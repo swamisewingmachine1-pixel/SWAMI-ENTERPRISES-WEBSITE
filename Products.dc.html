@@ -26,6 +26,7 @@
     .navlinks a[aria-current='page'] { color: var(--color-text); font-weight: 600; }
     .display { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: clamp(28px,3.5vw,40px); line-height: 1.1; letter-spacing: -0.02em; margin: 0; }
     product-catalog { display: block; margin-top: var(--space-4); }
+    .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.02em; padding: 6px 14px; border-radius: 999px; background: var(--color-text); color: var(--color-bg); margin-bottom: var(--space-3); }
     @media (max-width: 620px) { .navlinks { gap: var(--space-3); font-size: 14px; } }
   </style>
 </helmet>
@@ -43,6 +44,7 @@
 
   <div class="wrap">
     <section style="padding: calc(2*var(--space-6)) 0 var(--space-8)">
+      <span class="badge">Authorized Jack Showroom</span>
       <h1 class="display">Products</h1>
       <product-catalog></product-catalog>
     </section>

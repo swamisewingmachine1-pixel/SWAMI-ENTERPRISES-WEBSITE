@@ -35,9 +35,10 @@
     .split { display: grid; grid-template-columns: minmax(0,5fr) minmax(0,7fr); gap: clamp(24px,5vw,72px); align-items: center; }
     .split-title { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 30px; margin: 0; letter-spacing: -0.015em; }
     .split p { font-size: 15.5px; line-height: 1.65; color: color-mix(in srgb, var(--color-text) 78%, transparent); max-width: 46ch; }
-    .badge-row { display: flex; gap: var(--space-2); flex-wrap: wrap; margin: 0 0 var(--space-4); }
-    .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.02em; padding: 6px 14px; border-radius: 999px; background: var(--color-accent-100); color: var(--color-accent-800); }
-    .badge-dark { background: var(--color-text); color: var(--color-bg); }
+    .trust-strip { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 12px; border-left: 3px solid var(--color-accent); padding-left: 14px; margin: 0 0 var(--space-4); }
+    .trust-strip .t1 { font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; color: var(--color-text); }
+    .trust-strip .dot { color: color-mix(in srgb, var(--color-text) 35%, transparent); }
+    .trust-strip .t2 { font-size: 12.5px; color: color-mix(in srgb, var(--color-text) 65%, transparent); }
     .cols3 > div { padding: var(--space-4); border-radius: var(--radius-lg); transition: box-shadow 0.2s ease, transform 0.2s ease; }
     .cols3 > div:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
     @media (max-width: 900px) { .cols3, .index { grid-template-columns: 1fr 1fr; } .split { grid-template-columns: 1fr; } }
@@ -58,9 +59,10 @@
 
   <div class="wrap">
     <section style="padding: calc(4*var(--space-6)) 0 var(--space-8)">
-      <div class="badge-row">
-        <span class="badge badge-dark">Authorized Jack Showroom</span>
-        <span class="badge">Jack — 14 Years World No.1</span>
+      <div class="trust-strip">
+        <span class="t1">Authorized Jack Showroom</span>
+        <span class="dot">·</span>
+        <span class="t2">Jack — 14 Years World No.1</span>
       </div>
       <span class="kicker">Chanakya Place, New Delhi &middot; Since 2015</span>
       <h1 class="display">
@@ -119,7 +121,7 @@
         <div style="aspect-ratio:21/9"><image-slot id="home-showroom-teaser" shape="rect" src="./uploads/showroom-ribbon-cutting.jpg" placeholder="Jack showroom opening photo"></image-slot></div>
         <div style="position:absolute;inset:0;background:linear-gradient(0deg, color-mix(in srgb, black 65%, transparent) 0%, transparent 55%);display:flex;align-items:flex-end;padding:var(--space-6);pointer-events:none">
           <div>
-            <span class="badge badge-dark" style="margin-bottom:var(--space-2);display:inline-flex">New</span>
+            <span style="display:inline-block;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:#fff;border:1px solid color-mix(in srgb, #fff 55%, transparent);padding:4px 10px;border-radius:2px;margin-bottom:var(--space-2)">New</span>
             <h3 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:clamp(20px,2.6vw,28px);margin:0;color:#fff">Now an authorized Jack showroom — see the opening</h3>
           </div>
         </div>

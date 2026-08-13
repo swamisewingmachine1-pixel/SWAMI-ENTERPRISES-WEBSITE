@@ -369,20 +369,14 @@ window.SHOP_PRODUCTS = [
   }
 ];
 
-window.SHOP_CATEGORIES = ['All', 'Domestic', 'Lockstitch', 'Overlock', 'Interlock', 'Heavy-Duty', 'Special Machine', 'Cutting Equipment', 'Motors & Parts'];
+window.SHOP_CATEGORIES = ['All', 'Lockstitch', 'Overlock', 'Interlock', 'Heavy-Duty', 'Special Machine', 'Cutting Equipment', 'Motors & Parts'];
 
-// — Domestic & Motors/Parts (no manufacturer catalog for these — generic/placeholder) —
+// — Motors/Parts (no manufacturer catalog for these — generic/placeholder) —
 window.SHOP_PRODUCTS.push(
   {
-    id: 'domestic', name: 'Domestic Multi-Stitch Machine', category: 'Domestic', sub: 'Home & hobby use',
-    blurb: 'Straight-stitch and multi-stitch home machines for tailoring, alterations and hobby sewing. Set up and demonstrated in-store before sale.',
-    specs: [['Series', 'Domestic'], ['Stitch', 'Straight & multi-stitch'], ['Best for', 'Home tailoring, alterations, hobby sewing'], ['Availability', 'In stock']],
-    gallery: ['https://images.unsplash.com/photo-1606501126768-b78d4569d3f9?auto=format&fit=crop&w=1200&q=80']
-  },
-  {
     id: 'motors', name: 'Motors', category: 'Motors & Parts', sub: 'Clutch & servo',
-    blurb: 'Clutch and servo motors for domestic and industrial machines, sized and wired to match your setup.',
-    specs: [['Types', 'Clutch, Servo'], ['Fits', 'Domestic & industrial machines'], ['Availability', 'In stock']],
+    blurb: 'Clutch and servo motors for industrial machines, sized and wired to match your setup.',
+    specs: [['Types', 'Clutch, Servo'], ['Fits', 'Industrial machines'], ['Availability', 'In stock']],
     gallery: []
   },
   {

@@ -20,10 +20,10 @@
 
   var STYLE =
     ':host { display: block; }' +
-    '.cat-tabs { display: flex; gap: var(--space-2); flex-wrap: wrap; padding-bottom: var(--space-4); border-bottom: 1px solid var(--color-divider); }' +
-    '.cat-tab { font-family: var(--font-body); font-size: 13.5px; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--color-divider); background: transparent; color: var(--color-text); cursor: pointer; }' +
-    '.cat-tab:hover { border-color: var(--color-accent); color: var(--color-accent); }' +
-    '.cat-tab.active { background: var(--color-accent); border-color: var(--color-accent); color: var(--color-bg); }' +
+    '.cat-tabs { display: flex; gap: clamp(16px,3vw,32px); flex-wrap: wrap; border-bottom: 1px solid var(--color-divider); }' +
+    '.cat-tab { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 13.5px; letter-spacing: 0.01em; padding: 0 0 12px; margin-bottom: -1px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: color-mix(in srgb, var(--color-text) 52%, transparent); cursor: pointer; transition: color 0.15s ease, border-color 0.15s ease; }' +
+    '.cat-tab:hover { color: var(--color-text); }' +
+    '.cat-tab.active { color: var(--color-accent-800); border-bottom-color: var(--color-accent); }' +
     '.pgrid { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--space-6); margin-top: var(--space-6); }' +
     '@media (max-width: 980px) { .pgrid { grid-template-columns: repeat(2,1fr); } }' +
     '@media (max-width: 620px) { .pgrid { grid-template-columns: 1fr; } }' +

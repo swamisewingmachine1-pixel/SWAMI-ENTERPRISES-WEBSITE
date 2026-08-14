@@ -82,6 +82,98 @@ window.SHOP_PRODUCTS = [
     ],
     gallery: ['./uploads/jack-a4c-hero.jpg', './uploads/jack-a4c-side.jpg', './uploads/jack-a4c-front34.jpg', './uploads/jack-a4c-detail.jpg', './uploads/jack-a4c-inuse.jpg']
   },
+  {
+    id: 'jack-a5e', name: 'Jack A5E-B AMH2', category: 'Lockstitch', sub: 'AI-integrated lockstitch',
+    blurb: 'AI-integrated computerized lockstitch with the largest operating space in its class — automatically adapts to changing fabric thickness mid-seam.',
+    specs: [
+      ['Series', 'Lockstitch (A-series), AI-integrated'],
+      ['Needle', 'DBx1, 11-18# / DPx5, 18-21#'],
+      ['Max sewing speed', 'Up to 5000 s.p.m.'],
+      ['Operating space', '305 × 130mm — largest in its class'],
+      ['Feed', 'Auto-trimmer, auto backtack, auto foot lift'],
+      ['Best for', 'Shirts, suits, pants, down jackets'],
+      ['Availability', 'Order on request']
+    ],
+    gallery: ['./uploads/jack-a5e-hero.jpg']
+  },
+  {
+    id: 'jack-a6fe', name: 'Jack A6F-E', category: 'Lockstitch', sub: 'Digital needle-feed',
+    blurb: 'Digital needle-feed computerized lockstitch with a sealed oil pan and a large 300mm sewing space — feeds smoothly with no short thread tail.',
+    specs: [
+      ['Series', 'Lockstitch, needle feed'],
+      ['Needle', 'DBx1, 11-18# / DPx5, 18-21#'],
+      ['Max sewing speed', 'Up to 4000 s.p.m.'],
+      ['Sewing space', '300mm, large operating area'],
+      ['Lubrication', 'Sealed oil pan, no oil stains'],
+      ['Best for', 'Shirts, suits, pants, down jackets'],
+      ['Availability', 'Order on request']
+    ],
+    gallery: ['./uploads/jack-a6fe-hero.jpg']
+  },
+  {
+    id: 'jack-2002', name: 'Jack JK-2002G', category: 'Lockstitch', sub: '12mm stitch length',
+    blurb: 'Large-hook, heavy-gauge lockstitch built for extra-long stitching — a 12mm stitch length for coarse work most machines in this class can’t do.',
+    specs: [
+      ['Series', 'Lockstitch, large hook'],
+      ['Needle', 'DPx17, 22#'],
+      ['Max stitch length', '12mm'],
+      ['Max sewing speed', 'Up to 3000 s.p.m.'],
+      ['Best for', 'Shirts, jeans, non-woven bags, shoes, bags'],
+      ['Availability', 'Order on request']
+    ],
+    gallery: ['./uploads/jack-2002-hero.jpg']
+  },
+  {
+    id: 'jack-5558g', name: 'Jack JK-5558G', category: 'Lockstitch', sub: 'Edge cutter & piping',
+    blurb: 'Lockstitch fitted with an edge cutter and piping device in one pass — trims and seams simultaneously for clean-finish work.',
+    specs: [
+      ['Series', 'Lockstitch, edge cutter'],
+      ['Needle', 'DBx1, 11-18#'],
+      ['Max sewing speed', 'Up to 4000 s.p.m.'],
+      ['Feature', 'Built-in edge cutter and piping device'],
+      ['Best for', 'Shirts, suits, pants, down jackets'],
+      ['Availability', 'Order on request']
+    ],
+    gallery: ['./uploads/jack-5558g-hero.jpg']
+  },
+  {
+    id: 'jack-5559f', name: 'Jack JK-5559F-W', category: 'Lockstitch', sub: 'Digital edge cutter',
+    blurb: 'Semi-dry computerized lockstitch with a stable built-in edge cutter — stepping-motor presser-foot lift for a smoother, quieter finish.',
+    specs: [
+      ['Series', 'Lockstitch, digital edge cutter'],
+      ['Needle', 'DBx1, 11-18#'],
+      ['Max sewing speed', 'Up to 4000 s.p.m.'],
+      ['Feature', 'Stable built-in edge cutter, stepping-motor foot lift'],
+      ['Best for', 'Shirts, suits, pants, down jackets'],
+      ['Availability', 'Order on request']
+    ],
+    gallery: ['./uploads/jack-5559f-hero.jpg']
+  },
+  {
+    id: 'jack-8558', name: 'Jack JK-8558G', category: 'Lockstitch', sub: 'Flatbed chain stitch',
+    blurb: 'Power-saving flatbed chain-stitch machine, available in 1, 2 or 3-needle configurations, with a rear puller for umbrella, denim and T-shirt work.',
+    specs: [
+      ['Series', 'Chain stitch, flatbed'],
+      ['Needle', 'TVx7, various gauges, 1/2/3-needle'],
+      ['Max sewing speed', 'Up to 4000 s.p.m.'],
+      ['Best for', 'Umbrella, denim, T-shirt (chain stitch)'],
+      ['Availability', 'Order on request']
+    ],
+    gallery: ['./uploads/jack-8558-hero.jpg']
+  },
+  {
+    id: 'jack-58450', name: 'Jack JK-58450J', category: 'Lockstitch', sub: 'Computerized double needle',
+    blurb: 'Double-needle computerized lockstitch with auto cornering and a large sewing space — built-in presser-foot lifter, one-shaft drive.',
+    specs: [
+      ['Series', 'Lockstitch, double needle'],
+      ['Needle', 'DPx5, multiple gauges'],
+      ['Max sewing speed', 'Up to 3000 s.p.m.'],
+      ['Feature', 'Auto cornering, built-in presser-foot lifter'],
+      ['Best for', 'Umbrella, denim, T-shirt (chain-stitch work)'],
+      ['Availability', 'Order on request']
+    ],
+    gallery: ['./uploads/jack-58450-hero.jpg']
+  },
 
   // — Overlock (current Jack line-up) —
   {
@@ -116,6 +208,43 @@ window.SHOP_PRODUCTS = [
     ],
     gallery: ['./uploads/jack-e4s-hero.jpg']
   },
+  {
+    id: 'jack-c60', name: 'Jack C60+', category: 'Overlock', sub: 'Advanced · Touch screen',
+    blurb: 'Advanced overlock with a full touch-screen panel — production counter, adjustable speed, RFID and WiFi built in for factory-floor tracking.',
+    specs: [
+      ['Series', 'Overlock, advanced'],
+      ['Max sewing speed', 'Up to 6000 s.p.m.'],
+      ['Controls', 'Full touch-screen panel, voice guide, production counter'],
+      ['Connectivity', 'Integrated RFID and WiFi'],
+      ['Best for', 'T-shirts, underwear, jeans, mid-to-high-level clothing'],
+      ['Availability', 'Order on request']
+    ],
+    gallery: ['./uploads/jack-c60-hero.jpg']
+  },
+  {
+    id: 'jack-c5t', name: 'Jack C5T', category: 'Overlock', sub: 'Digital · Top feed',
+    blurb: 'Variable top-feed digital overlock built for heavy materials — super-fast start/stop response with no fabric dislocation.',
+    specs: [
+      ['Series', 'Overlock, digital top feed'],
+      ['Needle', 'DCx27, 11#–19# (model-dependent)'],
+      ['Max sewing speed', 'Up to 6000 s.p.m.'],
+      ['Best for', 'Heavy materials, extra-heavy denim'],
+      ['Availability', 'Order on request']
+    ],
+    gallery: ['./uploads/jack-c5t-hero.jpg']
+  },
+  {
+    id: 'jack-797', name: 'Jack JK-797', category: 'Overlock', sub: 'Small-arm overlock',
+    blurb: 'Small cylinder-bed, super-fast overlock with variable top feed — a compact bed for flexible, no-dislocation sewing on curved seams.',
+    specs: [
+      ['Series', 'Overlock, small-arm'],
+      ['Needle', 'DCx27, 9#–11#'],
+      ['Max sewing speed', 'Up to 7000 s.p.m.'],
+      ['Best for', 'T-shirts, underwear, jeans, mid-to-high-level clothing'],
+      ['Availability', 'Order on request']
+    ],
+    gallery: ['./uploads/jack-797-hero.jpg']
+  },
 
   // — Interlock (current Jack line-up) —
   {
@@ -146,6 +275,55 @@ window.SHOP_PRODUCTS = [
       ['Availability', 'Order on request']
     ],
     gallery: ['./uploads/jack-w5e-hero.jpg']
+  },
+  {
+    id: 'jack-k10', name: 'Jack K10+-UT', category: 'Interlock', sub: 'Advanced · Touch screen',
+    blurb: 'Jack’s top-of-line cylinder-bed interlock — full touch-screen control, built for the most demanding high-volume interlock production lines.',
+    specs: [
+      ['Series', 'Interlock (cylinder-bed), advanced'],
+      ['Max sewing speed', 'Up to 6000 s.p.m.'],
+      ['Controls', 'Full touch-screen panel, voice guide'],
+      ['Feed', 'Active Feed system, auto thread trimmer'],
+      ['Best for', 'T-shirts, underwear, jeans, mid-to-high-level clothing'],
+      ['Availability', 'Order on request']
+    ],
+    gallery: ['./uploads/jack-k10-hero.jpg']
+  },
+  {
+    id: 'jack-8787', name: 'Jack JK-8787-01GX356/UT', category: 'Interlock', sub: 'Super high speed cylinder-bed',
+    blurb: 'Super high-speed computerized cylinder-bed interlock with an electromagnetic direct-drive presser-foot lifter group.',
+    specs: [
+      ['Series', 'Interlock, cylinder-bed'],
+      ['Stitch/Thread', '3 stitch / 5 thread'],
+      ['Max sewing speed', 'Up to 4500 s.p.m.'],
+      ['Best for', 'Shirts, suits, pants, down jackets'],
+      ['Availability', 'Order on request']
+    ],
+    gallery: ['./uploads/jack-8787-hero.jpg']
+  },
+  {
+    id: 'jack-8670', name: 'Jack JK-8670BDII/UT', category: 'Interlock', sub: 'Small cylinder-bed',
+    blurb: 'High-speed computerized small cylinder-bed interlock (180mm circumference) with auto thread trimming and a built-in cooling fan.',
+    specs: [
+      ['Series', 'Interlock, small cylinder-bed'],
+      ['Needle', 'UY128GAS, 11-14#'],
+      ['Max sewing speed', 'Up to 4500 s.p.m.'],
+      ['Best for', 'T-shirts, underwear, jeans, mid-to-high-level clothing'],
+      ['Availability', 'Order on request']
+    ],
+    gallery: ['./uploads/jack-8670-hero.jpg']
+  },
+  {
+    id: 'jack-8009', name: 'Jack JK-8009VCDII/UTL', category: 'Interlock', sub: 'Multi-needle · Computerized',
+    blurb: 'High-speed computerized multi-needle machine (up to 25 needles) with auto presser-foot lifting for elastic attaching, tape and waistband work.',
+    specs: [
+      ['Series', 'Interlock, multi-needle'],
+      ['Needle', 'UO113, 14-16#'],
+      ['Max sewing speed', 'Up to 3500 s.p.m.'],
+      ['Best for', 'T-shirts, underwear, jeans, mid-to-high-level clothing'],
+      ['Availability', 'Order on request']
+    ],
+    gallery: ['./uploads/jack-8009-hero.jpg']
   },
 
   // — Heavy-Duty (current Jack line-up) —
@@ -179,6 +357,78 @@ window.SHOP_PRODUCTS = [
     ],
     gallery: ['./uploads/jack-s7-hero.jpg']
   },
+  {
+    id: 'jack-h2', name: 'Jack H2', category: 'Heavy-Duty', sub: 'Basic top feed',
+    blurb: 'Direct-drive top-and-bottom feeding lockstitch for heavy duty — strong feeding, big stitch length, built for sofas, car seats, luggage and bags.',
+    specs: [
+      ['Series', 'Heavy-Duty, top feed'],
+      ['Needle', 'DPx17, 20-23#'],
+      ['Max sewing speed', 'Up to 2000 s.p.m.'],
+      ['Best for', 'Sofa, car seat, luggage, gloves, bags'],
+      ['Availability', 'Order on request']
+    ],
+    gallery: ['./uploads/jack-h2-hero.jpg']
+  },
+  {
+    id: 'jack-h5k', name: 'Jack H5K', category: 'Heavy-Duty', sub: 'Edge cutter · Top feed',
+    blurb: 'Side-cutter synchronous heavy-duty lockstitch with a separated cutter for a neat cutting edge and strong durability.',
+    specs: [
+      ['Series', 'Heavy-Duty, edge cutter'],
+      ['Needle', 'DPx17, 20-23#'],
+      ['Max sewing speed', 'Up to 2000 s.p.m.'],
+      ['Best for', 'Shirts, suits, pants, down jackets'],
+      ['Availability', 'Order on request']
+    ],
+    gallery: ['./uploads/jack-h5k-hero.jpg']
+  },
+  {
+    id: 'jack-z7', name: 'Jack Z7', category: 'Heavy-Duty', sub: 'Triple transport · Digital',
+    blurb: 'Jack’s newest triple-transport digital lockstitch — needle, top and bottom feed move together for the strongest possible grip on thick, layered material.',
+    specs: [
+      ['Series', 'Heavy-Duty, triple transport'],
+      ['Feed', 'Needle feed + top feed + bottom feed (triple transport)'],
+      ['Controls', 'Full digital touch panel'],
+      ['Best for', 'Sofa, car seat, luggage, heavy leather goods'],
+      ['Availability', 'Order on request']
+    ],
+    gallery: ['./uploads/jack-z7-hero.jpg']
+  },
+  {
+    id: 'jack-2030', name: 'Jack JK-2030G', category: 'Heavy-Duty', sub: 'Top & bottom feeding',
+    blurb: 'Full-automatic top-and-bottom feeding computerized lockstitch for heavy duty, with a large working space for 8-layer leather work.',
+    specs: [
+      ['Series', 'Heavy-Duty, top & bottom feed'],
+      ['Needle', 'DPx17, 20-23#'],
+      ['Max sewing speed', 'Up to 2200 s.p.m.'],
+      ['Best for', 'Sofa, car seat, luggage, shoes'],
+      ['Availability', 'Order on request']
+    ],
+    gallery: ['./uploads/jack-2030-hero.jpg']
+  },
+  {
+    id: 'jack-2060', name: 'Jack JK-2060G', category: 'Heavy-Duty', sub: 'Compound feeding',
+    blurb: 'Full-automatic compound-feeding computerized lockstitch for heavy duty — large space, sews up to 8 layers of leather.',
+    specs: [
+      ['Series', 'Heavy-Duty, compound feed'],
+      ['Needle', 'DPx17, 20-23#'],
+      ['Max sewing speed', 'Up to 2200 s.p.m.'],
+      ['Best for', 'Sofa, car seat, luggage, shoes'],
+      ['Availability', 'Order on request']
+    ],
+    gallery: ['./uploads/jack-2060-hero.jpg']
+  },
+  {
+    id: 'jack-s5', name: 'Jack S5', category: 'Heavy-Duty', sub: 'Post bed · Synchronized rolls',
+    blurb: 'Computerized post-bed roller-feed machine with a built-in panel, QR-code software upgrades and a 100% stitch-overlap ratio.',
+    specs: [
+      ['Series', 'Post bed'],
+      ['Needle', 'INDPX5#16'],
+      ['Max sewing speed', 'Up to 3000 s.p.m.'],
+      ['Best for', 'Shirts, suits, pants, down jackets'],
+      ['Availability', 'Order on request']
+    ],
+    gallery: ['./uploads/jack-s5-hero.jpg']
+  },
 
   // — Special Machines (current Jack line-up) —
   {
@@ -209,6 +459,53 @@ window.SHOP_PRODUCTS = [
       ['Availability', 'Order on request']
     ],
     gallery: ['./uploads/jack-m9-hero.jpg']
+  },
+  {
+    id: 'jack-1790', name: 'Jack JK-T1790G', category: 'Special Machine', sub: 'Computerized buttonhole',
+    blurb: 'Super-fast computerized buttonhole machine with good knitting adaptation and an intelligent high-speed, high-efficiency system.',
+    specs: [
+      ['Type', 'Buttonhole'],
+      ['Needle', 'DPx5, 12#'],
+      ['Max sewing speed', 'Up to 4200 s.p.m.'],
+      ['Best for', 'Keyhole seams: shirts, cardigans, work clothes, jeans'],
+      ['Availability', 'Order on request']
+    ],
+    gallery: ['./uploads/jack-1790-hero.jpg']
+  },
+  {
+    id: 'jack-9270', name: 'Jack JK-T9270D/9280D', category: 'Special Machine', sub: 'Feed-off-the-arm',
+    blurb: 'Mechatronic, direct-drive feed-off-the-arm machine with automatic needle stopping and a lubricated rear puller — widely used across garment types.',
+    specs: [
+      ['Type', 'Feed-off-the-arm'],
+      ['Needle', 'TVx64 12# / TVx5 21#'],
+      ['Max sewing speed', 'Up to 3500 s.p.m.'],
+      ['Best for', 'General feed-off-the-arm work'],
+      ['Availability', 'Order on request']
+    ],
+    gallery: ['./uploads/jack-9270-hero.jpg']
+  },
+  {
+    id: 'jack-8740', name: 'Jack JK-8740', category: 'Special Machine', sub: '4-needle feed-off-arm',
+    blurb: 'Feed-off-arm interlock with a large operating-space seat design for easier sewing of large fabric pieces — 4 needles, 6 threads.',
+    specs: [
+      ['Type', 'Feed-off-the-arm, multi-needle'],
+      ['Needles / Threads', '4 needles / 6 thread'],
+      ['Max sewing speed', 'Up to 3200 s.p.m.'],
+      ['Best for', 'Shirts, suits, pants, down jackets'],
+      ['Availability', 'Order on request']
+    ],
+    gallery: ['./uploads/jack-8740-hero.jpg']
+  },
+  {
+    id: 'jack-m7', name: 'Jack M7', category: 'Special Machine', sub: 'Extra-large foldable template machine',
+    blurb: 'Extra-large 140×95cm template machine that folds down for easy transport and storage — Jack’s largest foldable template machine.',
+    specs: [
+      ['Type', 'Template / pattern machine'],
+      ['Sewing area', '1400 × 950mm (140 × 95cm)'],
+      ['Footprint', 'Foldable for easy transport and storage'],
+      ['Availability', 'Order on request']
+    ],
+    gallery: ['./uploads/jack-m7-hero.jpg']
   }
 ];
 

@@ -5,7 +5,7 @@
  * <script src> tags through its own "x-dc" page runtime, which does not
  * appear to support type="module".
  */
-window.SHOP_PHONE = '919000000000';
+window.SHOP_PHONE = '919971336656';
 
 window.SHOP_PRODUCTS = [
   // — Lockstitch —

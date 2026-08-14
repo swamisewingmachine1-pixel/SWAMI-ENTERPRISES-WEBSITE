@@ -442,3 +442,13 @@ textarea.input { min-height: 90px; resize: vertical; }
   .navlinks .btn-primary { margin-top: var(--space-2); width: 100%; text-align: center; }
 }
 
+/* Scroll-tied motion — CSS-only scroll-driven animation (no JS, so it
+   cannot collide with the x-dc runtime's React re-render). On browsers
+   without support for animation-timeline, the image is simply static
+   at its normal position — never hidden, never broken. */
+@supports (animation-timeline: view()) {
+  .motion-rise { animation: motion-rise-kf linear both; animation-timeline: view(); animation-range: entry 0% cover 45%; }
+  @keyframes motion-rise-kf { from { transform: translateY(56px) scale(0.97); opacity: 0.75; } to { transform: translateY(0) scale(1); opacity: 1; } }
+}
+@media (prefers-reduced-motion: reduce) { .motion-rise { animation: none !important; } }
+

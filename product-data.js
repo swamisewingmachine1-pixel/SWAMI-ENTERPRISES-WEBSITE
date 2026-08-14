@@ -13,25 +13,25 @@ window.SHOP_PRODUCTS = [
     id: 'jack-f6', name: 'Jack F6', category: 'Lockstitch', sub: 'Direct-drive · Computerized',
     blurb: 'Direct-drive, power-saving, fully computerized single-needle lockstitch machine. Our current industrial workhorse — in stock and set up for a demo at the shop.',
     specs: [['Series', 'Lockstitch (direct drive)'], ['Stitch', 'Single-needle lockstitch'], ['Feed', 'Automatic, computerized'], ['Best for', 'General to medium-heavy garment stitching'], ['Availability', 'In stock']],
-    gallery: ['./uploads/jack-f6-hero.jpg', './uploads/jack-f6-side.jpg', './uploads/jack-f6-front34.jpg', './uploads/jack-f6-detail.jpg', './uploads/jack-f6-table.jpg', './uploads/jack-f6-inuse.jpg']
+    gallery: ['./uploads/jack-f6-hero.jpg', './uploads/jack-f6-side.jpg', './uploads/jack-f6-front34.jpg', './uploads/jack-f6-detail.jpg', './uploads/jack-f6-inuse.jpg']
   },
   {
     id: 'jack-a2c', name: 'Jack A2C', category: 'Lockstitch', sub: 'Computerized · Auto-trimmer',
     blurb: 'Computerized single-needle lockstitch machine with auto thread trimmer, from Jack’s A-series. Ask us for current stock and pricing.',
     specs: [['Series', 'Lockstitch (A-series)'], ['Stitch', 'Single-needle lockstitch'], ['Feed', 'Computerized, auto-trimmer'], ['Best for', 'General garment stitching, production lines'], ['Availability', 'Order on request']],
-    gallery: ['./uploads/jack-a2c-hero.jpg', './uploads/jack-a2c-side.jpg', './uploads/jack-a2c-front34.jpg', './uploads/jack-a2c-detail.jpg', './uploads/jack-a2c-table.jpg', './uploads/jack-a2c-inuse.jpg']
+    gallery: ['./uploads/jack-a2c-hero.jpg', './uploads/jack-a2c-side.jpg', './uploads/jack-a2c-front34.jpg', './uploads/jack-a2c-detail.jpg', './uploads/jack-a2c-inuse.jpg']
   },
   {
     id: 'jack-a3c', name: 'Jack A3C', category: 'Lockstitch', sub: 'Computerized · Auto-trimmer',
     blurb: 'Computerized single-needle lockstitch machine with auto thread trimmer, from Jack’s A-series. Ask us for current stock and pricing.',
     specs: [['Series', 'Lockstitch (A-series)'], ['Stitch', 'Single-needle lockstitch'], ['Feed', 'Computerized, auto-trimmer'], ['Best for', 'General garment stitching, production lines'], ['Availability', 'Order on request']],
-    gallery: ['./uploads/jack-a3c-hero.jpg', './uploads/jack-a3c-side.jpg', './uploads/jack-a3c-front34.jpg', './uploads/jack-a3c-detail.jpg', './uploads/jack-a3c-table.jpg', './uploads/jack-a3c-inuse.jpg']
+    gallery: ['./uploads/jack-a3c-hero.jpg', './uploads/jack-a3c-side.jpg', './uploads/jack-a3c-front34.jpg', './uploads/jack-a3c-detail.jpg', './uploads/jack-a3c-inuse.jpg']
   },
   {
     id: 'jack-a4c', name: 'Jack A4C', category: 'Lockstitch', sub: 'Computerized · Auto-trimmer',
     blurb: 'Computerized single-needle lockstitch machine with auto thread trimmer, from Jack’s A-series. Ask us for current stock and pricing.',
     specs: [['Series', 'Lockstitch (A-series)'], ['Stitch', 'Single-needle lockstitch'], ['Feed', 'Computerized, auto-trimmer'], ['Best for', 'General garment stitching, production lines'], ['Availability', 'Order on request']],
-    gallery: ['./uploads/jack-a4c-hero.jpg', './uploads/jack-a4c-side.jpg', './uploads/jack-a4c-front34.jpg', './uploads/jack-a4c-detail.jpg', './uploads/jack-a4c-table.jpg', './uploads/jack-a4c-inuse.jpg']
+    gallery: ['./uploads/jack-a4c-hero.jpg', './uploads/jack-a4c-side.jpg', './uploads/jack-a4c-front34.jpg', './uploads/jack-a4c-detail.jpg', './uploads/jack-a4c-inuse.jpg']
   },
   {
     id: 'jack-a4f', name: 'Jack A4F', category: 'Lockstitch', sub: 'Super-fast · Computerized',

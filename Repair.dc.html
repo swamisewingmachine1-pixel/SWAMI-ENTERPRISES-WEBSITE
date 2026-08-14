@@ -26,11 +26,11 @@
     .kicker { display: block; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 70%, transparent); margin: 0 0 var(--space-3); }
     .trust-strip { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 12px; border-left: 3px solid var(--color-accent); padding-left: 14px; margin: 0 0 var(--space-4); }
     .trust-strip .t1 { font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; color: var(--color-text); }
-    .cols3 { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--space-6) clamp(24px,4vw,56px); }
+    .cols3 { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--space-8) clamp(24px,4vw,56px); }
     .cols3 h2 { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 20px; margin: 0; letter-spacing: -0.01em; }
     .cols3 p { font-size: 15.5px; line-height: 1.65; margin: var(--space-2) 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent); }
-    .cols3 > div { padding: var(--space-5); border-radius: var(--radius-lg); background: var(--color-surface); transition: box-shadow 0.2s ease, transform 0.2s ease; }
-    .cols3 > div:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .cols3 > div { padding-top: var(--space-4); border-top: 2px solid var(--color-accent); transition: transform 0.2s ease; }
+    .cols3 > div:hover { transform: translateY(-2px); }
     .split { display: grid; grid-template-columns: minmax(0,7fr) minmax(0,5fr); gap: clamp(24px,5vw,72px); align-items: center; }
     @media (max-width: 900px) { .split { grid-template-columns: 1fr; } }
     .steps { counter-reset: step; display: grid; grid-template-columns: repeat(3,1fr); gap: var(--space-6); margin-top: var(--space-6); }

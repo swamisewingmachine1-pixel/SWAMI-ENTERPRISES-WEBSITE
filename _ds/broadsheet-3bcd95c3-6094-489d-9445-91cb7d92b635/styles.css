@@ -397,3 +397,16 @@ textarea.input { min-height: 90px; resize: vertical; }
 .dialog-body { font-size: 14px; opacity: 0.85; }
 .dialog-actions { display: flex; justify-content: flex-end; gap: var(--space-2); margin-top: var(--space-2); }
 
+/* Site footer — Apple-style multi-column sitemap */
+.site-footer { border-top: 1px solid var(--color-divider); padding: calc(2*var(--space-6)) 0 var(--space-6); margin-top: calc(2*var(--space-8)); }
+.site-footer .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-6) clamp(16px, 3vw, 40px); padding-bottom: var(--space-6); border-bottom: 1px solid var(--color-divider); }
+.site-footer h4 { font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent); margin: 0 0 var(--space-3); }
+.site-footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.site-footer ul a { font-size: 13.5px; color: color-mix(in srgb, var(--color-text) 80%, transparent); text-decoration: none; }
+.site-footer ul a:hover { color: var(--color-accent); text-decoration: underline; }
+.site-footer .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3); padding-top: var(--space-4); font-size: 12.5px; color: color-mix(in srgb, var(--color-text) 55%, transparent); }
+.site-footer .footer-bottom a { color: inherit; text-decoration: underline; }
+.site-footer .footer-bottom a:hover { color: var(--color-accent); }
+@media (max-width: 780px) { .site-footer .footer-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .site-footer .footer-grid { grid-template-columns: 1fr; gap: var(--space-4); } }
+

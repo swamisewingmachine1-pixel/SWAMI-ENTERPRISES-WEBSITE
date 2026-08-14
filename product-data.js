@@ -323,25 +323,6 @@ window.SHOP_PRODUCTS = [
     specs: [['Type', 'Template machine'], ['Needle', 'DPx5 / DPx17'], ['Sewing area', '1400×950mm'], ['Max speed', 'Up to 3000 s.p.m.'], ['Availability', 'Order on request']],
     gallery: ['./uploads/ms-100a.jpg']
   },
-  {
-    id: 'jack-mg-60a', name: 'Jack MG-60A', category: 'Special Machine', sub: 'Flexible size template',
-    blurb: 'Small-footprint flexible-size template machine with an intelligent middle presser foot and quick hook-changing window for wide, efficient use.',
-    specs: [['Type', 'Template machine'], ['Needle', 'DBx1 7-14#'], ['Max speed', 'Up to 3300 s.p.m.'], ['Availability', 'Order on request']],
-    gallery: ['./uploads/mg-60a.jpg']
-  },
-  {
-    id: 'jack-mg-80a', name: 'Jack MG-80A', category: 'Special Machine', sub: 'Intelligent template machine',
-    blurb: 'Wide-use intelligent template machine with a small footprint, humanized operation panel and smart middle presser foot for precise sewing.',
-    specs: [['Type', 'Template machine'], ['Needle', 'DPx5 / DPx17'], ['Sewing area', '800×550mm'], ['Max speed', 'Up to 3200 s.p.m.'], ['Availability', 'Order on request']],
-    gallery: ['./uploads/mg-80a.jpg']
-  },
-  {
-    id: 'jack-pattern', name: 'Jack Programmable Pattern Series', category: 'Special Machine', sub: 'Electronic pattern sewing',
-    blurb: 'Full-automatic programmable electronic pattern machine, visual operation, available in several sewing-area sizes from 130×100mm up to 1000×400mm.',
-    specs: [['Type', 'Programmable pattern'], ['Needle', 'DPx17 11-25#'], ['Models', 'JK-T1310 / T2210 / T3020 / T6040 / T10040'], ['Max speed', 'Up to 2700 s.p.m.'], ['Availability', 'Order on request']],
-    gallery: ['./uploads/jk-pattern.jpg']
-  },
-
   // — Cutting & Spreading Equipment —
   {
     id: 'jack-pz5', name: 'Jack JK-PZ5', category: 'Cutting Equipment', sub: 'Knitted & woven fabric spreader',

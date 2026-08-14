@@ -21,7 +21,7 @@
     a:hover { color: var(--color-accent); }
     .wrap { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px,5vw,72px); }
     .navrow { padding-inline: max(clamp(20px,5vw,72px), calc((100% - 1200px)/2 + clamp(20px,5vw,72px))); display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; }
-    .navlinks { display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap; font-size: 15px; }
+    .navlinks { display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap; font-size: 13.5px; letter-spacing: 0.01em; }
     .navlinks a[aria-current='page'] { color: var(--color-text); font-weight: 600; }
     @media (max-width: 620px) { .navlinks { gap: var(--space-3); font-size: 14px; } }
   </style>
@@ -29,6 +29,9 @@
 <div style="background:var(--color-bg);min-height:100vh">
   <nav class="nav navrow">
     <a href="./Home.dc.html"><span class="nav-brand">Swami Enterprises</span></a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="nav-toggle-label" aria-label="Menu"><span></span><span></span><span></span></label>
+    <label for="nav-toggle" class="nav-scrim"></label>
     <div class="navlinks">
       <a href="./Home.dc.html">Home</a>
       <a href="./Products.dc.html" aria-current="page">Products</a>

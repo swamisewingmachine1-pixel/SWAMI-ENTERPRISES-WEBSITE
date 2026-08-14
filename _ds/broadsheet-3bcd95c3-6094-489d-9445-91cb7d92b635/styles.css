@@ -410,3 +410,35 @@ textarea.input { min-height: 90px; resize: vertical; }
 @media (max-width: 780px) { .site-footer .footer-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 480px) { .site-footer .footer-grid { grid-template-columns: 1fr; gap: var(--space-4); } }
 
+/* Mobile nav — CSS-only hamburger (checkbox hack), no JS involved so it
+   can never collide with the x-dc runtime's React re-render of the DOM. */
+.nav-toggle { display: none; }
+.nav-toggle-label { display: none; }
+.nav-scrim { display: none; }
+@media (max-width: 680px) {
+  .nav-toggle-label {
+    display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+    width: 40px; height: 40px; margin-left: auto; cursor: pointer; position: relative; z-index: 60;
+  }
+  .nav-toggle-label span { display: block; width: 22px; height: 2px; background: var(--color-text); border-radius: 2px; transition: transform 0.25s ease, opacity 0.2s ease; }
+  .nav-toggle:checked ~ .nav-toggle-label span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle:checked ~ .nav-toggle-label span:nth-child(2) { opacity: 0; }
+  .nav-toggle:checked ~ .nav-toggle-label span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .nav-scrim {
+    display: block; position: fixed; inset: 0; background: rgba(0,0,0,0.4);
+    opacity: 0; pointer-events: none; transition: opacity 0.25s ease; z-index: 55;
+  }
+  .nav-toggle:checked ~ .nav-scrim { opacity: 1; pointer-events: auto; }
+
+  .navlinks {
+    position: fixed; top: 0; right: -340px; bottom: 0; width: min(300px, 82vw);
+    background: var(--color-bg); flex-direction: column; align-items: flex-start;
+    gap: var(--space-4) !important; padding: 88px 28px 28px; box-shadow: -12px 0 32px rgba(0,0,0,0.18);
+    transition: right 0.3s ease; z-index: 56;
+    font-size: 17px !important;
+  }
+  .nav-toggle:checked ~ .navlinks { right: 0; }
+  .navlinks .btn-primary { margin-top: var(--space-2); width: 100%; text-align: center; }
+}
+

@@ -2,6 +2,7 @@ import './globals.css';
 import { Analytics } from '@vercel/analytics/next';
 import TrackedLink from '../components/TrackedLink';
 import MobileNav from '../components/MobileNav';
+import SearchModal from '../components/SearchModal';
 
 export const metadata = {
   metadataBase: new URL('https://swamienterprises.online'),
@@ -49,6 +50,7 @@ export default function RootLayout({ children }) {
           </div>
           <MobileNav />
         </nav>
+        <SearchModal />
         {children}
         <footer className="footer">
           <div>

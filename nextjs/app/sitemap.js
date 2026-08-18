@@ -2,7 +2,7 @@ import { getAllMachines } from '../lib/machines';
 
 export default function sitemap() {
   const base = 'https://swamienterprises.online';
-  const staticPages = ['', '/machines', '/about'].map((p) => ({
+  const staticPages = ['', '/machines', '/finder', '/compare', '/industries', '/solutions', '/about', '/contact'].map((p) => ({
     url: base + p,
     lastModified: new Date(),
   }));

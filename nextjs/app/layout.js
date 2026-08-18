@@ -1,6 +1,7 @@
 import './globals.css';
 import { Analytics } from '@vercel/analytics/next';
 import TrackedLink from '../components/TrackedLink';
+import MobileNav from '../components/MobileNav';
 
 export const metadata = {
   metadataBase: new URL('https://swamienterprises.online'),
@@ -30,7 +31,10 @@ export default function RootLayout({ children }) {
             <a href="/machines">Machines</a>
             <a href="/finder">Find Your Machine</a>
             <a href="/compare">Compare</a>
+            <a href="/industries">Industries</a>
+            <a href="/solutions">Solutions</a>
             <a href="/about">About</a>
+            <a href="/contact">Contact</a>
             <TrackedLink href="tel:+919971336656" event="call_click" props={{ location: 'nav' }}>Call</TrackedLink>
             <TrackedLink
               href="https://wa.me/919971336656"
@@ -43,6 +47,7 @@ export default function RootLayout({ children }) {
               WhatsApp Us
             </TrackedLink>
           </div>
+          <MobileNav />
         </nav>
         {children}
         <footer className="footer">

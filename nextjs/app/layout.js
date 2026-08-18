@@ -1,4 +1,6 @@
 import './globals.css';
+import { Analytics } from '@vercel/analytics/next';
+import TrackedLink from '../components/TrackedLink';
 
 export const metadata = {
   metadataBase: new URL('https://swamienterprises.online'),
@@ -27,10 +29,17 @@ export default function RootLayout({ children }) {
           <div className="nav-links">
             <a href="/machines">Machines</a>
             <a href="/about">About</a>
-            <a href="tel:+919971336656">Call</a>
-            <a className="btn btn-dark" href="https://wa.me/919971336656" target="_blank" rel="noopener noreferrer">
+            <TrackedLink href="tel:+919971336656" event="call_click" props={{ location: 'nav' }}>Call</TrackedLink>
+            <TrackedLink
+              href="https://wa.me/919971336656"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-dark"
+              event="whatsapp_click"
+              props={{ location: 'nav' }}
+            >
               WhatsApp Us
-            </a>
+            </TrackedLink>
           </div>
         </nav>
         {children}
@@ -40,12 +49,14 @@ export default function RootLayout({ children }) {
           </div>
           <div style={{ marginTop: 8 }}>E-2/73, 30 Feet Road, Block C, Chanakya Place I, New Delhi 110058</div>
           <div style={{ marginTop: 8 }}>
-            <a href="tel:+919971336656">+91 99713 36656</a> &middot;{' '}
-            <a href="https://wa.me/919971336656" target="_blank" rel="noopener noreferrer">
+            <TrackedLink href="tel:+919971336656" event="call_click" props={{ location: 'footer' }}>+91 99713 36656</TrackedLink>
+            {' '}&middot;{' '}
+            <TrackedLink href="https://wa.me/919971336656" target="_blank" rel="noopener noreferrer" event="whatsapp_click" props={{ location: 'footer' }}>
               WhatsApp
-            </a>
+            </TrackedLink>
           </div>
         </footer>
+        <Analytics />
       </body>
     </html>
   );

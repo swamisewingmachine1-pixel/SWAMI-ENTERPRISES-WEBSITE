@@ -2,6 +2,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getAllMachines, getMachine, getRelatedMachines } from '../../../lib/machines';
+import TrackedLink from '../../../components/TrackedLink';
+import ViewTracker from '../../../components/ViewTracker';
 
 export function generateStaticParams() {
   return getAllMachines().map((m) => ({ id: m.id }));
@@ -30,6 +32,7 @@ export default async function MachinePage({ params }) {
 
   return (
     <main className="wrap" style={{ padding: '48px 0 100px' }}>
+      <ViewTracker event="product_view" props={{ id: m.id, model: m.model, category: m.category }} />
       <Link href="/machines" className="mono" style={{ fontSize: 12, letterSpacing: '0.1em', color: '#707070' }}>
         ← MACHINES
       </Link>
@@ -43,9 +46,16 @@ export default async function MachinePage({ params }) {
       </div>
 
       <div style={{ display: 'flex', gap: 16, margin: '28px 0 40px', flexWrap: 'wrap' }}>
-        <a href="https://wa.me/919971336656" target="_blank" rel="noopener noreferrer" className="btn btn-dark">
+        <TrackedLink
+          href="https://wa.me/919971336656"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn btn-dark"
+          event="whatsapp_click"
+          props={{ location: 'product', machine: m.id }}
+        >
           Talk to a Specialist
-        </a>
+        </TrackedLink>
         <Link href="/machines" className="btn btn-light">See related machines</Link>
       </div>
 

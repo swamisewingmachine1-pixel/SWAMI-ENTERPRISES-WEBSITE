@@ -411,35 +411,53 @@ textarea.input { min-height: 90px; resize: vertical; }
 @media (max-width: 480px) { .site-footer .footer-grid { grid-template-columns: 1fr; gap: var(--space-4); } }
 
 /* Mobile nav — CSS-only hamburger (checkbox hack), no JS involved so it
-   can never collide with the x-dc runtime's React re-render of the DOM. */
+   can never collide with the x-dc runtime's React re-render of the DOM.
+   Full-screen overlay panel (Apple-style), not a side drawer. */
 .nav-toggle { display: none; }
 .nav-toggle-label { display: none; }
 .nav-scrim { display: none; }
 @media (max-width: 680px) {
+  /* Sticky nav's backdrop-filter is a known iOS Safari scroll-jank source
+     (recomposited every frame while sticky+scrolling) — plain solid bg
+     on mobile is materially cheaper to paint. */
+  .nav { backdrop-filter: none; background: var(--color-bg); }
+
   .nav-toggle-label {
     display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
-    width: 40px; height: 40px; margin-left: auto; cursor: pointer; position: relative; z-index: 60;
+    width: 40px; height: 40px; margin-left: auto; cursor: pointer; position: relative; z-index: 70;
   }
   .nav-toggle-label span { display: block; width: 22px; height: 2px; background: var(--color-text); border-radius: 2px; transition: transform 0.25s ease, opacity 0.2s ease; }
   .nav-toggle:checked ~ .nav-toggle-label span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .nav-toggle:checked ~ .nav-toggle-label span:nth-child(2) { opacity: 0; }
   .nav-toggle:checked ~ .nav-toggle-label span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  .nav-scrim {
-    display: block; position: fixed; inset: 0; background: rgba(0,0,0,0.4);
-    opacity: 0; pointer-events: none; transition: opacity 0.25s ease; z-index: 55;
-  }
-  .nav-toggle:checked ~ .nav-scrim { opacity: 1; pointer-events: auto; }
-
+  /* !important throughout this block: each page's own <style> also
+     declares an unconditional, non-media .navlinks rule (desktop layout)
+     with equal CSS specificity that physically appears later in the
+     document (page <style> loads after this linked stylesheet), so on a
+     specificity tie it would otherwise win over this media-query block
+     regardless of which one actually matches the viewport. */
   .navlinks {
-    position: fixed; top: 0; right: -340px; bottom: 0; width: min(300px, 82vw);
-    background: var(--color-bg); flex-direction: column; align-items: flex-start;
-    gap: var(--space-4) !important; padding: 88px 28px 28px; box-shadow: -12px 0 32px rgba(0,0,0,0.18);
-    transition: right 0.3s ease; z-index: 56;
-    font-size: 17px !important;
+    position: fixed !important; inset: 0 !important; width: auto !important;
+    background: var(--color-bg) !important;
+    flex-direction: column !important; align-items: flex-start !important; justify-content: flex-start !important;
+    gap: 0 !important; padding: 100px 24px 28px !important;
+    box-shadow: none !important; z-index: 65;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+    font-weight: 400 !important;
+    font-size: 28px !important; letter-spacing: -0.01em !important;
+    opacity: 0; pointer-events: none; transform: translateY(-10px);
+    transition: opacity 0.22s ease, transform 0.22s ease;
+    overflow-y: auto;
   }
-  .nav-toggle:checked ~ .navlinks { right: 0; }
-  .navlinks .btn-primary { margin-top: var(--space-2); width: 100%; text-align: center; }
+  .navlinks a { padding: 13px 0 !important; border-bottom: none !important; color: var(--color-text) !important; }
+  .navlinks a[aria-current='page'] { font-weight: 400 !important; color: var(--color-text) !important; border-bottom: none !important; }
+  .navlinks .btn-primary {
+    margin-top: var(--space-5) !important; width: fit-content !important; border-bottom: none !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+    font-size: 16px !important; font-weight: 600 !important;
+  }
+  .nav-toggle:checked ~ .navlinks { opacity: 1; pointer-events: auto; transform: translateY(0); }
 }
 
 /* Scroll-tied motion — CSS-only scroll-driven animation (no JS, so it

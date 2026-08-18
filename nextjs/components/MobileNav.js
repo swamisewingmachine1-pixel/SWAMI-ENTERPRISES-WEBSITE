@@ -2,22 +2,21 @@
 
 import { useState } from 'react';
 
-export default function MobileNav() {
+export default function MobileNav({ color = '#151515' }) {
   const [open, setOpen] = useState(false);
   return (
     <>
       <button
-        className="hamburger"
         onClick={() => setOpen(true)}
         aria-label="Menu"
-        style={{ display: 'none', background: 'none', border: 'none', fontSize: 22, cursor: 'pointer' }}
+        style={{ background: 'none', border: 'none', fontSize: 22, cursor: 'pointer', color }}
       >
         ☰
       </button>
       {open && (
         <div
           style={{
-            position: 'fixed', inset: 0, background: '#050505', zIndex: 999,
+            position: 'fixed', inset: 0, background: '#050505', zIndex: 1002,
             display: 'flex', flexDirection: 'column', justifyContent: 'center',
             padding: '80px clamp(28px,8vw,60px)', gap: 26,
           }}
@@ -45,12 +44,6 @@ export default function MobileNav() {
           ))}
         </div>
       )}
-      <style>{`
-        @media (max-width: 860px) {
-          .nav-links { display: none !important; }
-          .hamburger { display: block !important; }
-        }
-      `}</style>
     </>
   );
 }

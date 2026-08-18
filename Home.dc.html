@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Swami Enterprises — JACK Industrial Sewing Machines, Delhi</title>
 <meta name="description" content="Authorized Jack showroom in Chanakya Place, New Delhi. Industrial sewing machines, motors, spare parts, repair and AMC — trading on 30 Feet Road since 2015.">
+<!-- Every route now rewrites to this same file (see vercel.json), so relative asset paths like
+     "./support.js" or "uploads/x.jpg" must resolve against the site root regardless of the
+     actual requested path (e.g. /machines/jack-f6), not against that path's own directory. -->
+<base href="/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230A5CFF'/%3E%3Ctext x='50' y='68' font-size='58' font-family='Arial,sans-serif' font-weight='700' fill='white' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
 <script src="./support.js"></script>
 </head>
@@ -1770,6 +1774,29 @@ class Component extends DCLogic {
     this.updateNavWidth();
     window.addEventListener('resize', this.updateNavWidth);
 
+    // Read the URL on first load (deep link / shared link / refresh) so it lands on the right
+    // page instead of always resetting to home, and keep the URL in sync on browser back/forward.
+    this.applyPathToState = (replace) => {
+      const path = window.location.pathname;
+      const machineMatch = path.match(/^\/machines\/([a-z0-9-]+)/i);
+      const viewFromPath = { '/machines': 'machines', '/industries': 'industries', '/solutions': 'solutions', '/finder': 'finder', '/compare': 'compare', '/about': 'about' };
+      let next = null;
+      if (machineMatch && this.machines.find((m) => m.id === machineMatch[1])) {
+        next = { view: 'product', selectedMachineId: machineMatch[1] };
+      } else if (viewFromPath[path]) {
+        next = { view: viewFromPath[path] };
+      }
+      if (next) {
+        this.setState(next);
+        document.title = this.titleFor(next.view, next.selectedMachineId || this.state.selectedMachineId);
+      } else if (!replace) {
+        document.title = this.titleFor('home');
+      }
+    };
+    this.applyPathToState(true);
+    this.onPopState = () => this.applyPathToState(false);
+    window.addEventListener('popstate', this.onPopState);
+
     // Accessibility pass: this template drives every interaction off onClick spans (no native
     // <button>/<a>), which means none of them are keyboard-reachable or screen-reader-announced
     // by default. Rather than rewrite hundreds of onClick spans into semantic elements, tag every
@@ -1881,12 +1908,39 @@ class Component extends DCLogic {
     { key: 'priority', title: 'What matters most to you?', options: ['Speed', 'Precision', 'Durability', 'Ease of use'] },
   ];
 
+  // Every view (and every machine's product page) gets its own real URL — deep-linkable,
+  // shareable, back/forward-button-correct, and crawlable by any bot that executes JS
+  // (which includes Googlebot). This is a client-rendered single page, so it can't offer true
+  // server-rendered per-URL HTML, but a distinct URL + accurate <title> per page is the
+  // meaningful floor for both SEO and normal link-sharing, and costs nothing to add.
+  urlPath = (view, id) => {
+    if (view === 'home') return '/';
+    if (view === 'product') return '/machines/' + (id || 'jack-f6');
+    return '/' + view;
+  };
+  titleFor = (view, id) => {
+    if (view === 'home') return 'Swami Enterprises — JACK Industrial Sewing Machines, Delhi';
+    if (view === 'product') {
+      const m = this.machines.find((x) => x.id === id);
+      return (m ? m.model + ' — ' : '') + 'Swami Enterprises';
+    }
+    const labels = { machines: 'Machines', industries: 'Industries', solutions: 'Solutions', finder: 'Find Your Machine', compare: 'Compare Machines', about: 'About' };
+    return (labels[view] || view) + ' — Swami Enterprises';
+  };
+  syncUrl = (view, id) => {
+    if (typeof window === 'undefined' || !window.history) return;
+    const path = this.urlPath(view, id);
+    if (window.location.pathname !== path) window.history.pushState({ view, id }, '', path);
+    document.title = this.titleFor(view, id);
+  };
   goToView = (view) => {
     this.setState({ view, contactOpen: false });
+    this.syncUrl(view);
     if (typeof window !== 'undefined') window.scrollTo(0, 0);
   };
   goToProduct = (id) => {
     this.setState({ view: 'product', selectedMachineId: id, contactOpen: false });
+    this.syncUrl('product', id);
     if (typeof window !== 'undefined') window.scrollTo(0, 0);
   };
   openSearch = () => this.setState({ searchOpen: true, searchQuery: '' });

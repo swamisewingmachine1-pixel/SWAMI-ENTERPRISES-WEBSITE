@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+@keyframes swFadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes swEaseDemo { 0% { transform:translateX(0); } 100% { transform:translateX(220px); } }
+@keyframes swBounceDemo { 0% { transform:translateX(0); } 50% { transform:translateX(240px); } 65% { transform:translateX(210px); } 80% { transform:translateX(230px); } 100% { transform:translateX(220px); } }
+body { margin:0; }
+a { color:#0A5CFF; text-decoration:none; }
+a:hover { color:#3D7BFF; }
+* { box-sizing:border-box; }
+</style>
+</helmet>
+
+<div style="width:100%;background:#F7F7F5;font-family:'Manrope',sans-serif;color:#151515">
+
+  <!-- LABEL -->
+  <div style="padding:20px clamp(20px,6vw,60px);border-bottom:1px solid rgba(0,0,0,0.08);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:#F7F7F5;z-index:500">
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#707070">SWAMI ENTERPRISES — VISUAL FOUNDATION v1</span>
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#0A5CFF">TOKENS / NAV / HERO PROTOTYPE</span>
+  </div>
+
+  <!-- ============ 01 COLOR TOKENS ============ -->
+  <div style="padding:clamp(60px,8vw,90px) clamp(20px,6vw,60px) 40px">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#0A5CFF;margin-bottom:28px">01 — COLOR</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1px;background:rgba(0,0,0,0.08)">
+      <sc-for list="{{ colorTokens }}" as="c" hint-placeholder-count="8">
+        <div style="background:#F7F7F5;padding:18px">
+          <div style="width:100%;height:64px;background:{{ c.hex }};border:1px solid rgba(0,0,0,0.08)"></div>
+          <div style="font-size:13px;font-weight:600;margin-top:12px">{{ c.name }}</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#707070;margin-top:2px">{{ c.hex }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- ============ 02 TYPOGRAPHY ============ -->
+  <div style="padding:20px clamp(20px,6vw,60px) 90px">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#0A5CFF;margin-bottom:28px">02 — TYPOGRAPHY · Manrope + IBM Plex Mono</div>
+    <div style="display:flex;flex-direction:column">
+      <sc-for list="{{ typeSpecimens }}" as="t" hint-placeholder-count="9">
+        <div style="display:grid;grid-template-columns:160px 1fr;gap:24px;padding:22px 0;border-top:1px solid rgba(0,0,0,0.08);align-items:baseline">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#707070">{{ t.role }}<br/>{{ t.spec }}</div>
+          <div style="{{ t.style }}">{{ t.sample }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- ============ 03 SPACING / RADIUS ============ -->
+  <div style="padding:20px clamp(20px,6vw,60px) 90px;display:grid;grid-template-columns:1fr 1fr;gap:60px">
+    <div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#0A5CFF;margin-bottom:28px">03 — SPACING SCALE</div>
+      <sc-for list="{{ spacingTokens }}" as="s" hint-placeholder-count="6">
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:14px">
+          <div style="width:{{ s.px }}px;height:10px;background:#151515"></div>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#707070">{{ s.label }} — {{ s.px }}px</span>
+        </div>
+      </sc-for>
+    </div>
+    <div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#0A5CFF;margin-bottom:28px">04 — RADIUS HIERARCHY</div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-end">
+        <sc-for list="{{ radiusTokens }}" as="r" hint-placeholder-count="6">
+          <div>
+            <div style="width:72px;height:72px;background:#151515;border-radius:{{ r.css }}"></div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#707070;margin-top:8px;text-align:center">{{ r.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 05 MOTION ============ -->
+  <div style="padding:20px clamp(20px,6vw,60px) 90px">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#0A5CFF;margin-bottom:28px">05 — MOTION LANGUAGE</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px">
+      <div>
+        <div style="font-size:13px;color:#151515;margin-bottom:10px">✓ Momentum ease-out — 480ms cubic-bezier(0.16,1,0.3,1)</div>
+        <div style="width:260px;height:44px;background:rgba(0,0,0,0.06);position:relative;overflow:hidden">
+          <div style="width:32px;height:32px;background:#0A5CFF;margin:6px;animation:swEaseDemo 1.6s cubic-bezier(0.16,1,0.3,1) infinite alternate"></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:13px;color:#707070;margin-bottom:10px">✗ Bounce / rubber-band — never used</div>
+        <div style="width:260px;height:44px;background:rgba(0,0,0,0.06);position:relative;overflow:hidden">
+          <div style="width:32px;height:32px;background:#B0B0B0;margin:6px;animation:swBounceDemo 1.6s ease-in-out infinite alternate"></div>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:13px;color:#4A4A4A;margin-top:24px;max-width:640px;line-height:1.7">Reveals: 400–600ms ease-out, opacity + 24px translate. Hover: 150–200ms ease. Section/page transitions: 300–500ms fade. All motion respects <span style="font-family:'IBM Plex Mono',monospace">prefers-reduced-motion</span> — the hero below falls back to a static final frame.</div>
+  </div>
+
+  <!-- ============ 06 NAVIGATION PROTOTYPE ============ -->
+  <div style="padding:20px clamp(20px,6vw,60px) 90px">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#0A5CFF;margin-bottom:28px">06 — NAVIGATION</div>
+    <div style="background:#050505;position:relative">
+      <div style="height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 28px">
+        <span style="font-weight:800;font-size:15px;letter-spacing:0.06em;color:#F7F7F5">SWAMI ENTERPRISES</span>
+        <div style="align-items:center;gap:28px;display:{{ desktopNavDisplay }}">
+          <sc-for list="{{ navLinksDesktop }}" as="l" hint-placeholder-count="7">
+            <span style="font-size:13px;color:#B0B0B0" style-hover="color:#F7F7F5">{{ l }}</span>
+          </sc-for>
+          <span style="font-size:12px;font-family:'IBM Plex Mono',monospace;color:#F7F7F5;border:1px solid rgba(247,247,245,0.35);padding:9px 16px">Talk to a Specialist</span>
+        </div>
+        <span style="color:#F7F7F5;font-size:22px;cursor:pointer;display:{{ hamburgerDisplay }}" onClick="{{ toggleMobileNav }}">☰</span>
+      </div>
+      <sc-if value="{{ mobileNavOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;top:64px;left:0;right:0;background:#0A0A0A;padding:20px 28px;display:flex;flex-direction:column;gap:18px;animation:swFadeIn 0.25s ease both">
+          <sc-for list="{{ navLinksDesktop }}" as="l" hint-placeholder-count="7">
+            <span style="font-size:16px;color:#F7F7F5">{{ l }}</span>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+    <div style="font-size:12px;color:#707070;margin-top:12px">Resize the window below 760px to see the nav switch from full link row to the ☰ toggle.</div>
+  </div>
+
+  <!-- ============ 07 CINEMATIC HERO PROTOTYPE ============ -->
+  <div style="padding:20px clamp(20px,6vw,60px) 0">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#0A5CFF;margin-bottom:0">07 — CINEMATIC HERO · scroll to play</div>
+  </div>
+
+  <div data-sw-hero-wrapper="" style="height:500vh;position:relative">
+    <div style="position:sticky;top:0;height:100vh;overflow:hidden;background:{{ heroBg }}">
+
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 24px">
+        <div style="opacity:{{ voidOpacity }};font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.28em;color:{{ voidLabelColor }};position:absolute;transform:translateY({{ voidShift }}px)">SWAMI ENTERPRISES</div>
+
+        <div style="opacity:{{ statementOpacity }};transform:translateY({{ statementShift }}px) scale({{ statementScale }});filter:blur({{ statementBlur }}px);position:absolute;max-width:1000px">
+          <div style="font-weight:800;font-size:clamp(34px,6.5vw,84px);line-height:1.05;color:{{ statementColor }};letter-spacing:-0.02em">Precision moves<br/>the whole line forward.</div>
+        </div>
+
+        <div style="position:absolute;inset:0;pointer-events:none;opacity:{{ linesOpacity }};display:flex;align-items:center;justify-content:center">
+          <div style="width:60vw;height:60vw;max-width:820px;max-height:820px;border-radius:50%;background:radial-gradient(circle,rgba(10,92,255,0.22) 0%,rgba(10,92,255,0.08) 40%,rgba(10,92,255,0) 70%);filter:blur(2px);transform:scale({{ glowScale }})"></div>
+        </div>
+
+        <div style="opacity:{{ f6Opacity }};transform:translateY({{ f6Shift }}px) scale({{ f6Scale }});position:absolute;width:min(720px,86vw)">
+          <image-slot id="foundation-f6-hero" shape="rect" placeholder="Drop: JACK F6 studio photograph" style="width:100%;height:clamp(260px,40vw,440px)"></image-slot>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#707070;margin-top:18px;text-align:center">JACK F6 — COMPUTERIZED LOCKSTITCH MACHINE</div>
+        </div>
+      </div>
+
+      <div style="position:absolute;bottom:28px;left:0;right:0;display:flex;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.2em;color:{{ scrollCueColor }};opacity:{{ scrollCueOpacity }}">SCROLL</div>
+    </div>
+  </div>
+
+  <!-- ============ 08 CAMERA JOURNEY PROTOTYPE ============ -->
+  <div style="padding:60px clamp(20px,6vw,60px) 0;background:#F7F7F5">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#0A5CFF">08 — CAMERA JOURNEY (2.5D, real photography only)</div>
+  </div>
+
+  <div data-sw-cam-wrapper="" style="height:300vh;position:relative;background:#F7F7F5">
+    <div style="position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center">
+      <div style="position:absolute;inset:0;opacity:{{ camWideOpacity }};display:flex;align-items:center;justify-content:center;transform:scale({{ camWideScale }})">
+        <image-slot id="foundation-cam-wide" shape="rect" placeholder="Drop: F6 full-machine wide shot" style="width:min(900px,80vw);height:min(560px,60vh)"></image-slot>
+      </div>
+      <div style="position:absolute;inset:0;opacity:{{ camDetailOpacity }};display:flex;align-items:center;justify-content:center;transform:scale({{ camDetailScale }})">
+        <image-slot id="foundation-cam-detail" shape="rect" placeholder="Drop: needle & stitch macro detail" style="width:min(560px,70vw);height:min(560px,60vh)"></image-slot>
+      </div>
+      <div style="position:absolute;bottom:40px;left:0;right:0;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#707070">{{ camLabel }}</div>
+    </div>
+  </div>
+
+  <div style="height:20vh;background:#F7F7F5"></div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+function clamp01(v) { return Math.max(0, Math.min(1, v)); }
+function seg(t, a, b) { if (a === b) return t >= b ? 1 : 0; return clamp01((t - a) / (b - a)); }
+function lerp(a, b, t) { return a + (b - a) * t; }
+function lerpColor(c1, c2, t) {
+  const r = Math.round(lerp(c1[0], c2[0], t));
+  const g = Math.round(lerp(c1[1], c2[1], t));
+  const b = Math.round(lerp(c1[2], c2[2], t));
+  return `rgb(${r},${g},${b})`;
+}
+
+class Component extends DCLogic {
+  state = { heroT: 0, camT: 0, mobileNavOpen: false, reducedMotion: false, isMobile: false };
+
+  componentDidMount() {
+    if (typeof window === 'undefined') return;
+    this.reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.setState({ isMobile: window.innerWidth < 760 });
+    this.onResize = () => this.setState({ isMobile: window.innerWidth < 760 });
+    window.addEventListener('resize', this.onResize);
+    if (this.reduced) { this.setState({ reducedMotion: true, heroT: 1, camT: 1 }); return; }
+
+    this.recompute = () => {
+      const heroEl = document.querySelector('[data-sw-hero-wrapper]');
+      const camEl = document.querySelector('[data-sw-cam-wrapper]');
+      const H = window.innerHeight;
+      const heroT = this.progressFor(heroEl, H);
+      const camT = this.progressFor(camEl, H);
+      if (Math.abs(heroT - this.state.heroT) > 0.001 || Math.abs(camT - this.state.camT) > 0.001) {
+        this.setState({ heroT, camT });
+      }
+    };
+    window.addEventListener('scroll', this.recompute, { passive: true });
+    window.addEventListener('resize', this.recompute);
+    this.recompute();
+  }
+  componentWillUnmount() {
+    if (this.onResize) window.removeEventListener('resize', this.onResize);
+    if (this.recompute) {
+      window.removeEventListener('scroll', this.recompute);
+      window.removeEventListener('resize', this.recompute);
+    }
+  }
+  progressFor(el, viewportH) {
+    if (!el) return 0;
+    const rect = el.getBoundingClientRect();
+    const total = rect.height - viewportH;
+    if (total <= 0) return 1;
+    return clamp01(-rect.top / total);
+  }
+
+  toggleMobileNav = () => this.setState((s) => ({ mobileNavOpen: !s.mobileNavOpen }));
+
+  renderVals() {
+    const { heroT, camT, mobileNavOpen } = this.state;
+
+    const voidIn = seg(heroT, 0, 0.05);
+    const voidOut = seg(heroT, 0.16, 0.26);
+    const voidOpacity = voidIn * (1 - voidOut);
+    const voidShift = lerp(0, -30, voidOut);
+
+    const stIn = seg(heroT, 0.2, 0.32);
+    const stOut = seg(heroT, 0.52, 0.66);
+    const statementOpacity = stIn * (1 - stOut);
+    const statementShift = lerp(16, 0, stIn) - lerp(0, 40, stOut);
+    const statementScale = lerp(0.97, 1, stIn) - lerp(0, 0.05, stOut);
+    const statementBlur = lerp(0, 6, stOut);
+    const statementColor = '#F7F7F5';
+
+    const linesOpacity = seg(heroT, 0.3, 0.42) * (1 - seg(heroT, 0.58, 0.7));
+    const glowScale = lerp(1, 2.4, seg(heroT, 0.3, 0.68));
+
+    const f6In = seg(heroT, 0.68, 0.86);
+    const f6Opacity = f6In;
+    const f6Shift = lerp(30, 0, f6In);
+    const f6Scale = lerp(0.94, 1, f6In);
+
+    const bgT = seg(heroT, 0.5, 0.82);
+    const heroBg = lerpColor([5, 5, 5], [247, 247, 245], bgT);
+    const voidLabelColor = lerpColor([247, 247, 245], [21, 21, 21], bgT);
+
+    const scrollCueOpacity = 1 - seg(heroT, 0, 0.08);
+    const scrollCueColor = lerpColor([74, 74, 74], [74, 74, 74], 0);
+
+    const camDetailOpacity = seg(camT, 0.35, 0.65);
+    const camWideOpacity = 1 - seg(camT, 0.45, 0.7);
+    const camWideScale = lerp(1, 1.08, seg(camT, 0, 0.5));
+    const camDetailScale = lerp(0.95, 1, seg(camT, 0.35, 0.75));
+    const camLabel = camT < 0.5 ? 'FULL MACHINE' : 'NEEDLE & STITCH DETAIL';
+
+    return {
+      colorTokens: [
+        { name: 'Black', hex: '#050505' },
+        { name: 'Near Black', hex: '#0A0A0A' },
+        { name: 'Graphite 900', hex: '#151515' },
+        { name: 'Graphite 700', hex: '#222222' },
+        { name: 'Graphite 400', hex: '#707070' },
+        { name: 'White', hex: '#F7F7F5' },
+        { name: 'Pure White', hex: '#FFFFFF' },
+        { name: 'JACK Blue (accent)', hex: '#0A5CFF' },
+      ],
+      typeSpecimens: [
+        { role: 'DISPLAY XL', spec: 'Manrope 800 / -2% tracking', sample: 'Engineering what holds together.', style: 'font-weight:800;font-size:clamp(32px,5vw,64px);letter-spacing:-0.02em;line-height:1.05' },
+        { role: 'DISPLAY L', spec: 'Manrope 800', sample: 'JACK F6', style: 'font-weight:800;font-size:40px;letter-spacing:-0.01em' },
+        { role: 'H1', spec: 'Manrope 700', sample: 'An authorized JACK dealer.', style: 'font-weight:700;font-size:30px;line-height:1.3' },
+        { role: 'H2', spec: 'Manrope 700', sample: 'Key capabilities', style: 'font-weight:700;font-size:22px' },
+        { role: 'BODY LARGE', spec: 'Manrope 400 / 17px', sample: 'We bring JACK\u2019s industrial sewing technology to India\u2019s makers.', style: 'font-weight:400;font-size:17px;line-height:1.6;color:#4A4A4A' },
+        { role: 'BODY', spec: 'Manrope 400 / 15px', sample: 'Full specification sheet available on request.', style: 'font-weight:400;font-size:15px;line-height:1.6;color:#4A4A4A' },
+        { role: 'TECHNICAL', spec: 'IBM Plex Mono 400 / tracked', sample: 'COMPUTERIZED LOCKSTITCH MACHINE', style: "font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.1em;color:#151515" },
+        { role: 'CAPTION / MICRO', spec: 'IBM Plex Mono 400 / 10px', sample: 'AUTHORIZED JACK DEALER', style: "font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:#707070" },
+        { role: 'NUMERALS', spec: 'IBM Plex Mono — tabular', sample: '01  02  03  1998  2026', style: "font-family:'IBM Plex Mono',monospace;font-size:20px;color:#151515" },
+      ],
+      spacingTokens: [
+        { label: 'XS', px: 8 }, { label: 'S', px: 16 }, { label: 'M', px: 24 },
+        { label: 'L', px: 40 }, { label: 'XL', px: 64 }, { label: '2XL', px: 96 },
+      ],
+      radiusTokens: [
+        { label: 'Sharp', css: '0px' }, { label: 'Micro', css: '2px' }, { label: 'Small', css: '6px' },
+        { label: 'Medium', css: '14px' }, { label: 'Large', css: '28px' }, { label: 'Circular', css: '50%' },
+      ],
+      navLinksDesktop: ['Machines', 'Solutions', 'Industries', 'Intelligence', 'Service', 'Knowledge', 'About'],
+      mobileNavOpen, toggleMobileNav: this.toggleMobileNav,
+      isMobile: this.state.isMobile,
+      desktopNavDisplay: this.state.isMobile ? 'none' : 'flex',
+      hamburgerDisplay: this.state.isMobile ? 'block' : 'none',
+
+      heroBg, voidOpacity, voidShift, voidLabelColor,
+      statementOpacity, statementShift, statementScale, statementBlur, statementColor,
+      linesOpacity, glowScale,
+      f6Opacity, f6Shift, f6Scale,
+      scrollCueOpacity, scrollCueColor,
+
+      camWideOpacity, camWideScale, camDetailOpacity, camDetailScale, camLabel,
+    };
+  }
+}
+
+</script>
+</body>
+</html>

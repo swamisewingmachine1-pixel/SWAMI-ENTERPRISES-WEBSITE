@@ -59,6 +59,7 @@ a { color: inherit; text-decoration: none; }
 .machine-title { font-weight: 800; font-size: clamp(19px, 2.4vw, 24px); }
 .machine-desc { font-size: 14px; color: #4A4A4A; margin-top: 8px; max-width: 440px; }
 @media (max-width: 640px) { .machine-row { grid-template-columns: 1fr; } }
+@media (max-width: 700px) { .compare-pickers { grid-template-columns: 1fr !important; } }
 
 .spec-table { width: 100%; border-collapse: collapse; }
 .spec-table tr { border-top: 1px solid rgba(0,0,0,0.08); }

@@ -28,6 +28,8 @@ export default function RootLayout({ children }) {
           <a href="/" className="nav-brand">SWAMI ENTERPRISES</a>
           <div className="nav-links">
             <a href="/machines">Machines</a>
+            <a href="/finder">Find Your Machine</a>
+            <a href="/compare">Compare</a>
             <a href="/about">About</a>
             <TrackedLink href="tel:+919971336656" event="call_click" props={{ location: 'nav' }}>Call</TrackedLink>
             <TrackedLink

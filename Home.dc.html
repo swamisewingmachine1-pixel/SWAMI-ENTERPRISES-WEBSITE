@@ -37,6 +37,7 @@ a:hover { color:#3D7BFF; }
 .sw-btn-accent:hover { box-shadow:0 12px 28px rgba(10,92,255,0.32); }
 .sw-btn-light:hover { box-shadow:0 12px 28px rgba(0,0,0,0.14); }
 :focus-visible { outline:2px solid #0A5CFF; outline-offset:2px; }
+@media (max-width:700px) { .sw-compare-pickers { grid-template-columns:1fr !important; } }
 </style>
 </helmet>
 
@@ -67,7 +68,7 @@ a:hover { color:#3D7BFF; }
     <div style="display:flex;align-items:center;gap:18px">
       <svg onClick="{{ openSearch }}" style="cursor:pointer" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ navText }}" stroke-width="1.8"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.2" y2="16.2"></line></svg>
       <div style="position:relative;cursor:pointer" onClick="{{ goCompare }}">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ navText }}" stroke-width="1.8"><rect x="3" y="5" width="7" height="14" rx="1"></rect><rect x="14" y="5" width="7" height="14" rx="1"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ navText }}" stroke-width="1.8"><path d="M6 8h12l-1 13H7L6 8z"></path><path d="M9 8V6a3 3 0 0 1 6 0v2"></path></svg>
         <sc-if value="{{ hasCompareBadgeDot }}" hint-placeholder-val="{{ false }}">
           <span style="position:absolute;top:-6px;right:-8px;background:#0A5CFF;color:#fff;font-size:9px;font-family:'IBM Plex Mono',monospace;width:14px;height:14px;border-radius:50%;display:flex;align-items:center;justify-content:center">{{ compareCountNum }}</span>
         </sc-if>
@@ -708,7 +709,7 @@ a:hover { color:#3D7BFF; }
       <div style="text-align:center;font-size:15px;color:#707070;margin-top:14px;max-width:560px;margin-left:auto;margin-right:auto">Pick any three machines. We only show fields we can verify — a specialist confirms anything else.</div>
 
       <!-- APPLE-STYLE MODEL PICKERS -->
-      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px,1fr));gap:20px;max-width:960px;margin:48px auto 0">
+      <div class="sw-compare-pickers" style="display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:20px;max-width:960px;margin:48px auto 0">
         <sc-for list="{{ compareSlots }}" as="slot" hint-placeholder-count="3">
           <div>
             <div style="position:relative">

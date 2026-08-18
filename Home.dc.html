@@ -519,10 +519,17 @@ a:hover { color:#3D7BFF; }
           <span style="padding:15px 28px;background:#151515;color:#F7F7F5;font-size:14px;cursor:pointer" onClick="{{ openContact }}">Talk to a Specialist</span>
           <span style="padding:15px 28px;border:1px solid #151515;color:#151515;font-size:14px;cursor:pointer" onClick="{{ goFinder }}">Find your machine</span>
         </div>
-        <div style="margin-top:56px;height:clamp(220px,32vw,400px);border:1px dashed rgba(0,0,0,0.18);background:repeating-linear-gradient(135deg,rgba(0,0,0,0.02),rgba(0,0,0,0.02) 10px,transparent 10px,transparent 20px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px">
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#707070">PRODUCT VIDEO</span>
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A8A8A">Drop a video file for the {{ activeMachine.model }}</span>
-        </div>
+        <sc-if value="{{ activeMachine.hasVideo }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:56px;position:relative;padding-top:56.25%;background:#0A0A0A">
+            <iframe src="{{ activeMachine.videoEmbedUrl }}" title="{{ activeMachine.model }} — official JACK product video" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+          </div>
+        </sc-if>
+        <sc-if value="{{ activeMachine.hasNoVideo }}" hint-placeholder-val="{{ true }}">
+          <div style="margin-top:56px;height:clamp(220px,32vw,400px);border:1px dashed rgba(0,0,0,0.18);background:repeating-linear-gradient(135deg,rgba(0,0,0,0.02),rgba(0,0,0,0.02) 10px,transparent 10px,transparent 20px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#707070">PRODUCT VIDEO</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A8A8A">Not yet available for the {{ activeMachine.model }}</span>
+          </div>
+        </sc-if>
       </div>
 
       <div style="background:#0A0A0A;padding:clamp(60px,10vw,100px) clamp(24px,8vw,80px)">
@@ -546,7 +553,9 @@ a:hover { color:#3D7BFF; }
           </sc-for>
         </div>
       </div>
+      </sc-if>
 
+      <sc-if value="{{ hasDetailItems }}" hint-placeholder-val="{{ true }}">
       <div style="background:#151515;padding:clamp(60px,8vw,90px) 0">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.2em;color:#707070;margin-bottom:8px;padding:0 clamp(24px,8vw,80px)">DETAIL</div>
         <sc-for list="{{ detailItems }}" as="d" hint-placeholder-count="3">
@@ -564,7 +573,7 @@ a:hover { color:#3D7BFF; }
       </div>
       </sc-if>
 
-      <sc-if value="{{ isNotF6Active }}" hint-placeholder-val="{{ false }}">
+      <sc-if value="{{ noDetailItems }}" hint-placeholder-val="{{ false }}">
       <div style="background:#151515;padding:clamp(70px,10vw,110px) clamp(24px,8vw,80px);text-align:center">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.2em;color:#707070;margin-bottom:16px">DETAIL</div>
         <div style="font-size:15px;color:#B0B0B0;max-width:520px;margin:0 auto;line-height:1.7">Detailed macro photography for the {{ activeMachine.model }} is available on request.</div>
@@ -862,11 +871,18 @@ class Component extends DCLogic {
       imgId: 'lib-jack-f6',
       imgSrc: 'uploads/f6-cutout-final.png',
       imgPh: 'Drop: JACK F6 product photograph',
+      youtubeId: '8_ympqgXpK0',
       specs: [
         ['Series', 'Lockstitch, direct drive'], ['Needle', 'DBx1, 11-18#'], ['Number of threads', '2'],
         ['Max stitch length', '5mm'], ['Presser foot lift (hand/auto)', '13mm / 6mm'], ['Max sewing speed', '5000 s.p.m.'],
         ['Motor', 'Built-in silent, energy-saving servo motor'], ['Lubrication', 'Semi-dry head, oil-free'],
         ['Feed', 'Automatic, computerized, auto thread trimmer'], ['Availability', 'In stock'],
+      ],
+      detailItems: [
+        { id: 'f6-detail-panel', src: 'uploads/card5.jpg', ph: 'Drop: control panel macro', label: 'CONTROL PANEL', n: '01', note: 'Speed and settings sit under a digital display rather than mechanical dials.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
+        { id: 'f6-detail-needle', src: 'uploads/f6 jack 1.jpg', ph: 'Drop: needle & presser foot macro', label: 'NEEDLE & PRESSER FOOT', n: '02', note: 'The work area where thread meets fabric — precision at the point of the stitch.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
+        { id: 'f6-detail-mechanism', src: 'uploads/card9.jpg', ph: 'Drop: bobbin/tension mechanism macro', label: 'BOBBIN & TENSION ASSEMBLY', n: '03', note: 'The winding and tension mechanism that keeps stitch quality consistent.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
+        { id: 'f6-detail-official1', src: 'uploads/official-jack-f6-card2.jpg', ph: 'Official product photograph', label: 'OFFICIAL PRODUCT PHOTOGRAPHY', n: '04', note: 'From JACK’s official product documentation.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
       ],
     },
     {
@@ -884,6 +900,10 @@ class Component extends DCLogic {
         ['Max sewing speed', 'Up to 3000 s.p.m.'], ['Best for', 'Shirts, jeans, non-woven bags, shoes, bags'],
         ['Availability', 'Order on request'],
       ],
+      detailItems: [
+        { id: '2002g-detail-1', src: 'uploads/official-jack-2002g-card2.png', ph: 'Official product photograph', label: 'STITCH DETAIL', n: '01', note: 'From JACK’s official product documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
+        { id: '2002g-detail-2', src: 'uploads/official-jack-2002g-card3.png', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '02', note: 'From JACK’s official product documentation.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
+      ],
     },
     {
       id: 'jack-5558g',
@@ -900,6 +920,10 @@ class Component extends DCLogic {
         ['Feature', 'Built-in edge cutter and piping device'], ['Best for', 'Shirts, suits, pants, down jackets'],
         ['Availability', 'Order on request'],
       ],
+      detailItems: [
+        { id: '5558g-detail-1', src: 'uploads/official-jack-5558g-card2.jpg', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'From JACK’s official product documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
+        { id: '5558g-detail-2', src: 'uploads/official-jack-5558g-card3.jpg', ph: 'Official product photograph', label: 'EDGE CUTTER DETAIL', n: '02', note: 'From JACK’s official product documentation.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
+      ],
     },
     {
       id: 'jack-5559f',
@@ -915,6 +939,10 @@ class Component extends DCLogic {
         ['Series', 'Lockstitch, digital edge cutter'], ['Needle', 'DBx1, 11-18#'], ['Max sewing speed', 'Up to 4000 s.p.m.'],
         ['Feature', 'Stable built-in edge cutter, stepping-motor foot lift'], ['Best for', 'Shirts, suits, pants, down jackets'],
         ['Availability', 'Order on request'],
+      ],
+      detailItems: [
+        { id: '5559f-detail-1', src: 'uploads/official-jack-5559f-card2.jpg', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'From JACK’s official product documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
+        { id: '5559f-detail-2', src: 'uploads/official-jack-5559f-card4.jpg', ph: 'Official product photograph', label: 'CONTROL PANEL', n: '02', note: 'From JACK’s official product documentation.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
       ],
     },
     {
@@ -933,6 +961,12 @@ class Component extends DCLogic {
         ['Control system', 'Jack NTB system with Octopus "Nine-Brain" AI chip'], ['Motor', 'Direct-drive integrated servo motor'],
         ['Feed', 'Computerized, auto-trimmer, auto backtack, auto foot lift'], ['Availability', 'Order on request'],
       ],
+      youtubeId: 'HVx6o33NR8U',
+      detailItems: [
+        { id: 'a4c-detail-1', src: 'uploads/jack-a4c-detail.jpg', ph: 'Detail photograph', label: 'CONTROL DETAIL', n: '01', note: 'The Jack NTB control system, with the Octopus “Nine-Brain” AI chip.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
+        { id: 'a4c-detail-2', src: 'uploads/jack-a4c-side.jpg', ph: 'Side profile photograph', label: 'SIDE PROFILE', n: '02', note: 'Direct-drive integrated servo motor.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
+        { id: 'a4c-detail-3', src: 'uploads/jack-a4c-inuse.jpg', ph: 'In-use photograph', label: 'IN OPERATION', n: '03', note: 'On the showroom floor at Swami Enterprises.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
+      ],
     },
     {
       id: 'jack-e4s',
@@ -950,6 +984,11 @@ class Component extends DCLogic {
         ['Controls', 'One-key reset intelligent panel, LED light'], ['Motor', 'Single-shaft, integrated energy-saving motor'],
         ['Best for', 'T-shirts, underwear, jeans, mid-to-high-level clothing'], ['Availability', 'Order on request'],
       ],
+      youtubeId: 'PrBaPHgFia8',
+      detailItems: [
+        { id: 'e4s-detail-1', src: 'uploads/official-jack-e4s-card2.jpg', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'From JACK’s official product documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
+        { id: 'e4s-detail-2', src: 'uploads/official-jack-e4s-card4.jpg', ph: 'Official product photograph', label: 'CONTROL PANEL', n: '02', note: 'One-key reset intelligent panel with LED light.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
+      ],
     },
     {
       id: 'jack-c5t',
@@ -966,6 +1005,10 @@ class Component extends DCLogic {
         ['Max sewing speed', 'Up to 6000 s.p.m.'], ['Best for', 'Heavy materials, extra-heavy denim'],
         ['Availability', 'Order on request'],
       ],
+      detailItems: [
+        { id: 'c5t-detail-1', src: 'uploads/official-jack-c5t-card2.jpg', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'From JACK’s official product documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
+        { id: 'c5t-detail-2', src: 'uploads/official-jack-c5t-card4.jpg', ph: 'Official product photograph', label: 'TOP FEED DETAIL', n: '02', note: 'From JACK’s official product documentation.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
+      ],
     },
     {
       id: 'jack-w4',
@@ -977,6 +1020,15 @@ class Component extends DCLogic {
       operations: ['interlock', 'coverstitch'],
       searchTerms: ['w4', 'jack w4', 'interlock', 'coverstitch', 'knitwear'],
       imgId: 'lib-w4', imgSrc: 'uploads/w4-cutout.png', imgPh: 'Drop: JACK W4 photograph',
+      specs: [
+        ['Model shown', 'W4-D-01GB'], ['Needle', 'UY128GAS, 11-14#'], ['Needle no. / thread no.', '3 / 5'],
+        ['Stitch length', '1.5–4.5mm'], ['Stitch width', '5.6 / 6.4mm'], ['Differential ratio', '0.65–1.3'],
+        ['Max speed', '5500 s.p.m.'], ['Weight', '48–64 kg (model-dependent)'], ['Availability', 'Order on request'],
+      ],
+      detailItems: [
+        { id: 'w4-detail-1', src: 'uploads/official-jack-w4-card4.jpg', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'From JACK’s official product documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
+        { id: 'w4-detail-2', src: 'uploads/official-jack-w4-card6.jpg', ph: 'Official product photograph', label: 'STITCH DETAIL', n: '02', note: 'From JACK’s official product documentation.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
+      ],
     },
     {
       id: 'jack-k7',
@@ -988,6 +1040,15 @@ class Component extends DCLogic {
       operations: ['interlock', 'coverstitch'],
       searchTerms: ['k7', 'jack k7', 'interlock', 'coverstitch', 'knitwear'],
       imgId: 'lib-k7', imgSrc: 'uploads/k7-cutout.png', imgPh: 'Drop: JACK K7 photograph',
+      specs: [
+        ['Model shown', 'K7-UT-01GB'], ['Needle size', '10#'], ['No. of needles / threads', '3 / 5'],
+        ['Stitch length', '1.5–4.5mm'], ['Differential ratio', '0.6–1.8'], ['Preset / max speed', '4500 / 6000 s.p.m.'],
+        ['Features', 'Step motor, upper trim, holder device'], ['Weight', '51–61 kg'], ['Availability', 'Order on request'],
+      ],
+      detailItems: [
+        { id: 'k7-detail-1', src: 'uploads/official-jack-k7-card2.jpg', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'From JACK’s official product documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
+        { id: 'k7-detail-2', src: 'uploads/official-jack-k7-card4.jpg', ph: 'Official product photograph', label: 'STITCH DETAIL', n: '02', note: 'From JACK’s official product documentation.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
+      ],
     },
     {
       id: 'jack-9820g',
@@ -999,6 +1060,16 @@ class Component extends DCLogic {
       operations: ['bartack', 'pattern stitching'],
       searchTerms: ['9820g', 'jack 9820g', 'bartack', 'pattern'],
       imgId: 'lib-9820g', imgSrc: 'uploads/9820g-cutout.png', imgPh: 'Drop: JACK 9820G photograph',
+      specs: [
+        ['Model shown', '9820G-1 (Jacket) / 9820G-2 (Jeans)'], ['Eyelet length', '5–42mm'], ['Stitch length', '0.5–2.0mm'],
+        ['Zig-zag width', '1.5–5.0mm'], ['Footlifter height', '12–16mm'], ['Needle', '558'],
+        ['Max speed', '2500rpm'], ['Weight', '210 / 255 kg'], ['Availability', 'Order on request'],
+      ],
+      youtubeId: 'yo8F40gTw1o',
+      detailItems: [
+        { id: '9820g-detail-1', src: 'uploads/official-jack-9820g-card2.jpg', ph: 'Official product photograph', label: 'EYELET DETAIL', n: '01', note: 'Maximum precision and symmetry in eyelets and circles.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
+        { id: '9820g-detail-2', src: 'uploads/official-jack-9820g-card4.jpg', ph: 'Official product photograph', label: 'CONTROL PANEL', n: '02', note: 'Function keys on the display, operated with a single multifunction pedal.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
+      ],
     },
     {
       id: 'jack-z7',
@@ -1014,6 +1085,10 @@ class Component extends DCLogic {
         ['Series', 'Heavy-Duty, triple transport'], ['Feed', 'Needle feed + top feed + bottom feed (triple transport)'],
         ['Controls', 'Full digital touch panel'], ['Best for', 'Sofa, car seat, luggage, heavy leather goods'],
         ['Availability', 'Order on request'],
+      ],
+      detailItems: [
+        { id: 'z7-detail-1', src: 'uploads/official-jack-z7-card3.jpg', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'From JACK’s official product documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
+        { id: 'z7-detail-2', src: 'uploads/official-jack-z7-card5.jpg', ph: 'Official product photograph', label: 'CONTROL PANEL', n: '02', note: 'Full digital touch panel.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
       ],
     },
   ];
@@ -1289,10 +1364,16 @@ class Component extends DCLogic {
           categoryLabel: (m.operations[0] && m.operations[0].toLowerCase() !== m.category.toLowerCase() ? m.category + ' — ' + m.operations[0] : m.category).toUpperCase(),
           heroImgId: 'product-hero-' + m.id,
           operationsText: m.operations.join(', '),
+          hasVideo: !!m.youtubeId,
+          hasNoVideo: !m.youtubeId,
+          videoEmbedUrl: m.youtubeId ? `https://www.youtube.com/embed/${m.youtubeId}` : '',
         };
       })(),
       isF6Active: this.state.selectedMachineId === 'jack-f6',
       isNotF6Active: this.state.selectedMachineId !== 'jack-f6',
+      hasDetailItems: !!((this.machines.find((x) => x.id === this.state.selectedMachineId) || this.machines[0]).detailItems || []).length,
+      noDetailItems: !((this.machines.find((x) => x.id === this.state.selectedMachineId) || this.machines[0]).detailItems || []).length,
+      detailItems: (this.machines.find((x) => x.id === this.state.selectedMachineId) || this.machines[0]).detailItems || [],
       relatedMachines: this.machines.filter((m) => m.id !== this.state.selectedMachineId && m.category === (this.machines.find((x) => x.id === this.state.selectedMachineId) || this.machines[0]).category).slice(0, 3).map((m) => ({ ...m, open: () => this.goToProduct(m.id) })),
       goCompare: () => this.goToView('compare'),
       navCompareOpacity: view === 'compare' ? 1 : 0.55,
@@ -1460,11 +1541,6 @@ class Component extends DCLogic {
         { n: '02', title: 'Direct-drive motor', desc: 'Built for efficient, quieter operation on the floor.' },
         { n: '03', title: 'Digital control panel', desc: 'Adjust settings directly, without mechanical guesswork.' },
         { n: '04', title: 'Consistent stitch quality', desc: 'Engineered for high-speed work without sacrificing precision.' },
-      ],
-      detailItems: [
-        { id: 'f6-detail-panel', src: 'uploads/card5.jpg', ph: 'Drop: control panel macro', label: 'CONTROL PANEL', n: '01', note: 'Speed and settings sit under a digital display rather than mechanical dials.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
-        { id: 'f6-detail-needle', src: 'uploads/f6 jack 1.jpg', ph: 'Drop: needle & presser foot macro', label: 'NEEDLE & PRESSER FOOT', n: '02', note: 'The work area where thread meets fabric — precision at the point of the stitch.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
-        { id: 'f6-detail-mechanism', src: 'uploads/card9.jpg', ph: 'Drop: bobbin/tension mechanism macro', label: 'BOBBIN & TENSION ASSEMBLY', n: '03', note: 'The winding and tension mechanism that keeps stitch quality consistent.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
       ],
       specRows: ((m) => (m.specs && m.specs.length)
         ? m.specs.map(([label, value]) => ({ label, value }))

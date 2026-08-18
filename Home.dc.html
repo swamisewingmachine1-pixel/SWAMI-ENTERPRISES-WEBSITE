@@ -162,7 +162,7 @@ a:hover { color:#3D7BFF; }
         <div style="position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center">
           <sc-for list="{{ camStages }}" as="stage" hint-placeholder-count="5">
             <div style="position:absolute;inset:0;opacity:{{ stage.opacity }};display:flex;flex-direction:column;align-items:center;justify-content:center;transform:scale({{ stage.scale }});filter:blur({{ stage.blurPx }}px)">
-              <image-slot id="{{ stage.id }}" shape="rect" placeholder="{{ stage.ph }}" style="width:min(760px,80vw);height:min(500px,56vh)"></image-slot>
+              <image-slot id="{{ stage.id }}" shape="rect" src="{{ stage.src }}" fit="contain" placeholder="{{ stage.ph }}" style="width:min(760px,80vw);height:min(500px,56vh)"></image-slot>
             </div>
           </sc-for>
           <div style="position:absolute;bottom:36px;left:0;right:0;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#707070">{{ camLabel }}</div>
@@ -1844,11 +1844,11 @@ class Component extends DCLogic {
 
     const camT = this.state.camT;
     const camStageDefs = [
-      { id: 'cam-full', ph: 'Drop: full machine wide shot', label: 'FULL MACHINE', center: 0 },
-      { id: 'cam-panel', ph: 'Drop: control panel photo', label: 'CONTROL PANEL', center: 0.25 },
-      { id: 'cam-needle', ph: 'Drop: needle & thread macro', label: 'NEEDLE & THREAD', center: 0.5 },
-      { id: 'cam-fabric', ph: 'Drop: fabric under the foot', label: 'FABRIC', center: 0.75 },
-      { id: 'cam-stitch', ph: 'Drop: finished stitch macro', label: 'STITCH', center: 1 },
+      { id: 'cam-full', src: 'uploads/f6-cutout-final.png', ph: 'Drop: full machine wide shot', label: 'FULL MACHINE', center: 0 },
+      { id: 'cam-panel', src: 'uploads/card5.jpg', ph: 'Drop: control panel photo', label: 'CONTROL PANEL', center: 0.25 },
+      { id: 'cam-needle', src: 'uploads/f6 jack 1.jpg', ph: 'Drop: needle & thread macro', label: 'NEEDLE & THREAD', center: 0.5 },
+      { id: 'cam-fabric', src: 'uploads/official-jack-f6-card1.jpg', ph: 'Drop: fabric under the foot', label: 'FABRIC', center: 0.75 },
+      { id: 'cam-stitch', src: 'uploads/card9.jpg', ph: 'Drop: finished stitch macro', label: 'STITCH', center: 1 },
     ];
     const width = 0.19;
     let activeLabel = camStageDefs[0].label;
@@ -1859,7 +1859,7 @@ class Component extends DCLogic {
       const scale = lerp(1.06, 1, opacity);
       const blurPx = lerp(10, 0, opacity);
       if (dist < bestDist) { bestDist = dist; activeLabel = s.label; }
-      return { id: s.id, ph: s.ph, opacity, scale, blurPx };
+      return { id: s.id, src: s.src, ph: s.ph, opacity, scale, blurPx };
     });
 
     const handoffT = this.state.handoffT;

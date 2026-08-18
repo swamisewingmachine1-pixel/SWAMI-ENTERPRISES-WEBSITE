@@ -10,6 +10,11 @@
      actual requested path (e.g. /machines/jack-f6), not against that path's own directory. -->
 <base href="/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230A5CFF'/%3E%3Ctext x='50' y='68' font-size='58' font-family='Arial,sans-serif' font-weight='700' fill='white' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
+<!-- Vercel Web Analytics — the site's own hosting already provides this backend, no separate
+     service/database to stand up. Requires "Web Analytics" turned on once in the Vercel project
+     dashboard (Project -> Analytics -> Enable); the snippet below is inert until that's on. -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -796,7 +801,7 @@ a:hover { color:#3D7BFF; }
             <input type="tel" placeholder="Phone number" required="" style="padding:14px;border:1px solid rgba(0,0,0,0.18);background:transparent;font-size:14px;font-family:'Manrope',sans-serif"></input>
             <textarea placeholder="What are you looking for?" rows="4" style="padding:14px;border:1px solid rgba(0,0,0,0.18);background:transparent;font-size:14px;font-family:'Manrope',sans-serif;resize:vertical"></textarea>
             <button type="submit" style="padding:15px;background:#151515;color:#F7F7F5;border:none;font-size:14px;cursor:pointer;margin-top:8px">Send</button>
-            <div style="text-align:center;font-size:13px;color:#707070;margin-top:8px">Or call <a href="tel:+919971336656">{{ phoneDisplay }}</a> / <a href="{{ whatsappHref }}" target="_blank" rel="noopener noreferrer">WhatsApp us</a> — Delhi showroom.</div>
+            <div style="text-align:center;font-size:13px;color:#707070;margin-top:8px">Or call <a href="tel:+919971336656" onClick="{{ trackCallClick }}">{{ phoneDisplay }}</a> / <a href="{{ whatsappHref }}" target="_blank" rel="noopener noreferrer" onClick="{{ trackWhatsappClick }}">WhatsApp us</a> — Delhi showroom.</div>
           </form>
         </sc-if>
       </div>
@@ -864,6 +869,7 @@ class Component extends DCLogic {
     });
   };
   setCompareSlot = (idx, id) => {
+    this.track('compare_slot_change', { slot: idx, id });
     this.setState((s) => {
       const slots = [...(s.compareSlotOverrides || [null, null, null])];
       slots[idx] = id;
@@ -1927,11 +1933,21 @@ class Component extends DCLogic {
     const labels = { machines: 'Machines', industries: 'Industries', solutions: 'Solutions', finder: 'Find Your Machine', compare: 'Compare Machines', about: 'About' };
     return (labels[view] || view) + ' — Swami Enterprises';
   };
+  // Product intelligence: every meaningful business action fires a named event through Vercel
+  // Web Analytics (the site's existing host, so no separate backend/database to run). This is
+  // the actual data — searches run, machines viewed, Finder answers and where people drop off,
+  // WhatsApp/call intent, Compare usage — that answers "how do people search, what do they look
+  // at" rather than just raw pageview counts.
+  track = (name, props) => {
+    if (typeof window !== 'undefined' && typeof window.va === 'function') window.va('event', { name, ...(props || {}) });
+  };
+
   syncUrl = (view, id) => {
     if (typeof window === 'undefined' || !window.history) return;
     const path = this.urlPath(view, id);
     if (window.location.pathname !== path) window.history.pushState({ view, id }, '', path);
     document.title = this.titleFor(view, id);
+    if (typeof window.va === 'function') window.va('pageview', { path });
   };
   goToView = (view) => {
     this.setState({ view, contactOpen: false });
@@ -1939,26 +1955,43 @@ class Component extends DCLogic {
     if (typeof window !== 'undefined') window.scrollTo(0, 0);
   };
   goToProduct = (id) => {
+    const m = this.machines.find((x) => x.id === id);
+    this.track('product_view', { id, model: m ? m.model : id, category: m ? m.category : undefined });
     this.setState({ view: 'product', selectedMachineId: id, contactOpen: false });
     this.syncUrl('product', id);
     if (typeof window !== 'undefined') window.scrollTo(0, 0);
   };
   openSearch = () => this.setState({ searchOpen: true, searchQuery: '' });
   closeSearch = () => this.setState({ searchOpen: false });
-  onSearchChange = (e) => this.setState({ searchQuery: e.target.value });
+  onSearchChange = (e) => {
+    const q = e.target.value;
+    this.setState({ searchQuery: q });
+    clearTimeout(this._searchTrackTimer);
+    if (q.trim().length >= 2) {
+      this._searchTrackTimer = setTimeout(() => this.track('search', { query: q.trim().toLowerCase() }), 600);
+    }
+  };
   stopProp = (e) => e.stopPropagation();
-  openContact = () => this.setState({ contactOpen: true, contactSubmitted: false });
+  openContact = () => { this.track('contact_intent', { view: this.state.view, machine: this.state.selectedMachineId }); this.setState({ contactOpen: true, contactSubmitted: false }); };
   closeContact = () => this.setState({ contactOpen: false });
-  submitContact = (e) => { e.preventDefault(); this.setState({ contactSubmitted: true }); };
+  submitContact = (e) => { e.preventDefault(); this.track('contact_submitted', { machine: this.state.selectedMachineId }); this.setState({ contactSubmitted: true }); };
+  trackWhatsappClick = () => this.track('whatsapp_click', { view: this.state.view, machine: this.state.selectedMachineId });
+  trackCallClick = () => this.track('call_click', { view: this.state.view });
 
   selectFinderOption = (key, value) => {
-    this.setState((s) => ({
-      finderAnswers: { ...s.finderAnswers, [key]: value },
-      finderStep: s.finderStep + 1,
-    }));
+    this.track('finder_answer', { step: key, value });
+    this.setState((s) => {
+      const nextStep = s.finderStep + 1;
+      if (nextStep >= this.finderSteps.length) {
+        const answers = { ...s.finderAnswers, [key]: value };
+        const matches = this.matchedMachines(answers);
+        this.track('finder_completed', { answers: JSON.stringify(answers), matchCount: matches.length, matches: matches.map((m) => m.id).join(',') });
+      }
+      return { finderAnswers: { ...s.finderAnswers, [key]: value }, finderStep: nextStep };
+    });
   };
   finderBack = () => this.setState((s) => ({ finderStep: Math.max(0, s.finderStep - 1) }));
-  finderRestart = () => this.setState({ finderStep: 0, finderAnswers: {} });
+  finderRestart = () => { this.track('finder_restart'); this.setState({ finderStep: 0, finderAnswers: {} }); };
 
   toggleIndustry = (key) => this.setState((s) => ({ openIndustry: s.openIndustry === key ? null : key }));
   toggleSolution = (key) => this.setState((s) => ({ openSolution: s.openSolution === key ? null : key }));
@@ -2198,6 +2231,7 @@ class Component extends DCLogic {
           compareSlots,
           compareSpecRows,
           sendCompareToWhatsapp: () => {
+            this.track('whatsapp_click', { view: 'compare', machines: compareMachines.map((m) => m.id).join(',') });
             const lines = compareMachines.map((m) => `• ${m.model} (${m.category}) — ${m.purpose}`).join('\n');
             const msg = `Hi Swami Enterprises, I'm interested in these machines:\n\n${lines}\n\nCan you share more details?`;
             window.open('https://wa.me/919971336656?text=' + encodeURIComponent(msg), '_blank');
@@ -2314,6 +2348,8 @@ class Component extends DCLogic {
       hasMachineResults: machineResults.length > 0,
       hasNoMachineResults: machineResults.length === 0,
       openContact: this.openContact,
+      trackWhatsappClick: this.trackWhatsappClick,
+      trackCallClick: this.trackCallClick,
       closeContact: this.closeContact,
       submitContact: this.submitContact,
       contactOpen,

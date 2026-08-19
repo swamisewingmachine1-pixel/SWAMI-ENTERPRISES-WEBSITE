@@ -501,7 +501,7 @@
       root.innerHTML =
         '<style>' + stylesheet + '</style>' +
         '<div class="frame" part="frame">' +
-        '  <img part="image" alt="" draggable="false" style="display:none">' +
+        '  <img part="image" alt="" draggable="false" loading="lazy" decoding="async" style="display:none">' +
         '  <div class="empty" part="empty">' + icon +
         '    <div class="cap"></div>' +
         '    <div class="sub">or <u>browse files</u></div></div>' +
@@ -1148,6 +1148,15 @@
           // (the pick path's credit/credit-href setAttributes) need this
           // flag, not complete, to know a load is in flight.
           this._loadPending = true;
+          // A host can mark itself above-the-fold (e.g. the hero image)
+          // with the `priority` attribute so it loads eager/high instead
+          // of the lazy/auto default every other slot gets — lazy-loading
+          // the LCP image would delay first paint waiting on a viewport
+          // check it's already guaranteed to pass.
+          if (this.hasAttribute('priority')) {
+            this._img.loading = 'eager';
+            this._img.fetchPriority = 'high';
+          }
           this._img.src = url;
           this._ghost.src = url;
         } else {

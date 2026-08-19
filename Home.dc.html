@@ -85,7 +85,7 @@ a:hover { color:#3D7BFF; }
 <div style="width:100%;min-height:100vh;background:#F5F5F7;font-family:'Manrope',sans-serif;color:#1D1D1F;position:relative">
 
   <!-- NAV -->
-  <div style="position:fixed;top:0;left:0;right:0;height:76px;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(24px,5vw,64px);display:{{ mobileBarDisplay }};background:{{ navBg }};backdropFilter:blur({{ navBlur }}px);WebkitBackdropFilter:blur({{ navBlur }}px);border-bottom:1px solid {{ navBorder }};transition:background 0.4s ease">
+  <div style="position:fixed;top:0;left:0;right:0;height:76px;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(24px,5vw,64px);display:{{ mobileBarDisplay }};background:{{ navBg }};backdropFilter:blur({{ navBlur }}px);WebkitBackdropFilter:blur({{ navBlur }}px);border-bottom:1px solid {{ navBorder }};transform:{{ navTransform }};transition:transform 0.32s cubic-bezier(0.4,0,0.2,1),background 0.4s ease">
     <div style="display:flex;align-items:center;gap:9px;cursor:pointer" onClick="{{ goHome }}">
       <span style="font-weight:700;font-size:14px;letter-spacing:0.14em;color:{{ navText }}">SWAMI ENTERPRISES</span>
     </div>
@@ -93,7 +93,7 @@ a:hover { color:#3D7BFF; }
   </div>
 
   <!-- DESKTOP FULL-WIDTH BAR (Apple-style) -->
-  <div style="position:fixed;top:0;left:0;right:0;height:52px;z-index:1001;display:{{ desktopNavDisplay }};align-items:center;justify-content:space-between;padding:0 clamp(24px,3vw,40px);background:{{ navBg }};backdropFilter:blur({{ navBlur }}px);WebkitBackdropFilter:blur({{ navBlur }}px);border-bottom:1px solid {{ navBorder }};transition:background 0.4s ease">
+  <div style="position:fixed;top:0;left:0;right:0;height:52px;z-index:1001;display:{{ desktopNavDisplay }};align-items:center;justify-content:space-between;padding:0 clamp(24px,3vw,40px);background:{{ navBg }};backdropFilter:blur({{ navBlur }}px);WebkitBackdropFilter:blur({{ navBlur }}px);border-bottom:1px solid {{ navBorder }};transform:{{ navTransform }};transition:transform 0.32s cubic-bezier(0.4,0,0.2,1),background 0.4s ease">
     <div style="display:flex;align-items:center;gap:8px;cursor:pointer" onClick="{{ goHome }}">
       <span style="font-weight:700;font-size:13px;letter-spacing:0.06em;color:{{ navText }}">SWAMI ENTERPRISES</span>
     </div>
@@ -359,7 +359,7 @@ a:hover { color:#3D7BFF; }
 
       <!-- FOOTER -->
       <div style="background:#050505;padding:clamp(70px,9vw,110px) clamp(24px,8vw,80px) 96px">
-        <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:clamp(28px,4vw,40px)">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:clamp(28px,4vw,40px)">
           <div>
             <div style="font-weight:700;font-size:clamp(26px,4vw,38px);color:#F5F5F7;letter-spacing:-0.02em">SWAMI ENTERPRISES</div>
             <div style="font-size:14px;color:#86868B;margin-top:16px;max-width:320px;line-height:1.6">A Delhi-based dealer of JACK sewing machines — helping you find, install and maintain the right equipment for your production.</div>
@@ -999,6 +999,7 @@ class Component extends DCLogic {
     handoffT: 0,
     rawHandoffT: 0,
     scrollPct: 0,
+    navHidden: false,
     machineQuery: '',
     openIndustry: null,
     openSolution: null,
@@ -2054,12 +2055,25 @@ class Component extends DCLogic {
       const scrollY = window.scrollY || doc.scrollTop || document.body.scrollTop || 0;
       const scrollH = Math.max(doc.scrollHeight, document.body.scrollHeight);
       const scrollPct = scrollH > window.innerHeight ? clamp01(scrollY / (scrollH - window.innerHeight)) : 0;
+      // Apple-style nav: hide while scrolling down past the first screen, reveal the moment
+      // the user scrolls up (even 1px) or returns near the top — matches apple.com's own bar,
+      // which reads intent from direction rather than a fixed reveal delay/distance.
+      const lastY = this._lastNavScrollY === undefined ? scrollY : this._lastNavScrollY;
+      const scrollingDown = scrollY > lastY + 2;
+      const scrollingUp = scrollY < lastY - 2;
+      this._lastNavScrollY = scrollY;
+      let navHidden = this._navHidden || false;
+      if (scrollY < 80) navHidden = false;
+      else if (scrollingDown) navHidden = true;
+      else if (scrollingUp) navHidden = false;
+      this._navHidden = navHidden;
       this.setState((s) => {
         const next = {};
         if (rawHeroT !== null && Math.abs(rawHeroT - s.rawHeroT) > 0.0003) next.rawHeroT = rawHeroT;
         if (rawCamT !== null && Math.abs(rawCamT - s.rawCamT) > 0.0003) next.rawCamT = rawCamT;
         if (rawHandoffT !== null && Math.abs(rawHandoffT - s.rawHandoffT) > 0.0003) next.rawHandoffT = rawHandoffT;
         if (Math.abs(scrollPct - s.scrollPct) > 0.0008) next.scrollPct = scrollPct;
+        if (navHidden !== s.navHidden) next.navHidden = navHidden;
         const targetHeroT = next.rawHeroT !== undefined ? next.rawHeroT : s.rawHeroT;
         const targetCamT = next.rawCamT !== undefined ? next.rawCamT : s.rawCamT;
         const targetHandoffT = next.rawHandoffT !== undefined ? next.rawHandoffT : s.rawHandoffT;
@@ -2500,9 +2514,10 @@ class Component extends DCLogic {
     const navTheme = (view === 'home' && this.state.scrollPct < 0.02) ? 'dark' : 'light';
     const navBg = navTheme === 'light' ? 'rgba(247,247,245,0.82)' : 'rgba(20,20,20,0.55)';
     const navBlurPx = 20;
+    const navTransform = (this.state.navHidden && !this.state.mobileNavOpen && !this.state.searchOpen) ? 'translateY(-100%)' : 'translateY(0)';
 
     return {
-      navTheme, navBg, navBlurPx,
+      navTheme, navBg, navBlurPx, navTransform,
       handoffMachineOpacity, handoffMachineScale, handoffEngOpacity, handoffEngScale, handoffBg, handoffRotY,
       heroBg, voidOpacity, voidShift, voidLabelColor,
       statementOpacity, statementShift, statementScale, statementBlur,

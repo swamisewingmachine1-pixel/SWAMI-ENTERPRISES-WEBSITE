@@ -152,147 +152,171 @@ a:hover { color:#3D7BFF; }
 
   <!-- ============ HOME ============ -->
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
-    <div style="width:100%">
+    <div style="width:100%;padding-bottom:{{ heroBottomPad }}">
 
-      <!-- CINEMATIC HERO -->
-      <div data-sw-hero-wrapper="" style="height:420vh;position:relative">
-        <div style="position:sticky;top:0;height:100vh;overflow:hidden;background:{{ heroBg }}">
-          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 24px">
-
-            <div style="opacity:{{ voidOpacity }};font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.28em;color:{{ voidLabelColor }};position:absolute;transform:translateY({{ voidShift }}px)">SWAMI ENTERPRISES — AUTHORIZED JACK DEALER</div>
-
-            <div style="opacity:{{ statementOpacity }};transform:translateY({{ statementShift }}px) scale({{ statementScale }});filter:blur({{ statementBlur }}px);position:absolute;max-width:1100px">
-              <div style="font-weight:800;font-size:clamp(34px,6.5vw,84px);line-height:1.05;color:#F7F7F5;letter-spacing:-0.02em">Engineering what<br/>holds together.</div>
-              <div style="font-size:clamp(15px,1.6vw,18px);color:#B0B0B0;max-width:560px;margin:26px auto 0;line-height:1.6">We bring JACK's industrial sewing technology to India's makers — from the first machine to a full production line.</div>
-            </div>
-
-            <div style="position:absolute;inset:0;pointer-events:none;opacity:{{ linesOpacity }};display:flex;align-items:center;justify-content:center">
-              <div style="width:60vw;height:60vw;max-width:820px;max-height:820px;border-radius:50%;background:radial-gradient(circle,rgba(10,92,255,0.22) 0%,rgba(10,92,255,0.08) 40%,rgba(10,92,255,0) 70%);filter:blur(2px);transform:scale({{ glowScale }})"></div>
-            </div>
-
-            <div style="opacity:{{ f6Opacity }};transform:translateY({{ f6Shift }}px) scale({{ f6Scale }}) perspective(1400px) rotateY({{ f6RotY }}deg) rotateZ({{ f6RotZ }}deg);position:absolute;width:min(920px,94vw)">
-              <image-slot id="hero-f6-reveal" shape="rect" src="uploads/f6-cutout-final.png" fit="contain" placeholder="Drop: JACK F6 studio photograph" style="width:100%;height:clamp(340px,50vw,560px);filter:drop-shadow(0 30px 40px rgba(0,0,0,0.35))"></image-slot>
-              <div style="display:flex;gap:20px;justify-content:center;margin-top:28px;flex-wrap:wrap">
-                <span class="sw-btn sw-btn-light" style="padding:15px 28px;border:1px solid #151515;color:#151515;font-size:14px;cursor:pointer;border-radius:10px" onClick="{{ goProduct }}">Explore the F6</span>
-                <span style="padding:15px 28px;color:#151515;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:8px" onClick="{{ goFinder }}">Find your machine →</span>
-              </div>
-            </div>
-          </div>
-          <div style="position:absolute;bottom:28px;left:0;right:0;display:flex;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.2em;color:#4A4A4A;opacity:{{ scrollCueOpacity }}">SCROLL</div>
+      <!-- HERO -->
+      <div style="min-height:94vh;position:relative;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:140px 24px 80px;animation:swFadeUp 0.7s ease both">
+        <div style="font-size:13px;font-weight:600;letter-spacing:0.08em;color:#8A8A8A;margin-bottom:20px">AUTHORIZED JACK DEALER · GLOBAL TECHNOLOGY, DELHI EXPERTISE</div>
+        <div style="max-width:980px">
+          <div style="font-weight:700;font-size:clamp(38px,7vw,96px);line-height:1.04;color:#F5F5F7;letter-spacing:-0.03em">Engineering what<br/>holds together.</div>
+          <div style="font-size:clamp(17px,1.8vw,21px);color:#A1A1A6;max-width:600px;margin:22px auto 0;line-height:1.5;font-weight:400">JACK's industrial sewing technology, brought to India's makers.</div>
+        </div>
+        <div style="display:flex;gap:16px;justify-content:center;margin-top:32px;flex-wrap:wrap">
+          <span style="padding:13px 26px;background:#0A5CFF;color:#fff;font-size:16px;font-weight:500;border-radius:980px;cursor:pointer" onClick="{{ goProduct }}">Explore the F6</span>
+          <span style="padding:13px 12px;color:#2997FF;font-size:16px;font-weight:400;cursor:pointer;display:flex;align-items:center;gap:4px" onClick="{{ goFinder }}">Find your machine <span>›</span></span>
+        </div>
+        <div style="margin-top:56px;width:100%;max-width:1600px">
+          <image-slot id="hero-f6-reveal" shape="rect" src="uploads/f6-cutout-final.png" fit="contain" placeholder="Drop: JACK F6 studio photograph" style="width:100%;height:clamp(360px,52vw,620px)"></image-slot>
         </div>
       </div>
 
-      <!-- CAMERA JOURNEY -->
-      <div data-sw-cam-wrapper="" style="height:320vh;position:relative;background:#F7F7F5">
-        <div style="position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center">
+      <!-- TRUST BAR -->
+      <div style="background:#0A0A0A;padding:22px clamp(24px,6vw,80px);display:flex;flex-wrap:wrap;gap:clamp(20px,4vw,48px);justify-content:center;align-items:center;border-top:1px solid rgba(247,247,245,0.08);border-bottom:1px solid rgba(247,247,245,0.08)">
+        <span style="font-size:13px;font-weight:600;color:#F5F5F7;white-space:nowrap">Authorized JACK Dealer since 2015</span>
+        <span style="width:4px;height:4px;border-radius:50%;background:#3A3A3A"></span>
+        <span style="font-size:13px;font-weight:600;color:#F5F5F7;white-space:nowrap">4.7★ Google rating (92 reviews)</span>
+        <span style="width:4px;height:4px;border-radius:50%;background:#3A3A3A"></span>
+        <span style="font-size:13px;font-weight:600;color:#F5F5F7;white-space:nowrap">Genuine JACK spare parts</span>
+        <span style="width:4px;height:4px;border-radius:50%;background:#3A3A3A"></span>
+        <span style="font-size:13px;font-weight:600;color:#F5F5F7;white-space:nowrap">On-site service &amp; AMC</span>
+      </div>
+
+      <!-- CAMERA DETAIL GRID -->
+      <div style="background:#F5F5F7;padding:clamp(64px,9vw,110px) clamp(24px,6vw,80px);animation:swFadeUp 0.7s ease 0.08s both">
+        <div style="max-width:1280px;margin:0 auto">
+        <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:14px;text-align:center">BUILT FOR THE DETAIL</div>
+        <div style="font-weight:700;font-size:clamp(26px,3.6vw,44px);letter-spacing:-0.02em;color:#1D1D1F;text-align:center;margin-bottom:48px">Every part, considered.</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px">
           <sc-for list="{{ camStages }}" as="stage" hint-placeholder-count="5">
-            <div style="position:absolute;inset:0;opacity:{{ stage.opacity }};display:flex;flex-direction:column;align-items:center;justify-content:center;transform:scale({{ stage.scale }});filter:blur({{ stage.blurPx }}px)">
-              <image-slot id="{{ stage.id }}" shape="rect" src="{{ stage.src }}" fit="contain" placeholder="{{ stage.ph }}" style="width:min(760px,80vw);height:min(500px,56vh)"></image-slot>
+            <div style="background:#fff;border-radius:20px;overflow:hidden;padding-bottom:16px">
+              <image-slot id="{{ stage.id }}" shape="rect" src="{{ stage.src }}" fit="contain" placeholder="{{ stage.ph }}" style="width:100%;height:200px"></image-slot>
+              <div style="margin-top:14px;text-align:center;font-size:13px;font-weight:600;letter-spacing:0.02em;color:#1D1D1F">{{ stage.label }}</div>
             </div>
           </sc-for>
-          <div style="position:absolute;bottom:36px;left:0;right:0;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#707070">{{ camLabel }}</div>
+        </div>
         </div>
       </div>
 
       <!-- STATEMENT -->
-      <div style="background:#F7F7F5;padding:clamp(80px,14vw,160px) clamp(24px,8vw,120px)">
-        <div style="font-weight:700;font-size:clamp(26px,4vw,48px);line-height:1.3;color:#151515;max-width:880px">A sewing machine is not just a tool. It is the difference between a workshop and a production line.</div>
+      <div style="background:#F5F5F7;padding:clamp(64px,9vw,110px) clamp(24px,6vw,120px);text-align:center;animation:swFadeUp 0.7s ease 0.14s both">
+        <div style="font-weight:600;font-size:clamp(28px,4.4vw,54px);line-height:1.2;letter-spacing:-0.015em;color:#1D1D1F;max-width:820px;margin:0 auto">A sewing machine is not just a tool. It is the difference between a workshop and a production line.</div>
       </div>
 
       <!-- MACHINE SPOTLIGHT -->
-      <div style="background:#0A0A0A;padding:clamp(60px,10vw,100px) clamp(24px,8vw,80px);display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(32px,6vw,80px);align-items:center">
-        <image-slot id="home-f6-hero" shape="rect" src="uploads/f6-cutout-final.png" fit="contain" placeholder="Drop: JACK F6 product photograph" style="width:100%;height:clamp(280px,40vw,460px);filter:drop-shadow(0 24px 32px rgba(0,0,0,0.4))"></image-slot>
+      <div style="background:#000;padding:clamp(64px,9vw,110px) clamp(24px,6vw,80px);animation:swFadeUp 0.7s ease 0.2s both">
+        <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(32px,6vw,80px);align-items:center">
+        <div style="border-radius:24px;overflow:hidden;background:#0A0A0A">
+          <image-slot id="home-f6-hero" shape="rect" src="uploads/f6-cutout-final.png" fit="contain" placeholder="Drop: JACK F6 product photograph" style="width:100%;height:clamp(280px,38vw,440px)"></image-slot>
+        </div>
         <div>
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.2em;color:#0A5CFF;margin-bottom:18px">FEATURED MACHINE</div>
-          <div style="font-weight:800;font-size:clamp(32px,5vw,60px);color:#F7F7F5;letter-spacing:-0.02em">JACK F6</div>
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;color:#8A8A8A;margin-top:10px">COMPUTERIZED LOCKSTITCH MACHINE</div>
-          <div style="font-size:15px;color:#B0B0B0;line-height:1.7;margin-top:20px;max-width:420px">Built for high-speed production with digital control at the core — designed to reduce guesswork on the floor.</div>
-          <div style="margin-top:28px;color:#F7F7F5;font-size:14px;cursor:pointer;display:inline-flex;gap:8px" onClick="{{ goProduct }}">View the F6 →</div>
+          <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#2997FF;margin-bottom:14px">FEATURED MACHINE</div>
+          <div style="font-weight:700;font-size:clamp(34px,5vw,64px);color:#F5F5F7;letter-spacing:-0.03em">JACK F6</div>
+          <div style="font-size:15px;color:#86868B;margin-top:8px;font-weight:500">Computerized Lockstitch Machine</div>
+          <div style="font-size:17px;color:#A1A1A6;line-height:1.6;margin-top:20px;max-width:420px;font-weight:400">Built for high-speed production with digital control at the core — designed to reduce guesswork on the floor.</div>
+          <div style="margin-top:26px;color:#2997FF;font-size:16px;cursor:pointer;display:inline-flex;align-items:center;gap:4px" onClick="{{ goProduct }}">View the F6 <span>›</span></div>
+        </div>
         </div>
       </div>
 
-      <!-- HANDOFF: machine → engineering -->
-      <div data-sw-handoff-wrapper="" style="height:180vh;position:relative;background:#0A0A0A">
-        <div style="position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center;background:{{ handoffBg }}">
-          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:{{ handoffMachineOpacity }};transform:scale({{ handoffMachineScale }}) perspective(1400px) rotateY({{ handoffRotY }}deg)">
-            <image-slot id="handoff-f6" shape="rect" src="uploads/f6-cutout-final.png" fit="contain" placeholder="Drop: JACK F6 product photograph" style="width:min(560px,70vw);height:min(380px,44vh);filter:drop-shadow(0 24px 30px rgba(0,0,0,0.4))"></image-slot>
+      <!-- HANDOFF -->
+      <div style="background:#000;padding:clamp(64px,9vw,110px) clamp(24px,6vw,80px);text-align:center;animation:swFadeUp 0.7s ease 0.26s both">
+        <div style="font-size:clamp(64px,10vw,140px);font-weight:700;color:#2997FF;letter-spacing:-0.03em;line-height:1">01</div>
+        <div style="font-weight:600;font-size:clamp(24px,3vw,34px);color:#F5F5F7;margin-top:4px">Precision</div>
+      </div>
+
+      <!-- RISK REVERSAL / WHY SWAMI -->
+      <div style="background:#F5F5F7;padding:clamp(64px,9vw,110px) clamp(24px,6vw,80px);animation:swFadeUp 0.7s ease 0.28s both">
+        <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:40px;text-align:center">WHY BUY FROM SWAMI</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:clamp(28px,4vw,40px)">
+          <div style="text-align:center">
+            <div style="font-weight:700;font-size:19px;color:#1D1D1F">Try before you buy</div>
+            <div style="font-size:14px;color:#6E6E73;margin-top:8px;line-height:1.6">Every machine on our floor is threaded and running — see it work on your material before you decide.</div>
           </div>
-          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:{{ handoffEngOpacity }};transform:scale({{ handoffEngScale }})">
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:clamp(60px,10vw,140px);font-weight:500;color:#0A5CFF">01</div>
-            <div style="font-weight:700;font-size:clamp(22px,3vw,32px);color:#F7F7F5;margin-top:8px">Precision</div>
+          <div style="text-align:center">
+            <div style="font-weight:700;font-size:19px;color:#1D1D1F">Genuine parts, always</div>
+            <div style="font-size:14px;color:#6E6E73;margin-top:8px;line-height:1.6">Stocked direct — a breakdown costs you an hour, not a week.</div>
+          </div>
+          <div style="text-align:center">
+            <div style="font-weight:700;font-size:19px;color:#1D1D1F">Installed for you</div>
+            <div style="font-size:14px;color:#6E6E73;margin-top:8px;line-height:1.6">Delivery and installation handled — machine ready on day one.</div>
+          </div>
+          <div style="text-align:center">
+            <div style="font-weight:700;font-size:19px;color:#1D1D1F">On-site AMC</div>
+            <div style="font-size:14px;color:#6E6E73;margin-top:8px;line-height:1.6">Ongoing service in Delhi so downtime stays short.</div>
           </div>
         </div>
       </div>
 
       <!-- ENGINEERING -->
-      <div style="background:#F7F7F5;padding:clamp(70px,10vw,110px) clamp(24px,8vw,80px)">
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(32px,5vw,60px)">
+      <div style="background:#F5F5F7;padding:clamp(64px,9vw,110px) clamp(24px,6vw,80px);animation:swFadeUp 0.7s ease 0.3s both">
+        <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(32px,5vw,60px)">
           <sc-for list="{{ engineeringPoints }}" as="e" hint-placeholder-count="3">
             <div>
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:44px;font-weight:500;color:#0A5CFF">{{ e.n }}</div>
-              <div style="font-weight:700;font-size:19px;color:#151515;margin-top:14px">{{ e.title }}</div>
-              <div style="font-size:14px;color:#4A4A4A;line-height:1.6;margin-top:8px">{{ e.desc }}</div>
+              <div style="font-size:40px;font-weight:700;color:#2997FF;letter-spacing:-0.02em">{{ e.n }}</div>
+              <div style="font-weight:600;font-size:21px;color:#1D1D1F;margin-top:14px;letter-spacing:-0.01em">{{ e.title }}</div>
+              <div style="font-size:15px;color:#6E6E73;line-height:1.6;margin-top:8px">{{ e.desc }}</div>
             </div>
           </sc-for>
+        </div>
         </div>
       </div>
 
       <!-- STITCH STORY -->
-      <div style="background:#0A0A0A;padding:clamp(70px,10vw,110px) clamp(24px,8vw,80px)">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.2em;color:#707070;margin-bottom:36px">HOW IT COMES TOGETHER</div>
-        <div style="display:flex;gap:clamp(20px,3vw,36px);flex-wrap:wrap">
+      <div style="background:#000;padding:clamp(64px,9vw,110px) clamp(24px,6vw,80px);animation:swFadeUp 0.7s ease 0.34s both">
+        <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:32px">HOW IT COMES TOGETHER</div>
+        <div style="display:flex;gap:clamp(16px,3vw,28px);flex-wrap:wrap">
           <sc-for list="{{ stitchItems }}" as="item" hint-placeholder-count="6">
             <div style="width:140px">
-              <image-slot id="{{ item.id }}" shape="rect" placeholder="{{ item.ph }}" style="width:100%;height:140px"></image-slot>
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#F7F7F5;margin-top:12px">{{ item.label }}</div>
+              <image-slot id="{{ item.id }}" shape="rect" placeholder="{{ item.ph }}" style="width:100%;height:140px;border-radius:14px;overflow:hidden"></image-slot>
+              <div style="font-size:13px;font-weight:500;color:#F5F5F7;margin-top:12px">{{ item.label }}</div>
             </div>
           </sc-for>
         </div>
       </div>
 
       <!-- WHAT YOU'RE BUILDING (applications) -->
-      <div style="background:#F7F7F5;padding:clamp(70px,10vw,110px) clamp(24px,8vw,80px)">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.2em;color:#707070;margin-bottom:8px">WHAT YOU'RE BUILDING</div>
-        <div style="font-size:13px;color:#707070;margin-bottom:32px;max-width:520px">Commonly suited applications for machines like the F6 — a specialist confirms fit for your exact material.</div>
+      <div style="background:#F5F5F7;padding:clamp(64px,9vw,110px) clamp(24px,6vw,80px);animation:swFadeUp 0.7s ease 0.38s both">
+        <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:8px">WHAT YOU'RE BUILDING</div>
+        <div style="font-size:15px;color:#6E6E73;margin-bottom:32px;max-width:520px">Commonly suited applications for machines like the F6 — a specialist confirms fit for your exact material.</div>
         <div style="display:flex;flex-direction:column">
           <sc-for list="{{ applicationRows }}" as="a" hint-placeholder-count="4">
-            <div style="padding:22px 0;border-top:1px solid rgba(0,0,0,0.1);font-weight:700;font-size:clamp(22px,3vw,32px);color:#151515;cursor:pointer" style-hover="color:#0A5CFF" onClick="{{ goFinder }}">{{ a }}</div>
+            <div style="padding:22px 0;border-top:1px solid rgba(0,0,0,0.1);font-weight:600;font-size:clamp(22px,3vw,32px);letter-spacing:-0.01em;color:#1D1D1F;cursor:pointer" style-hover="color:#2997FF" onClick="{{ goFinder }}">{{ a }}</div>
           </sc-for>
         </div>
       </div>
 
       <!-- HOWEVER YOU'RE PRODUCING (solutions) -->
-      <div style="background:#151515;padding:clamp(70px,10vw,110px) clamp(24px,8vw,80px)">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.2em;color:#707070;margin-bottom:8px">HOWEVER YOU'RE PRODUCING</div>
-        <div style="font-size:13px;color:#8A8A8A;margin-bottom:32px;max-width:520px">We don't just sell machines — we help you find the right one for where your production is today.</div>
+      <div style="background:#000;padding:clamp(64px,9vw,110px) clamp(24px,6vw,80px);animation:swFadeUp 0.7s ease 0.42s both">
+        <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:8px">HOWEVER YOU'RE PRODUCING</div>
+        <div style="font-size:15px;color:#86868B;margin-bottom:32px;max-width:520px">We don't just sell machines — we help you find the right one for where your production is today.</div>
         <div style="display:flex;flex-direction:column">
           <sc-for list="{{ solutionRows }}" as="s" hint-placeholder-count="4">
-            <div style="padding:22px 0;border-top:1px solid rgba(247,247,245,0.14);font-weight:700;font-size:clamp(22px,3vw,32px);color:#F7F7F5;cursor:pointer" style-hover="color:#0A5CFF" onClick="{{ openContact }}">{{ s }}</div>
+            <div style="padding:22px 0;border-top:1px solid rgba(247,247,245,0.14);font-weight:600;font-size:clamp(22px,3vw,32px);letter-spacing:-0.01em;color:#F5F5F7;cursor:pointer" style-hover="color:#2997FF" onClick="{{ openContact }}">{{ s }}</div>
           </sc-for>
         </div>
       </div>
 
       <!-- FINDER TEASER -->
-      <div style="background:#050505;padding:clamp(80px,12vw,140px) 24px;text-align:center">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.2em;color:#0A5CFF;margin-bottom:20px">MACHINE INTELLIGENCE</div>
-        <div style="font-weight:700;font-size:clamp(26px,4vw,46px);color:#F7F7F5;max-width:720px;margin:0 auto;line-height:1.25">Not sure which machine fits your production?</div>
-        <div style="font-size:15px;color:#8A8A8A;margin-top:16px">Answer five quick questions built from our verified machine data.</div>
-        <div style="margin-top:36px;display:inline-block;padding:15px 30px;border:1px solid #F7F7F5;color:#F7F7F5;font-size:14px;cursor:pointer" onClick="{{ goFinder }}">Find your machine</div>
+      <div style="background:#000;padding:clamp(64px,9vw,140px) 24px;text-align:center;animation:swFadeUp 0.7s ease 0.46s both">
+        <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#2997FF;margin-bottom:20px">MACHINE INTELLIGENCE</div>
+        <div style="font-weight:700;font-size:clamp(28px,4.4vw,50px);letter-spacing:-0.02em;color:#F5F5F7;max-width:720px;margin:0 auto;line-height:1.2">Not sure which machine fits your production?</div>
+        <div style="font-size:17px;color:#A1A1A6;margin-top:16px">Answer five quick questions built from our verified machine data.</div>
+        <div style="margin-top:36px;display:inline-block;padding:14px 30px;background:#0A5CFF;color:#fff;font-size:16px;font-weight:500;border-radius:980px;cursor:pointer" onClick="{{ goFinder }}">Find your machine</div>
       </div>
 
       <!-- ABOUT -->
-      <div style="background:#F7F7F5;padding:clamp(70px,10vw,110px) clamp(24px,8vw,80px);display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(32px,6vw,80px);align-items:center">
-        <image-slot id="home-showroom" shape="rect" placeholder="Drop: Swami showroom / team photograph" style="width:100%;height:clamp(260px,34vw,400px)"></image-slot>
+      <div style="background:#F5F5F7;padding:clamp(64px,9vw,110px) clamp(24px,6vw,80px);display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(32px,6vw,80px);align-items:center;animation:swFadeUp 0.7s ease 0.5s both">
+        <image-slot id="home-showroom" shape="rect" src="uploads/showroom-interior.jpg" placeholder="Photo of the shop front or counter" style="width:100%;height:clamp(260px,34vw,400px);border-radius:24px;overflow:hidden"></image-slot>
         <div>
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.2em;color:#707070;margin-bottom:18px">ABOUT SWAMI</div>
-          <div style="font-weight:700;font-size:clamp(24px,3.4vw,38px);color:#151515;line-height:1.3;max-width:560px">An authorized JACK dealer, built around people who understand machines.</div>
-          <div style="font-size:15px;color:#4A4A4A;line-height:1.7;margin-top:20px;max-width:520px">We help businesses choose, install, and maintain the right sewing machinery for how they actually produce — not just what's on a spec sheet.</div>
+          <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:16px">ABOUT SWAMI</div>
+          <div style="font-weight:700;font-size:clamp(26px,3.6vw,42px);color:#1D1D1F;letter-spacing:-0.02em;line-height:1.2;max-width:560px">An authorized JACK dealer, built around people who understand machines.</div>
+          <div style="font-size:17px;color:#6E6E73;line-height:1.6;margin-top:20px;max-width:520px">We help businesses choose, install, and maintain the right sewing machinery for how they actually produce — not just what's on a spec sheet.</div>
         </div>
       </div>
 
       <!-- SERVICE BAND -->
-      <div style="background:#151515;padding:clamp(60px,8vw,90px) clamp(24px,8vw,80px)">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.2em;color:#707070;margin-bottom:8px">SERVICE, DELHI</div>
+      <div style="background:#000;padding:clamp(64px,9vw,110px) clamp(24px,6vw,80px);animation:swFadeUp 0.7s ease 0.54s both">
+        <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:8px">SERVICE, DELHI</div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:40px;margin-top:28px">
           <sc-for list="{{ serviceItems }}" as="sv" hint-placeholder-count="6">
             <div style="border-top:1px solid rgba(247,247,245,0.18);padding-top:22px">
@@ -303,13 +327,19 @@ a:hover { color:#3D7BFF; }
         </div>
       </div>
 
+      <!-- STICKY MOBILE CTA -->
+      <div style="display:{{ mobileBarDisplay }};position:fixed;left:0;right:0;bottom:0;z-index:998;padding:12px 16px;gap:10px;background:rgba(10,10,10,0.9);backdropFilter:blur(16px);WebkitBackdropFilter:blur(16px);border-top:1px solid rgba(247,247,245,0.12)">
+        <div style="flex:1;text-align:center;padding:13px 0;background:#0A5CFF;color:#fff;font-size:14px;font-weight:600;border-radius:980px;cursor:pointer" onClick="{{ goFinder }}">Find your machine</div>
+        <div style="flex:1;text-align:center;padding:13px 0;color:#F5F5F7;font-size:14px;font-weight:600;border:1px solid rgba(247,247,245,0.3);border-radius:980px;cursor:pointer" onClick="{{ openContact }}">Talk to a Specialist</div>
+      </div>
+
       <!-- FOOTER -->
-      <div style="background:#050505;padding:clamp(70px,9vw,110px) clamp(24px,8vw,80px) 40px">
+      <div style="background:#050505;padding:clamp(70px,9vw,110px) clamp(24px,8vw,80px) 96px">
         <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:clamp(28px,4vw,40px)">
           <div>
-            <div style="font-weight:800;font-size:clamp(28px,4.4vw,44px);color:#F7F7F5;letter-spacing:-0.02em">SWAMI ENTERPRISES</div>
-            <div style="font-size:14px;color:#8A8A8A;margin-top:16px;max-width:320px;line-height:1.6">A Delhi-based dealer of JACK sewing machines — helping you find, install and maintain the right equipment for your production.</div>
-            <div style="margin-top:24px;display:inline-block;padding:13px 24px;border:1px solid #F7F7F5;color:#F7F7F5;font-size:13px;cursor:pointer" onClick="{{ openContact }}">Talk to a Specialist</div>
+            <div style="font-weight:700;font-size:clamp(26px,4vw,38px);color:#F5F5F7;letter-spacing:-0.02em">SWAMI ENTERPRISES</div>
+            <div style="font-size:14px;color:#86868B;margin-top:16px;max-width:320px;line-height:1.6">A Delhi-based dealer of JACK sewing machines — helping you find, install and maintain the right equipment for your production.</div>
+            <div style="margin-top:24px;display:inline-block;padding:12px 24px;background:#0A5CFF;color:#fff;font-size:14px;font-weight:500;border-radius:980px;cursor:pointer" onClick="{{ openContact }}">Talk to a Specialist</div>
           </div>
           <div>
             <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#5A5A5A;margin-bottom:16px">EXPLORE</div>
@@ -341,7 +371,6 @@ a:hover { color:#3D7BFF; }
 
     </div>
   </sc-if>
-
   <!-- ============ INDUSTRIES ============ -->
   <sc-if value="{{ isIndustries }}" hint-placeholder-val="{{ false }}">
     <div style="width:100%;background:#F7F7F5;animation:swFadeIn 0.5s ease both;padding:calc(64px + clamp(50px,8vw,90px)) clamp(24px,8vw,80px) 100px">
@@ -2130,7 +2159,7 @@ class Component extends DCLogic {
       const scale = lerp(1.06, 1, opacity);
       const blurPx = lerp(10, 0, opacity);
       if (dist < bestDist) { bestDist = dist; activeLabel = s.label; }
-      return { id: s.id, src: s.src, ph: s.ph, opacity, scale, blurPx };
+      return { id: s.id, src: s.src, ph: s.ph, label: s.label, opacity, scale, blurPx };
     });
 
     const handoffT = this.state.handoffT;
@@ -2261,6 +2290,7 @@ class Component extends DCLogic {
       navBorder: navTheme === 'light' ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.12)',
       navPillTextInverse: navTheme === 'light' ? '#F7F7F5' : '#050505',
       mobileBarDisplay: this.state.isNarrowNav ? 'flex' : 'none',
+      heroBottomPad: this.state.isNarrowNav ? '84px' : '0px',
       isNarrowNav: this.state.isNarrowNav,
       desktopNavDisplay: this.state.isNarrowNav ? 'none' : 'flex',
       hamburgerDisplay: this.state.isNarrowNav ? 'block' : 'none',

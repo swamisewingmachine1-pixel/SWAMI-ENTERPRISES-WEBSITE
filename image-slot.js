@@ -727,6 +727,16 @@
       this._ro.observe(this);
       load();
       this._render();
+      // Self-heal against a real-network race: on a fast localhost the
+      // framework's attribute writes (src/id/placeholder) all land before
+      // this element upgrades, but over real latency this first render can
+      // land between writes and see a still-empty src — leaving a filled
+      // slot stuck showing the empty-state ring forever (nothing re-renders
+      // it afterward since the attribute really did finish changing, just
+      // too late for this call to see). One more render next frame, once
+      // every attribute write for this paint has definitely landed, costs
+      // nothing when the first render was already correct.
+      requestAnimationFrame(() => this._render());
     }
 
     disconnectedCallback() {

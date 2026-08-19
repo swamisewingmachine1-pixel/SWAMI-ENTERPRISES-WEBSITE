@@ -85,7 +85,7 @@ a:hover { color:#3D7BFF; }
 <div style="width:100%;min-height:100vh;background:#F5F5F7;font-family:'Manrope',sans-serif;color:#1D1D1F;position:relative">
 
   <!-- NAV -->
-  <div style="position:fixed;top:0;left:0;right:0;height:76px;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(24px,5vw,64px);display:{{ mobileBarDisplay }}">
+  <div style="position:fixed;top:0;left:0;right:0;height:76px;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(24px,5vw,64px);display:{{ mobileBarDisplay }};background:{{ navBg }};backdropFilter:blur({{ navBlur }}px);WebkitBackdropFilter:blur({{ navBlur }}px);border-bottom:1px solid {{ navBorder }};transition:background 0.4s ease">
     <div style="display:flex;align-items:center;gap:9px;cursor:pointer" onClick="{{ goHome }}">
       <span style="font-weight:700;font-size:14px;letter-spacing:0.14em;color:{{ navText }}">SWAMI ENTERPRISES</span>
     </div>
@@ -2292,7 +2292,11 @@ class Component extends DCLogic {
     const handoffBg = lerpColor([10, 10, 10], [10, 10, 10], 0);
     const handoffRotY = lerp(0, -8, seg(handoffT, 0.1, 0.5));
 
-    const navTheme = (view === 'home' && bgT > 0.55) ? 'light' : 'dark';
+    // Nav theme now keys off real overall scroll position (scrollPct) instead of the removed
+    // scroll-jacking hero's bgT, which stopped updating once that hero was replaced — it was
+    // stuck on 'dark' everywhere, including light-background pages, which is why the nav text
+    // (and the old unstyled mobile bar, with no background at all) went invisible against white.
+    const navTheme = (view === 'home' && this.state.scrollPct < 0.02) ? 'dark' : 'light';
     const navBg = navTheme === 'light' ? 'rgba(247,247,245,0.82)' : 'rgba(20,20,20,0.55)';
     const navBlurPx = 20;
 

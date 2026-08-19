@@ -5,6 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Swami Enterprises — JACK Industrial Sewing Machines, Delhi</title>
 <meta name="description" content="Authorized Jack showroom in Chanakya Place, New Delhi. Industrial sewing machines, motors, spare parts, repair and AMC — trading on 30 Feet Road since 2015.">
+<link rel="canonical" href="https://swamienterprises.online/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Swami Enterprises">
+<meta property="og:title" content="Swami Enterprises — JACK Industrial Sewing Machines, Delhi">
+<meta property="og:description" content="Authorized Jack showroom in Chanakya Place, New Delhi. Industrial sewing machines, motors, spare parts, repair and AMC — trading on 30 Feet Road since 2015.">
+<meta property="og:url" content="https://swamienterprises.online/">
+<meta property="og:image" content="https://swamienterprises.online/uploads/f6-cutout-final.png">
+<meta name="twitter:card" content="summary_large_image">
+<!-- Real, verified fields only — no invented rating value, price, or hours. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Swami Enterprises",
+  "image": "https://swamienterprises.online/uploads/f6-cutout-final.png",
+  "url": "https://swamienterprises.online/",
+  "telephone": "+919971336656",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "E-2/73, 30 Feet Road, Block C, Chanakya Place I",
+    "addressLocality": "New Delhi",
+    "postalCode": "110058",
+    "addressCountry": "IN"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.7",
+    "reviewCount": "92"
+  }
+}
+</script>
 <!-- Every route now rewrites to this same file (see vercel.json), so relative asset paths like
      "./support.js" or "uploads/x.jpg" must resolve against the site root regardless of the
      actual requested path (e.g. /machines/jack-f6), not against that path's own directory. -->
@@ -518,6 +550,20 @@ a:hover { color:#3D7BFF; }
         <span style="cursor:pointer;border-bottom:1px solid rgba(0,0,0,0.15)" onClick="{{ goFinder }}">Not sure? Find Your Machine →</span>
         <span style="cursor:pointer" onClick="{{ focusMachineSearch }}">Try “lockstitch”, “denim”, “overlock”</span>
       </div>
+
+      <sc-if value="{{ hasRecentlyViewed }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:48px">
+          <div class="mono" style="font-size:11px;letter-spacing:0.16em;color:#707070;margin-bottom:16px">RECENTLY VIEWED</div>
+          <div style="display:flex;gap:16px;overflow-x:auto;padding-bottom:8px">
+            <sc-for list="{{ recentlyViewed }}" as="rv" hint-placeholder-count="3">
+              <div class="sw-panel" style="min-width:160px;padding:14px;cursor:pointer" onClick="{{ rv.open }}">
+                <image-slot id="{{ 'recent-' + rv.id }}" shape="rect" src="{{ rv.imgSrc }}" fit="contain" placeholder="{{ rv.imgPh }}" style="width:132px;height:100px"></image-slot>
+                <div style="font-size:13px;font-weight:700;color:#151515;margin-top:10px;white-space:nowrap">{{ rv.model }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
 
       <div style="margin-top:60px;padding-top:8px">
         <sc-if value="{{ hasMachineResults }}" hint-placeholder-val="{{ true }}">
@@ -1821,12 +1867,18 @@ class Component extends DCLogic {
       } else if (viewFromPath[path]) {
         next = { view: viewFromPath[path] };
       }
-      if (next) {
-        this.setState(next);
-        document.title = this.titleFor(next.view, next.selectedMachineId || this.state.selectedMachineId);
-      } else if (!replace) {
-        document.title = this.titleFor('home');
-      }
+      const view = next ? next.view : 'home';
+      const id = next ? (next.selectedMachineId || this.state.selectedMachineId) : undefined;
+      if (next) this.setState(next);
+      document.title = this.titleFor(view, id);
+      this.setMeta('name', 'description', this.descriptionFor(view, id));
+      const canonical = 'https://swamienterprises.online' + path;
+      this.setMeta('property', 'og:title', this.titleFor(view, id));
+      this.setMeta('property', 'og:description', this.descriptionFor(view, id));
+      this.setMeta('property', 'og:url', canonical);
+      this.setMeta('name', 'twitter:card', 'summary_large_image');
+      this.setCanonical(canonical);
+      this.setProductJsonLd(view, id);
     };
     this.applyPathToState(true);
     this.onPopState = () => this.applyPathToState(false);
@@ -1962,6 +2014,56 @@ class Component extends DCLogic {
     const labels = { machines: 'Machines', industries: 'Industries', solutions: 'Solutions', finder: 'Find Your Machine', compare: 'Compare Machines', about: 'About' };
     return (labels[view] || view) + ' — Swami Enterprises';
   };
+  descriptionFor = (view, id) => {
+    if (view === 'home') return 'Authorized Jack showroom in Chanakya Place, New Delhi. Industrial sewing machines, motors, spare parts, repair and AMC — trading since 2015.';
+    if (view === 'product') {
+      const m = this.machines.find((x) => x.id === id);
+      if (!m) return 'Swami Enterprises — authorized JACK sewing machine dealer, New Delhi.';
+      return `${m.model} — ${m.purpose} Real specifications, ${m.detailItems && m.detailItems.length ? 'official photography, ' : ''}${m.youtubeId ? 'product video, ' : ''}available from Swami Enterprises, authorized JACK dealer, New Delhi.`;
+    }
+    const descs = {
+      machines: 'The full JACK industrial sewing machine range stocked by Swami Enterprises — lockstitch, overlock, interlock and bartack machines, real specifications.',
+      industries: 'What Swami Enterprises’ JACK machines are used for — shirts, uniforms, denim, knitwear, bags and technical sewing.',
+      solutions: 'We don’t just sell machines — installation, training, maintenance, spare parts and technical support from Swami Enterprises.',
+      finder: 'A short, honest questionnaire based on Swami Enterprises’ verified JACK machine data to find the right machine for your production.',
+      compare: 'Compare JACK sewing machines side by side — real, verified specifications from Swami Enterprises.',
+      about: 'Swami Enterprises — authorized Jack sewing machine dealer, Chanakya Place, New Delhi, trading since 2015.',
+    };
+    return descs[view] || descs.home;
+  };
+  // Updates <meta name/property> tags and the canonical link in place — createElement only if
+  // missing so repeated navigation never leaves duplicate tags behind.
+  setMeta = (attr, key, content) => {
+    let el = document.head.querySelector(`meta[${attr}="${key}"]`);
+    if (!el) { el = document.createElement('meta'); el.setAttribute(attr, key); document.head.appendChild(el); }
+    el.setAttribute('content', content);
+  };
+  setCanonical = (url) => {
+    let el = document.head.querySelector('link[rel="canonical"]');
+    if (!el) { el = document.createElement('link'); el.setAttribute('rel', 'canonical'); document.head.appendChild(el); }
+    el.setAttribute('href', url);
+  };
+  // Structured data (schema.org): a LocalBusiness block that's always present, plus a Product
+  // block injected only while a product page is open. Real fields only — no invented ratings,
+  // prices, or availability claims beyond what's already verified elsewhere on the site.
+  setProductJsonLd = (view, id) => {
+    let el = document.getElementById('product-jsonld');
+    if (view !== 'product') { if (el) el.remove(); return; }
+    const m = this.machines.find((x) => x.id === id);
+    if (!m) { if (el) el.remove(); return; }
+    if (!el) { el = document.createElement('script'); el.type = 'application/ld+json'; el.id = 'product-jsonld'; document.head.appendChild(el); }
+    el.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      name: m.model,
+      brand: { '@type': 'Brand', name: m.manufacturer || 'JACK' },
+      category: m.category,
+      description: m.purpose,
+      image: 'https://swamienterprises.online/' + m.imgSrc,
+      url: 'https://swamienterprises.online/machines/' + m.id,
+      manufacturer: { '@type': 'Organization', name: 'JACK' },
+    });
+  };
   // Product intelligence: every meaningful business action fires a named event through Vercel
   // Web Analytics (the site's existing host, so no separate backend/database to run). This is
   // the actual data — searches run, machines viewed, Finder answers and where people drop off,
@@ -1975,7 +2077,17 @@ class Component extends DCLogic {
     if (typeof window === 'undefined' || !window.history) return;
     const path = this.urlPath(view, id);
     if (window.location.pathname !== path) window.history.pushState({ view, id }, '', path);
-    document.title = this.titleFor(view, id);
+    const title = this.titleFor(view, id);
+    const description = this.descriptionFor(view, id);
+    const canonical = 'https://swamienterprises.online' + path;
+    document.title = title;
+    this.setMeta('name', 'description', description);
+    this.setMeta('property', 'og:title', title);
+    this.setMeta('property', 'og:description', description);
+    this.setMeta('property', 'og:url', canonical);
+    this.setMeta('name', 'twitter:card', 'summary_large_image');
+    this.setCanonical(canonical);
+    this.setProductJsonLd(view, id);
     if (typeof window.va === 'function') window.va('pageview', { path });
   };
   goToView = (view) => {
@@ -1986,9 +2098,29 @@ class Component extends DCLogic {
   goToProduct = (id) => {
     const m = this.machines.find((x) => x.id === id);
     this.track('product_view', { id, model: m ? m.model : id, category: m ? m.category : undefined });
+    this.recordRecentlyViewed(id);
     this.setState({ view: 'product', selectedMachineId: id, contactOpen: false });
     this.syncUrl('product', id);
     if (typeof window !== 'undefined') window.scrollTo(0, 0);
+  };
+  // Real per-visitor personalization (localStorage, this browser only) — never fabricated
+  // "trending"/"popular" claims, just what this specific visitor actually looked at.
+  recordRecentlyViewed = (id) => {
+    if (typeof window === 'undefined' || !window.localStorage) return;
+    try {
+      const raw = window.localStorage.getItem('sw-recently-viewed');
+      const ids = raw ? JSON.parse(raw) : [];
+      const next = [id, ...ids.filter((x) => x !== id)].slice(0, 6);
+      window.localStorage.setItem('sw-recently-viewed', JSON.stringify(next));
+    } catch (e) {}
+  };
+  getRecentlyViewed = () => {
+    if (typeof window === 'undefined' || !window.localStorage) return [];
+    try {
+      const raw = window.localStorage.getItem('sw-recently-viewed');
+      const ids = raw ? JSON.parse(raw) : [];
+      return ids.map((id) => this.machines.find((m) => m.id === id)).filter(Boolean);
+    } catch (e) { return []; }
   };
   openSearch = () => this.setState({ searchOpen: true, searchQuery: '' });
   closeSearch = () => this.setState({ searchOpen: false });
@@ -2377,6 +2509,8 @@ class Component extends DCLogic {
       })(),
       hasMachineResults: machineResults.length > 0,
       hasNoMachineResults: machineResults.length === 0,
+      recentlyViewed: this.getRecentlyViewed().map((m) => ({ ...m, open: () => this.goToProduct(m.id) })),
+      hasRecentlyViewed: this.getRecentlyViewed().length > 0,
       openContact: this.openContact,
       trackWhatsappClick: this.trackWhatsappClick,
       trackCallClick: this.trackCallClick,

@@ -7,6 +7,7 @@
     { "source": "/solutions", "destination": "/Home.dc.html" },
     { "source": "/finder", "destination": "/Home.dc.html" },
     { "source": "/compare", "destination": "/Home.dc.html" },
-    { "source": "/about", "destination": "/Home.dc.html" }
+    { "source": "/about", "destination": "/Home.dc.html" },
+    { "source": "/request-quote", "destination": "/Home.dc.html" }
   ]
 }

@@ -1985,9 +1985,29 @@ class Component extends DCLogic {
       this.setMeta('name', 'twitter:card', 'summary_large_image');
       this.setCanonical(canonical);
       this.setProductJsonLd(view, id);
+      this._pageEnteredAt = Date.now();
+      this._pageEnteredPath = path;
     };
     this.applyPathToState(true);
     this.onPopState = () => this.applyPathToState(false);
+    // How long someone actually looks at a page/product — not available from
+    // pageview counts alone. Flushed on navigation (syncUrl), on tab hide,
+    // and on page unload, so a closed tab or an app-switch still reports a
+    // real number instead of losing the last page of a session entirely.
+    // Sub-2-second visits are dropped as noise (bounces, accidental taps).
+    this.flushPageEngagement = () => {
+      if (!this._pageEnteredAt) return;
+      const seconds = Math.round((Date.now() - this._pageEnteredAt) / 1000);
+      if (seconds >= 2) this.track('page_engagement', { path: this._pageEnteredPath, seconds });
+      this._pageEnteredAt = null;
+    };
+    if (typeof document !== 'undefined') {
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') this.flushPageEngagement();
+        else this._pageEnteredAt = Date.now();
+      });
+    }
+    if (typeof window !== 'undefined') window.addEventListener('pagehide', this.flushPageEngagement);
     window.addEventListener('popstate', this.onPopState);
 
     // Accessibility pass: this template drives every interaction off onClick spans (no native
@@ -2196,6 +2216,7 @@ class Component extends DCLogic {
 
   syncUrl = (view, id) => {
     if (typeof window === 'undefined' || !window.history) return;
+    this.flushPageEngagement();
     const path = this.urlPath(view, id);
     if (window.location.pathname !== path) window.history.pushState({ view, id }, '', path);
     const title = this.titleFor(view, id);
@@ -2210,6 +2231,8 @@ class Component extends DCLogic {
     this.setCanonical(canonical);
     this.setProductJsonLd(view, id);
     if (typeof window.va === 'function') window.va('pageview', { path });
+    this._pageEnteredAt = Date.now();
+    this._pageEnteredPath = path;
   };
   goToView = (view) => {
     this.setState({ view, contactOpen: false });

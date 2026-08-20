@@ -427,7 +427,16 @@ a:hover { color:#3D7BFF; }
                   <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:8px">TYPICAL OPERATION</div>
                   <div style="font-size:15px;color:#6E6E73;line-height:1.7">{{ ind.process }}</div>
                   <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-top:20px;margin-bottom:8px">RELEVANT MACHINES</div>
-                  <div style="font-size:15px;color:#1D1D1F;font-weight:600">{{ ind.relevantMachinesText }}</div>
+                  <sc-if value="{{ ind.hasMatches }}" hint-placeholder-val="{{ true }}">
+                    <div style="display:flex;flex-wrap:wrap;gap:8px">
+                      <sc-for list="{{ ind.relevantMachineLinks }}" as="rm" hint-placeholder-count="3">
+                        <span style="font-size:13px;font-weight:600;color:#1D1D1F;background:#fff;padding:8px 14px;border-radius:980px;cursor:pointer;border:1px solid rgba(0,0,0,0.1)" onClick="{{ rm.open }}">{{ rm.model }}</span>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ ind.noMatches }}" hint-placeholder-val="{{ false }}">
+                    <div style="font-size:14px;color:#6E6E73">{{ ind.relevantMachinesText }}</div>
+                  </sc-if>
                   <div style="display:flex;gap:16px;margin-top:20px">
                     <span style="padding:12px 22px;background:#1D1D1F;color:#F5F5F7;font-size:13px;cursor:pointer" onClick="{{ goMachines }}">Browse Machines</span>
                     <span style="padding:12px 22px;border:1px solid #1D1D1F;color:#1D1D1F;font-size:13px;cursor:pointer" onClick="{{ goFinder }}">Not sure? Find Your Machine</span>
@@ -2768,7 +2777,9 @@ class Component extends DCLogic {
           open: this.state.openIndustry === ind.key,
           toggle: () => this.toggleIndustry(ind.key),
           hasMatches: matches.length > 0,
+          noMatches: matches.length === 0,
           relevantMachinesText: matches.length ? matches.map((m) => m.model).join(', ') : 'Ask a specialist for the current best fit.',
+          relevantMachineLinks: matches.slice(0, 6).map((m) => ({ model: m.model, open: () => this.goToProduct(m.id) })),
         };
       }),
       lifecycleStages: ['SELECT', '→', 'INSTALL', '→', 'TRAIN', '→', 'PRODUCE', '→', 'MAINTAIN', '→', 'SUPPORT'],

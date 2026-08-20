@@ -17,6 +17,12 @@
   .metric .n{font-size:26px;font-weight:800;letter-spacing:-0.02em}
   .metric .l{font-size:12px;color:var(--sub);margin-top:2px}
   .pipeline{display:flex;gap:8px;overflow-x:auto;margin-bottom:20px;padding-bottom:4px}
+  .bi{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:20px}
+  .bi-card{background:var(--white);border-radius:14px;padding:16px}
+  .bi-card h4{margin:0 0 10px;font-size:12px;font-weight:700;letter-spacing:0.06em;color:var(--sub);text-transform:uppercase}
+  .bi-row{display:flex;justify-content:space-between;padding:5px 0;font-size:13px}
+  .bi-row .n{color:var(--sub);font-variant-numeric:tabular-nums}
+  .bi-empty{color:var(--sub);font-size:12px}
   .stage{flex:1;min-width:110px;background:var(--white);border-radius:12px;padding:12px;text-align:center;cursor:pointer;border:2px solid transparent}
   .stage.active{border-color:var(--blue)}
   .stage .n{font-size:20px;font-weight:800}
@@ -76,6 +82,7 @@
   <div class="wrap">
     <div class="metrics" id="metrics"></div>
     <div class="pipeline" id="pipeline"></div>
+    <div class="bi" id="bi"></div>
     <div class="toolbar">
       <input id="search" placeholder="Search name, company, phone, email, machine…" oninput="render()" style="flex:1;min-width:200px">
       <select id="fCity" onchange="render()"><option value="">All cities</option></select>
@@ -167,6 +174,18 @@ function filtered() {
   });
 }
 
+function rank(leads, field) {
+  const counts = {};
+  leads.forEach((l) => { const v = (l[field] || '').trim(); if (v) counts[v] = (counts[v] || 0) + 1; });
+  return Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 6);
+}
+function biCard(title, rows) {
+  const body = rows.length
+    ? rows.map(([label, n]) => `<div class="bi-row"><span>${esc(label)}</span><span class="n">${n}</span></div>`).join('')
+    : '<div class="bi-empty">No data yet</div>';
+  return `<div class="bi-card"><h4>${esc(title)}</h4>${body}</div>`;
+}
+
 function render() {
   const list = filtered();
   // Metrics
@@ -186,6 +205,16 @@ function render() {
     const active = STAGE_FILTER === s ? 'active' : '';
     return `<div class="stage ${active}" onclick="setStage('${s}')"><div class="n">${n}</div><div class="l">${s}</div></div>`;
   }).join('') + `<div class="stage ${STAGE_FILTER === '' ? 'active' : ''}" onclick="setStage('')"><div class="n">${total}</div><div class="l">ALL</div></div>`;
+
+  // Business intelligence — ranked from real submitted leads only. Empty
+  // until real leads carry that field; never backfilled with placeholder
+  // ranks just to make a card look populated.
+  document.getElementById('bi').innerHTML = [
+    biCard('Top requested machines', rank(LEADS, 'machine')),
+    biCard('Top industries', rank(LEADS, 'industry')),
+    biCard('Top cities', rank(LEADS, 'city')),
+    biCard('Acquisition source', rank(LEADS, 'source')),
+  ].join('');
 
   // Rows
   document.getElementById('rows').innerHTML = list.map((l) => `

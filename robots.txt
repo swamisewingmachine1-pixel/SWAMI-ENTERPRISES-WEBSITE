@@ -3,5 +3,6 @@ Allow: /
 Disallow: /admin/
 Disallow: /admin-leads.html
 Disallow: /admin-seo.html
+Disallow: /admin-intelligence.html
 
 Sitemap: https://swamienterprises.online/sitemap.xml

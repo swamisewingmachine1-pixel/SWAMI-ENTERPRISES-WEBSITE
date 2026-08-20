@@ -40,4 +40,12 @@ module.exports = {
     const client = await getClient();
     return client.lRange(key, start, stop);
   },
+  kvLtrim: async (key, start, stop) => {
+    const client = await getClient();
+    return client.lTrim(key, start, stop);
+  },
+  kvLlen: async (key) => {
+    const client = await getClient();
+    return client.lLen(key);
+  },
 };

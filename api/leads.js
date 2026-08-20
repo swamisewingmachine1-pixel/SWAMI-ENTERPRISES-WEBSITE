@@ -92,6 +92,8 @@ async function handle(req, res) {
       medium: clean(body.medium, 40) || 'none',
       campaign: clean(body.campaign, 60),
       landingPage: clean(body.landingPage, 200),
+      lastTouchSource: clean(body.lastTouchSource, 40),
+      lastTouchMedium: clean(body.lastTouchMedium, 40),
       status: 'NEW',
       notes: [],
       followUpDate: '',

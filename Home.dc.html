@@ -1983,13 +1983,20 @@ class Component extends DCLogic {
         next.quoteName = ''; next.quoteCompany = ''; next.quotePhone = ''; next.quoteEmail = '';
         next.quoteCity = ''; next.quoteQty = ''; next.quoteTimeline = ''; next.quoteRequirements = ''; next.quoteError = '';
       }
-      // First-touch UTM capture: only set once per browser so a later organic/direct visit
-      // doesn't overwrite the campaign that actually brought this lead in.
-      if (typeof window !== 'undefined' && !localStorage.getItem('sw-utm')) {
+      // First-touch UTM: set once per browser, never overwritten — this is
+      // "what campaign actually brought this person to us the first time."
+      // Last-touch: overwritten on every visit that carries UTM params —
+      // "what brought them back today." Both are kept, deliberately never
+      // merged into one value, because they answer different questions
+      // (which is why generate_lead sends both, not a single "source").
+      if (typeof window !== 'undefined') {
         const p = new URLSearchParams(window.location.search);
-        const utm = { source: p.get('utm_source') || '', medium: p.get('utm_medium') || '', campaign: p.get('utm_campaign') || '', landingPage: path };
+        const utm = { source: p.get('utm_source') || '', medium: p.get('utm_medium') || '', campaign: p.get('utm_campaign') || '', content: p.get('utm_content') || '', landingPage: path };
         if (utm.source || utm.medium || utm.campaign) {
-          try { localStorage.setItem('sw-utm', JSON.stringify(utm)); } catch (e) {}
+          if (!localStorage.getItem('sw-utm')) {
+            try { localStorage.setItem('sw-utm', JSON.stringify(utm)); } catch (e) {}
+          }
+          try { localStorage.setItem('sw-utm-last', JSON.stringify({ ...utm, referrer: document.referrer || '' })); } catch (e) {}
         }
       }
       const view = next ? next.view : 'home';
@@ -2229,8 +2236,32 @@ class Component extends DCLogic {
   // the actual data — searches run, machines viewed, Finder answers and where people drop off,
   // WhatsApp/call intent, Compare usage — that answers "how do people search, what do they look
   // at" rather than just raw pageview counts.
+  // Curated subset that's actually worth a Redis write (see api/events.js
+  // for why: Vercel Analytics has no read API on this plan, so this is the
+  // only way /admin/intelligence gets real demand-side numbers).
+  _loggedEvents = new Set(['product_view', 'search', 'compare_started', 'whatsapp_click', 'call_click', 'quote_started', 'generate_lead', 'finder_completed']);
   track = (name, props) => {
-    if (typeof window !== 'undefined' && typeof window.va === 'function') window.va('event', { name, ...(props || {}) });
+    if (typeof window === 'undefined') return;
+    if (typeof window.va === 'function') window.va('event', { name, ...(props || {}) });
+    // One data layer, GTM-compatible, never re-initialized after first
+    // push — a future GTM container can read this without any other code
+    // change. No GTM script is loaded (no real container ID exists yet);
+    // this just keeps the data available for when one does.
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: name, ...(props || {}) });
+    if (this._loggedEvents.has(name)) {
+      const utm = this.getUtm ? this.getUtm() : {};
+      try {
+        fetch('/api/events', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name, machine: props && props.machine, industry: props && props.industry,
+            source: utm.source, medium: utm.medium, page: window.location.pathname,
+          }),
+        }).catch(() => {});
+      } catch (e) {}
+    }
   };
 
   syncUrl = (view, id) => {
@@ -2337,6 +2368,10 @@ class Component extends DCLogic {
     if (typeof window === 'undefined') return {};
     try { return JSON.parse(localStorage.getItem('sw-utm') || '{}'); } catch (e) { return {}; }
   };
+  getLastTouchUtm = () => {
+    if (typeof window === 'undefined') return {};
+    try { return JSON.parse(localStorage.getItem('sw-utm-last') || '{}'); } catch (e) { return {}; }
+  };
   goQuote = (machineId, industryKey) => {
     const validMachine = machineId && this.machines.find((m) => m.id === machineId) ? machineId : '';
     const validIndustry = industryKey && this.industries.find((i) => i.key === industryKey) ? industryKey : '';
@@ -2406,6 +2441,7 @@ class Component extends DCLogic {
           industry: industry ? industry.name : '', machine: machine ? machine.model : '',
           quantity: s.quoteQty, timeline: s.quoteTimeline, requirements: s.quoteRequirements,
           source: utm.source, medium: utm.medium, campaign: utm.campaign, landingPage: utm.landingPage,
+          lastTouchSource: this.getLastTouchUtm().source, lastTouchMedium: this.getLastTouchUtm().medium,
         }),
       }).catch(() => {});
     } catch (e) {}

@@ -16,8 +16,8 @@ const KINDS = {
     statuses: ['IDEA', 'RESEARCHING', 'READY', 'WRITING', 'PUBLISHED'],
   },
   question: {
-    fields: ['question', 'context', 'askedBy'],
-    statuses: [],
+    fields: ['question', 'source', 'industry', 'product', 'location', 'intent', 'frequency', 'commercialValue', 'status'],
+    statuses: ['UNVALIDATED', 'VALIDATED', 'CONTENT_BRIEFED', 'PUBLISHED'],
   },
   prospect: {
     fields: ['company', 'industry', 'city', 'website', 'contactRole', 'source', 'status', 'nextFollowUp', 'notes'],

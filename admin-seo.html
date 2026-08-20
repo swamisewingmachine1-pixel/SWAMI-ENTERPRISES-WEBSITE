@@ -46,6 +46,7 @@
   <div class="wrap">
     <div class="tabs" id="tabs"></div>
     <div class="desc" id="desc"></div>
+    <div id="seedRow" style="display:none;margin-bottom:14px"><span class="tab" style="background:#fff" onclick="seedQuestions()">Seed 10 market-researched questions (UNVALIDATED)</span></div>
     <form class="add" id="addForm" onsubmit="return addItem(event)"></form>
     <div id="tableWrap"></div>
   </div>
@@ -63,8 +64,8 @@ const KIND_META = {
     fieldLabels: { opportunity: 'Opportunity', intent: 'Search intent', product: 'Product', industry: 'Industry', location: 'Location', competition: 'Competition', commercialIntent: 'Commercial intent', existingPage: 'Existing page', priority: 'Priority', status: 'Status', notes: 'Notes' } },
   brief: { label: 'Content Briefs', desc: 'Research first, write second. A brief should be fillable by someone who has never talked to a customer.',
     fieldLabels: { title: 'Title', intent: 'Primary intent', audience: 'Target audience', product: 'Target product', industry: 'Target industry', location: 'Target location', questions: 'Questions to answer', requiredInfo: 'Required real info', internalLinks: 'Internal links', cta: 'CTA', status: 'Status' } },
-  question: { label: 'Customer Questions', desc: 'Log real questions customers actually ask — on WhatsApp, calls, or in the showroom. This becomes the raw material for FAQs, guides, and product content later.',
-    fieldLabels: { question: 'Question', context: 'Context (machine/industry)', askedBy: 'Asked by / channel' } },
+  question: { label: 'Customer Questions', desc: 'Real questions customers ask, PLUS 10 market-researched hypotheses seeded as UNVALIDATED (not real Swami customer quotes — mark VALIDATED once you’ve actually heard a real version of one from a real customer). This becomes the raw material for FAQs, guides, and product content.',
+    fieldLabels: { question: 'Question', source: 'Source', industry: 'Industry', product: 'Product', location: 'Location', intent: 'Intent', frequency: 'Frequency', commercialValue: 'Commercial value', status: 'Status' } },
   prospect: { label: 'Prospects', desc: 'Real businesses worth reaching out to — no scraped personal data, just company-level research.',
     fieldLabels: { company: 'Company', industry: 'Industry', city: 'City', website: 'Website', contactRole: 'Contact role', source: 'Source', status: 'Status', nextFollowUp: 'Next follow-up', notes: 'Notes' } },
 };
@@ -101,7 +102,35 @@ function renderTabs() {
     `<div class="tab ${k === KIND ? 'active' : ''}" onclick="switchKind('${k}')">${KIND_META[k].label}</div>`
   ).join('');
   document.getElementById('desc').textContent = KIND_META[KIND].desc;
+  document.getElementById('seedRow').style.display = KIND === 'question' ? 'block' : 'none';
   renderForm(); renderTable();
+}
+
+// The 10 questions below are market-research hypotheses supplied at setup
+// time, not real Swami Enterprises customer quotes — seeded UNVALIDATED on
+// purpose. Mark one VALIDATED only once a real customer has actually asked
+// a real version of it.
+const RESEARCH_QUESTIONS = [
+  'Which Jack sewing machine is best for my production requirement?',
+  'What is the price of the Jack machine I need, and what is included in the complete setup?',
+  'Which sewing machine should I use for shirts, trousers, denim or another specific garment?',
+  'What is the difference between two Jack models, and which one should I actually buy?',
+  'Is this a genuine/original Jack machine, and how can I verify it?',
+  'What warranty do I get and who handles service?',
+  'Do you provide installation, machine setup and operator guidance?',
+  'Are genuine spare parts available and how quickly can I get them?',
+  'I am setting up or expanding a garment unit — which machines do I need?',
+  'Can you supply machines in bulk and deliver/service them at my factory?',
+];
+async function seedQuestions() {
+  if (!confirm('Add 10 market-researched questions as UNVALIDATED? (skips if already seeded)')) return;
+  const existing = new Set(ITEMS.map((i) => i.question));
+  for (const q of RESEARCH_QUESTIONS) {
+    if (existing.has(q)) continue;
+    await api('/api/growth?kind=question', { method: 'POST', body: JSON.stringify({ question: q, source: 'Market research (not a real customer quote)', status: 'UNVALIDATED' }) });
+  }
+  await loadKind('question');
+  renderTable();
 }
 
 function renderForm() {

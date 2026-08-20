@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Growth Workspace — Swami Enterprises</title>
+<style>
+  :root{--blue:#0A5CFF;--ink:#1D1D1F;--sub:#6E6E73;--bg:#F5F5F7;--line:rgba(0,0,0,0.1);--white:#fff}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,'Manrope',sans-serif;background:var(--bg);color:var(--ink)}
+  .bar{position:sticky;top:0;background:rgba(245,245,247,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;z-index:10}
+  .bar b{font-size:14px;letter-spacing:0.06em}
+  .wrap{max-width:1100px;margin:0 auto;padding:20px}
+  .tabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+  .tab{padding:9px 16px;border-radius:980px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid var(--line);background:var(--white)}
+  .tab.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .desc{font-size:13px;color:var(--sub);margin-bottom:16px;max-width:640px}
+  form.add{background:var(--white);border-radius:12px;padding:16px;margin-bottom:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+  form.add input,form.add select,form.add textarea{padding:9px 10px;border:1px solid var(--line);border-radius:8px;font-size:13px;font-family:inherit;background:var(--bg)}
+  form.add textarea{grid-column:1/-1;resize:vertical}
+  form.add button{grid-column:1/-1;padding:11px;background:var(--blue);color:#fff;border:none;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer}
+  table{width:100%;border-collapse:collapse;background:var(--white);border-radius:12px;overflow:hidden;font-size:13px}
+  th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--sub);font-weight:600;font-size:10px;letter-spacing:0.04em;text-transform:uppercase}
+  select.status{padding:5px 6px;border-radius:6px;border:1px solid var(--line);font-size:11px}
+  .empty{text-align:center;color:var(--sub);padding:30px;font-size:13px}
+  #login{max-width:340px;margin:80px auto;text-align:center}
+  #login input{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font-size:14px;margin-top:14px}
+  #login button{margin-top:14px;width:100%;padding:11px;background:var(--blue);color:#fff;border:none;border-radius:980px;font-weight:600;cursor:pointer}
+  #err{color:#C4361D;font-size:13px;margin-top:10px;display:none}
+</style>
+</head>
+<body>
+
+<div id="login">
+  <b style="font-size:14px;letter-spacing:0.06em">SWAMI ENTERPRISES — GROWTH</b>
+  <div style="font-size:13px;color:#6E6E73;margin-top:8px">Enter the dashboard password.</div>
+  <input id="pwInput" type="password" placeholder="Password" autocomplete="current-password">
+  <button onclick="tryLogin()">Enter</button>
+  <div id="err">Incorrect password.</div>
+</div>
+
+<div id="app" style="display:none">
+  <div class="bar"><b>SWAMI ENTERPRISES — GROWTH WORKSPACE</b><span style="font-size:12px;color:#6E6E73;cursor:pointer" onclick="logout()">Log out</span></div>
+  <div class="wrap">
+    <div class="tabs" id="tabs"></div>
+    <div class="desc" id="desc"></div>
+    <form class="add" id="addForm" onsubmit="return addItem(event)"></form>
+    <div id="tableWrap"></div>
+  </div>
+</div>
+
+<script>
+let TOKEN = sessionStorage.getItem('sw-admin-token') || '';
+let KIND = 'opportunity';
+let FIELDS = [];
+let STATUSES = [];
+let ITEMS = [];
+
+const KIND_META = {
+  opportunity: { label: 'SEO Opportunities', desc: 'Real research only — search intent, product, industry, location, priority. No invented search volume or competition data; leave blank until you have real numbers.',
+    fieldLabels: { opportunity: 'Opportunity', intent: 'Search intent', product: 'Product', industry: 'Industry', location: 'Location', competition: 'Competition', commercialIntent: 'Commercial intent', existingPage: 'Existing page', priority: 'Priority', status: 'Status', notes: 'Notes' } },
+  brief: { label: 'Content Briefs', desc: 'Research first, write second. A brief should be fillable by someone who has never talked to a customer.',
+    fieldLabels: { title: 'Title', intent: 'Primary intent', audience: 'Target audience', product: 'Target product', industry: 'Target industry', location: 'Target location', questions: 'Questions to answer', requiredInfo: 'Required real info', internalLinks: 'Internal links', cta: 'CTA', status: 'Status' } },
+  question: { label: 'Customer Questions', desc: 'Log real questions customers actually ask — on WhatsApp, calls, or in the showroom. This becomes the raw material for FAQs, guides, and product content later.',
+    fieldLabels: { question: 'Question', context: 'Context (machine/industry)', askedBy: 'Asked by / channel' } },
+  prospect: { label: 'Prospects', desc: 'Real businesses worth reaching out to — no scraped personal data, just company-level research.',
+    fieldLabels: { company: 'Company', industry: 'Industry', city: 'City', website: 'Website', contactRole: 'Contact role', source: 'Source', status: 'Status', nextFollowUp: 'Next follow-up', notes: 'Notes' } },
+};
+
+function api(path, opts) {
+  opts = opts || {};
+  opts.headers = Object.assign({ 'Authorization': 'Bearer ' + TOKEN, 'Content-Type': 'application/json' }, opts.headers || {});
+  return fetch(path, opts).then(async (r) => {
+    if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error || ('HTTP ' + r.status));
+    return r.json();
+  });
+}
+
+async function tryLogin() {
+  TOKEN = document.getElementById('pwInput').value;
+  try {
+    await loadKind('opportunity');
+    sessionStorage.setItem('sw-admin-token', TOKEN);
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    renderTabs();
+  } catch (e) { document.getElementById('err').style.display = 'block'; }
+}
+function logout() { sessionStorage.removeItem('sw-admin-token'); location.reload(); }
+
+async function loadKind(kind) {
+  const data = await api('/api/growth?kind=' + kind);
+  KIND = kind; FIELDS = data.fields; STATUSES = data.statuses; ITEMS = data.items;
+}
+function switchKind(kind) { loadKind(kind).then(() => { renderTabs(); renderForm(); renderTable(); }); }
+
+function renderTabs() {
+  document.getElementById('tabs').innerHTML = Object.keys(KIND_META).map((k) =>
+    `<div class="tab ${k === KIND ? 'active' : ''}" onclick="switchKind('${k}')">${KIND_META[k].label}</div>`
+  ).join('');
+  document.getElementById('desc').textContent = KIND_META[KIND].desc;
+  renderForm(); renderTable();
+}
+
+function renderForm() {
+  const meta = KIND_META[KIND];
+  document.getElementById('addForm').innerHTML = FIELDS.map((f) => {
+    const label = meta.fieldLabels[f] || f;
+    if (f === 'status' && STATUSES.length) {
+      return `<select name="${f}">${STATUSES.map((s) => `<option>${s}</option>`).join('')}</select>`;
+    }
+    if (f === 'notes' || f === 'questions' || f === 'requiredInfo' || f === 'context') {
+      return `<textarea name="${f}" rows="2" placeholder="${label}"></textarea>`;
+    }
+    return `<input name="${f}" placeholder="${label}">`;
+  }).join('') + '<button type="submit">Add</button>';
+}
+
+async function addItem(e) {
+  e.preventDefault();
+  const form = e.target;
+  const body = {};
+  FIELDS.forEach((f) => { const el = form.elements[f]; if (el) body[f] = el.value; });
+  await api('/api/growth?kind=' + KIND, { method: 'POST', body: JSON.stringify(body) });
+  await loadKind(KIND);
+  renderTable();
+  form.reset();
+  return false;
+}
+
+function esc(s) { return (s || '').toString().replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+
+function renderTable() {
+  const meta = KIND_META[KIND];
+  const displayFields = FIELDS.filter((f) => f !== 'notes' || KIND !== 'opportunity').slice(0, 7);
+  const wrap = document.getElementById('tableWrap');
+  if (!ITEMS.length) { wrap.innerHTML = '<div class="empty">Nothing logged yet — add the first one above.</div>'; return; }
+  wrap.innerHTML = `<table><thead><tr>${displayFields.map((f) => `<th>${meta.fieldLabels[f] || f}</th>`).join('')}<th>Date</th></tr></thead><tbody>
+    ${ITEMS.map((item) => `<tr>${displayFields.map((f) => {
+      if (f === 'status' && STATUSES.length) {
+        return `<td><select class="status" onchange="updateStatus('${item.id}', this.value)">${STATUSES.map((s) => `<option ${s === item.status ? 'selected' : ''}>${s}</option>`).join('')}</select></td>`;
+      }
+      return `<td>${esc(item[f]) || '—'}</td>`;
+    }).join('')}<td>${(item.createdAt || '').slice(0, 10)}</td></tr>`).join('')}
+  </tbody></table>`;
+}
+
+async function updateStatus(id, status) {
+  await api('/api/growth?kind=' + KIND + '&id=' + encodeURIComponent(id), { method: 'PATCH', body: JSON.stringify({ status }) });
+  await loadKind(KIND);
+}
+
+if (TOKEN) {
+  loadKind('opportunity').then(() => {
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    renderTabs();
+  }).catch(() => { sessionStorage.removeItem('sw-admin-token'); });
+}
+</script>
+</body>
+</html>

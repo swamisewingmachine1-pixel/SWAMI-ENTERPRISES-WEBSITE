@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /admin-leads.html
+Disallow: /admin-seo.html
 
 Sitemap: https://swamienterprises.online/sitemap.xml

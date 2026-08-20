@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Leads — Swami Enterprises</title>
+<style>
+  :root{--blue:#0A5CFF;--ink:#1D1D1F;--sub:#6E6E73;--bg:#F5F5F7;--line:rgba(0,0,0,0.1);--white:#fff}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,'Manrope',sans-serif;background:var(--bg);color:var(--ink)}
+  .bar{position:sticky;top:0;background:rgba(245,245,247,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;z-index:10}
+  .bar b{font-size:14px;letter-spacing:0.06em}
+  .wrap{max-width:1200px;margin:0 auto;padding:20px}
+  .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:20px}
+  .metric{background:var(--white);border-radius:14px;padding:16px}
+  .metric .n{font-size:26px;font-weight:800;letter-spacing:-0.02em}
+  .metric .l{font-size:12px;color:var(--sub);margin-top:2px}
+  .pipeline{display:flex;gap:8px;overflow-x:auto;margin-bottom:20px;padding-bottom:4px}
+  .stage{flex:1;min-width:110px;background:var(--white);border-radius:12px;padding:12px;text-align:center;cursor:pointer;border:2px solid transparent}
+  .stage.active{border-color:var(--blue)}
+  .stage .n{font-size:20px;font-weight:800}
+  .stage .l{font-size:11px;color:var(--sub);margin-top:2px}
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+  .toolbar input,.toolbar select{padding:9px 12px;border:1px solid var(--line);border-radius:8px;font-size:13px;background:var(--white);font-family:inherit}
+  table{width:100%;border-collapse:collapse;background:var(--white);border-radius:12px;overflow:hidden;font-size:13px}
+  th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+  th{color:var(--sub);font-weight:600;font-size:11px;letter-spacing:0.04em;text-transform:uppercase}
+  tr{cursor:pointer}
+  tr:hover td{background:#FAFAFA}
+  .badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600}
+  .b-NEW{background:#E8F0FF;color:#0A5CFF}
+  .b-CONTACTED{background:#FFF3D9;color:#946200}
+  .b-QUALIFIED{background:#E4F7E9;color:#1C7C34}
+  .b-QUOTATION{background:#F0E6FF;color:#6C2BD9}
+  .b-NEGOTIATION{background:#FFE8DA;color:#B84A00}
+  .b-WON{background:#D9F7DE;color:#0E6B22}
+  .b-LOST{background:#F2F2F2;color:#6E6E73}
+  .pri-HIGH{color:#C4361D;font-weight:700}
+  .pri-MEDIUM{color:#946200;font-weight:600}
+  .pri-LOW{color:var(--sub)}
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);display:none;align-items:flex-end;justify-content:flex-end;z-index:100}
+  .overlay.open{display:flex}
+  .panel{width:min(460px,100vw);height:100%;background:var(--white);overflow-y:auto;padding:24px}
+  .panel h2{margin:0 0 4px;font-size:22px}
+  .panel .sec{margin-top:22px}
+  .panel .sec-title{font-size:12px;font-weight:700;letter-spacing:0.06em;color:var(--sub);margin-bottom:10px}
+  .row{display:flex;justify-content:space-between;padding:6px 0;font-size:13px;border-bottom:1px solid #f0f0f0}
+  .row span:first-child{color:var(--sub)}
+  .btn{display:inline-block;padding:11px 18px;border-radius:980px;font-size:13px;font-weight:600;cursor:pointer;border:none;text-align:center}
+  .btn-blue{background:var(--blue);color:#fff}
+  .btn-green{background:#25D366;color:#050505}
+  .btn-line{background:transparent;border:1px solid var(--line);color:var(--ink)}
+  .notes textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:13px;resize:vertical}
+  .note{background:#FAFAFA;border-radius:8px;padding:8px 10px;font-size:12px;margin-top:6px}
+  .note .at{color:var(--sub);font-size:10px;margin-top:2px}
+  #login{max-width:340px;margin:80px auto;text-align:center}
+  #login input{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font-size:14px;margin-top:14px}
+  #login button{margin-top:14px;width:100%}
+  #err{color:#C4361D;font-size:13px;margin-top:10px;display:none}
+  select.status{padding:6px 8px;border-radius:6px;border:1px solid var(--line);font-size:12px}
+</style>
+</head>
+<body>
+
+<div id="login">
+  <b style="font-size:14px;letter-spacing:0.06em">SWAMI ENTERPRISES — LEADS</b>
+  <div style="font-size:13px;color:#6E6E73;margin-top:8px">Enter the dashboard password.</div>
+  <input id="pwInput" type="password" placeholder="Password" autocomplete="current-password">
+  <button class="btn btn-blue" onclick="tryLogin()">Enter</button>
+  <div id="err">Incorrect password.</div>
+</div>
+
+<div id="app" style="display:none">
+  <div class="bar"><b>SWAMI ENTERPRISES — LEADS</b><span style="font-size:12px;color:#6E6E73;cursor:pointer" onclick="logout()">Log out</span></div>
+  <div class="wrap">
+    <div class="metrics" id="metrics"></div>
+    <div class="pipeline" id="pipeline"></div>
+    <div class="toolbar">
+      <input id="search" placeholder="Search name, company, phone, email, machine…" oninput="render()" style="flex:1;min-width:200px">
+      <select id="fCity" onchange="render()"><option value="">All cities</option></select>
+      <select id="fIndustry" onchange="render()"><option value="">All industries</option></select>
+      <select id="fMachine" onchange="render()"><option value="">All machines</option></select>
+      <select id="fSource" onchange="render()"><option value="">All sources</option></select>
+      <label style="display:flex;align-items:center;gap:6px;font-size:13px"><input type="checkbox" id="fFollowToday" onchange="render()"> Follow-up today</label>
+    </div>
+    <table>
+      <thead><tr><th>Lead</th><th>Company</th><th>City</th><th>Industry</th><th>Machine</th><th>Qty</th><th>Source</th><th>Date</th><th>Priority</th><th>Status</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeDetail()">
+  <div class="panel" id="panel"></div>
+</div>
+
+<script>
+let TOKEN = sessionStorage.getItem('sw-admin-token') || '';
+let LEADS = [];
+let STAGE_FILTER = '';
+const STAGES = ['NEW','CONTACTED','QUALIFIED','QUOTATION','NEGOTIATION','WON','LOST'];
+const LOST_REASONS = ['Price','Competitor','Timing','No response','Requirement changed','Other'];
+
+function api(path, opts) {
+  opts = opts || {};
+  opts.headers = Object.assign({ 'Authorization': 'Bearer ' + TOKEN, 'Content-Type': 'application/json' }, opts.headers || {});
+  return fetch(path, opts).then(async (r) => {
+    if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error || ('HTTP ' + r.status));
+    return r.json();
+  });
+}
+
+async function tryLogin() {
+  const pw = document.getElementById('pwInput').value;
+  TOKEN = pw;
+  try {
+    const data = await api('/api/leads');
+    sessionStorage.setItem('sw-admin-token', pw);
+    LEADS = data.leads;
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    populateFilters();
+    render();
+  } catch (e) {
+    document.getElementById('err').style.display = 'block';
+  }
+}
+function logout() { sessionStorage.removeItem('sw-admin-token'); location.reload(); }
+
+async function refresh() {
+  const data = await api('/api/leads');
+  LEADS = data.leads;
+  render();
+}
+
+function populateFilters() {
+  const uniq = (f) => [...new Set(LEADS.map(f).filter(Boolean))].sort();
+  const fill = (id, values) => { const el = document.getElementById(id); values.forEach((v) => { const o = document.createElement('option'); o.value = v; o.textContent = v; el.appendChild(o); }); };
+  fill('fCity', uniq((l) => l.city));
+  fill('fIndustry', uniq((l) => l.industry));
+  fill('fMachine', uniq((l) => l.machine));
+  fill('fSource', uniq((l) => l.source));
+}
+
+function todayStr() { return new Date().toISOString().slice(0, 10); }
+
+function filtered() {
+  const q = document.getElementById('search').value.trim().toLowerCase();
+  const city = document.getElementById('fCity').value;
+  const industry = document.getElementById('fIndustry').value;
+  const machine = document.getElementById('fMachine').value;
+  const source = document.getElementById('fSource').value;
+  const followToday = document.getElementById('fFollowToday').checked;
+  return LEADS.filter((l) => {
+    if (STAGE_FILTER && l.status !== STAGE_FILTER) return false;
+    if (city && l.city !== city) return false;
+    if (industry && l.industry !== industry) return false;
+    if (machine && l.machine !== machine) return false;
+    if (source && l.source !== source) return false;
+    if (followToday && l.followUpDate !== todayStr()) return false;
+    if (q) {
+      const hay = [l.fullName, l.companyName, l.phone, l.email, l.machine].join(' ').toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+}
+
+function render() {
+  const list = filtered();
+  // Metrics
+  const total = LEADS.length;
+  const byStatus = (s) => LEADS.filter((l) => l.status === s).length;
+  const won = byStatus('WON');
+  const metrics = [
+    ['Total leads', total], ['New', byStatus('NEW')], ['Qualified', byStatus('QUALIFIED')],
+    ['Quotation', byStatus('QUOTATION')], ['Won', won],
+    ['Conversion', total ? Math.round((won / total) * 100) + '%' : '—'],
+  ];
+  document.getElementById('metrics').innerHTML = metrics.map(([l, n]) => `<div class="metric"><div class="n">${n}</div><div class="l">${l}</div></div>`).join('');
+
+  // Pipeline
+  document.getElementById('pipeline').innerHTML = STAGES.map((s) => {
+    const n = byStatus(s);
+    const active = STAGE_FILTER === s ? 'active' : '';
+    return `<div class="stage ${active}" onclick="setStage('${s}')"><div class="n">${n}</div><div class="l">${s}</div></div>`;
+  }).join('') + `<div class="stage ${STAGE_FILTER === '' ? 'active' : ''}" onclick="setStage('')"><div class="n">${total}</div><div class="l">ALL</div></div>`;
+
+  // Rows
+  document.getElementById('rows').innerHTML = list.map((l) => `
+    <tr onclick="openDetail('${l.id}')">
+      <td><b>${esc(l.fullName)}</b><div style="color:#6E6E73;font-size:11px">${esc(l.phone)}</div></td>
+      <td>${esc(l.companyName) || '—'}</td>
+      <td>${esc(l.city) || '—'}</td>
+      <td>${esc(l.industry) || '—'}</td>
+      <td>${esc(l.machine) || '—'}</td>
+      <td>${esc(l.quantity) || '—'}</td>
+      <td>${esc(l.source) || '—'}</td>
+      <td>${(l.createdAt || '').slice(0, 10)}</td>
+      <td class="pri-${l.priority ? l.priority.level : 'LOW'}">${l.priority ? l.priority.level : 'LOW'}</td>
+      <td><span class="badge b-${l.status}">${l.status}</span></td>
+    </tr>
+  `).join('') || '<tr><td colspan="10" style="text-align:center;color:#6E6E73;padding:30px">No leads match.</td></tr>';
+}
+
+function setStage(s) { STAGE_FILTER = s; render(); }
+function esc(s) { return (s || '').toString().replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+
+function openDetail(id) {
+  const l = LEADS.find((x) => x.id === id);
+  if (!l) return;
+  const waMsg = encodeURIComponent(`Hi ${l.fullName}, this is Swami Enterprises. You'd enquired${l.machine ? ' about the ' + l.machine : ''}${l.industry ? ' for your ' + l.industry.toLowerCase() + ' work' : ''}. Following up on pricing and availability.`);
+  const wa = 'https://wa.me/' + l.phone.replace(/\D/g, '') + '?text=' + waMsg;
+  document.getElementById('panel').innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h2>${esc(l.fullName)}</h2>
+      <span style="cursor:pointer;font-size:20px" onclick="closeDetail()">×</span>
+    </div>
+    <div style="color:#6E6E73;font-size:13px">${esc(l.companyName)}</div>
+    <div style="display:flex;gap:10px;margin-top:16px">
+      <a class="btn btn-green" href="${wa}" target="_blank">WhatsApp Customer</a>
+      <a class="btn btn-line" href="tel:${esc(l.phone)}">Call</a>
+    </div>
+
+    <div class="sec"><div class="sec-title">STATUS</div>
+      <select class="status" id="statusSel" onchange="onStatusChange('${l.id}')">
+        ${STAGES.map((s) => `<option value="${s}" ${s === l.status ? 'selected' : ''}>${s}</option>`).join('')}
+      </select>
+      <div id="wonLostFields" style="margin-top:10px"></div>
+    </div>
+
+    <div class="sec"><div class="sec-title">CUSTOMER</div>
+      <div class="row"><span>Phone</span><span>${esc(l.phone)}</span></div>
+      <div class="row"><span>Email</span><span>${esc(l.email) || '—'}</span></div>
+      <div class="row"><span>City</span><span>${esc(l.city) || '—'}</span></div>
+    </div>
+
+    <div class="sec"><div class="sec-title">REQUIREMENT</div>
+      <div class="row"><span>Industry</span><span>${esc(l.industry) || '—'}</span></div>
+      <div class="row"><span>Machine</span><span>${esc(l.machine) || '—'}</span></div>
+      <div class="row"><span>Quantity</span><span>${esc(l.quantity) || '—'}</span></div>
+      <div class="row"><span>Timeline</span><span>${esc(l.timeline) || '—'}</span></div>
+      <div class="row" style="display:block"><span>Notes from customer</span><div style="margin-top:4px">${esc(l.requirements) || '—'}</div></div>
+    </div>
+
+    <div class="sec"><div class="sec-title">ATTRIBUTION</div>
+      <div class="row"><span>Source</span><span>${esc(l.source) || '—'}</span></div>
+      <div class="row"><span>Medium</span><span>${esc(l.medium) || '—'}</span></div>
+      <div class="row"><span>Campaign</span><span>${esc(l.campaign) || '—'}</span></div>
+      <div class="row"><span>Landing page</span><span>${esc(l.landingPage) || '—'}</span></div>
+      <div class="row"><span>Created</span><span>${(l.createdAt || '').replace('T', ' ').slice(0, 16)}</span></div>
+    </div>
+
+    <div class="sec"><div class="sec-title">FOLLOW UP</div>
+      <input type="date" id="followInput" value="${l.followUpDate || ''}" onchange="setFollowUp('${l.id}')" style="padding:9px;border:1px solid #ddd;border-radius:8px">
+    </div>
+
+    <div class="sec notes"><div class="sec-title">NOTES</div>
+      <textarea id="noteInput" rows="2" placeholder="e.g. Called customer — wants 20 machines. Follow up Friday."></textarea>
+      <div class="btn btn-blue" style="margin-top:8px" onclick="addNote('${l.id}')">Add note</div>
+      <div id="notesList">${(l.notes || []).slice().reverse().map((n) => `<div class="note">${esc(n.text)}<div class="at">${(n.at || '').replace('T', ' ').slice(0, 16)}</div></div>`).join('') || '<div style="color:#6E6E73;font-size:12px;margin-top:6px">No notes yet.</div>'}</div>
+    </div>
+  `;
+  renderWonLostFields(l);
+  document.getElementById('overlay').classList.add('open');
+}
+function closeDetail() { document.getElementById('overlay').classList.remove('open'); }
+
+function renderWonLostFields(l) {
+  const el = document.getElementById('wonLostFields');
+  const status = document.getElementById('statusSel').value;
+  if (status === 'WON') {
+    el.innerHTML = `
+      <input id="wlOrderValue" placeholder="Order value (₹)" style="width:100%;padding:8px;margin-top:6px;border:1px solid #ddd;border-radius:6px">
+      <input id="wlOrderDate" type="date" style="width:100%;padding:8px;margin-top:6px;border:1px solid #ddd;border-radius:6px">
+      <div class="btn btn-blue" style="margin-top:8px" onclick="saveWonLost('${l.id}','WON')">Save</div>`;
+  } else if (status === 'LOST') {
+    el.innerHTML = `
+      <select id="wlReason" style="width:100%;padding:8px;margin-top:6px;border:1px solid #ddd;border-radius:6px">${LOST_REASONS.map((r) => `<option>${r}</option>`).join('')}</select>
+      <textarea id="wlNotes" placeholder="Why?" rows="2" style="width:100%;padding:8px;margin-top:6px;border:1px solid #ddd;border-radius:6px"></textarea>
+      <div class="btn btn-blue" style="margin-top:8px" onclick="saveWonLost('${l.id}','LOST')">Save</div>`;
+  } else {
+    el.innerHTML = '';
+  }
+}
+function onStatusChange(id) {
+  const l = LEADS.find((x) => x.id === id);
+  renderWonLostFields(l);
+  const status = document.getElementById('statusSel').value;
+  if (status !== 'WON' && status !== 'LOST') updateLead(id, { status });
+}
+function saveWonLost(id, type) {
+  const wonLost = type === 'WON'
+    ? { orderValue: document.getElementById('wlOrderValue').value, orderDate: document.getElementById('wlOrderDate').value }
+    : { reason: document.getElementById('wlReason').value, notes: document.getElementById('wlNotes').value };
+  updateLead(id, { status: type, wonLost });
+}
+function setFollowUp(id) { updateLead(id, { followUpDate: document.getElementById('followInput').value }); }
+function addNote(id) {
+  const text = document.getElementById('noteInput').value.trim();
+  if (!text) return;
+  updateLead(id, { note: text }).then(() => openDetail(id));
+}
+async function updateLead(id, patch) {
+  const data = await api('/api/leads?id=' + encodeURIComponent(id), { method: 'PATCH', body: JSON.stringify(patch) });
+  const idx = LEADS.findIndex((x) => x.id === id);
+  if (idx >= 0) LEADS[idx] = data.lead;
+  render();
+  return data;
+}
+
+if (TOKEN) {
+  api('/api/leads').then((data) => {
+    LEADS = data.leads;
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    populateFilters();
+    render();
+  }).catch(() => { sessionStorage.removeItem('sw-admin-token'); });
+}
+</script>
+</body>
+</html>

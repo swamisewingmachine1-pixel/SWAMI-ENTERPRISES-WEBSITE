@@ -2269,6 +2269,18 @@ class Component extends DCLogic {
     if (need) lines.push(`Looking for: ${need}`);
     window.open('https://wa.me/919971336656?text=' + encodeURIComponent(lines.join('\n')), '_blank');
     this.setState({ contactSubmitted: true });
+    try {
+      const utm = this.getUtm();
+      const m = this.machines.find((x) => x.id === this.state.selectedMachineId);
+      fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName: name, phone, requirements: need, machine: m ? m.model : '',
+          source: utm.source, medium: utm.medium, campaign: utm.campaign, landingPage: utm.landingPage,
+        }),
+      }).catch(() => {});
+    } catch (e) {}
   };
   trackWhatsappClick = () => this.track('whatsapp_click', { view: this.state.view, machine: this.state.selectedMachineId });
   trackCallClick = () => this.track('call_click', { view: this.state.view });
@@ -2340,6 +2352,21 @@ class Component extends DCLogic {
     this._lastQuoteWhatsapp = 'https://wa.me/919971336656?text=' + encodeURIComponent(lines.join('\n'));
     window.open(this._lastQuoteWhatsapp, '_blank');
     this.setState({ quoteSubmitted: true });
+    // Persist to the lead API for the admin dashboard. Fire-and-forget and
+    // never block/fail the WhatsApp handoff on this — a customer's message
+    // reaching you does not depend on the dashboard backend being healthy.
+    try {
+      fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName: name, companyName: company, phone, email, city: s.quoteCity,
+          industry: industry ? industry.name : '', machine: machine ? machine.model : '',
+          quantity: s.quoteQty, timeline: s.quoteTimeline, requirements: s.quoteRequirements,
+          source: utm.source, medium: utm.medium, campaign: utm.campaign, landingPage: utm.landingPage,
+        }),
+      }).catch(() => {});
+    } catch (e) {}
   };
   quoteWhatsappAgain = () => { if (this._lastQuoteWhatsapp) window.open(this._lastQuoteWhatsapp, '_blank'); };
 

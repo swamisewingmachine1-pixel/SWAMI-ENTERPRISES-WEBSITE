@@ -2239,7 +2239,7 @@ class Component extends DCLogic {
   // Curated subset that's actually worth a Redis write (see api/events.js
   // for why: Vercel Analytics has no read API on this plan, so this is the
   // only way /admin/intelligence gets real demand-side numbers).
-  _loggedEvents = new Set(['product_view', 'search', 'compare_started', 'whatsapp_click', 'call_click', 'quote_started', 'generate_lead', 'finder_completed']);
+  _loggedEvents = new Set(['product_view', 'search', 'compare_started', 'whatsapp_click', 'call_click', 'quote_started', 'generate_lead', 'finder_started', 'finder_completed']);
   track = (name, props) => {
     if (typeof window === 'undefined') return;
     if (typeof window.va === 'function') window.va('event', { name, ...(props || {}) });
@@ -2281,10 +2281,21 @@ class Component extends DCLogic {
     this.setCanonical(canonical);
     this.setProductJsonLd(view, id);
     if (typeof window.va === 'function') window.va('pageview', { path });
+    // The initial page load's pageview is auto-captured by Vercel's own
+    // insights script (no custom call needed there); this custom call only
+    // covers client-side SPA navigations, which Vercel's auto-tracking
+    // can't see on its own. Push to dataLayer here too so a future GTM
+    // container sees every route change, not just named track() events.
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'page_view', path });
     this._pageEnteredAt = Date.now();
     this._pageEnteredPath = path;
   };
   goToView = (view) => {
+    if (view !== this.state.view) {
+      if (view === 'finder') this.track('finder_started', {});
+      if (view === 'compare') this.track('compare_started', {});
+    }
     this.setState({ view, contactOpen: false });
     this.syncUrl(view);
     if (typeof window !== 'undefined') window.scrollTo(0, 0);
@@ -2823,7 +2834,13 @@ class Component extends DCLogic {
       solutionDetails: this.solutions.map((sol) => ({
         ...sol, icon: this.state.openSolution === sol.key ? '−' : '+', open: this.state.openSolution === sol.key, toggle: () => this.toggleSolution(sol.key),
       })),
-      whatsappHref: 'https://wa.me/919971336656',
+      whatsappHref: (() => {
+        if (view === 'product') {
+          const m = this.machines.find((x) => x.id === this.state.selectedMachineId);
+          if (m) return 'https://wa.me/919971336656?text=' + encodeURIComponent(`Hi, I'm interested in the ${m.model} and would like pricing and availability.`);
+        }
+        return 'https://wa.me/919971336656';
+      })(),
       phoneDisplay: '+91 99713 36656',
       machineQuery: this.state.machineQuery,
       onMachineQueryChange: this.onMachineQueryChange,

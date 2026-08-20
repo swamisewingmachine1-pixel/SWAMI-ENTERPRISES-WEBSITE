@@ -10,7 +10,7 @@
 // (30MB) doesn't fill up on a low-traffic site over time.
 const { kvRpush, kvLrange, kvLtrim, kvLlen } = require('./_kv');
 
-const ALLOWED = new Set(['product_view', 'search', 'compare_started', 'whatsapp_click', 'call_click', 'quote_started', 'generate_lead', 'finder_completed']);
+const ALLOWED = new Set(['product_view', 'search', 'compare_started', 'whatsapp_click', 'call_click', 'quote_started', 'generate_lead', 'finder_started', 'finder_completed']);
 const MAX_EVENTS = 5000;
 const KEY = 'events:log';
 

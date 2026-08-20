@@ -43,7 +43,19 @@ function clean(str, max) {
 
 module.exports = async (req, res) => {
   res.setHeader('Content-Type', 'application/json');
+  try {
+    return await handle(req, res);
+  } catch (e) {
+    // A misconfigured deploy (KV not connected yet, etc.) must fail as a
+    // clean JSON error, not a raw platform crash page — this is the
+    // difference between "the dashboard isn't set up yet" and looking like
+    // the whole site is broken.
+    res.statusCode = 500;
+    return res.end(JSON.stringify({ error: e.message || 'Server error' }));
+  }
+};
 
+async function handle(req, res) {
   if (req.method === 'POST' && !req.query.id) {
     // Public endpoint — the /request-quote form calls this. Validate and
     // cap every field server-side; never trust the client payload as-is.
@@ -154,4 +166,4 @@ module.exports = async (req, res) => {
 
   res.statusCode = 405;
   return res.end(JSON.stringify({ error: 'Method not allowed' }));
-};
+}

@@ -1,0 +1,9 @@
+{
+  "name": "swami-enterprises-website",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Static site (Home.dc.html) + a couple of Vercel serverless functions under /api for the lead dashboard. Not a Next.js/framework project — no build step.",
+  "dependencies": {
+    "redis": "^4.7.0"
+  }
+}

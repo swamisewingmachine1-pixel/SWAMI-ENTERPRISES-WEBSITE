@@ -6,17 +6,15 @@ is in place, but it needs these two real things from you before it goes
 live. Until then, `/api/leads` will return an error rather than pretend to
 work.
 
-## 1. Create the database (Vercel KV) — ~2 minutes
+## 1. Create the database (Redis) — done ✅
 
-1. Open your project on vercel.com → **Storage** tab.
-2. Click **Create Database** → choose **KV** (this is Upstash Redis under
-   the hood — free tier is enough for thousands of leads).
-3. Name it anything (e.g. `swami-leads`), create it.
-4. On the "Connect to Project" step, connect it to this project
-   (`swami-enterprises-website`) for the **Production** environment.
-5. Vercel automatically adds `KV_REST_API_URL` and `KV_REST_API_TOKEN` as
-   environment variables on the project — you don't type these in
-   yourself.
+A free Redis database (`redis-orange-park`, Redis Cloud, 30MB free tier —
+plenty for thousands of leads) is already created and connected to this
+project, with the custom prefix `KV`. That gave the project a
+`KV_REDIS_URL` environment variable automatically — the code
+(`api/_kv.js`) connects to it directly over `redis://` using the `redis`
+npm package (added in `package.json`; Vercel installs it automatically on
+deploy, no action needed from you).
 
 ## 2. Set the dashboard password — ~1 minute
 

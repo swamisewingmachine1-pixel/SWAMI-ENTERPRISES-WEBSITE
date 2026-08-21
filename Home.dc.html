@@ -600,12 +600,15 @@ a:hover { color:#3D7BFF; }
                     <option value="{{ ind.key }}">{{ ind.name }}</option>
                   </sc-for>
                 </select>
-                <select aria-label="Machine" value="{{ quoteMachine }}" onChange="{{ onQuoteMachineChange }}" style="padding:14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:10px;color:#1D1D1F">
-                  <option value="">Machine — not sure yet</option>
-                  <sc-for list="{{ quoteMachineOptions }}" as="mo" hint-placeholder-count="8">
-                    <option value="{{ mo.id }}">{{ mo.model }}</option>
-                  </sc-for>
-                </select>
+                <div style="border:1px solid rgba(0,0,0,0.18);background:#fff;border-radius:10px;padding:14px">
+                  <div style="font-size:13px;color:#6E6E73;margin-bottom:10px">Machine(s) — select any that apply, or leave blank if not sure yet</div>
+                  <div style="max-height:180px;overflow-y:auto;display:flex;flex-wrap:wrap;gap:8px;padding-right:4px">
+                    <sc-for list="{{ quoteMachineOptions }}" as="mo" hint-placeholder-count="8">
+                      <span onClick="{{ mo.toggle }}" style="font-size:13px;font-weight:600;padding:8px 14px;border-radius:980px;cursor:pointer;border:1px solid {{ mo.chipBorder }};background:{{ mo.chipBg }};color:{{ mo.chipColor }}">{{ mo.model }}</span>
+                    </sc-for>
+                  </div>
+                  <div style="font-size:13px;color:#0A5CFF;margin-top:10px;font-weight:600">{{ quoteMachinesSummary }}</div>
+                </div>
                 <input type="text" name="qty" placeholder="Quantity required (e.g. 1, 5, 20+)" aria-label="Quantity required" value="{{ quoteQty }}" onChange="{{ onQuoteQtyChange }}" style="padding:14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:10px"></input>
                 <select aria-label="Timeline" value="{{ quoteTimeline }}" onChange="{{ onQuoteTimelineChange }}" style="padding:14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:10px;color:#1D1D1F">
                   <option value="">When do you need it?</option>
@@ -2212,7 +2215,7 @@ class Component extends DCLogic {
           ? machinesParam.split(',').map((s) => s.trim()).filter((id) => this.machines.find((m) => m.id === id))
           : [];
         const validIndustry = industryParam && this.industries.find((i) => i.key === industryParam) ? industryParam : '';
-        next.quoteMachine = validMachine || (validMachines[0] || '');
+        next.quoteMachines = validMachine ? [validMachine] : validMachines;
         next.quoteIndustry = validIndustry;
         next.quoteSubmitted = false;
         next.quoteStarted = false;
@@ -2632,7 +2635,7 @@ class Component extends DCLogic {
     const validIndustry = industryKey && this.industries.find((i) => i.key === industryKey) ? industryKey : '';
     this.setState({
       view: 'quote', contactOpen: false, quoteSubmitted: false, quoteStarted: false,
-      quoteMachine: validMachine, quoteIndustry: validIndustry,
+      quoteMachines: validMachine ? [validMachine] : [], quoteIndustry: validIndustry,
       quoteName: '', quoteCompany: '', quotePhone: '', quoteEmail: '', quoteCity: '', quoteQty: '', quoteTimeline: '', quoteRequirements: '', quoteError: '',
     });
     let path = '/request-quote';
@@ -2644,10 +2647,32 @@ class Component extends DCLogic {
     this.track('quote_page_view', { fromView: this.state.view, machine: validMachine || undefined, industry: validIndustry || undefined });
     if (typeof window !== 'undefined') window.scrollTo(0, 0);
   };
+  goQuoteMulti = (machineIds) => {
+    const validIds = (machineIds || []).filter((id) => this.machines.find((m) => m.id === id));
+    this.setState({
+      view: 'quote', contactOpen: false, quoteSubmitted: false, quoteStarted: false,
+      quoteMachines: validIds, quoteIndustry: '',
+      quoteName: '', quoteCompany: '', quotePhone: '', quoteEmail: '', quoteCity: '', quoteQty: '', quoteTimeline: '', quoteRequirements: '', quoteError: '',
+    });
+    const path = '/request-quote' + (validIds.length ? '?machines=' + validIds.join(',') : '');
+    if (typeof window !== 'undefined' && window.history) window.history.pushState({}, '', path);
+    document.title = this.titleFor('quote');
+    this.setMeta('name', 'description', this.descriptionFor('quote'));
+    this.track('quote_page_view', { fromView: this.state.view, machineCount: validIds.length || undefined });
+    if (typeof window !== 'undefined') window.scrollTo(0, 0);
+  };
   quoteTouch = () => {
     if (this.state.quoteStarted) return;
     this.setState({ quoteStarted: true });
-    this.track('quote_started', { machine: this.state.quoteMachine || undefined, industry: this.state.quoteIndustry || undefined });
+    this.track('quote_started', { machine: (this.state.quoteMachines || [])[0] || undefined, industry: this.state.quoteIndustry || undefined });
+  };
+  toggleQuoteMachine = (id) => {
+    this.quoteTouch();
+    this.setState((s) => {
+      const cur = s.quoteMachines || [];
+      const next = cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id];
+      return { quoteMachines: next };
+    });
   };
   onQuoteField = (field) => (e) => {
     this.quoteTouch();
@@ -2663,7 +2688,7 @@ class Component extends DCLogic {
     if (!name || !phone) { this.setState({ quoteError: 'Please add your name and phone number.' }); return; }
     if (email && !/^\S+@\S+\.\S+$/.test(email)) { this.setState({ quoteError: 'That email address doesn’t look right.' }); return; }
     this.setState({ quoteError: '' });
-    const machine = this.machines.find((m) => m.id === s.quoteMachine);
+    const selectedMachines = (s.quoteMachines || []).map((id) => this.machines.find((m) => m.id === id)).filter(Boolean);
     const industry = this.industries.find((i) => i.key === s.quoteIndustry);
     const utm = this.getUtm();
     const lines = ['New quote request from swamienterprises.online:', `Name: ${name}`];
@@ -2672,13 +2697,15 @@ class Component extends DCLogic {
     if (email) lines.push(`Email: ${email}`);
     if (s.quoteCity) lines.push(`City: ${s.quoteCity}`);
     if (industry) lines.push(`Industry: ${industry.name}`);
-    if (machine) lines.push(`Machine: ${machine.model}`);
+    if (selectedMachines.length === 1) lines.push(`Machine: ${selectedMachines[0].model}`);
+    else if (selectedMachines.length > 1) lines.push(`Machines: ${selectedMachines.map((m) => m.model).join(', ')}`);
     if (s.quoteQty) lines.push(`Quantity: ${s.quoteQty}`);
     if (s.quoteTimeline) lines.push(`Timeline: ${s.quoteTimeline}`);
     if ((s.quoteRequirements || '').trim()) lines.push(`Requirements: ${s.quoteRequirements.trim()}`);
     if (utm.source) lines.push(`Source: ${utm.source}${utm.medium ? ' / ' + utm.medium : ''}${utm.campaign ? ' (' + utm.campaign + ')' : ''}`);
     this.track('generate_lead', {
-      machine: s.quoteMachine || undefined, industry: s.quoteIndustry || undefined,
+      machine: selectedMachines[0] ? selectedMachines[0].id : undefined,
+      machineCount: selectedMachines.length || undefined, industry: s.quoteIndustry || undefined,
       source: utm.source || undefined, medium: utm.medium || undefined, campaign: utm.campaign || undefined,
     });
     this._lastQuoteWhatsapp = 'https://wa.me/919971336656?text=' + encodeURIComponent(lines.join('\n'));
@@ -2693,7 +2720,7 @@ class Component extends DCLogic {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           fullName: name, companyName: company, phone, email, city: s.quoteCity,
-          industry: industry ? industry.name : '', machine: machine ? machine.model : '',
+          industry: industry ? industry.name : '', machine: selectedMachines.map((m) => m.model).join(', '),
           quantity: s.quoteQty, timeline: s.quoteTimeline, requirements: s.quoteRequirements,
           source: utm.source, medium: utm.medium, campaign: utm.campaign, landingPage: utm.landingPage,
           lastTouchSource: this.getLastTouchUtm().source, lastTouchMedium: this.getLastTouchUtm().medium,
@@ -2929,9 +2956,22 @@ class Component extends DCLogic {
       quoteQty: this.state.quoteQty || '',
       quoteTimeline: this.state.quoteTimeline || '',
       quoteRequirements: this.state.quoteRequirements || '',
-      quoteMachine: this.state.quoteMachine || '',
       quoteIndustry: this.state.quoteIndustry || '',
-      quoteMachineOptions: this.machines.map((m) => ({ id: m.id, model: m.model })),
+      quoteMachineCount: (this.state.quoteMachines || []).length,
+      quoteMachinesSummary: (() => {
+        const ids = this.state.quoteMachines || [];
+        if (!ids.length) return 'No machines selected yet — optional, but helps us quote faster';
+        const models = ids.map((id) => { const m = this.machines.find((x) => x.id === id); return m ? m.model : null; }).filter(Boolean);
+        return models.length > 2 ? `${models.slice(0, 2).join(', ')} +${models.length - 2} more` : models.join(', ');
+      })(),
+      quoteMachineOptions: this.machines.map((m) => {
+        const selected = (this.state.quoteMachines || []).includes(m.id);
+        return {
+          id: m.id, model: m.model, category: m.category, selected, toggle: () => this.toggleQuoteMachine(m.id),
+          chipBg: selected ? '#0A5CFF' : '#F5F5F7', chipColor: selected ? '#fff' : '#1D1D1F',
+          chipBorder: selected ? '#0A5CFF' : 'rgba(0,0,0,0.12)',
+        };
+      }),
       quoteIndustryOptions: this.industries.map((i) => ({ key: i.key, name: i.name })),
       onQuoteNameChange: this.onQuoteField('quoteName'),
       onQuoteCompanyChange: this.onQuoteField('quoteCompany'),
@@ -2941,7 +2981,6 @@ class Component extends DCLogic {
       onQuoteQtyChange: this.onQuoteField('quoteQty'),
       onQuoteTimelineChange: this.onQuoteField('quoteTimeline'),
       onQuoteRequirementsChange: this.onQuoteField('quoteRequirements'),
-      onQuoteMachineChange: this.onQuoteField('quoteMachine'),
       onQuoteIndustryChange: this.onQuoteField('quoteIndustry'),
       submitQuote: this.submitQuote,
       quoteWhatsappAgain: this.quoteWhatsappAgain,
@@ -3009,7 +3048,7 @@ class Component extends DCLogic {
             const msg = `Hi Swami Enterprises, I'm interested in these machines:\n\n${lines}\n\nCan you share more details?`;
             window.open('https://wa.me/919971336656?text=' + encodeURIComponent(msg), '_blank');
           },
-          goQuoteFromCompare: () => this.goQuote(resolvedSlotIds[0]),
+          goQuoteFromCompare: () => this.goQuoteMulti(resolvedSlotIds),
         };
       })(),
       isProduct: view === 'product',

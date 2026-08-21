@@ -394,6 +394,8 @@ a:hover { color:#3D7BFF; }
               <span style="font-size:14px;color:#A1A1A6;cursor:pointer" onClick="{{ goGuideCompareF6 }}">JACK F6 vs 2002G</span>
               <span style="font-size:14px;color:#A1A1A6;cursor:pointer" onClick="{{ goGuideShirtFactory }}">Machines for a Shirt Factory</span>
               <span style="font-size:14px;color:#A1A1A6;cursor:pointer" onClick="{{ goGuideIndustrialVsDomestic }}">Industrial vs Domestic Machines</span>
+              <span style="font-size:14px;color:#A1A1A6;cursor:pointer" onClick="{{ goGuideKnitwear }}">Machines for a Knitwear Line</span>
+              <span style="font-size:14px;color:#A1A1A6;cursor:pointer" onClick="{{ goGuideFactorySetup }}">Setting Up a New Production Line</span>
             </div>
           </div>
           <div>
@@ -442,7 +444,7 @@ a:hover { color:#3D7BFF; }
                     <div style="font-size:14px;color:#6E6E73">{{ ind.relevantMachinesText }}</div>
                   </sc-if>
                   <sc-if value="{{ ind.hasGuide }}" hint-placeholder-val="{{ false }}">
-                    <div style="margin-top:14px"><span style="font-size:13px;color:#0A5CFF;cursor:pointer;border-bottom:1px solid rgba(10,92,255,0.3)" onClick="{{ ind.goGuide }}">What machines does a shirt factory actually need? →</span></div>
+                    <div style="margin-top:14px"><span style="font-size:13px;color:#0A5CFF;cursor:pointer;border-bottom:1px solid rgba(10,92,255,0.3)" onClick="{{ ind.goGuide }}">{{ ind.guideLabel }}</span></div>
                   </sc-if>
                   <div style="display:flex;gap:16px;margin-top:20px">
                     <span style="padding:12px 22px;background:#1D1D1F;color:#F5F5F7;font-size:13px;cursor:pointer" onClick="{{ goMachines }}">Browse Machines</span>
@@ -483,6 +485,9 @@ a:hover { color:#3D7BFF; }
             <sc-if value="{{ sol.open }}" hint-placeholder-val="{{ false }}">
               <div style="padding-bottom:36px;max-width:640px">
                 <div style="font-size:15px;color:#A1A1A6;line-height:1.7">{{ sol.desc }}</div>
+                <sc-if value="{{ sol.hasGuide }}" hint-placeholder-val="{{ false }}">
+                  <div style="margin-top:14px"><span style="font-size:13px;color:#2997FF;cursor:pointer;border-bottom:1px solid rgba(41,151,255,0.3)" onClick="{{ sol.goGuide }}">Read: Setting Up a New Production Line →</span></div>
+                </sc-if>
                 <div style="display:flex;gap:16px;margin-top:20px">
                   <span style="padding:12px 22px;background:#F5F5F7;color:#1D1D1F;font-size:13px;cursor:pointer" onClick="{{ goFinder }}">Find Your Machine</span>
                   <span style="padding:12px 22px;border:1px solid rgba(247,247,245,0.4);color:#F5F5F7;font-size:13px;cursor:pointer" onClick="{{ openContact }}">Talk to a Specialist</span>
@@ -777,6 +782,72 @@ a:hover { color:#3D7BFF; }
           <span style="font-size:13px;font-weight:600;color:#1D1D1F;background:#fff;padding:8px 14px;border-radius:980px;cursor:pointer" onClick="{{ goProductF6 }}">View JACK F6 →</span>
           <span style="font-size:13px;font-weight:600;color:#1D1D1F;background:#fff;padding:8px 14px;border-radius:980px;cursor:pointer" onClick="{{ goFinder }}">Find your machine →</span>
         </div>
+
+        <div style="display:flex;gap:16px;margin-top:32px;flex-wrap:wrap">
+          <span style="padding:15px 28px;background:#0A5CFF;color:#fff;font-size:15px;font-weight:600;cursor:pointer;border-radius:980px" onClick="{{ goQuote }}">Request a Quote</span>
+          <span style="padding:15px 28px;border:1px solid #1D1D1F;color:#1D1D1F;font-size:15px;font-weight:600;cursor:pointer;border-radius:980px" onClick="{{ goMachines }}">Browse Machines</span>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ GUIDE: MACHINES FOR A KNITWEAR LINE ============ -->
+  <sc-if value="{{ isGuideKnitwear }}" hint-placeholder-val="{{ false }}">
+    <div style="width:100%;background:#F5F5F7;animation:swFadeIn 0.5s ease both;padding:calc(64px + clamp(50px,8vw,90px)) clamp(24px,8vw,80px) clamp(60px,8vw,100px)">
+      <div style="max-width:720px;margin:0 auto">
+        <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73">APPLICATION GUIDE</div>
+        <div style="font-weight:800;font-size:clamp(28px,5vw,48px);color:#1D1D1F;letter-spacing:-0.02em;margin-top:16px;line-height:1.15">What Machines Does a Knitwear Line Actually Need</div>
+        <div style="font-size:15px;color:#6E6E73;margin-top:16px;line-height:1.6">Knitwear is the one category where a single machine genuinely isn't enough — here's why, and what the real sequence looks like.</div>
+
+        <div style="margin-top:44px;font-weight:700;font-size:22px;color:#1D1D1F">Why knits need more than lockstitch</div>
+        <div style="font-size:15px;color:#1D1D1F;line-height:1.75;margin-top:12px">Knit fabric stretches and frays differently from woven fabric. A pure lockstitch seam has no give — on a knit garment it can pucker or snap under stretch. That's why a real knitwear line runs three machine types together, not one.</div>
+
+        <div style="margin-top:36px;font-weight:700;font-size:22px;color:#1D1D1F">Lockstitch — where the seam doesn't need to stretch</div>
+        <div style="font-size:15px;color:#1D1D1F;line-height:1.75;margin-top:12px">Still used for parts of a knit garment that don't flex — attaching labels, some closures. A high-speed lockstitch machine like the JACK F6 covers this role.</div>
+
+        <div style="margin-top:36px;font-weight:700;font-size:22px;color:#1D1D1F">Overlock — the main seam</div>
+        <div style="font-size:15px;color:#1D1D1F;line-height:1.75;margin-top:12px">Side seams and panel joins on knitwear are overlocked, not lockstitched — the stitch itself has built-in stretch and trims/wraps the raw edge in one pass, which is exactly what a knit edge needs. The JACK E4S is a multi-thread overlock machine built for this.</div>
+
+        <div style="margin-top:36px;font-weight:700;font-size:22px;color:#1D1D1F">Interlock/coverstitch — hems that move with the fabric</div>
+        <div style="font-size:15px;color:#1D1D1F;line-height:1.75;margin-top:12px">Hems on T-shirts and activewear need a flat seam that stretches with the body, not a rigid one — that's an interlock/coverstitch job. The JACK W4, a cylinder-bed interlock machine, is built for this specifically.</div>
+
+        <div style="margin-top:44px;padding:24px;background:#fff;border-radius:16px">
+          <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:14px">A REAL KNITWEAR STARTING SETUP</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <span style="font-size:13px;font-weight:600;color:#1D1D1F;background:#F5F5F7;padding:8px 14px;border-radius:980px;cursor:pointer" onClick="{{ goProductF6 }}">JACK F6 (lockstitch) →</span>
+            <span style="font-size:13px;font-weight:600;color:#1D1D1F;background:#F5F5F7;padding:8px 14px;border-radius:980px;cursor:pointer" onClick="{{ goProductE4S }}">JACK E4S (overlock) →</span>
+            <span style="font-size:13px;font-weight:600;color:#1D1D1F;background:#F5F5F7;padding:8px 14px;border-radius:980px;cursor:pointer" onClick="{{ goProductW4 }}">JACK W4 (interlock) →</span>
+          </div>
+        </div>
+
+        <div style="margin-top:32px;font-size:14px;color:#6E6E73;line-height:1.6">Compare the three side by side, or <span style="color:#0A5CFF;cursor:pointer;font-weight:600" onClick="{{ goGuideStitch }}">read the full stitch-type breakdown</span>.</div>
+
+        <div style="display:flex;gap:16px;margin-top:32px;flex-wrap:wrap">
+          <span style="padding:15px 28px;background:#0A5CFF;color:#fff;font-size:15px;font-weight:600;cursor:pointer;border-radius:980px" onClick="{{ goQuote }}">Request a Quote</span>
+          <span style="padding:15px 28px;border:1px solid #1D1D1F;color:#1D1D1F;font-size:15px;font-weight:600;cursor:pointer;border-radius:980px" onClick="{{ goCompare }}">Compare Machines</span>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ GUIDE: SETTING UP A NEW PRODUCTION LINE ============ -->
+  <sc-if value="{{ isGuideFactorySetup }}" hint-placeholder-val="{{ false }}">
+    <div style="width:100%;background:#F5F5F7;animation:swFadeIn 0.5s ease both;padding:calc(64px + clamp(50px,8vw,90px)) clamp(24px,8vw,80px) clamp(60px,8vw,100px)">
+      <div style="max-width:720px;margin:0 auto">
+        <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73">FACTORY SETUP GUIDE</div>
+        <div style="font-weight:800;font-size:clamp(28px,5vw,48px);color:#1D1D1F;letter-spacing:-0.02em;margin-top:16px;line-height:1.15">Setting Up a New Production Line: The Real Machine Sequence</div>
+        <div style="font-size:15px;color:#6E6E73;margin-top:16px;line-height:1.6">The order that actually matters when you're starting from zero — what to buy first, and what genuinely waits.</div>
+
+        <div style="margin-top:44px;font-weight:700;font-size:22px;color:#1D1D1F">Start with what you're actually making</div>
+        <div style="font-size:15px;color:#1D1D1F;line-height:1.75;margin-top:12px">The starting machine depends entirely on the product, not on what's popular. Shirts and wovens start with a high-speed lockstitch machine alone. Knitwear needs lockstitch, overlock and interlock together from day one — see the knitwear guide for why that's not optional for knits specifically.</div>
+
+        <div style="margin-top:36px;font-weight:700;font-size:22px;color:#1D1D1F">Buy for your real volume, not your hoped-for volume</div>
+        <div style="font-size:15px;color:#1D1D1F;line-height:1.75;margin-top:12px">A single high-speed industrial machine covers real production volume that a domestic machine can't — see the industrial-vs-domestic guide for the actual duty-cycle reasoning. Don't buy a second or third machine of the same type until the first is genuinely the bottleneck.</div>
+
+        <div style="margin-top:36px;font-weight:700;font-size:22px;color:#1D1D1F">What can genuinely wait</div>
+        <div style="font-size:15px;color:#1D1D1F;line-height:1.75;margin-top:12px">Specialized operations — buttonholing, bartacking, dedicated cutting equipment — are real, separate purchases most new lines add once volume justifies a dedicated machine for that one operation, not on day one. Whether that threshold has been reached for your specific plan is exactly the kind of question worth asking a specialist before committing, since it depends on your real numbers, not a general rule.</div>
+
+        <div style="margin-top:32px;font-size:14px;color:#6E6E73;line-height:1.6">Not sure where to start? <span style="color:#0A5CFF;cursor:pointer;font-weight:600" onClick="{{ goFinder }}">Use the Machine Finder</span> or <span style="color:#0A5CFF;cursor:pointer;font-weight:600" onClick="{{ openContact }}">talk to a specialist</span> — this is a production-planning conversation as much as a purchase.</div>
 
         <div style="display:flex;gap:16px;margin-top:32px;flex-wrap:wrap">
           <span style="padding:15px 28px;background:#0A5CFF;color:#fff;font-size:15px;font-weight:600;cursor:pointer;border-radius:980px" onClick="{{ goQuote }}">Request a Quote</span>
@@ -2198,7 +2269,7 @@ class Component extends DCLogic {
     this.applyPathToState = (replace) => {
       const path = window.location.pathname;
       const machineMatch = path.match(/^\/machines\/([a-z0-9-]+)/i);
-      const viewFromPath = { '/machines': 'machines', '/industries': 'industries', '/solutions': 'solutions', '/finder': 'finder', '/compare': 'compare', '/about': 'about', '/request-quote': 'quote', '/guides/lockstitch-vs-overlock-vs-flatlock': 'guideStitch', '/guides/jack-f6-vs-jack-2002g': 'guideCompareF6', '/guides/machines-for-a-shirt-factory': 'guideShirtFactory', '/guides/industrial-vs-domestic-sewing-machines': 'guideIndustrialVsDomestic' };
+      const viewFromPath = { '/machines': 'machines', '/industries': 'industries', '/solutions': 'solutions', '/finder': 'finder', '/compare': 'compare', '/about': 'about', '/request-quote': 'quote', '/guides/lockstitch-vs-overlock-vs-flatlock': 'guideStitch', '/guides/jack-f6-vs-jack-2002g': 'guideCompareF6', '/guides/machines-for-a-shirt-factory': 'guideShirtFactory', '/guides/industrial-vs-domestic-sewing-machines': 'guideIndustrialVsDomestic', '/guides/machines-for-a-knitwear-line': 'guideKnitwear', '/guides/setting-up-a-new-production-line': 'guideFactorySetup' };
       let next = null;
       if (machineMatch && this.machines.find((m) => m.id === machineMatch[1])) {
         next = { view: 'product', selectedMachineId: machineMatch[1] };
@@ -2412,6 +2483,8 @@ class Component extends DCLogic {
     if (view === 'guideCompareF6') return '/guides/jack-f6-vs-jack-2002g';
     if (view === 'guideShirtFactory') return '/guides/machines-for-a-shirt-factory';
     if (view === 'guideIndustrialVsDomestic') return '/guides/industrial-vs-domestic-sewing-machines';
+    if (view === 'guideKnitwear') return '/guides/machines-for-a-knitwear-line';
+    if (view === 'guideFactorySetup') return '/guides/setting-up-a-new-production-line';
     return '/' + view;
   };
   titleFor = (view, id) => {
@@ -2420,7 +2493,7 @@ class Component extends DCLogic {
       const m = this.machines.find((x) => x.id === id);
       return (m ? m.model + ' — ' : '') + 'Swami Enterprises';
     }
-    const labels = { machines: 'Machines', industries: 'Industries', solutions: 'Solutions', finder: 'Find Your Machine', compare: 'Compare Machines', about: 'About', quote: 'Request a Quote', guideStitch: 'Lockstitch vs Overlock vs Flatlock: Which Machine for Which Job', guideCompareF6: 'JACK F6 vs JACK 2002G: Which Lockstitch Machine Do You Need', guideShirtFactory: 'What Machines Does a Shirt Factory Actually Need', guideIndustrialVsDomestic: 'Industrial vs Domestic Sewing Machines: What Actually Changes' };
+    const labels = { machines: 'Machines', industries: 'Industries', solutions: 'Solutions', finder: 'Find Your Machine', compare: 'Compare Machines', about: 'About', quote: 'Request a Quote', guideStitch: 'Lockstitch vs Overlock vs Flatlock: Which Machine for Which Job', guideCompareF6: 'JACK F6 vs JACK 2002G: Which Lockstitch Machine Do You Need', guideShirtFactory: 'What Machines Does a Shirt Factory Actually Need', guideIndustrialVsDomestic: 'Industrial vs Domestic Sewing Machines: What Actually Changes', guideKnitwear: 'What Machines Does a Knitwear Line Actually Need', guideFactorySetup: 'Setting Up a New Production Line: The Real Machine Sequence' };
     return (labels[view] || view) + ' — Swami Enterprises';
   };
   descriptionFor = (view, id) => {
@@ -2442,6 +2515,8 @@ class Component extends DCLogic {
       guideCompareF6: 'JACK F6 vs JACK 2002G compared on real specs — speed, stitch length, needle, and which fabrics each one actually handles, from Swami Enterprises, New Delhi.',
       guideShirtFactory: 'The real machine sequence for a shirt production line — lockstitch, buttonholing, and what to add as you scale, from Swami Enterprises, authorized JACK dealer, New Delhi.',
       guideIndustrialVsDomestic: 'What actually changes between a domestic and an industrial sewing machine — speed, duty cycle, and when you genuinely need to upgrade, from Swami Enterprises, New Delhi.',
+      guideKnitwear: 'What machines a knitwear production line actually needs — lockstitch, overlock and interlock, and why one alone isn’t enough, from Swami Enterprises, New Delhi.',
+      guideFactorySetup: 'Setting up a new garment production line — the real machine sequence and what to plan for as you scale, from Swami Enterprises, authorized JACK dealer, New Delhi.',
     };
     return descs[view] || descs.home;
   };
@@ -2942,6 +3017,12 @@ class Component extends DCLogic {
       goGuideShirtFactory: () => this.goToView('guideShirtFactory'),
       isGuideIndustrialVsDomestic: view === 'guideIndustrialVsDomestic',
       goGuideIndustrialVsDomestic: () => this.goToView('guideIndustrialVsDomestic'),
+      isGuideKnitwear: view === 'guideKnitwear',
+      goGuideKnitwear: () => this.goToView('guideKnitwear'),
+      isGuideFactorySetup: view === 'guideFactorySetup',
+      goGuideFactorySetup: () => this.goToView('guideFactorySetup'),
+      goProductE4S: () => this.goToProduct('jack-e4s'),
+      goProductW4: () => this.goToProduct('jack-w4'),
       goProductF6: () => this.goToProduct('jack-f6'),
       goProduct2002g: () => this.goToProduct('jack-2002g'),
       quoteNotSubmitted: !this.state.quoteSubmitted,
@@ -3121,16 +3202,20 @@ class Component extends DCLogic {
           noMatches: matches.length === 0,
           relevantMachinesText: matches.length ? matches.map((m) => m.model).join(', ') : 'Ask a specialist for the current best fit.',
           relevantMachineLinks: matches.slice(0, 6).map((m) => ({ model: m.model, open: () => this.goToProduct(m.id) })),
-          // Only the shirts industry has a real, directly-matching guide today — not
+          // Only shirts and knitwear have real, directly-matching guides today — not
           // adding placeholder guide links for industries without real content to link to.
-          hasGuide: ind.key === 'shirts',
-          goGuide: () => this.goToView('guideShirtFactory'),
+          hasGuide: ind.key === 'shirts' || ind.key === 'knitwear',
+          guideLabel: ind.key === 'knitwear' ? 'What machines does a knitwear line actually need? →' : 'What machines does a shirt factory actually need? →',
+          goGuide: () => this.goToView(ind.key === 'knitwear' ? 'guideKnitwear' : 'guideShirtFactory'),
         };
       }),
       lifecycleStages: ['SELECT', '→', 'INSTALL', '→', 'TRAIN', '→', 'PRODUCE', '→', 'MAINTAIN', '→', 'SUPPORT'],
       arrowIfNotLast: '',
       solutionDetails: this.solutions.map((sol) => ({
         ...sol, icon: this.state.openSolution === sol.key ? '−' : '+', open: this.state.openSolution === sol.key, toggle: () => this.toggleSolution(sol.key),
+        // Only "start" has a real, directly-matching guide today.
+        hasGuide: sol.key === 'start',
+        goGuide: () => this.goToView('guideFactorySetup'),
       })),
       whatsappHref: (() => {
         if (view === 'product') {

@@ -733,10 +733,22 @@
       // land between writes and see a still-empty src — leaving a filled
       // slot stuck showing the empty-state ring forever (nothing re-renders
       // it afterward since the attribute really did finish changing, just
-      // too late for this call to see). One more render next frame, once
-      // every attribute write for this paint has definitely landed, costs
-      // nothing when the first render was already correct.
-      requestAnimationFrame(() => this._render());
+      // too late for this call to see). A single next-frame retry was
+      // enough on a lightly-loaded page, but a grid with several slots
+      // connecting and racing to settle attributes at once (confirmed live
+      // on the /industrial-sewing-machines product grid) can take longer
+      // than one frame — retry across a few frames, then fall back to a
+      // couple of short timeouts as a final safety net, stopping the
+      // moment a render actually lands on a filled state.
+      let attempts = 0;
+      const retry = () => {
+        attempts++;
+        this._render();
+        if (this.hasAttribute('data-filled') || attempts >= 6) return;
+        if (attempts <= 3) requestAnimationFrame(retry);
+        else setTimeout(retry, 200);
+      };
+      requestAnimationFrame(retry);
     }
 
     disconnectedCallback() {

@@ -390,6 +390,7 @@ a:hover { color:#3D7BFF; }
               <span style="font-size:14px;color:#A1A1A6;cursor:pointer" onClick="{{ goAbout }}">About</span>
               <span style="font-size:14px;color:#A1A1A6;cursor:pointer" onClick="{{ openContact }}">Contact</span>
               <span style="font-size:14px;color:#A1A1A6;cursor:pointer" onClick="{{ goQuote }}">Request a Quote</span>
+              <span style="font-size:14px;color:#A1A1A6;cursor:pointer" onClick="{{ goGuideStitch }}">Lockstitch vs Overlock vs Flatlock</span>
             </div>
           </div>
           <div>
@@ -631,6 +632,44 @@ a:hover { color:#3D7BFF; }
           </div>
         </sc-if>
 
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ GUIDE: LOCKSTITCH VS OVERLOCK VS FLATLOCK ============ -->
+  <sc-if value="{{ isGuideStitch }}" hint-placeholder-val="{{ false }}">
+    <div style="width:100%;background:#F5F5F7;animation:swFadeIn 0.5s ease both;padding:calc(64px + clamp(50px,8vw,90px)) clamp(24px,8vw,80px) clamp(60px,8vw,100px)">
+      <div style="max-width:720px;margin:0 auto">
+        <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73">BUYING GUIDE</div>
+        <div style="font-weight:800;font-size:clamp(28px,5vw,48px);color:#1D1D1F;letter-spacing:-0.02em;margin-top:16px;line-height:1.15">Lockstitch vs Overlock vs Flatlock: Which Machine for Which Job</div>
+        <div style="font-size:15px;color:#6E6E73;margin-top:16px;line-height:1.6">If you're setting up or expanding a production line, this is usually the first real decision: these three machine types do different jobs, and most garments need more than one of them.</div>
+
+        <div style="margin-top:44px;font-weight:700;font-size:22px;color:#1D1D1F">Lockstitch — builds the seam</div>
+        <div style="font-size:15px;color:#1D1D1F;line-height:1.75;margin-top:12px">A lockstitch machine uses two threads that interlock to form a strong, flat seam. This is the machine that actually constructs the garment — the main seams on shirts, trousers, and most woven fabric. It's the standard starting point for a new production line making wovens.</div>
+
+        <div style="margin-top:36px;font-weight:700;font-size:22px;color:#1D1D1F">Overlock — finishes the edge</div>
+        <div style="font-size:15px;color:#1D1D1F;line-height:1.75;margin-top:12px">Overlock (serger) machines use 3–5 threads to sew, trim, and wrap the raw edge of fabric in one pass, stopping it from fraying. On knitwear, side seams and panel joins are typically overlocked, not lockstitched — the stitch itself has built-in stretch, which a lockstitch seam doesn't. If lockstitch builds the garment, overlock finishes it.</div>
+
+        <div style="margin-top:36px;font-weight:700;font-size:22px;color:#1D1D1F">Flatlock — hems and stretch seams</div>
+        <div style="font-size:15px;color:#1D1D1F;line-height:1.75;margin-top:12px">Flatlock machines butt two fabric edges together with no overlap, giving a flat seam that lies smoothly against the skin — the reason it's standard for hemming knitwear (T-shirts, activewear) and for stretch seams that need to move with the fabric. Denim production sometimes uses flatlock for reinforced, high-durability seams.</div>
+
+        <div style="margin-top:36px;font-weight:700;font-size:22px;color:#1D1D1F">A typical knitwear line needs all three</div>
+        <div style="font-size:15px;color:#1D1D1F;line-height:1.75;margin-top:12px">Lockstitch to build, overlock to finish the edges, flatlock to hem — this is normal, not overbuying. A shirt or trouser line making wovens can often start with lockstitch alone and add the others as the work demands it.</div>
+
+        <div style="margin-top:44px;padding:24px;background:#fff;border-radius:16px">
+          <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:14px">RELEVANT MACHINES AT SWAMI ENTERPRISES</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <span style="font-size:13px;font-weight:600;color:#1D1D1F;background:#F5F5F7;padding:8px 14px;border-radius:980px;cursor:pointer" onClick="{{ goProduct }}">JACK F6 (lockstitch)</span>
+            <span style="font-size:13px;font-weight:600;color:#1D1D1F;background:#F5F5F7;padding:8px 14px;border-radius:980px;cursor:pointer" onClick="{{ goMachines }}">See the full range →</span>
+          </div>
+        </div>
+
+        <div style="margin-top:32px;font-size:14px;color:#6E6E73;line-height:1.6">Not sure which combination your production actually needs? <span style="color:#0A5CFF;cursor:pointer;font-weight:600" onClick="{{ goFinder }}">Use the Machine Finder</span> or <span style="color:#0A5CFF;cursor:pointer;font-weight:600" onClick="{{ openContact }}">talk to a specialist</span>.</div>
+
+        <div style="display:flex;gap:16px;margin-top:32px;flex-wrap:wrap">
+          <span style="padding:15px 28px;background:#0A5CFF;color:#fff;font-size:15px;font-weight:600;cursor:pointer;border-radius:980px" onClick="{{ goQuote }}">Request a Quote</span>
+          <span style="padding:15px 28px;border:1px solid #1D1D1F;color:#1D1D1F;font-size:15px;font-weight:600;cursor:pointer;border-radius:980px" onClick="{{ goMachines }}">Browse Machines</span>
+        </div>
       </div>
     </div>
   </sc-if>
@@ -1946,6 +1985,59 @@ class Component extends DCLogic {
         ['Availability', 'Order on request'],
       ],
     },
+    {
+      id: 'jack-t3-cutter',
+      model: 'JACK JK-T3',
+      manufacturer: 'JACK',
+      category: 'Cutting Equipment',
+      purpose: 'Straight-blade fabric cutting machine for clean, precise cuts through multiple layers of material — genuine Swedish high-speed steel blade with an integrated sharpening stone.',
+      applications: ["garments","denim","technical sewing"],
+      operations: ["fabric cutting"],
+      searchTerms: ["cutter","cutting machine","jk-t3","t3","fabric cutter","straight knife"],
+      imgId: 'lib-t3-cutter', imgSrc: '', imgPh: 'Drop: JACK JK-T3 cutter photograph',
+      specs: [
+        ['Type', 'Straight blade fabric cutter'],
+        ['Blade', 'Genuine Swedish HSS (high-speed steel)'],
+        ['Blade size', '8" (6½" cutting capacity)'],
+        ['Power', '850W or 1168W (heavy-fabric variant)'],
+        ['Features', 'Integrated sharpening stone, automatic lubrication & motor cooling'],
+        ['Availability', 'Order on request'],
+      ],
+    },
+    {
+      id: 'jack-l5-press',
+      model: 'JACK L5',
+      manufacturer: 'JACK',
+      category: 'Finishing Equipment',
+      purpose: 'Industrial ironing table with steam generator boiler for garment finishing and pressing — cyclonic vacuum motor with electromagnetic heat exchange for consistent, wrinkle-free results.',
+      applications: ["garments","shirts","finishing"],
+      operations: ["steam pressing","finishing"],
+      searchTerms: ["steam press","ironing table","press","boiler","l5","vacuum table"],
+      imgId: 'lib-l5-press', imgSrc: '', imgPh: 'Drop: JACK L5 steam press photograph',
+      specs: [
+        ['Type', 'Rectangular ironing table with steam generator boiler'],
+        ['Motor', 'Cyclonic vacuum motor, electromagnetic heat exchange, frequency-controlled'],
+        ['Boiler options', 'Jack U5 / F2 (3.5L, 2500W) / 2035 (3.5L, 1250W) / T7602 (2L stainless steel, 1250W)'],
+        ['Availability', 'Order on request — boiler capacity selected to your floor'],
+      ],
+    },
+    {
+      id: 'jack-tailor-scissors',
+      model: 'JACK Tailor Scissors',
+      manufacturer: 'JACK',
+      category: 'Hand Tools',
+      purpose: 'Professional-grade tailoring scissors in high-carbon steel, for fabric, patterns, interfacing and lightweight leather across multiple layers.',
+      applications: ["garments","tailoring"],
+      operations: ["hand cutting"],
+      searchTerms: ["scissors","shears","tailor scissors","cutting shears"],
+      imgId: 'lib-scissors', imgSrc: '', imgPh: 'Drop: JACK tailor scissors photograph',
+      specs: [
+        ['Type', 'Manual tailoring scissors'],
+        ['Blade material', 'High-carbon steel, precision-ground edge'],
+        ['Suitable for', 'Fabric, patterns, interfacing, lightweight leather'],
+        ['Availability', 'Order on request'],
+      ],
+    },
   ];
 
   componentDidMount() {
@@ -1959,7 +2051,7 @@ class Component extends DCLogic {
     this.applyPathToState = (replace) => {
       const path = window.location.pathname;
       const machineMatch = path.match(/^\/machines\/([a-z0-9-]+)/i);
-      const viewFromPath = { '/machines': 'machines', '/industries': 'industries', '/solutions': 'solutions', '/finder': 'finder', '/compare': 'compare', '/about': 'about', '/request-quote': 'quote' };
+      const viewFromPath = { '/machines': 'machines', '/industries': 'industries', '/solutions': 'solutions', '/finder': 'finder', '/compare': 'compare', '/about': 'about', '/request-quote': 'quote', '/guides/lockstitch-vs-overlock-vs-flatlock': 'guideStitch' };
       let next = null;
       if (machineMatch && this.machines.find((m) => m.id === machineMatch[1])) {
         next = { view: 'product', selectedMachineId: machineMatch[1] };
@@ -2169,6 +2261,7 @@ class Component extends DCLogic {
     if (view === 'home') return '/';
     if (view === 'product') return '/machines/' + (id || 'jack-f6');
     if (view === 'quote') return '/request-quote';
+    if (view === 'guideStitch') return '/guides/lockstitch-vs-overlock-vs-flatlock';
     return '/' + view;
   };
   titleFor = (view, id) => {
@@ -2177,7 +2270,7 @@ class Component extends DCLogic {
       const m = this.machines.find((x) => x.id === id);
       return (m ? m.model + ' — ' : '') + 'Swami Enterprises';
     }
-    const labels = { machines: 'Machines', industries: 'Industries', solutions: 'Solutions', finder: 'Find Your Machine', compare: 'Compare Machines', about: 'About', quote: 'Request a Quote' };
+    const labels = { machines: 'Machines', industries: 'Industries', solutions: 'Solutions', finder: 'Find Your Machine', compare: 'Compare Machines', about: 'About', quote: 'Request a Quote', guideStitch: 'Lockstitch vs Overlock vs Flatlock: Which Machine for Which Job' };
     return (labels[view] || view) + ' — Swami Enterprises';
   };
   descriptionFor = (view, id) => {
@@ -2195,6 +2288,7 @@ class Component extends DCLogic {
       compare: 'Compare JACK sewing machines side by side — real, verified specifications from Swami Enterprises.',
       about: 'Swami Enterprises — authorized Jack sewing machine dealer, Chanakya Place, New Delhi, trading since 2015.',
       quote: 'Request a quote from Swami Enterprises — authorized JACK dealer, New Delhi. Tell us what you need, a specialist follows up on WhatsApp or by phone.',
+      guideStitch: 'Lockstitch, overlock and flatlock machines do different jobs — a plain-English guide to which one you actually need, from Swami Enterprises, authorized JACK dealer, New Delhi.',
     };
     return descs[view] || descs.home;
   };
@@ -2663,6 +2757,8 @@ class Component extends DCLogic {
       isCompare: view === 'compare',
       isLogo: view === 'logo',
       isQuote: view === 'quote',
+      isGuideStitch: view === 'guideStitch',
+      goGuideStitch: () => this.goToView('guideStitch'),
       quoteNotSubmitted: !this.state.quoteSubmitted,
       quoteSubmitted: !!this.state.quoteSubmitted,
       quoteError: this.state.quoteError || '',

@@ -1066,8 +1066,11 @@ a:hover { color:#3D7BFF; }
         </div>
       </div>
 
-      <!-- 9. FOOTER (minimal, standalone for this landing page) -->
-      <div style="background:#050505;padding:clamp(40px,6vw,56px) clamp(24px,8vw,80px);display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center">
+      <!-- 9. FOOTER (minimal, standalone for this landing page). Extra bottom
+           padding accounts for the fixed sticky mobile CTA bar below, which
+           would otherwise sit directly on top of these links on small
+           screens — confirmed by testing, not a hypothetical. -->
+      <div style="background:#050505;padding:clamp(40px,6vw,56px) clamp(24px,8vw,80px) calc(clamp(40px,6vw,56px) + 76px);display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center">
         <div style="font-weight:700;font-size:15px;color:#F5F5F7;letter-spacing:0.06em">SWAMI ENTERPRISES</div>
         <div style="display:flex;gap:24px;flex-wrap:wrap;font-size:13px;color:#A1A1A6">
           <a href="tel:+919971336656" onClick="{{ trackCallClick }}" style="color:#A1A1A6;text-decoration:none">+91 99713 36656</a>

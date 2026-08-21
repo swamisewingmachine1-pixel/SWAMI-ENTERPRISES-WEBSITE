@@ -857,6 +857,235 @@ a:hover { color:#3D7BFF; }
     </div>
   </sc-if>
 
+  <!-- ============ GOOGLE ADS LANDING: INDUSTRIAL SEWING MACHINES ============ -->
+  <sc-if value="{{ isLandingAds }}" hint-placeholder-val="{{ false }}">
+    <div style="width:100%;background:#F5F5F7">
+
+      <!-- 1. HERO -->
+      <div style="background:#050505;min-height:88vh;padding:calc(64px + clamp(50px,8vw,90px)) clamp(24px,8vw,80px) clamp(60px,9vw,100px);display:flex;flex-direction:column;justify-content:center;animation:swFadeUp 0.7s ease both">
+        <div style="max-width:840px;margin:0 auto;text-align:center">
+          <h1 style="font-weight:800;font-size:clamp(32px,6vw,64px);color:#F5F5F7;letter-spacing:-0.02em;line-height:1.08">Industrial Sewing Machines Built for Serious Production.</h1>
+          <div style="font-size:clamp(16px,1.8vw,19px);color:#A1A1A6;max-width:620px;margin:24px auto 0;line-height:1.6">Genuine JACK industrial sewing machines for garment manufacturers, tailoring businesses, factories and workshops. Get expert guidance on choosing the right machine for your production.</div>
+          <div style="display:flex;gap:14px;justify-content:center;margin-top:36px;flex-wrap:wrap">
+            <span data-event="machine_recommendation" style="padding:16px 30px;background:#0A5CFF;color:#fff;font-size:15px;font-weight:600;border-radius:980px;cursor:pointer" onClick="{{ scrollToLaRecommend }}">Get Machine Recommendation</span>
+            <a data-event="whatsapp_click" href="{{ laWhatsappHref }}" target="_blank" rel="noopener noreferrer" onClick="{{ trackWhatsappClick }}" style="padding:16px 30px;border:1px solid rgba(247,247,245,0.35);color:#F5F5F7;font-size:15px;font-weight:600;border-radius:980px;cursor:pointer;text-decoration:none">WhatsApp an Expert</a>
+          </div>
+          <div style="margin-top:18px"><a data-event="phone_click" href="tel:+919971336656" onClick="{{ trackCallClick }}" style="color:#86868B;font-size:14px;text-decoration:underline">Or call +91 99713 36656</a></div>
+          <div style="display:flex;flex-wrap:wrap;gap:clamp(20px,4vw,40px);justify-content:center;margin-top:52px;padding-top:32px;border-top:1px solid rgba(247,247,245,0.12)">
+            <span style="font-size:13px;color:#A1A1A6">Genuine Products</span>
+            <span style="font-size:13px;color:#A1A1A6">Business-Focused Guidance</span>
+            <span style="font-size:13px;color:#A1A1A6">Delivery Support</span>
+            <span style="font-size:13px;color:#A1A1A6">After-Sales Assistance</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. PRODUCT DISCOVERY -->
+      <div style="padding:clamp(64px,9vw,100px) clamp(24px,8vw,80px)">
+        <div style="max-width:1200px;margin:0 auto">
+          <h2 style="font-weight:800;font-size:clamp(26px,4vw,42px);color:#1D1D1F;letter-spacing:-0.02em;text-align:center">Find the Right Machine for Your Production</h2>
+          <div style="font-size:15px;color:#6E6E73;text-align:center;max-width:560px;margin:16px auto 0;line-height:1.6">Different materials, operations and production volumes require different machines. Explore our industrial sewing machine range or tell us what you manufacture and we'll help you identify the right option.</div>
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:48px">
+            <sc-for list="{{ laFeaturedProducts }}" as="p" hint-placeholder-count="4">
+              <div style="background:#fff;border-radius:16px;padding:20px;border:1px solid rgba(0,0,0,0.06)">
+                <div style="cursor:pointer" onClick="{{ p.open }}">
+                  <image-slot id="{{ p.imgId }}" shape="rect" src="{{ p.imgSrc }}" fit="contain" loading="lazy" placeholder="{{ p.imgPh }}" style="width:100%;height:180px"></image-slot>
+                  <div style="font-weight:700;font-size:19px;color:#1D1D1F;margin-top:16px">{{ p.model }}</div>
+                  <div style="font-size:13px;color:#0A5CFF;margin-top:2px">{{ p.category }}</div>
+                  <div style="font-size:14px;color:#6E6E73;margin-top:8px;line-height:1.6">{{ p.purpose }}</div>
+                </div>
+                <div data-event="price_request" style="margin-top:16px;text-align:center;padding:11px;border:1px solid #1D1D1F;color:#1D1D1F;font-size:13px;font-weight:600;cursor:pointer;border-radius:980px" onClick="{{ p.getPrice }}">Get Price</div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="text-align:center;margin-top:40px">
+            <span style="padding:14px 26px;border:1px solid #1D1D1F;color:#1D1D1F;font-size:14px;font-weight:600;cursor:pointer;border-radius:980px" onClick="{{ goMachines }}">View All Machines</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. MACHINE RECOMMENDATION TOOL -->
+      <div id="la-recommend" style="background:#fff;padding:clamp(64px,9vw,100px) clamp(24px,8vw,80px)">
+        <div style="max-width:600px;margin:0 auto">
+          <h2 style="font-weight:800;font-size:clamp(26px,4vw,42px);color:#1D1D1F;letter-spacing:-0.02em;text-align:center">Not Sure Which Machine You Need?</h2>
+          <div style="font-size:15px;color:#6E6E73;text-align:center;margin-top:16px;line-height:1.6">Tell us what you're making and we'll help you choose the right machine.</div>
+
+          <sc-if value="{{ laNotSubmitted }}" hint-placeholder-val="{{ true }}">
+            <div style="margin-top:44px;background:#F5F5F7;border-radius:20px;padding:clamp(24px,4vw,40px)">
+
+              <sc-if value="{{ laStep0 }}" hint-placeholder-val="{{ true }}">
+                <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:20px">STEP 1 OF 3 — WHAT DO YOU MANUFACTURE?</div>
+                <div style="display:flex;flex-wrap:wrap;gap:10px">
+                  <sc-for list="{{ laMakeOptions }}" as="opt" hint-placeholder-count="7">
+                    <span style="padding:12px 20px;background:#fff;border:1px solid rgba(0,0,0,0.12);color:#1D1D1F;font-size:14px;font-weight:600;border-radius:980px;cursor:pointer" onClick="{{ opt.select }}">{{ opt.label }}</span>
+                  </sc-for>
+                </div>
+              </sc-if>
+
+              <sc-if value="{{ laStep1 }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:20px">STEP 2 OF 3 — WHAT'S YOUR PRODUCTION LEVEL?</div>
+                <div style="display:flex;flex-wrap:wrap;gap:10px">
+                  <sc-for list="{{ laScaleOptions }}" as="opt" hint-placeholder-count="3">
+                    <span style="padding:12px 20px;background:#fff;border:1px solid rgba(0,0,0,0.12);color:#1D1D1F;font-size:14px;font-weight:600;border-radius:980px;cursor:pointer" onClick="{{ opt.select }}">{{ opt.label }}</span>
+                  </sc-for>
+                </div>
+                <div style="margin-top:20px;font-size:13px;color:#6E6E73;cursor:pointer" onClick="{{ laBack }}">← Back</div>
+              </sc-if>
+
+              <sc-if value="{{ laStep2 }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:20px">STEP 3 OF 3 — WHAT OPERATION DO YOU NEED?</div>
+                <div style="display:flex;flex-wrap:wrap;gap:10px">
+                  <sc-for list="{{ laOperationOptions }}" as="opt" hint-placeholder-count="6">
+                    <span style="padding:12px 20px;background:#fff;border:1px solid rgba(0,0,0,0.12);color:#1D1D1F;font-size:14px;font-weight:600;border-radius:980px;cursor:pointer" onClick="{{ opt.select }}">{{ opt.label }}</span>
+                  </sc-for>
+                </div>
+                <div style="margin-top:20px;font-size:13px;color:#6E6E73;cursor:pointer" onClick="{{ laBack }}">← Back</div>
+              </sc-if>
+
+              <sc-if value="{{ laStep3 }}" hint-placeholder-val="{{ false }}">
+                <form onSubmit="{{ submitLaLead }}" style="display:flex;flex-direction:column;gap:12px">
+                  <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:6px">ALMOST DONE — WHERE SHOULD WE SEND YOUR RECOMMENDATION?</div>
+                  <input type="text" placeholder="Name" aria-label="Full name" required="" autocomplete="name" value="{{ laName }}" onChange="{{ onLaNameChange }}" style="padding:14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:10px"></input>
+                  <input type="tel" placeholder="Phone / WhatsApp" aria-label="Phone or WhatsApp number" required="" autocomplete="tel" value="{{ laPhone }}" onChange="{{ onLaPhoneChange }}" style="padding:14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:10px"></input>
+                  <input type="text" placeholder="Business name (optional)" aria-label="Business name" autocomplete="organization" value="{{ laBusiness }}" onChange="{{ onLaBusinessChange }}" style="padding:14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:10px"></input>
+                  <sc-if value="{{ hasLaError }}" hint-placeholder-val="{{ false }}">
+                    <div role="alert" style="color:#C4361D;font-size:14px">{{ laError }}</div>
+                  </sc-if>
+                  <button type="submit" style="padding:16px;background:#0A5CFF;color:#fff;border:none;font-size:15px;font-weight:600;cursor:pointer;border-radius:980px;margin-top:6px">Get My Recommendation</button>
+                  <div style="text-align:center;font-size:13px;color:#6E6E73;cursor:pointer" onClick="{{ laBack }}">← Back</div>
+                </form>
+              </sc-if>
+
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ laSubmitted }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:44px;text-align:center;padding:clamp(40px,6vw,60px) 24px;background:#F5F5F7;border-radius:20px">
+              <div style="font-weight:700;font-size:24px;color:#1D1D1F">Request received.</div>
+              <div style="font-size:14px;color:#6E6E73;margin-top:12px;max-width:380px;margin-left:auto;margin-right:auto">A specialist will follow up shortly. If WhatsApp didn't open automatically, tap below.</div>
+              <div style="margin-top:24px"><span style="padding:14px 26px;background:#0A5CFF;color:#fff;font-size:14px;font-weight:600;cursor:pointer;border-radius:980px" onClick="{{ laWhatsappAgain }}">WhatsApp us now</span></div>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+
+      <!-- 4. WHY SWAMI ENTERPRISES -->
+      <div style="background:#0A0A0A;padding:clamp(64px,9vw,100px) clamp(24px,8vw,80px)">
+        <div style="max-width:1000px;margin:0 auto">
+          <h2 style="font-weight:800;font-size:clamp(26px,4vw,42px);color:#F5F5F7;letter-spacing:-0.02em;text-align:center;line-height:1.2">Machines Are Easy to Buy. Choosing the Right Machine Isn't.</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:clamp(28px,4vw,40px);margin-top:56px">
+            <div>
+              <div style="font-weight:700;font-size:17px;color:#F5F5F7">Genuine Machines</div>
+              <div style="font-size:14px;color:#86868B;margin-top:8px;line-height:1.6">Source genuine industrial equipment from established brands.</div>
+            </div>
+            <div>
+              <div style="font-weight:700;font-size:17px;color:#F5F5F7">Business-Focused Guidance</div>
+              <div style="font-size:14px;color:#86868B;margin-top:8px;line-height:1.6">Choose according to your material, operation and production requirements.</div>
+            </div>
+            <div>
+              <div style="font-weight:700;font-size:17px;color:#F5F5F7">Delivery Support</div>
+              <div style="font-size:14px;color:#86868B;margin-top:8px;line-height:1.6">Get your machine where you need it.</div>
+            </div>
+            <div>
+              <div style="font-weight:700;font-size:17px;color:#F5F5F7">After-Sales Assistance</div>
+              <div style="font-size:14px;color:#86868B;margin-top:8px;line-height:1.6">Support beyond the purchase.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. APPLICATIONS -->
+      <div style="padding:clamp(64px,9vw,100px) clamp(24px,8vw,80px)">
+        <div style="max-width:1100px;margin:0 auto">
+          <h2 style="font-weight:800;font-size:clamp(26px,4vw,42px);color:#1D1D1F;letter-spacing:-0.02em;text-align:center">Built Around Your Production</h2>
+          <div style="font-size:15px;color:#6E6E73;text-align:center;max-width:520px;margin:16px auto 0;line-height:1.6">Machine selection depends on material, operation and production volume.</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:48px">
+            <sc-for list="{{ laApplications }}" as="ap" hint-placeholder-count="5">
+              <div style="background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:16px;padding:24px">
+                <div style="font-weight:700;font-size:16px;color:#1D1D1F">{{ ap.name }}</div>
+                <div style="font-size:13px;color:#6E6E73;margin-top:8px;line-height:1.6">{{ ap.process }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="text-align:center;margin-top:40px">
+            <span style="padding:14px 26px;background:#0A5CFF;color:#fff;font-size:14px;font-weight:600;cursor:pointer;border-radius:980px" onClick="{{ scrollToLaRecommend }}">Help Me Choose a Machine</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. JACK BRAND -->
+      <div style="background:#F5F5F7;padding:clamp(64px,9vw,100px) clamp(24px,8vw,80px);text-align:center">
+        <h2 style="font-weight:800;font-size:clamp(26px,4vw,42px);color:#1D1D1F;letter-spacing:-0.02em">JACK Industrial Sewing Machines</h2>
+        <div style="font-size:15px;color:#6E6E73;max-width:520px;margin:16px auto 0;line-height:1.6">Explore selected JACK industrial sewing machines available through Swami Enterprises.</div>
+        <div style="margin-top:32px"><span style="padding:14px 26px;border:1px solid #1D1D1F;color:#1D1D1F;font-size:14px;font-weight:600;cursor:pointer;border-radius:980px" onClick="{{ goMachines }}">Explore JACK Machines</span></div>
+      </div>
+
+      <!-- 7. LEAD CAPTURE CTA -->
+      <div style="background:#050505;padding:clamp(64px,9vw,100px) clamp(24px,8vw,80px);text-align:center">
+        <h2 style="font-weight:800;font-size:clamp(26px,4.4vw,46px);color:#F5F5F7;letter-spacing:-0.02em;max-width:620px;margin:0 auto;line-height:1.25">Tell Us What You're Making. We'll Help You Choose the Machine.</h2>
+        <div style="font-size:15px;color:#A1A1A6;max-width:520px;margin:18px auto 0;line-height:1.6">Whether you're setting up a workshop, expanding production or replacing an existing machine, tell us what you need.</div>
+        <div style="display:flex;gap:14px;justify-content:center;margin-top:36px;flex-wrap:wrap">
+          <span data-event="machine_recommendation" style="padding:16px 30px;background:#0A5CFF;color:#fff;font-size:15px;font-weight:600;border-radius:980px;cursor:pointer" onClick="{{ scrollToLaRecommend }}">Get Machine Recommendation</span>
+          <a data-event="whatsapp_click" href="{{ laWhatsappHref }}" target="_blank" rel="noopener noreferrer" onClick="{{ trackWhatsappClick }}" style="padding:16px 30px;border:1px solid rgba(247,247,245,0.35);color:#F5F5F7;font-size:15px;font-weight:600;border-radius:980px;cursor:pointer;text-decoration:none">WhatsApp Us</a>
+          <a data-event="phone_click" href="tel:+919971336656" onClick="{{ trackCallClick }}" style="padding:16px 30px;border:1px solid rgba(247,247,245,0.35);color:#F5F5F7;font-size:15px;font-weight:600;border-radius:980px;cursor:pointer;text-decoration:none">Call Us</a>
+        </div>
+      </div>
+
+      <!-- 8. FAQ -->
+      <div style="padding:clamp(64px,9vw,100px) clamp(24px,8vw,80px)">
+        <div style="max-width:720px;margin:0 auto">
+          <h2 style="font-weight:800;font-size:clamp(24px,3.6vw,36px);color:#1D1D1F;letter-spacing:-0.02em;margin-bottom:40px">Frequently Asked Questions</h2>
+          <div style="border-top:1px solid rgba(0,0,0,0.1)">
+            <div style="padding:24px 0;border-bottom:1px solid rgba(0,0,0,0.1)">
+              <div style="font-weight:700;font-size:16px;color:#1D1D1F">Which industrial sewing machine should I buy?</div>
+              <div style="font-size:14px;color:#6E6E73;margin-top:10px;line-height:1.7">It depends on your operation, material and production volume — a lockstitch, overlock and flatlock machine each do different jobs. Use the recommendation tool above or contact us for guidance specific to what you're making.</div>
+            </div>
+            <div style="padding:24px 0;border-bottom:1px solid rgba(0,0,0,0.1)">
+              <div style="font-weight:700;font-size:16px;color:#1D1D1F">Do you sell JACK industrial sewing machines?</div>
+              <div style="font-size:14px;color:#6E6E73;margin-top:10px;line-height:1.7">Yes — Swami Enterprises is an authorized JACK dealer based in Chanakya Place, New Delhi, trading since 2015.</div>
+            </div>
+            <div style="padding:24px 0;border-bottom:1px solid rgba(0,0,0,0.1)">
+              <div style="font-weight:700;font-size:16px;color:#1D1D1F">How can I get the price of a machine?</div>
+              <div style="font-size:14px;color:#6E6E73;margin-top:10px;line-height:1.7">Tap "Get Price" on any machine, or request a quote — a specialist will confirm current pricing directly, since it can change with specification and availability.</div>
+            </div>
+            <div style="padding:24px 0;border-bottom:1px solid rgba(0,0,0,0.1)">
+              <div style="font-weight:700;font-size:16px;color:#1D1D1F">Can you help me choose the right machine?</div>
+              <div style="font-size:14px;color:#6E6E73;margin-top:10px;line-height:1.7">Yes — tell us what you manufacture, your production level and the operation you need, and we'll recommend a machine from our real catalogue based on that.</div>
+            </div>
+            <div style="padding:24px 0;border-bottom:1px solid rgba(0,0,0,0.1)">
+              <div style="font-weight:700;font-size:16px;color:#1D1D1F">Do you deliver?</div>
+              <div style="font-size:14px;color:#6E6E73;margin-top:10px;line-height:1.7">Delivery support is available — ask a specialist to confirm details for your specific location.</div>
+            </div>
+            <div style="padding:24px 0">
+              <div style="font-weight:700;font-size:16px;color:#1D1D1F">How do I contact Swami Enterprises?</div>
+              <div style="font-size:14px;color:#6E6E73;margin-top:10px;line-height:1.7">Call +91 99713 36656, WhatsApp us, or use the machine recommendation form above — Chanakya Place, New Delhi.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9. FOOTER (minimal, standalone for this landing page) -->
+      <div style="background:#050505;padding:clamp(40px,6vw,56px) clamp(24px,8vw,80px);display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center">
+        <div style="font-weight:700;font-size:15px;color:#F5F5F7;letter-spacing:0.06em">SWAMI ENTERPRISES</div>
+        <div style="display:flex;gap:24px;flex-wrap:wrap;font-size:13px;color:#A1A1A6">
+          <a href="tel:+919971336656" onClick="{{ trackCallClick }}" style="color:#A1A1A6;text-decoration:none">+91 99713 36656</a>
+          <a href="{{ laWhatsappHref }}" target="_blank" rel="noopener noreferrer" onClick="{{ trackWhatsappClick }}" style="color:#A1A1A6;text-decoration:none">WhatsApp</a>
+          <span style="cursor:pointer" onClick="{{ goHome }}">Full Site</span>
+        </div>
+      </div>
+
+      <!-- STICKY MOBILE CTA -->
+      <div style="display:{{ mobileBarDisplay }};position:fixed;left:0;right:0;bottom:0;z-index:998;padding:10px 12px;gap:8px;background:rgba(10,10,10,0.94);backdropFilter:blur(16px);WebkitBackdropFilter:blur(16px);border-top:1px solid rgba(247,247,245,0.12)">
+        <a data-event="whatsapp_click" href="{{ laWhatsappHref }}" target="_blank" rel="noopener noreferrer" onClick="{{ trackWhatsappClick }}" style="flex:1;text-align:center;padding:12px 0;color:#F5F5F7;font-size:13px;font-weight:600;border:1px solid rgba(247,247,245,0.3);border-radius:980px;cursor:pointer;text-decoration:none">WhatsApp</a>
+        <a data-event="phone_click" href="tel:+919971336656" onClick="{{ trackCallClick }}" style="flex:1;text-align:center;padding:12px 0;color:#F5F5F7;font-size:13px;font-weight:600;border:1px solid rgba(247,247,245,0.3);border-radius:980px;cursor:pointer;text-decoration:none">Call</a>
+        <span data-event="machine_recommendation" style="flex:1;text-align:center;padding:12px 0;background:#0A5CFF;color:#fff;font-size:13px;font-weight:600;border-radius:980px;cursor:pointer" onClick="{{ scrollToLaRecommend }}">Get Price</span>
+      </div>
+
+    </div>
+  </sc-if>
+
   <!-- ============ MACHINES LIBRARY ============ -->
   <sc-if value="{{ isMachines }}" hint-placeholder-val="{{ false }}">
     <div style="width:100%;background:#F5F5F7;animation:swFadeIn 0.5s ease both;padding:calc(64px + clamp(50px,8vw,90px)) clamp(24px,8vw,80px) 0">
@@ -2269,7 +2498,7 @@ class Component extends DCLogic {
     this.applyPathToState = (replace) => {
       const path = window.location.pathname;
       const machineMatch = path.match(/^\/machines\/([a-z0-9-]+)/i);
-      const viewFromPath = { '/machines': 'machines', '/industries': 'industries', '/solutions': 'solutions', '/finder': 'finder', '/compare': 'compare', '/about': 'about', '/request-quote': 'quote', '/guides/lockstitch-vs-overlock-vs-flatlock': 'guideStitch', '/guides/jack-f6-vs-jack-2002g': 'guideCompareF6', '/guides/machines-for-a-shirt-factory': 'guideShirtFactory', '/guides/industrial-vs-domestic-sewing-machines': 'guideIndustrialVsDomestic', '/guides/machines-for-a-knitwear-line': 'guideKnitwear', '/guides/setting-up-a-new-production-line': 'guideFactorySetup' };
+      const viewFromPath = { '/machines': 'machines', '/industries': 'industries', '/solutions': 'solutions', '/finder': 'finder', '/compare': 'compare', '/about': 'about', '/request-quote': 'quote', '/guides/lockstitch-vs-overlock-vs-flatlock': 'guideStitch', '/guides/jack-f6-vs-jack-2002g': 'guideCompareF6', '/guides/machines-for-a-shirt-factory': 'guideShirtFactory', '/guides/industrial-vs-domestic-sewing-machines': 'guideIndustrialVsDomestic', '/guides/machines-for-a-knitwear-line': 'guideKnitwear', '/guides/setting-up-a-new-production-line': 'guideFactorySetup', '/industrial-sewing-machines': 'landingAds' };
       let next = null;
       if (machineMatch && this.machines.find((m) => m.id === machineMatch[1])) {
         next = { view: 'product', selectedMachineId: machineMatch[1] };
@@ -2485,6 +2714,7 @@ class Component extends DCLogic {
     if (view === 'guideIndustrialVsDomestic') return '/guides/industrial-vs-domestic-sewing-machines';
     if (view === 'guideKnitwear') return '/guides/machines-for-a-knitwear-line';
     if (view === 'guideFactorySetup') return '/guides/setting-up-a-new-production-line';
+    if (view === 'landingAds') return '/industrial-sewing-machines';
     return '/' + view;
   };
   titleFor = (view, id) => {
@@ -2493,7 +2723,7 @@ class Component extends DCLogic {
       const m = this.machines.find((x) => x.id === id);
       return (m ? m.model + ' — ' : '') + 'Swami Enterprises';
     }
-    const labels = { machines: 'Machines', industries: 'Industries', solutions: 'Solutions', finder: 'Find Your Machine', compare: 'Compare Machines', about: 'About', quote: 'Request a Quote', guideStitch: 'Lockstitch vs Overlock vs Flatlock: Which Machine for Which Job', guideCompareF6: 'JACK F6 vs JACK 2002G: Which Lockstitch Machine Do You Need', guideShirtFactory: 'What Machines Does a Shirt Factory Actually Need', guideIndustrialVsDomestic: 'Industrial vs Domestic Sewing Machines: What Actually Changes', guideKnitwear: 'What Machines Does a Knitwear Line Actually Need', guideFactorySetup: 'Setting Up a New Production Line: The Real Machine Sequence' };
+    const labels = { machines: 'Machines', industries: 'Industries', solutions: 'Solutions', finder: 'Find Your Machine', compare: 'Compare Machines', about: 'About', quote: 'Request a Quote', guideStitch: 'Lockstitch vs Overlock vs Flatlock: Which Machine for Which Job', guideCompareF6: 'JACK F6 vs JACK 2002G: Which Lockstitch Machine Do You Need', guideShirtFactory: 'What Machines Does a Shirt Factory Actually Need', guideIndustrialVsDomestic: 'Industrial vs Domestic Sewing Machines: What Actually Changes', guideKnitwear: 'What Machines Does a Knitwear Line Actually Need', guideFactorySetup: 'Setting Up a New Production Line: The Real Machine Sequence', landingAds: 'Industrial Sewing Machines Built for Serious Production' };
     return (labels[view] || view) + ' — Swami Enterprises';
   };
   descriptionFor = (view, id) => {
@@ -2517,6 +2747,7 @@ class Component extends DCLogic {
       guideIndustrialVsDomestic: 'What actually changes between a domestic and an industrial sewing machine — speed, duty cycle, and when you genuinely need to upgrade, from Swami Enterprises, New Delhi.',
       guideKnitwear: 'What machines a knitwear production line actually needs — lockstitch, overlock and interlock, and why one alone isn’t enough, from Swami Enterprises, New Delhi.',
       guideFactorySetup: 'Setting up a new garment production line — the real machine sequence and what to plan for as you scale, from Swami Enterprises, authorized JACK dealer, New Delhi.',
+      landingAds: 'Genuine JACK industrial sewing machines for garment manufacturers, tailoring businesses, factories and workshops. Get expert guidance choosing the right machine — authorized JACK dealer, New Delhi.',
     };
     return descs[view] || descs.home;
   };
@@ -2561,7 +2792,7 @@ class Component extends DCLogic {
   // Curated subset that's actually worth a Redis write (see api/events.js
   // for why: Vercel Analytics has no read API on this plan, so this is the
   // only way /admin/intelligence gets real demand-side numbers).
-  _loggedEvents = new Set(['product_view', 'search', 'compare_started', 'whatsapp_click', 'call_click', 'quote_started', 'generate_lead', 'finder_started', 'finder_completed']);
+  _loggedEvents = new Set(['product_view', 'search', 'compare_started', 'whatsapp_click', 'call_click', 'quote_started', 'generate_lead', 'finder_started', 'finder_completed', 'machine_recommendation', 'price_request']);
   track = (name, props) => {
     if (typeof window === 'undefined') return;
     if (typeof window.va === 'function') window.va('event', { name, ...(props || {}) });
@@ -2722,6 +2953,55 @@ class Component extends DCLogic {
     this.track('quote_page_view', { fromView: this.state.view, machine: validMachine || undefined, industry: validIndustry || undefined });
     if (typeof window !== 'undefined') window.scrollTo(0, 0);
   };
+  // --- Google Ads landing page recommendation tool -------------------------
+  // A lightweight, self-contained 3-question flow separate from the full
+  // Finder — this page needs to stand alone for ad traffic without pulling
+  // a visitor through the full site's multi-step Finder UI. Same WhatsApp
+  // handoff + lead API pattern as submitQuote, so it lands in the same
+  // /admin/leads pipeline, just tagged with a distinct source.
+  scrollToLaRecommend = () => {
+    if (typeof document === 'undefined') return;
+    const el = document.getElementById('la-recommend');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+  selectLaOption = (field, value) => {
+    this.track('machine_recommendation', { step: field, value });
+    this.setState((s) => ({ [field]: value, laStep: Math.min((s.laStep || 0) + 1, 3) }));
+  };
+  laBack = () => this.setState((s) => ({ laStep: Math.max((s.laStep || 0) - 1, 0) }));
+  onLaField = (field) => (e) => this.setState({ [field]: e && e.target ? e.target.value : e });
+  submitLaLead = (e) => {
+    e.preventDefault();
+    const s = this.state;
+    const name = (s.laName || '').trim();
+    const phone = (s.laPhone || '').trim();
+    if (!name || !phone) { this.setState({ laError: 'Please add your name and phone number.' }); return; }
+    this.setState({ laError: '' });
+    const lines = ['New machine recommendation request from swamienterprises.online/industrial-sewing-machines:', `Name: ${name}`];
+    if ((s.laBusiness || '').trim()) lines.push(`Business: ${s.laBusiness.trim()}`);
+    lines.push(`Phone: ${phone}`);
+    if (s.laMake) lines.push(`Manufactures: ${s.laMake}`);
+    if (s.laScale) lines.push(`Production level: ${s.laScale}`);
+    if (s.laOperation) lines.push(`Operation needed: ${s.laOperation}`);
+    const utm = this.getUtm();
+    if (utm.source) lines.push(`Source: ${utm.source}${utm.medium ? ' / ' + utm.medium : ''}${utm.campaign ? ' (' + utm.campaign + ')' : ''}`);
+    this.track('generate_lead', { machine: undefined, industry: s.laMake || undefined, source: utm.source || 'google_ads_landing' });
+    this._lastLaWhatsapp = 'https://wa.me/919971336656?text=' + encodeURIComponent(lines.join('\n'));
+    window.open(this._lastLaWhatsapp, '_blank');
+    this.setState({ laSubmitted: true });
+    try {
+      fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName: name, companyName: s.laBusiness || '', phone,
+          requirements: [s.laMake, s.laScale, s.laOperation].filter(Boolean).join(' / '),
+          source: utm.source || 'google_ads', medium: utm.medium || 'landing_page', campaign: utm.campaign, landingPage: '/industrial-sewing-machines',
+        }),
+      }).catch(() => {});
+    } catch (err) {}
+  };
+  laWhatsappAgain = () => { if (this._lastLaWhatsapp) window.open(this._lastLaWhatsapp, '_blank'); };
   goQuoteMulti = (machineIds) => {
     const validIds = (machineIds || []).filter((id) => this.machines.find((m) => m.id === id));
     this.setState({
@@ -3025,6 +3305,37 @@ class Component extends DCLogic {
       goProductW4: () => this.goToProduct('jack-w4'),
       goProductF6: () => this.goToProduct('jack-f6'),
       goProduct2002g: () => this.goToProduct('jack-2002g'),
+      isLandingAds: view === 'landingAds',
+      scrollToLaRecommend: this.scrollToLaRecommend,
+      laFeaturedProducts: ['jack-f6', 'jack-2002g', 'jack-e4s', 'jack-w4'].map((id) => {
+        const m = this.machines.find((x) => x.id === id);
+        return m ? { id: m.id, model: m.model, purpose: m.purpose, category: m.category, imgSrc: m.imgSrc, imgPh: m.imgPh, imgId: 'la-' + m.id, open: () => this.goToProduct(m.id), getPrice: () => { this.track('price_request', { machine: m.id }); this.goQuote(m.id); } } : null;
+      }).filter(Boolean),
+      laApplications: this.industries.map((ind) => ({ name: ind.name, process: ind.process })),
+      laStep: this.state.laStep || 0,
+      laStep0: (this.state.laStep || 0) === 0,
+      laStep1: (this.state.laStep || 0) === 1,
+      laStep2: (this.state.laStep || 0) === 2,
+      laStep3: (this.state.laStep || 0) >= 3,
+      laMake: this.state.laMake || '',
+      laScale: this.state.laScale || '',
+      laOperation: this.state.laOperation || '',
+      laName: this.state.laName || '',
+      laPhone: this.state.laPhone || '',
+      laBusiness: this.state.laBusiness || '',
+      laError: this.state.laError || '',
+      hasLaError: !!this.state.laError,
+      laSubmitted: !!this.state.laSubmitted,
+      laNotSubmitted: !this.state.laSubmitted,
+      laMakeOptions: ['Garments', 'Shirts', 'Trousers', 'Denim', 'Knitwear', 'Bags', 'Other'].map((v) => ({ label: v, select: () => this.selectLaOption('laMake', v) })),
+      laScaleOptions: ['Small Workshop', 'Growing Business', 'Factory / Large Production'].map((v) => ({ label: v, select: () => this.selectLaOption('laScale', v) })),
+      laOperationOptions: ['Straight Stitch', 'Overlock', 'Heavy Duty', 'Buttonhole', 'Button Attaching', 'Other'].map((v) => ({ label: v, select: () => this.selectLaOption('laOperation', v) })),
+      onLaNameChange: this.onLaField('laName'),
+      onLaPhoneChange: this.onLaField('laPhone'),
+      onLaBusinessChange: this.onLaField('laBusiness'),
+      submitLaLead: this.submitLaLead,
+      laWhatsappAgain: this.laWhatsappAgain,
+      laWhatsappHref: 'https://wa.me/919971336656?text=' + encodeURIComponent("Hi, I'm looking for an industrial sewing machine and would like some guidance."),
       quoteNotSubmitted: !this.state.quoteSubmitted,
       quoteSubmitted: !!this.state.quoteSubmitted,
       quoteError: this.state.quoteError || '',

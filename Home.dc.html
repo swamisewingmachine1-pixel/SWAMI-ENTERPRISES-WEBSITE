@@ -391,6 +391,9 @@ a:hover { color:#3D7BFF; }
               <span style="font-size:14px;color:#A1A1A6;cursor:pointer" onClick="{{ openContact }}">Contact</span>
               <span style="font-size:14px;color:#A1A1A6;cursor:pointer" onClick="{{ goQuote }}">Request a Quote</span>
               <span style="font-size:14px;color:#A1A1A6;cursor:pointer" onClick="{{ goGuideStitch }}">Lockstitch vs Overlock vs Flatlock</span>
+              <span style="font-size:14px;color:#A1A1A6;cursor:pointer" onClick="{{ goGuideCompareF6 }}">JACK F6 vs 2002G</span>
+              <span style="font-size:14px;color:#A1A1A6;cursor:pointer" onClick="{{ goGuideShirtFactory }}">Machines for a Shirt Factory</span>
+              <span style="font-size:14px;color:#A1A1A6;cursor:pointer" onClick="{{ goGuideIndustrialVsDomestic }}">Industrial vs Domestic Machines</span>
             </div>
           </div>
           <div>
@@ -674,6 +677,109 @@ a:hover { color:#3D7BFF; }
     </div>
   </sc-if>
 
+  <!-- ============ GUIDE: JACK F6 VS JACK 2002G ============ -->
+  <sc-if value="{{ isGuideCompareF6 }}" hint-placeholder-val="{{ false }}">
+    <div style="width:100%;background:#F5F5F7;animation:swFadeIn 0.5s ease both;padding:calc(64px + clamp(50px,8vw,90px)) clamp(24px,8vw,80px) clamp(60px,8vw,100px)">
+      <div style="max-width:720px;margin:0 auto">
+        <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73">PRODUCT COMPARISON</div>
+        <div style="font-weight:800;font-size:clamp(28px,5vw,48px);color:#1D1D1F;letter-spacing:-0.02em;margin-top:16px;line-height:1.15">JACK F6 vs JACK 2002G: Which Lockstitch Machine Do You Need</div>
+        <div style="font-size:15px;color:#6E6E73;margin-top:16px;line-height:1.6">Both are computerized lockstitch machines from JACK. The real difference isn't quality — it's what each one is built to handle.</div>
+
+        <div style="margin-top:44px;font-weight:700;font-size:22px;color:#1D1D1F">JACK F6 — speed, for lighter material</div>
+        <div style="font-size:15px;color:#1D1D1F;line-height:1.75;margin-top:12px">Built-in silent servo motor, up to 5000 stitches per minute, automatic thread trimmer. This is the machine for high-speed, consistent production runs on shirts, wovens, and uniforms — work where speed and stitch consistency matter more than handling very heavy material.</div>
+
+        <div style="margin-top:36px;font-weight:700;font-size:22px;color:#1D1D1F">JACK 2002G — heavier material, larger stitch</div>
+        <div style="font-size:15px;color:#1D1D1F;line-height:1.75;margin-top:12px">Large-hook lockstitch, up to 3000 stitches per minute — slower than the F6, but with a 12mm max stitch length (vs the F6's 5mm) and a heavier DPx17 22# needle. It's positioned for shirts, jeans, non-woven bags, and shoes — material the F6 isn't built for.</div>
+
+        <div style="margin-top:36px;font-weight:700;font-size:22px;color:#1D1D1F">The actual decision</div>
+        <div style="font-size:15px;color:#1D1D1F;line-height:1.75;margin-top:12px">If you're running high-speed shirt/woven production and don't need to handle heavy material, the F6's speed is the advantage. If your line needs to handle heavier fabric, bags, or footwear-adjacent material, the 2002G's stitch length and needle size matter more than the F6's extra speed. This is a material-and-speed tradeoff, not a better-vs-worse comparison.</div>
+
+        <table style="width:100%;margin-top:36px;border-collapse:collapse;background:#fff;border-radius:16px;overflow:hidden;font-size:14px">
+          <tr style="border-bottom:1px solid rgba(0,0,0,0.08)"><td style="padding:14px 16px;color:#6E6E73;font-weight:600">Spec</td><td style="padding:14px 16px;font-weight:600">JACK F6</td><td style="padding:14px 16px;font-weight:600">JACK 2002G</td></tr>
+          <tr style="border-bottom:1px solid rgba(0,0,0,0.08)"><td style="padding:12px 16px;color:#6E6E73">Max speed</td><td style="padding:12px 16px">5000 s.p.m.</td><td style="padding:12px 16px">3000 s.p.m.</td></tr>
+          <tr style="border-bottom:1px solid rgba(0,0,0,0.08)"><td style="padding:12px 16px;color:#6E6E73">Max stitch length</td><td style="padding:12px 16px">5mm</td><td style="padding:12px 16px">12mm</td></tr>
+          <tr style="border-bottom:1px solid rgba(0,0,0,0.08)"><td style="padding:12px 16px;color:#6E6E73">Needle</td><td style="padding:12px 16px">DBx1, 11-18#</td><td style="padding:12px 16px">DPx17, 22#</td></tr>
+          <tr><td style="padding:12px 16px;color:#6E6E73">Best for</td><td style="padding:12px 16px">Shirts, wovens, uniforms</td><td style="padding:12px 16px">Shirts, jeans, bags, shoes</td></tr>
+        </table>
+
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:32px">
+          <span style="font-size:13px;font-weight:600;color:#1D1D1F;background:#fff;padding:8px 14px;border-radius:980px;cursor:pointer" onClick="{{ goProductF6 }}">View JACK F6 →</span>
+          <span style="font-size:13px;font-weight:600;color:#1D1D1F;background:#fff;padding:8px 14px;border-radius:980px;cursor:pointer" onClick="{{ goProduct2002g }}">View JACK 2002G →</span>
+          <span style="font-size:13px;font-weight:600;color:#1D1D1F;background:#fff;padding:8px 14px;border-radius:980px;cursor:pointer" onClick="{{ goCompare }}">Compare side by side →</span>
+        </div>
+
+        <div style="display:flex;gap:16px;margin-top:32px;flex-wrap:wrap">
+          <span style="padding:15px 28px;background:#0A5CFF;color:#fff;font-size:15px;font-weight:600;cursor:pointer;border-radius:980px" onClick="{{ goQuote }}">Request a Quote</span>
+          <span style="padding:15px 28px;border:1px solid #1D1D1F;color:#1D1D1F;font-size:15px;font-weight:600;cursor:pointer;border-radius:980px" onClick="{{ goFinder }}">Not sure? Use the Finder</span>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ GUIDE: MACHINES FOR A SHIRT FACTORY ============ -->
+  <sc-if value="{{ isGuideShirtFactory }}" hint-placeholder-val="{{ false }}">
+    <div style="width:100%;background:#F5F5F7;animation:swFadeIn 0.5s ease both;padding:calc(64px + clamp(50px,8vw,90px)) clamp(24px,8vw,80px) clamp(60px,8vw,100px)">
+      <div style="max-width:720px;margin:0 auto">
+        <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73">APPLICATION GUIDE</div>
+        <div style="font-weight:800;font-size:clamp(28px,5vw,48px);color:#1D1D1F;letter-spacing:-0.02em;margin-top:16px;line-height:1.15">What Machines Does a Shirt Factory Actually Need</div>
+        <div style="font-size:15px;color:#6E6E73;margin-top:16px;line-height:1.6">Shirts are wovens, not knits — that changes which machines actually matter, compared to a knitwear line.</div>
+
+        <div style="margin-top:44px;font-weight:700;font-size:22px;color:#1D1D1F">The core machine: high-speed lockstitch</div>
+        <div style="font-size:15px;color:#1D1D1F;line-height:1.75;margin-top:12px">Shirt seams — collars, cuffs, body panels, side seams — are lockstitched, not overlocked. A woven fabric doesn't fray the way a knit does, and doesn't need the stretch an overlock/flatlock seam gives. A computerized lockstitch machine built for speed (the JACK F6's 5000 s.p.m., for example) is the actual core of a shirt line.</div>
+
+        <div style="margin-top:36px;font-weight:700;font-size:22px;color:#1D1D1F">What most shirt lines add next</div>
+        <div style="font-size:15px;color:#1D1D1F;line-height:1.75;margin-top:12px">Buttonholing and bartacking are the two operations a pure lockstitch machine doesn't do — both are real, separate operations on a shirt (buttonholes, and reinforcement points like pocket corners). Whether you need dedicated machines for these from day one depends on your actual volume — REQUIRES SWAMI CONFIRMATION for what Swami specifically recommends at what volume threshold.</div>
+
+        <div style="margin-top:36px;font-weight:700;font-size:22px;color:#1D1D1F">What a shirt line does NOT need</div>
+        <div style="font-size:15px;color:#1D1D1F;line-height:1.75;margin-top:12px">Overlock and flatlock machines — essential for knitwear — aren't the core need here, since woven shirt fabric doesn't require edge-finishing or stretch seams the way knits do. Don't buy a knitwear-oriented setup for a shirt line; the applications guide on lockstitch vs overlock vs flatlock covers why.</div>
+
+        <div style="margin-top:44px;padding:24px;background:#fff;border-radius:16px">
+          <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:14px">RELEVANT READING & MACHINES</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <span style="font-size:13px;font-weight:600;color:#1D1D1F;background:#F5F5F7;padding:8px 14px;border-radius:980px;cursor:pointer" onClick="{{ goProductF6 }}">JACK F6 →</span>
+            <span style="font-size:13px;font-weight:600;color:#1D1D1F;background:#F5F5F7;padding:8px 14px;border-radius:980px;cursor:pointer" onClick="{{ goGuideStitch }}">Lockstitch vs Overlock vs Flatlock →</span>
+            <span style="font-size:13px;font-weight:600;color:#1D1D1F;background:#F5F5F7;padding:8px 14px;border-radius:980px;cursor:pointer" onClick="{{ goGuideCompareF6 }}">F6 vs 2002G →</span>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:16px;margin-top:32px;flex-wrap:wrap">
+          <span style="padding:15px 28px;background:#0A5CFF;color:#fff;font-size:15px;font-weight:600;cursor:pointer;border-radius:980px" onClick="{{ goQuote }}">Request a Quote</span>
+          <span style="padding:15px 28px;border:1px solid #1D1D1F;color:#1D1D1F;font-size:15px;font-weight:600;cursor:pointer;border-radius:980px" onClick="{{ goFinder }}">Use the Machine Finder</span>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ GUIDE: INDUSTRIAL VS DOMESTIC ============ -->
+  <sc-if value="{{ isGuideIndustrialVsDomestic }}" hint-placeholder-val="{{ false }}">
+    <div style="width:100%;background:#F5F5F7;animation:swFadeIn 0.5s ease both;padding:calc(64px + clamp(50px,8vw,90px)) clamp(24px,8vw,80px) clamp(60px,8vw,100px)">
+      <div style="max-width:720px;margin:0 auto">
+        <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73">TECHNICAL GUIDE</div>
+        <div style="font-weight:800;font-size:clamp(28px,5vw,48px);color:#1D1D1F;letter-spacing:-0.02em;margin-top:16px;line-height:1.15">Industrial vs Domestic Sewing Machines: What Actually Changes</div>
+        <div style="font-size:15px;color:#6E6E73;margin-top:16px;line-height:1.6">Not a "better vs worse" question — a domestic machine and an industrial one are built for genuinely different jobs.</div>
+
+        <div style="margin-top:44px;font-weight:700;font-size:22px;color:#1D1D1F">Duty cycle is the real difference</div>
+        <div style="font-size:15px;color:#1D1D1F;line-height:1.75;margin-top:12px">A domestic machine is built to run intermittently — a home user sews for minutes at a time. An industrial machine like the JACK F6 is built to run continuously through an 8+ hour shift, at up to 5000 stitches per minute, without the motor or mechanism degrading. That sustained duty cycle, not the stitch itself, is what separates the two categories.</div>
+
+        <div style="margin-top:36px;font-weight:700;font-size:22px;color:#1D1D1F">Speed and consistency at scale</div>
+        <div style="font-size:15px;color:#1D1D1F;line-height:1.75;margin-top:12px">Industrial machines hold consistent stitch quality at production speed — a domestic machine's stitch quality typically degrades well before it reaches industrial speeds, because it isn't built to sustain them. For a single garment, this barely matters. Across a production run, it's the difference between consistent output and rework.</div>
+
+        <div style="margin-top:36px;font-weight:700;font-size:22px;color:#1D1D1F">When you genuinely need to upgrade</div>
+        <div style="font-size:15px;color:#1D1D1F;line-height:1.75;margin-top:12px">If you're sewing for personal use or very low volume, a domestic machine is genuinely the right tool — not a lesser one. The upgrade point is volume and consistency: once you're running production hours, not occasional sessions, the duty-cycle gap becomes the actual bottleneck, not the sewer's skill.</div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:32px">
+          <span style="font-size:13px;font-weight:600;color:#1D1D1F;background:#fff;padding:8px 14px;border-radius:980px;cursor:pointer" onClick="{{ goProductF6 }}">View JACK F6 →</span>
+          <span style="font-size:13px;font-weight:600;color:#1D1D1F;background:#fff;padding:8px 14px;border-radius:980px;cursor:pointer" onClick="{{ goFinder }}">Find your machine →</span>
+        </div>
+
+        <div style="display:flex;gap:16px;margin-top:32px;flex-wrap:wrap">
+          <span style="padding:15px 28px;background:#0A5CFF;color:#fff;font-size:15px;font-weight:600;cursor:pointer;border-radius:980px" onClick="{{ goQuote }}">Request a Quote</span>
+          <span style="padding:15px 28px;border:1px solid #1D1D1F;color:#1D1D1F;font-size:15px;font-weight:600;cursor:pointer;border-radius:980px" onClick="{{ goMachines }}">Browse Machines</span>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
   <!-- ============ MACHINES LIBRARY ============ -->
   <sc-if value="{{ isMachines }}" hint-placeholder-val="{{ false }}">
     <div style="width:100%;background:#F5F5F7;animation:swFadeIn 0.5s ease both;padding:calc(64px + clamp(50px,8vw,90px)) clamp(24px,8vw,80px) 0">
@@ -774,7 +880,17 @@ a:hover { color:#3D7BFF; }
       </div>
 
       <sc-if value="{{ isF6Active }}" hint-placeholder-val="{{ true }}">
-      <div style="background:#F5F5F7;padding:clamp(70px,10vw,110px) clamp(24px,8vw,80px)">
+      <div style="background:#F5F5F7;padding:clamp(70px,10vw,110px) clamp(24px,8vw,80px);display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(40px,6vw,72px)">
+        <div>
+          <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:16px">WHO IT'S FOR</div>
+          <div style="font-size:16px;color:#1D1D1F;line-height:1.7">Production lines running shirts, wovens, or uniforms at volume — where consistent stitch quality across an 8-hour shift matters more than handling heavy or unusual material. If your work is mostly light-to-medium woven fabric and speed is the bottleneck, this is the core machine to start with.</div>
+        </div>
+        <div>
+          <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:16px">THE PROBLEM IT SOLVES</div>
+          <div style="font-size:16px;color:#1D1D1F;line-height:1.7">A domestic or older mechanical machine can't sustain high stitch speed through a full production shift without stitch quality degrading. The F6's built-in servo motor and computerized control hold consistent speed and stitch quality at up to 5000 stitches per minute — the difference between predictable output and rework.</div>
+        </div>
+      </div>
+      <div style="background:#F5F5F7;padding:0 clamp(24px,8vw,80px) clamp(70px,10vw,110px)">
         <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:36px">KEY CAPABILITIES</div>
         <div style="display:flex;flex-direction:column">
           <sc-for list="{{ capabilityItems }}" as="cap" hint-placeholder-count="4">
@@ -841,6 +957,22 @@ a:hover { color:#3D7BFF; }
         </div>
         <div class="sw-btn sw-btn-light" style="margin-top:28px;display:inline-block;padding:14px 24px;border:1px solid rgba(247,247,245,0.35);color:#F5F5F7;font-size:14px;font-weight:600;cursor:pointer;border-radius:980px" onClick="{{ openContact }}">Request specification sheet</div>
       </div>
+
+      <div style="background:#fff;padding:clamp(50px,7vw,70px) clamp(24px,8vw,80px)">
+        <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:8px">SERVICE & SUPPORT</div>
+        <div style="font-size:15px;color:#1D1D1F;line-height:1.7;max-width:640px">Every machine from Swami Enterprises comes with installation, training, maintenance, genuine spare parts, technical support and after-sales — as an authorized JACK dealer in Delhi. <span style="color:#6E6E73;font-style:italic">Ask a specialist for specific service-area and warranty details for your location.</span></div>
+      </div>
+
+      <sc-if value="{{ isF6Active }}" hint-placeholder-val="{{ true }}">
+      <div style="background:#F5F5F7;padding:0 clamp(24px,8vw,80px) clamp(50px,7vw,70px)">
+        <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:16px">STILL DECIDING?</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <span style="font-size:13px;font-weight:600;color:#1D1D1F;background:#fff;padding:8px 14px;border-radius:980px;cursor:pointer" onClick="{{ goGuideCompareF6 }}">F6 vs JACK 2002G →</span>
+          <span style="font-size:13px;font-weight:600;color:#1D1D1F;background:#fff;padding:8px 14px;border-radius:980px;cursor:pointer" onClick="{{ goGuideStitch }}">Lockstitch vs Overlock vs Flatlock →</span>
+          <span style="font-size:13px;font-weight:600;color:#1D1D1F;background:#fff;padding:8px 14px;border-radius:980px;cursor:pointer" onClick="{{ goGuideShirtFactory }}">Machines for a Shirt Factory →</span>
+        </div>
+      </div>
+      </sc-if>
 
       <div style="background:#F5F5F7;padding:clamp(60px,8vw,90px) clamp(24px,8vw,80px)">
         <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:32px">RELATED MACHINES</div>
@@ -2051,7 +2183,7 @@ class Component extends DCLogic {
     this.applyPathToState = (replace) => {
       const path = window.location.pathname;
       const machineMatch = path.match(/^\/machines\/([a-z0-9-]+)/i);
-      const viewFromPath = { '/machines': 'machines', '/industries': 'industries', '/solutions': 'solutions', '/finder': 'finder', '/compare': 'compare', '/about': 'about', '/request-quote': 'quote', '/guides/lockstitch-vs-overlock-vs-flatlock': 'guideStitch' };
+      const viewFromPath = { '/machines': 'machines', '/industries': 'industries', '/solutions': 'solutions', '/finder': 'finder', '/compare': 'compare', '/about': 'about', '/request-quote': 'quote', '/guides/lockstitch-vs-overlock-vs-flatlock': 'guideStitch', '/guides/jack-f6-vs-jack-2002g': 'guideCompareF6', '/guides/machines-for-a-shirt-factory': 'guideShirtFactory', '/guides/industrial-vs-domestic-sewing-machines': 'guideIndustrialVsDomestic' };
       let next = null;
       if (machineMatch && this.machines.find((m) => m.id === machineMatch[1])) {
         next = { view: 'product', selectedMachineId: machineMatch[1] };
@@ -2262,6 +2394,9 @@ class Component extends DCLogic {
     if (view === 'product') return '/machines/' + (id || 'jack-f6');
     if (view === 'quote') return '/request-quote';
     if (view === 'guideStitch') return '/guides/lockstitch-vs-overlock-vs-flatlock';
+    if (view === 'guideCompareF6') return '/guides/jack-f6-vs-jack-2002g';
+    if (view === 'guideShirtFactory') return '/guides/machines-for-a-shirt-factory';
+    if (view === 'guideIndustrialVsDomestic') return '/guides/industrial-vs-domestic-sewing-machines';
     return '/' + view;
   };
   titleFor = (view, id) => {
@@ -2270,7 +2405,7 @@ class Component extends DCLogic {
       const m = this.machines.find((x) => x.id === id);
       return (m ? m.model + ' — ' : '') + 'Swami Enterprises';
     }
-    const labels = { machines: 'Machines', industries: 'Industries', solutions: 'Solutions', finder: 'Find Your Machine', compare: 'Compare Machines', about: 'About', quote: 'Request a Quote', guideStitch: 'Lockstitch vs Overlock vs Flatlock: Which Machine for Which Job' };
+    const labels = { machines: 'Machines', industries: 'Industries', solutions: 'Solutions', finder: 'Find Your Machine', compare: 'Compare Machines', about: 'About', quote: 'Request a Quote', guideStitch: 'Lockstitch vs Overlock vs Flatlock: Which Machine for Which Job', guideCompareF6: 'JACK F6 vs JACK 2002G: Which Lockstitch Machine Do You Need', guideShirtFactory: 'What Machines Does a Shirt Factory Actually Need', guideIndustrialVsDomestic: 'Industrial vs Domestic Sewing Machines: What Actually Changes' };
     return (labels[view] || view) + ' — Swami Enterprises';
   };
   descriptionFor = (view, id) => {
@@ -2289,6 +2424,9 @@ class Component extends DCLogic {
       about: 'Swami Enterprises — authorized Jack sewing machine dealer, Chanakya Place, New Delhi, trading since 2015.',
       quote: 'Request a quote from Swami Enterprises — authorized JACK dealer, New Delhi. Tell us what you need, a specialist follows up on WhatsApp or by phone.',
       guideStitch: 'Lockstitch, overlock and flatlock machines do different jobs — a plain-English guide to which one you actually need, from Swami Enterprises, authorized JACK dealer, New Delhi.',
+      guideCompareF6: 'JACK F6 vs JACK 2002G compared on real specs — speed, stitch length, needle, and which fabrics each one actually handles, from Swami Enterprises, New Delhi.',
+      guideShirtFactory: 'The real machine sequence for a shirt production line — lockstitch, buttonholing, and what to add as you scale, from Swami Enterprises, authorized JACK dealer, New Delhi.',
+      guideIndustrialVsDomestic: 'What actually changes between a domestic and an industrial sewing machine — speed, duty cycle, and when you genuinely need to upgrade, from Swami Enterprises, New Delhi.',
     };
     return descs[view] || descs.home;
   };
@@ -2759,6 +2897,14 @@ class Component extends DCLogic {
       isQuote: view === 'quote',
       isGuideStitch: view === 'guideStitch',
       goGuideStitch: () => this.goToView('guideStitch'),
+      isGuideCompareF6: view === 'guideCompareF6',
+      goGuideCompareF6: () => this.goToView('guideCompareF6'),
+      isGuideShirtFactory: view === 'guideShirtFactory',
+      goGuideShirtFactory: () => this.goToView('guideShirtFactory'),
+      isGuideIndustrialVsDomestic: view === 'guideIndustrialVsDomestic',
+      goGuideIndustrialVsDomestic: () => this.goToView('guideIndustrialVsDomestic'),
+      goProductF6: () => this.goToProduct('jack-f6'),
+      goProduct2002g: () => this.goToProduct('jack-2002g'),
       quoteNotSubmitted: !this.state.quoteSubmitted,
       quoteSubmitted: !!this.state.quoteSubmitted,
       quoteError: this.state.quoteError || '',

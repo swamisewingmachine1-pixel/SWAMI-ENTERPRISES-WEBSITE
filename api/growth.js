@@ -16,11 +16,11 @@ const KINDS = {
     statuses: ['IDEA', 'RESEARCHING', 'READY', 'WRITING', 'PUBLISHED'],
   },
   question: {
-    fields: ['question', 'source', 'industry', 'product', 'location', 'intent', 'frequency', 'commercialValue', 'status'],
+    fields: ['question', 'source', 'industry', 'product', 'location', 'intent', 'frequency', 'commercialValue', 'status', 'notes'],
     statuses: ['UNVALIDATED', 'VALIDATED', 'CONTENT_BRIEFED', 'PUBLISHED'],
   },
   prospect: {
-    fields: ['company', 'industry', 'city', 'website', 'contactRole', 'source', 'status', 'nextFollowUp', 'notes'],
+    fields: ['company', 'industry', 'city', 'state', 'website', 'relevantMachine', 'contactRole', 'source', 'status', 'nextFollowUp', 'notes'],
     statuses: ['PROSPECT', 'CONTACTED', 'RESPONDED', 'QUALIFIED', 'MEETING', 'QUOTATION', 'WON', 'LOST'],
   },
 };

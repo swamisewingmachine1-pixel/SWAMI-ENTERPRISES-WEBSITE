@@ -65,9 +65,9 @@ const KIND_META = {
   brief: { label: 'Content Briefs', desc: 'Research first, write second. A brief should be fillable by someone who has never talked to a customer.',
     fieldLabels: { title: 'Title', intent: 'Primary intent', audience: 'Target audience', product: 'Target product', industry: 'Target industry', location: 'Target location', questions: 'Questions to answer', requiredInfo: 'Required real info', internalLinks: 'Internal links', cta: 'CTA', status: 'Status' } },
   question: { label: 'Customer Questions', desc: 'Real questions customers ask, PLUS 10 market-researched hypotheses seeded as UNVALIDATED (not real Swami customer quotes — mark VALIDATED once you’ve actually heard a real version of one from a real customer). This becomes the raw material for FAQs, guides, and product content.',
-    fieldLabels: { question: 'Question', source: 'Source', industry: 'Industry', product: 'Product', location: 'Location', intent: 'Intent', frequency: 'Frequency', commercialValue: 'Commercial value', status: 'Status' } },
+    fieldLabels: { question: 'Question', source: 'Source', industry: 'Industry', product: 'Product', location: 'City', intent: 'Intent', frequency: 'Frequency', commercialValue: 'Commercial value', status: 'Status', notes: 'Notes' } },
   prospect: { label: 'Prospects', desc: 'Real businesses worth reaching out to — no scraped personal data, just company-level research.',
-    fieldLabels: { company: 'Company', industry: 'Industry', city: 'City', website: 'Website', contactRole: 'Contact role', source: 'Source', status: 'Status', nextFollowUp: 'Next follow-up', notes: 'Notes' } },
+    fieldLabels: { company: 'Company', industry: 'Industry', city: 'City', state: 'State', website: 'Website', relevantMachine: 'Relevant machine', contactRole: 'Contact role', source: 'Source', status: 'Status', nextFollowUp: 'Next follow-up', notes: 'Notes' } },
 };
 
 function api(path, opts) {

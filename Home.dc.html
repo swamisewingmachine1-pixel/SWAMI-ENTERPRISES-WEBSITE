@@ -353,7 +353,7 @@ a:hover { color:#3D7BFF; }
         <div style="font-weight:700;font-size:clamp(24px,3.4vw,38px);color:#1D1D1F;letter-spacing:-0.02em;text-align:center;max-width:640px;margin:0 auto">What are you sewing? We'll point you to the right machine.</div>
         <div style="display:grid;grid-template-columns:260px 1fr;gap:clamp(24px,4vw,48px);max-width:1000px;margin:48px auto 0;align-items:start">
           <div style="display:flex;flex-direction:column;gap:4px">
-            <sc-for list="{{ garmentTypes }}" as="g" hint-placeholder-count="6">
+            <sc-for list="{{ garmentTypes }}" as="g" hint-placeholder-count="9">
               <div style="display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:12px;cursor:pointer;background:{{ g.bg }}" onClick="{{ g.open }}">
                 <div style="width:40px;height:40px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;box-shadow:{{ g.ring }}">{{ g.icon }}</div>
                 <div style="font-size:15px;font-weight:600;color:{{ g.textColor }}">{{ g.label }}</div>
@@ -403,21 +403,55 @@ a:hover { color:#3D7BFF; }
                   <circle cx="134" cy="66" r="3" fill="#0A5CFF"/>
                 </svg>
               </sc-if>
-              <sc-if value="{{ isGarmentUniform }}" hint-placeholder-val="{{ false }}">
+              <sc-if value="{{ isGarmentPolo }}" hint-placeholder-val="{{ false }}">
                 <svg width="180" height="160" viewBox="0 0 180 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M62 18 L40 32 L20 55 L36 76 L46 66 L46 148 L134 148 L134 66 L144 76 L160 55 L140 32 L118 18 L100 30 L90 40 L80 30 Z" stroke="#2997FF" stroke-width="2.5" fill="#EAF3FF"/>
-                  <rect x="60" y="60" width="20" height="16" stroke="#2997FF" stroke-width="1.5" fill="none"/>
-                  <rect x="100" y="60" width="20" height="16" stroke="#2997FF" stroke-width="1.5" fill="none"/>
-                  <circle cx="90" cy="55" r="2.5" fill="#0A5CFF"/>
-                  <circle cx="46" cy="66" r="3" fill="#0A5CFF"/>
-                  <circle cx="134" cy="66" r="3" fill="#0A5CFF"/>
+                  <path d="M60 20 L40 35 L20 55 L35 75 L45 65 L45 145 L135 145 L135 65 L145 75 L160 55 L140 35 L120 20 C120 32 107 40 90 40 C73 40 60 32 60 20 Z" stroke="#2997FF" stroke-width="2.5" fill="#EAF3FF"/>
+                  <path d="M78 22 L78 44 L90 38 L102 44 L102 22" stroke="#2997FF" stroke-width="1.5" fill="none"/>
+                  <path d="M90 38 L90 60" stroke="#2997FF" stroke-width="1.5"/>
+                  <circle cx="90" cy="40" r="2.5" fill="#0A5CFF"/>
+                  <circle cx="90" cy="58" r="2.5" fill="#0A5CFF"/>
+                  <circle cx="45" cy="65" r="3" fill="#0A5CFF"/>
+                  <circle cx="135" cy="65" r="3" fill="#0A5CFF"/>
                 </svg>
               </sc-if>
-              <sc-if value="{{ isGarmentDenim }}" hint-placeholder-val="{{ false }}">
+              <sc-if value="{{ isGarmentSweatshirt }}" hint-placeholder-val="{{ false }}">
+                <svg width="180" height="160" viewBox="0 0 180 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M58 20 L36 34 L16 56 L32 78 L44 66 L44 145 L136 145 L136 66 L148 78 L164 56 L144 34 L122 20 C122 33 108 42 90 42 C72 42 58 33 58 20 Z" stroke="#2997FF" stroke-width="2.5" fill="#EAF3FF"/>
+                  <rect x="70" y="80" width="24" height="20" rx="2" stroke="#2997FF" stroke-width="1.5" fill="none"/>
+                  <rect x="44" y="126" width="20" height="19" fill="#D8E9FF" stroke="#2997FF" stroke-width="1.5"/>
+                  <rect x="116" y="126" width="20" height="19" fill="#D8E9FF" stroke="#2997FF" stroke-width="1.5"/>
+                  <circle cx="90" cy="30" r="3" fill="#0A5CFF"/>
+                  <circle cx="44" cy="66" r="3" fill="#0A5CFF"/>
+                  <circle cx="136" cy="66" r="3" fill="#0A5CFF"/>
+                  <circle cx="82" cy="90" r="2.5" fill="#0A5CFF"/>
+                </svg>
+              </sc-if>
+              <sc-if value="{{ isGarmentMenUnderwear }}" hint-placeholder-val="{{ false }}">
+                <svg width="160" height="120" viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M25 20 L135 20 L130 60 C128 90 105 105 80 105 C55 105 32 90 30 60 Z" stroke="#2997FF" stroke-width="2.5" fill="#EAF3FF"/>
+                  <path d="M25 32 L135 32" stroke="#0A5CFF" stroke-width="3" stroke-dasharray="3 3"/>
+                  <path d="M80 32 L80 90" stroke="#2997FF" stroke-width="1.5"/>
+                  <circle cx="80" cy="60" r="2.5" fill="#0A5CFF"/>
+                  <circle cx="45" cy="30" r="2.5" fill="#0A5CFF"/>
+                  <circle cx="115" cy="30" r="2.5" fill="#0A5CFF"/>
+                </svg>
+              </sc-if>
+              <sc-if value="{{ isGarmentWomenUnderwear }}" hint-placeholder-val="{{ false }}">
+                <svg width="160" height="130" viewBox="0 0 160 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 15 C20 40 40 48 55 40 C58 55 70 62 80 62 C90 62 102 55 105 40 C120 48 140 40 140 15" stroke="#2997FF" stroke-width="2.5" fill="#EAF3FF"/>
+                  <path d="M30 78 L130 78 L124 112 C122 122 100 128 80 128 C60 128 38 122 36 112 Z" stroke="#2997FF" stroke-width="2.5" fill="#EAF3FF"/>
+                  <circle cx="55" cy="30" r="2.5" fill="#0A5CFF"/>
+                  <circle cx="105" cy="30" r="2.5" fill="#0A5CFF"/>
+                  <circle cx="30" cy="88" r="2.5" fill="#0A5CFF"/>
+                  <circle cx="130" cy="88" r="2.5" fill="#0A5CFF"/>
+                </svg>
+              </sc-if>
+              <sc-if value="{{ isGarmentSuitPants }}" hint-placeholder-val="{{ false }}">
                 <svg width="140" height="160" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M35 15 L105 15 L110 95 L120 148 L92 148 L80 85 L70 85 L60 148 L32 148 L38 95 Z" stroke="#2997FF" stroke-width="2.5" fill="#EAF3FF"/>
-                  <path d="M35 15 L105 15" stroke="#0A5CFF" stroke-width="3" stroke-dasharray="3 3"/>
-                  <circle cx="70" cy="30" r="3" fill="#0A5CFF"/>
+                  <path d="M32 15 L108 15 L112 30 L108 95 L118 148 L90 148 L80 85 L70 85 L60 148 L32 148 L38 95 L32 30 Z" stroke="#2997FF" stroke-width="2.5" fill="#EAF3FF"/>
+                  <path d="M32 30 L108 30" stroke="#0A5CFF" stroke-width="3" stroke-dasharray="3 3"/>
+                  <circle cx="70" cy="22" r="2.5" fill="#0A5CFF"/>
+                  <circle cx="70" cy="60" r="2.5" fill="#0A5CFF"/>
                   <circle cx="45" cy="120" r="3" fill="#0A5CFF"/>
                   <circle cx="95" cy="120" r="3" fill="#0A5CFF"/>
                 </svg>
@@ -2663,12 +2697,15 @@ class Component extends DCLogic {
   ];
 
   garmentDefs = [
-    { key: 'tshirt', icon: '👕', label: 'T-Shirt', machineId: 'jack-c7-urus' },
-    { key: 'jacket', icon: '🧥', label: 'Jacket', machineId: 'jack-w4' },
-    { key: 'jeans', icon: '👖', label: 'Jeans & Trousers', machineId: 'jack-2002g' },
+    { key: 'tshirt', icon: '👕', label: 'Round Neck T-Shirt', machineId: 'jack-c7-urus' },
+    { key: 'jacket', icon: '🧥', label: 'Down Jacket', machineId: 'jack-w4' },
+    { key: 'jeans', icon: '👖', label: 'Jeans Pants', machineId: 'jack-2002g' },
     { key: 'shirt', icon: '👔', label: 'Shirt', machineId: 'jack-f6' },
-    { key: 'uniform', icon: '🥋', label: 'Uniform', machineId: 'jack-f6' },
-    { key: 'denim', icon: '🧵', label: 'Denim & Workwear', machineId: 'jack-9820g' },
+    { key: 'polo', icon: '🎽', label: 'Polo T-Shirt', machineId: 'jack-k7' },
+    { key: 'sweatshirt', icon: '🧶', label: 'Sweatshirt', machineId: 'jack-c60' },
+    { key: 'menUnderwear', icon: '🩲', label: 'Men Underwear', machineId: 'jack-k7-ut' },
+    { key: 'womenUnderwear', icon: '👙', label: 'Women Underwear', machineId: 'jack-e4s' },
+    { key: 'suitPants', icon: '🧑‍💼', label: 'Suit Pants', machineId: 'jack-5558g' },
   ];
 
   goldenEagleProducts = [
@@ -3511,8 +3548,11 @@ class Component extends DCLogic {
       isGarmentJacket: this.state.selectedGarmentType === 'jacket',
       isGarmentJeans: this.state.selectedGarmentType === 'jeans',
       isGarmentShirt: this.state.selectedGarmentType === 'shirt',
-      isGarmentUniform: this.state.selectedGarmentType === 'uniform',
-      isGarmentDenim: this.state.selectedGarmentType === 'denim',
+      isGarmentPolo: this.state.selectedGarmentType === 'polo',
+      isGarmentSweatshirt: this.state.selectedGarmentType === 'sweatshirt',
+      isGarmentMenUnderwear: this.state.selectedGarmentType === 'menUnderwear',
+      isGarmentWomenUnderwear: this.state.selectedGarmentType === 'womenUnderwear',
+      isGarmentSuitPants: this.state.selectedGarmentType === 'suitPants',
       activeGarment: (() => {
         const def = this.garmentDefs.find((g) => g.key === this.state.selectedGarmentType) || this.garmentDefs[0];
         const m = this.machines.find((x) => x.id === def.machineId);

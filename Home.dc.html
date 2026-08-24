@@ -100,16 +100,16 @@ a:hover { color:#3D7BFF; }
 
   <!-- NAV -->
   <div style="position:fixed;top:0;left:0;right:0;height:76px;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(24px,5vw,64px);display:{{ mobileBarDisplay }};background:{{ navBg }};backdropFilter:blur({{ navBlur }}px);WebkitBackdropFilter:blur({{ navBlur }}px);border-bottom:1px solid {{ navBorder }};transform:{{ navTransform }};transition:transform 0.32s cubic-bezier(0.4,0,0.2,1),background 0.4s ease">
-    <div style="display:flex;align-items:center;gap:9px;cursor:pointer" onClick="{{ goHome }}">
-      <span style="font-weight:700;font-size:14px;letter-spacing:0.14em;color:{{ navText }}">SWAMI ENTERPRISES</span>
+    <div style="display:flex;align-items:center;gap:9px;cursor:pointer;height:100%;overflow:hidden" onClick="{{ goHome }}">
+      <img src="{{ navLogoSrc }}" alt="Swami Enterprises" style="height:34px;width:auto;object-fit:contain">
     </div>
     <span style="color:{{ navText }};font-size:20px;cursor:pointer;display:{{ hamburgerVisibleDisplay }}" onClick="{{ toggleMobileNav }}">☰</span>
   </div>
 
   <!-- DESKTOP FULL-WIDTH BAR (Apple-style) -->
   <div style="position:fixed;top:0;left:0;right:0;height:52px;z-index:1001;display:{{ desktopNavDisplay }};align-items:center;justify-content:space-between;padding:0 clamp(24px,3vw,40px);background:{{ navBg }};backdropFilter:blur({{ navBlur }}px);WebkitBackdropFilter:blur({{ navBlur }}px);border-bottom:1px solid {{ navBorder }};transform:{{ navTransform }};transition:transform 0.32s cubic-bezier(0.4,0,0.2,1),background 0.4s ease">
-    <div style="display:flex;align-items:center;gap:8px;cursor:pointer" onClick="{{ goHome }}">
-      <span style="font-weight:700;font-size:13px;letter-spacing:0.06em;color:{{ navText }}">SWAMI ENTERPRISES</span>
+    <div style="display:flex;align-items:center;gap:8px;cursor:pointer;height:100%;overflow:hidden" onClick="{{ goHome }}">
+      <img src="{{ navLogoSrc }}" alt="Swami Enterprises" style="height:26px;width:auto;object-fit:contain">
     </div>
     <div style="display:flex;align-items:center;gap:clamp(22px,2.2vw,34px)">
       <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navHomeOpacity }}" onClick="{{ goHome }}">Home</span>
@@ -206,28 +206,6 @@ a:hover { color:#3D7BFF; }
       <!-- HERO: JACK video only, full-bleed, no text/photos -->
       <div style="min-height:94vh;position:relative;background:#000;overflow:hidden;animation:swFadeUp 0.7s ease both">
         <video id="hero-jack-video" autoplay muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;z-index:0" src="uploads/jack-hero-video.mp4"></video>
-      </div>
-
-      <!-- PROOF BAR -->
-      <div style="background:#050505;padding:clamp(36px,5vw,52px) clamp(24px,6vw,80px);border-bottom:1px solid rgba(247,247,245,0.1)">
-        <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:clamp(20px,3vw,32px);text-align:center">
-          <div>
-            <div style="font-weight:700;font-size:clamp(22px,2.6vw,32px);color:#F5F5F7;letter-spacing:-0.01em">2015</div>
-            <div style="font-size:12px;color:#86868B;margin-top:4px;letter-spacing:0.03em">TRADING SINCE</div>
-          </div>
-          <div>
-            <div style="font-weight:700;font-size:clamp(22px,2.6vw,32px);color:#F5F5F7;letter-spacing:-0.01em">5</div>
-            <div style="font-size:12px;color:#86868B;margin-top:4px;letter-spacing:0.03em">GLOBAL BRANDS</div>
-          </div>
-          <div>
-            <div style="font-weight:700;font-size:clamp(22px,2.6vw,32px);color:#F5F5F7;letter-spacing:-0.01em">34+</div>
-            <div style="font-size:12px;color:#86868B;margin-top:4px;letter-spacing:0.03em">MACHINES IN CATALOG</div>
-          </div>
-          <div>
-            <div style="font-weight:700;font-size:clamp(22px,2.6vw,32px);color:#F5F5F7;letter-spacing:-0.01em">Delhi</div>
-            <div style="font-size:12px;color:#86868B;margin-top:4px;letter-spacing:0.03em">HQ, SERVING INDIA</div>
-          </div>
-        </div>
       </div>
 
       <!-- STATEMENT / MISSION -->
@@ -570,7 +548,7 @@ a:hover { color:#3D7BFF; }
       <div style="background:#050505;padding:clamp(70px,9vw,110px) clamp(24px,8vw,80px) 96px">
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:clamp(28px,4vw,40px)">
           <div>
-            <div style="font-weight:700;font-size:clamp(26px,4vw,38px);color:#F5F5F7;letter-spacing:-0.02em">SWAMI ENTERPRISES</div>
+            <img src="uploads/swami-logo-dark-bg.png" alt="Swami Enterprises" style="height:clamp(50px,7vw,70px);width:auto;object-fit:contain;display:block">
             <div style="font-size:14px;color:#86868B;margin-top:16px;max-width:320px;line-height:1.6">A Delhi-headquartered partner serving customers across India, for industrial sewing machines and accessories — including JACK, Pegasus, JUKI, Golden Eagle, and Groz-Beckert — helping you find, install and maintain the right equipment for your production.</div>
             <div style="margin-top:24px;display:inline-block;padding:12px 24px;background:#0A5CFF;color:#fff;font-size:14px;font-weight:500;border-radius:980px;cursor:pointer" onClick="{{ openContact }}">Talk to a Specialist</div>
           </div>
@@ -3835,6 +3813,7 @@ class Component extends DCLogic {
       navAboutOpacity: view === 'about' ? 1 : 0.55,
       navTheme: navTheme,
       navText: navTheme === 'light' ? '#1D1D1F' : '#F5F5F7',
+      navLogoSrc: navTheme === 'light' ? 'uploads/swami-logo-light-bg.png' : 'uploads/swami-logo-dark-bg.png',
       navTextDim: navTheme === 'light' ? 'rgba(21,21,21,0.4)' : 'rgba(247,247,245,0.4)',
       navBg: navBg,
       navBlur: navBlurPx,

@@ -205,7 +205,7 @@ a:hover { color:#3D7BFF; }
 
       <!-- HERO: JACK video only, full-bleed, no text/photos -->
       <div style="min-height:94vh;position:relative;background:#000;overflow:hidden;animation:swFadeUp 0.7s ease both">
-        <video autoplay muted loop playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0" src="uploads/jack-hero-video.mp4"></video>
+        <video id="hero-jack-video" autoplay muted loop playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0" src="uploads/jack-hero-video.mp4"></video>
       </div>
 
       <!-- STATEMENT -->
@@ -2743,6 +2743,23 @@ class Component extends DCLogic {
     this.updateNavWidth = () => this.setState({ isNarrowNav: window.innerWidth < 980 });
     this.updateNavWidth();
     window.addEventListener('resize', this.updateNavWidth);
+
+    // Hero video: some browsers ignore the bare `muted` HTML attribute on autoplay (it only
+    // sets the initial state at parse time, not the live property) and silently block
+    // autoplay as a result. Force the property directly and retry .play() a few times in
+    // case the element wasn't in the DOM yet on the first attempt.
+    let heroVideoTries = 0;
+    const tryPlayHeroVideo = () => {
+      heroVideoTries++;
+      const v = document.getElementById('hero-jack-video');
+      if (v) {
+        v.muted = true;
+        v.play().catch(() => {});
+        return;
+      }
+      if (heroVideoTries < 10) setTimeout(tryPlayHeroVideo, 300);
+    };
+    tryPlayHeroVideo();
 
     // Read the URL on first load (deep link / shared link / refresh) so it lands on the right
     // page instead of always resetting to home, and keep the URL in sync on browser back/forward.

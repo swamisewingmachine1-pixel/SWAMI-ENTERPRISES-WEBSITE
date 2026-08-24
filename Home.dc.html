@@ -70,6 +70,10 @@
 @keyframes swFadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
 @keyframes swFadeIn { from { opacity:0; } to { opacity:1; } }
 body { margin:0; }
+/* Static brand logos (never user-uploaded) — the empty-state ring can lag a beat behind
+   the real network on first paint; these never show an empty state, so hide it outright
+   instead of racing the retry timing. */
+#jack-brand-logo::part(ring), #golden-eagle-logo::part(ring), #groz-beckert-logo::part(ring) { display:none !important; }
 a { color:#0A5CFF; text-decoration:none; }
 a:hover { color:#3D7BFF; }
 * { box-sizing:border-box; }
@@ -271,24 +275,24 @@ a:hover { color:#3D7BFF; }
           <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#2997FF;margin-bottom:14px;text-align:center">OUR BRANDS</div>
           <div style="font-weight:700;font-size:clamp(26px,3.6vw,42px);color:#F5F5F7;letter-spacing:-0.02em;text-align:center;max-width:720px;margin:0 auto">Swami Enterprises is a Delhi partner for multiple brands.</div>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(24px,4vw,32px);margin-top:clamp(40px,6vw,56px)">
-            <div style="background:#0A0A0A;border-radius:24px;padding:clamp(32px,4vw,44px);display:flex;flex-direction:column;align-items:center;text-align:center">
-              <div style="background:#fff;border-radius:16px;padding:14px;width:100%;height:clamp(60px,8vw,90px);display:flex;align-items:center;justify-content:center;overflow:hidden">
+            <div style="background:#0A0A0A;border:1px solid rgba(255,255,255,0.06);border-radius:24px;padding:clamp(32px,4vw,44px);display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform 0.25s ease" style-hover="transform:translateY(-3px)">
+              <div style="background:#fff;border-radius:14px;padding:18px 22px;width:100%;height:clamp(64px,8vw,92px);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,0.25)">
                 <image-slot id="jack-brand-logo" shape="rect" src="uploads/jack-official-logo.png" fit="contain" placeholder="JACK logo" style="width:100%;height:100%;max-width:100%;max-height:100%"></image-slot>
               </div>
               <div style="font-weight:700;font-size:22px;color:#F5F5F7;margin-top:24px">JACK</div>
               <div style="font-size:15px;color:#A1A1A6;line-height:1.6;margin-top:10px">Industrial sewing machines — our core catalog, from lockstitch to specialty machines.</div>
               <div style="margin-top:20px;color:#2997FF;font-size:15px;cursor:pointer;display:inline-flex;align-items:center;gap:4px" onClick="{{ goMachines }}">Browse machines <span>›</span></div>
             </div>
-            <div style="background:#0A0A0A;border-radius:24px;padding:clamp(32px,4vw,44px);display:flex;flex-direction:column;align-items:center;text-align:center">
-              <div style="border-radius:16px;overflow:hidden;width:clamp(60px,8vw,90px);height:clamp(60px,8vw,90px)">
-                <image-slot id="golden-eagle-logo" shape="rect" src="uploads/golden-eagle-logo.jpg" fit="cover" placeholder="Golden Eagle logo" style="width:100%;height:100%"></image-slot>
+            <div style="background:#0A0A0A;border:1px solid rgba(255,255,255,0.06);border-radius:24px;padding:clamp(32px,4vw,44px);display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform 0.25s ease" style-hover="transform:translateY(-3px)">
+              <div style="background:#fff;border-radius:14px;padding:18px 22px;width:100%;height:clamp(64px,8vw,92px);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,0.25)">
+                <image-slot id="golden-eagle-logo" shape="rect" src="uploads/golden-eagle-logo.jpg" fit="contain" placeholder="Golden Eagle logo" style="width:100%;height:100%;max-width:100%;max-height:100%"></image-slot>
               </div>
               <div style="font-weight:700;font-size:22px;color:#F5F5F7;margin-top:24px">Golden Eagle</div>
               <div style="font-size:15px;color:#A1A1A6;line-height:1.6;margin-top:10px">Genuine spares &amp; accessories — needles, cutting blades, abrasive belts, presser feet, and thread cutters.</div>
               <div style="margin-top:20px;color:#2997FF;font-size:15px;cursor:pointer;display:inline-flex;align-items:center;gap:4px" onClick="{{ openContact }}">Ask about spares <span>›</span></div>
             </div>
-            <div style="background:#0A0A0A;border-radius:24px;padding:clamp(32px,4vw,44px);display:flex;flex-direction:column;align-items:center;text-align:center">
-              <div style="background:#fff;border-radius:16px;padding:14px;width:100%;height:clamp(60px,8vw,90px);display:flex;align-items:center;justify-content:center;overflow:hidden">
+            <div style="background:#0A0A0A;border:1px solid rgba(255,255,255,0.06);border-radius:24px;padding:clamp(32px,4vw,44px);display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform 0.25s ease" style-hover="transform:translateY(-3px)">
+              <div style="background:#fff;border-radius:14px;padding:18px 22px;width:100%;height:clamp(64px,8vw,92px);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,0.25)">
                 <image-slot id="groz-beckert-logo" shape="rect" src="uploads/groz-beckert-logo.svg" fit="contain" placeholder="Groz-Beckert logo" style="width:100%;height:100%;max-width:100%;max-height:100%"></image-slot>
               </div>
               <div style="font-weight:700;font-size:22px;color:#F5F5F7;margin-top:24px">Groz-Beckert</div>
@@ -344,16 +348,94 @@ a:hover { color:#3D7BFF; }
       </div>
 
       <!-- CHOOSE BY GARMENT -->
-      <div style="background:#F5F5F7;padding:clamp(64px,9vw,110px) clamp(24px,6vw,80px) 0;animation:swFadeUp 0.7s ease 0.36s both">
+      <div style="background:#F5F5F7;padding:clamp(64px,9vw,110px) clamp(24px,6vw,80px);animation:swFadeUp 0.7s ease 0.36s both">
         <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:8px;text-align:center">CHOOSE BY GARMENT</div>
         <div style="font-weight:700;font-size:clamp(24px,3.4vw,38px);color:#1D1D1F;letter-spacing:-0.02em;text-align:center;max-width:640px;margin:0 auto">What are you sewing? We'll point you to the right machine.</div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:16px;max-width:900px;margin:40px auto 0">
-          <sc-for list="{{ garmentTypes }}" as="g" hint-placeholder-count="6">
-            <div style="background:#fff;border-radius:18px;padding:24px 12px;text-align:center;cursor:pointer" style-hover="transform:translateY(-2px)" onClick="{{ g.open }}">
-              <div style="font-size:32px">{{ g.icon }}</div>
-              <div style="font-size:13px;font-weight:600;color:#1D1D1F;margin-top:10px">{{ g.label }}</div>
+        <div style="display:grid;grid-template-columns:260px 1fr;gap:clamp(24px,4vw,48px);max-width:1000px;margin:48px auto 0;align-items:start">
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <sc-for list="{{ garmentTypes }}" as="g" hint-placeholder-count="6">
+              <div style="display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:12px;cursor:pointer;background:{{ g.bg }}" onClick="{{ g.open }}">
+                <div style="width:40px;height:40px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;box-shadow:{{ g.ring }}">{{ g.icon }}</div>
+                <div style="font-size:15px;font-weight:600;color:{{ g.textColor }}">{{ g.label }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="background:#fff;border-radius:24px;padding:clamp(28px,4vw,44px)">
+            <div style="display:flex;justify-content:center;padding:16px 0">
+              <sc-if value="{{ isGarmentTshirt }}" hint-placeholder-val="{{ true }}">
+                <svg width="180" height="160" viewBox="0 0 180 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M60 20 L40 35 L20 55 L35 75 L45 65 L45 145 L135 145 L135 65 L145 75 L160 55 L140 35 L120 20 C120 32 107 40 90 40 C73 40 60 32 60 20 Z" stroke="#2997FF" stroke-width="2.5" fill="#EAF3FF"/>
+                  <circle cx="90" cy="30" r="3" fill="#0A5CFF"/>
+                  <circle cx="75" cy="34" r="3" fill="#0A5CFF"/>
+                  <circle cx="105" cy="34" r="3" fill="#0A5CFF"/>
+                  <circle cx="45" cy="65" r="3" fill="#0A5CFF"/>
+                  <circle cx="135" cy="65" r="3" fill="#0A5CFF"/>
+                </svg>
+              </sc-if>
+              <sc-if value="{{ isGarmentJacket }}" hint-placeholder-val="{{ false }}">
+                <svg width="180" height="160" viewBox="0 0 180 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M65 18 L38 30 L18 55 L34 78 L44 68 L44 148 L90 148 L90 30 M115 18 L142 30 L162 55 L146 78 L136 68 L136 148 L90 148" stroke="#2997FF" stroke-width="2.5" fill="#EAF3FF"/>
+                  <circle cx="90" cy="30" r="3" fill="#0A5CFF"/>
+                  <circle cx="44" cy="68" r="3" fill="#0A5CFF"/>
+                  <circle cx="136" cy="68" r="3" fill="#0A5CFF"/>
+                  <circle cx="90" cy="90" r="3" fill="#0A5CFF"/>
+                  <circle cx="90" cy="120" r="3" fill="#0A5CFF"/>
+                </svg>
+              </sc-if>
+              <sc-if value="{{ isGarmentJeans }}" hint-placeholder-val="{{ false }}">
+                <svg width="140" height="160" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M35 15 L105 15 L110 95 L120 148 L92 148 L80 85 L70 85 L60 148 L32 148 L38 95 Z" stroke="#2997FF" stroke-width="2.5" fill="#EAF3FF"/>
+                  <circle cx="70" cy="30" r="3" fill="#0A5CFF"/>
+                  <circle cx="70" cy="60" r="3" fill="#0A5CFF"/>
+                  <circle cx="45" cy="120" r="3" fill="#0A5CFF"/>
+                  <circle cx="95" cy="120" r="3" fill="#0A5CFF"/>
+                </svg>
+              </sc-if>
+              <sc-if value="{{ isGarmentShirt }}" hint-placeholder-val="{{ false }}">
+                <svg width="180" height="160" viewBox="0 0 180 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M62 18 L40 32 L20 55 L36 76 L46 66 L46 148 L134 148 L134 66 L144 76 L160 55 L140 32 L118 18 L100 30 L90 40 L80 30 Z" stroke="#2997FF" stroke-width="2.5" fill="#EAF3FF"/>
+                  <path d="M90 40 L90 148" stroke="#2997FF" stroke-width="1.5"/>
+                  <circle cx="90" cy="55" r="2.5" fill="#0A5CFF"/>
+                  <circle cx="90" cy="80" r="2.5" fill="#0A5CFF"/>
+                  <circle cx="90" cy="105" r="2.5" fill="#0A5CFF"/>
+                  <circle cx="90" cy="130" r="2.5" fill="#0A5CFF"/>
+                  <circle cx="46" cy="66" r="3" fill="#0A5CFF"/>
+                  <circle cx="134" cy="66" r="3" fill="#0A5CFF"/>
+                </svg>
+              </sc-if>
+              <sc-if value="{{ isGarmentUniform }}" hint-placeholder-val="{{ false }}">
+                <svg width="180" height="160" viewBox="0 0 180 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M62 18 L40 32 L20 55 L36 76 L46 66 L46 148 L134 148 L134 66 L144 76 L160 55 L140 32 L118 18 L100 30 L90 40 L80 30 Z" stroke="#2997FF" stroke-width="2.5" fill="#EAF3FF"/>
+                  <rect x="60" y="60" width="20" height="16" stroke="#2997FF" stroke-width="1.5" fill="none"/>
+                  <rect x="100" y="60" width="20" height="16" stroke="#2997FF" stroke-width="1.5" fill="none"/>
+                  <circle cx="90" cy="55" r="2.5" fill="#0A5CFF"/>
+                  <circle cx="46" cy="66" r="3" fill="#0A5CFF"/>
+                  <circle cx="134" cy="66" r="3" fill="#0A5CFF"/>
+                </svg>
+              </sc-if>
+              <sc-if value="{{ isGarmentDenim }}" hint-placeholder-val="{{ false }}">
+                <svg width="140" height="160" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M35 15 L105 15 L110 95 L120 148 L92 148 L80 85 L70 85 L60 148 L32 148 L38 95 Z" stroke="#2997FF" stroke-width="2.5" fill="#EAF3FF"/>
+                  <path d="M35 15 L105 15" stroke="#0A5CFF" stroke-width="3" stroke-dasharray="3 3"/>
+                  <circle cx="70" cy="30" r="3" fill="#0A5CFF"/>
+                  <circle cx="45" cy="120" r="3" fill="#0A5CFF"/>
+                  <circle cx="95" cy="120" r="3" fill="#0A5CFF"/>
+                </svg>
+              </sc-if>
             </div>
-          </sc-for>
+            <div style="display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;margin-top:24px;padding-top:24px;border-top:1px solid rgba(0,0,0,0.08)">
+              <image-slot id="garment-machine-photo" shape="rect" src="{{ activeGarment.machineSrc }}" fit="contain" placeholder="Machine photo" style="width:110px;height:80px"></image-slot>
+              <div>
+                <div style="font-size:12px;font-weight:600;letter-spacing:0.04em;color:#2997FF">RECOMMENDED</div>
+                <div style="font-weight:700;font-size:19px;color:#1D1D1F;letter-spacing:-0.01em">{{ activeGarment.machineModel }}</div>
+                <div style="font-size:13px;color:#6E6E73;margin-top:2px">{{ activeGarment.machineCategory }} — {{ activeGarment.machinePurpose }}</div>
+              </div>
+            </div>
+            <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap">
+              <span style="padding:11px 22px;background:#0A5CFF;color:#fff;font-size:14px;font-weight:500;border-radius:980px;cursor:pointer" onClick="{{ activeGarment.viewMachine }}">View this machine</span>
+              <span style="padding:11px 22px;color:#1D1D1F;font-size:14px;font-weight:500;border-radius:980px;cursor:pointer;border:1px solid rgba(0,0,0,0.15)" onClick="{{ goFinderFromGarment }}">Not sure? Use the finder</span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1603,6 +1685,7 @@ class Component extends DCLogic {
     compareSlotOverrides: [null, null, null],
     selectedMachineId: 'jack-f6',
     selectedGeProductId: 'ge-abrasive-belts',
+    selectedGarmentType: 'tshirt',
   };
 
   // "+ Compare" on a card: quick-add, tracked separately from the compare page's
@@ -2579,6 +2662,15 @@ class Component extends DCLogic {
     },
   ];
 
+  garmentDefs = [
+    { key: 'tshirt', icon: '👕', label: 'T-Shirt', machineId: 'jack-c7-urus' },
+    { key: 'jacket', icon: '🧥', label: 'Jacket', machineId: 'jack-w4' },
+    { key: 'jeans', icon: '👖', label: 'Jeans & Trousers', machineId: 'jack-2002g' },
+    { key: 'shirt', icon: '👔', label: 'Shirt', machineId: 'jack-f6' },
+    { key: 'uniform', icon: '🥋', label: 'Uniform', machineId: 'jack-f6' },
+    { key: 'denim', icon: '🧵', label: 'Denim & Workwear', machineId: 'jack-9820g' },
+  ];
+
   goldenEagleProducts = [
     { id: 'ge-abrasive-belts', slug: 'abrasive-belts', src: 'uploads/golden-eagle-abrasive-belts.jpg', ph: 'Golden Eagle abrasive belts', name: 'Abrasive Belts', sub: 'FC1002 series', desc: 'Abrasive belts for sewing machine sharpening and finishing work, from Golden Eagle’s FC1002 series.', officialUrl: 'https://goldeneagle-sewingparts.com/sewing-machine-abrasive-belt.html' },
     { id: 'ge-thread-cutters', slug: 'thread-cutters', src: 'uploads/golden-eagle-thread-cutters.jpg', ph: 'Golden Eagle thread cutters', name: 'Thread Cutters', sub: 'Handheld snips', desc: 'Handheld thread-cutting snips, sold individually or in sets, in Golden Eagle’s standard handle colours.', officialUrl: 'https://goldeneagle-sewingparts.com/thread-cutter.html' },
@@ -3403,14 +3495,36 @@ class Component extends DCLogic {
       ],
       scrollBarPct: Math.round(this.state.scrollPct * 100),
       applicationRows: ['Shirts & Light Wovens', 'Uniforms & Institutional Garments', 'Light Denim & Workwear'],
-      garmentTypes: [
-        { icon: '👕', label: 'T-Shirt', open: () => this.goToView('finder') },
-        { icon: '🧥', label: 'Jacket', open: () => this.goToView('finder') },
-        { icon: '👖', label: 'Jeans & Trousers', open: () => this.goToView('finder') },
-        { icon: '👔', label: 'Shirt', open: () => this.goToView('finder') },
-        { icon: '🥋', label: 'Uniform', open: () => this.goToView('finder') },
-        { icon: '🧵', label: 'Denim & Workwear', open: () => this.goToView('finder') },
-      ],
+      garmentTypes: this.garmentDefs.map((g) => {
+        const active = this.state.selectedGarmentType === g.key;
+        return {
+          key: g.key,
+          icon: g.icon,
+          label: g.label,
+          bg: active ? '#0A5CFF' : 'transparent',
+          textColor: active ? '#fff' : '#1D1D1F',
+          ring: active ? '0 0 0 2px #0A5CFF' : '0 1px 2px rgba(0,0,0,0.08)',
+          open: () => this.setState({ selectedGarmentType: g.key }),
+        };
+      }),
+      isGarmentTshirt: this.state.selectedGarmentType === 'tshirt',
+      isGarmentJacket: this.state.selectedGarmentType === 'jacket',
+      isGarmentJeans: this.state.selectedGarmentType === 'jeans',
+      isGarmentShirt: this.state.selectedGarmentType === 'shirt',
+      isGarmentUniform: this.state.selectedGarmentType === 'uniform',
+      isGarmentDenim: this.state.selectedGarmentType === 'denim',
+      activeGarment: (() => {
+        const def = this.garmentDefs.find((g) => g.key === this.state.selectedGarmentType) || this.garmentDefs[0];
+        const m = this.machines.find((x) => x.id === def.machineId);
+        return {
+          machineSrc: m ? m.imgSrc : '',
+          machineModel: m ? m.model : '',
+          machineCategory: m ? m.category : '',
+          machinePurpose: m ? m.purpose : '',
+          viewMachine: () => this.goToProduct(def.machineId),
+        };
+      })(),
+      goFinderFromGarment: () => this.goToView('finder'),
       solutionRows: ['Starting your first line', 'Upgrading an existing machine', 'Scaling production', 'Consulting on your setup'],
       serviceItems: [
         { title: 'Installation', desc: 'Getting a machine set up and running correctly on your floor.' },

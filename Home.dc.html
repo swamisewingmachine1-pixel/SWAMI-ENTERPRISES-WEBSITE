@@ -152,6 +152,7 @@ a:hover { color:#3D7BFF; }
       <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navSolutionsOpacity }}" onClick="{{ goSolutions }}">Solutions</span>
       <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navFinderOpacity }}" onClick="{{ goFinder }}">Find Your Machine</span>
       <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navAboutOpacity }}" onClick="{{ goAbout }}">About</span>
+      <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navAccessoriesOpacity }}" onClick="{{ goAccessories }}">Accessories &amp; Spare Parts</span>
       <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navCompareOpacity }}" onClick="{{ goCompare }}">Compare{{ compareBadge }}</span>
     </div>
     <div style="display:flex;align-items:center;gap:18px">
@@ -228,6 +229,7 @@ a:hover { color:#3D7BFF; }
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goSolutionsAndClose }}">Solutions</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goFinderAndClose }}">Find Your Machine</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goAboutAndClose }}">About</span>
+      <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goAccessoriesAndClose }}">Accessories</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goCompareAndClose }}">Compare{{ compareBadge }}</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ openSearchAndCloseNav }}">Search</span>
       <span style="font-size:15px;color:#0A5CFF;cursor:pointer;margin-top:14px" onClick="{{ openContactAndClose }}">Talk to a Specialist →</span>
@@ -254,19 +256,37 @@ a:hover { color:#3D7BFF; }
         <div style="font-weight:600;font-size:clamp(28px,4.4vw,54px);line-height:1.2;letter-spacing:-0.015em;color:#1D1D1F;max-width:820px;margin:0 auto">The machine and technology backbone behind India's garment production.</div>
       </div>
 
-      <!-- MACHINE SPOTLIGHT -->
+      <!-- MACHINE SPOTLIGHT (3 featured machines) -->
       <div style="background:#000;padding:clamp(64px,9vw,110px) clamp(24px,6vw,80px);animation:swFadeUp 0.7s ease 0.2s both">
-        <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(32px,6vw,80px);align-items:center">
-        <div style="border-radius:24px;overflow:hidden;background:#0A0A0A">
-          <image-slot id="home-a3c-hero" shape="rect" src="uploads/jack-a3c-hero.webp" fit="contain" placeholder="Drop: JACK A3C product photograph" style="width:100%;height:clamp(280px,38vw,440px)"></image-slot>
-        </div>
-        <div>
-          <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#2997FF;margin-bottom:14px">FEATURED MACHINE</div>
-          <div style="font-weight:700;font-size:clamp(34px,5vw,64px);color:#F5F5F7;letter-spacing:-0.03em">JACK A3C</div>
-          <div style="font-size:15px;color:#86868B;margin-top:8px;font-weight:500">Computerized Lockstitch Machine</div>
-          <div style="font-size:17px;color:#A1A1A6;line-height:1.6;margin-top:20px;max-width:420px;font-weight:400">Single-needle lockstitch with auto thread trimmer, from JACK's A-series intelligent control line.</div>
-          <div style="margin-top:26px;color:#2997FF;font-size:16px;cursor:pointer;display:inline-flex;align-items:center;gap:4px" onClick="{{ goSpotlightA3C }}">View the A3C <span>›</span></div>
-        </div>
+        <div style="max-width:1280px;margin:0 auto">
+          <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#2997FF;margin-bottom:14px;text-align:center">FEATURED MACHINES</div>
+          <div style="font-weight:700;font-size:clamp(26px,3.6vw,42px);color:#F5F5F7;letter-spacing:-0.02em;text-align:center;max-width:640px;margin:0 auto 48px">The three machines we recommend most.</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(24px,4vw,32px)">
+            <div style="background:#0A0A0A;border-radius:24px;overflow:hidden;cursor:pointer" onClick="{{ goSpotlightF6 }}">
+              <image-slot id="home-f6-spotlight" shape="rect" src="uploads/f6-cutout-final.webp" fit="contain" placeholder="Drop: JACK F6 product photograph" style="width:100%;height:260px"></image-slot>
+              <div style="padding:24px 28px 28px">
+                <div style="font-weight:700;font-size:24px;color:#F5F5F7;letter-spacing:-0.02em">JACK F6</div>
+                <div style="font-size:14px;color:#86868B;margin-top:4px">Computerized Lockstitch Machine</div>
+                <div style="margin-top:16px;color:#2997FF;font-size:15px;display:inline-flex;align-items:center;gap:4px">View the F6 <span>›</span></div>
+              </div>
+            </div>
+            <div style="background:#0A0A0A;border-radius:24px;overflow:hidden;cursor:pointer" onClick="{{ goSpotlightA4C }}">
+              <image-slot id="home-a4c-spotlight" shape="rect" src="uploads/a4c-cutout.webp" fit="contain" placeholder="Drop: JACK A4C product photograph" style="width:100%;height:260px"></image-slot>
+              <div style="padding:24px 28px 28px">
+                <div style="font-weight:700;font-size:24px;color:#F5F5F7;letter-spacing:-0.02em">JACK A4C</div>
+                <div style="font-size:14px;color:#86868B;margin-top:4px">Computerized Lockstitch Machine</div>
+                <div style="margin-top:16px;color:#2997FF;font-size:15px;display:inline-flex;align-items:center;gap:4px">View the A4C <span>›</span></div>
+              </div>
+            </div>
+            <div style="background:#0A0A0A;border-radius:24px;overflow:hidden;cursor:pointer" onClick="{{ goSpotlightC5T }}">
+              <image-slot id="home-c5t-spotlight" shape="rect" src="uploads/c5t-cutout.webp" fit="contain" placeholder="Drop: JACK C5T product photograph" style="width:100%;height:260px"></image-slot>
+              <div style="padding:24px 28px 28px">
+                <div style="font-weight:700;font-size:24px;color:#F5F5F7;letter-spacing:-0.02em">JACK C5T</div>
+                <div style="font-size:14px;color:#86868B;margin-top:4px">Computerized Overlock Machine</div>
+                <div style="margin-top:16px;color:#2997FF;font-size:15px;display:inline-flex;align-items:center;gap:4px">View the C5T <span>›</span></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1679,6 +1699,31 @@ a:hover { color:#3D7BFF; }
     </div>
   </sc-if>
 
+  <!-- ============ ACCESSORIES & SPARE PARTS ============ -->
+  <sc-if value="{{ isAccessories }}" hint-placeholder-val="{{ false }}">
+    <div style="width:100%;background:#F5F5F7;animation:swFadeIn 0.5s ease both;padding:calc(64px + clamp(50px,8vw,90px)) clamp(24px,8vw,80px) 100px">
+      <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73">ACCESSORIES &amp; SPARE PARTS</div>
+      <div style="font-weight:800;font-size:clamp(28px,4.4vw,52px);color:#1D1D1F;letter-spacing:-0.02em;line-height:1.15;margin-top:16px;max-width:820px">Genuine parts, always in stock.</div>
+      <div style="font-size:16px;color:#6E6E73;max-width:600px;margin-top:16px;line-height:1.6">Needles, blades, presser feet, thread cutters and more — from Golden Eagle, Pegasus, JUKI and Groz-Beckert. A breakdown costs you an hour, not a week.</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(20px,3vw,24px);margin-top:48px">
+        <sc-for list="{{ goldenEagleProducts }}" as="p" hint-placeholder-count="14">
+          <div style="background:#fff;border-radius:16px;overflow:hidden;cursor:pointer" onClick="{{ p.open }}">
+            <image-slot id="{{ p.id }}-acc" shape="rect" src="{{ p.src }}" fit="cover" placeholder="{{ p.ph }}" style="width:100%;height:170px"></image-slot>
+            <div style="padding:16px 18px 20px">
+              <div style="font-weight:600;font-size:15px;color:#1D1D1F">{{ p.name }}</div>
+              <div style="font-size:13px;color:#6E6E73;margin-top:4px">{{ p.sub }}</div>
+              <div style="font-size:13px;color:#2997FF;margin-top:10px;display:flex;align-items:center;gap:4px">View details <span>›</span></div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:56px;text-align:center">
+        <div style="font-size:15px;color:#6E6E73;margin-bottom:20px">Looking for something not listed here?</div>
+        <span style="display:inline-block;padding:14px 30px;background:#0A5CFF;color:#fff;font-size:16px;font-weight:500;border-radius:980px;cursor:pointer" onClick="{{ openContact }}">Ask a Specialist</span>
+      </div>
+    </div>
+  </sc-if>
+
   <!-- CONTACT DRAWER -->
   <sc-if value="{{ contactOpen }}" hint-placeholder-val="{{ false }}">
     <div style="position:fixed;inset:0;z-index:2000;display:flex;justify-content:flex-end">
@@ -2823,7 +2868,7 @@ class Component extends DCLogic {
       const path = window.location.pathname;
       const machineMatch = path.match(/^\/machines\/([a-z0-9-]+)/i);
       const geMatch = path.match(/^\/accessories\/golden-eagle\/([a-z0-9-]+)/i);
-      const viewFromPath = { '/machines': 'machines', '/industries': 'industries', '/solutions': 'solutions', '/finder': 'finder', '/compare': 'compare', '/about': 'about', '/request-quote': 'quote', '/guides/lockstitch-vs-overlock-vs-flatlock': 'guideStitch', '/guides/jack-f6-vs-jack-2002g': 'guideCompareF6', '/guides/machines-for-a-shirt-factory': 'guideShirtFactory', '/guides/industrial-vs-domestic-sewing-machines': 'guideIndustrialVsDomestic', '/guides/machines-for-a-knitwear-line': 'guideKnitwear', '/guides/setting-up-a-new-production-line': 'guideFactorySetup', '/industrial-sewing-machines': 'landingAds' };
+      const viewFromPath = { '/machines': 'machines', '/industries': 'industries', '/solutions': 'solutions', '/finder': 'finder', '/compare': 'compare', '/accessories': 'accessories', '/about': 'about', '/request-quote': 'quote', '/guides/lockstitch-vs-overlock-vs-flatlock': 'guideStitch', '/guides/jack-f6-vs-jack-2002g': 'guideCompareF6', '/guides/machines-for-a-shirt-factory': 'guideShirtFactory', '/guides/industrial-vs-domestic-sewing-machines': 'guideIndustrialVsDomestic', '/guides/machines-for-a-knitwear-line': 'guideKnitwear', '/guides/setting-up-a-new-production-line': 'guideFactorySetup', '/industrial-sewing-machines': 'landingAds' };
       let next = null;
       if (machineMatch && this.machines.find((m) => m.id === machineMatch[1])) {
         next = { view: 'product', selectedMachineId: machineMatch[1] };
@@ -3058,7 +3103,7 @@ class Component extends DCLogic {
       const p = this.goldenEagleProducts.find((x) => x.id === id) || this.goldenEagleProducts[0];
       return p.name + ' — Golden Eagle — Swami Enterprises';
     }
-    const labels = { machines: 'Machines', industries: 'Industries', solutions: 'Solutions', finder: 'Find Your Machine', compare: 'Compare Machines', about: 'About', quote: 'Request a Quote', guideStitch: 'Lockstitch vs Overlock vs Flatlock: Which Machine for Which Job', guideCompareF6: 'JACK F6 vs JACK 2002G: Which Lockstitch Machine Do You Need', guideShirtFactory: 'What Machines Does a Shirt Factory Actually Need', guideIndustrialVsDomestic: 'Industrial vs Domestic Sewing Machines: What Actually Changes', guideKnitwear: 'What Machines Does a Knitwear Line Actually Need', guideFactorySetup: 'Setting Up a New Production Line: The Real Machine Sequence', landingAds: 'Industrial Sewing Machines Built for Serious Production' };
+    const labels = { machines: 'Machines', industries: 'Industries', solutions: 'Solutions', finder: 'Find Your Machine', compare: 'Compare Machines', accessories: 'Accessories & Spare Parts', about: 'About', quote: 'Request a Quote', guideStitch: 'Lockstitch vs Overlock vs Flatlock: Which Machine for Which Job', guideCompareF6: 'JACK F6 vs JACK 2002G: Which Lockstitch Machine Do You Need', guideShirtFactory: 'What Machines Does a Shirt Factory Actually Need', guideIndustrialVsDomestic: 'Industrial vs Domestic Sewing Machines: What Actually Changes', guideKnitwear: 'What Machines Does a Knitwear Line Actually Need', guideFactorySetup: 'Setting Up a New Production Line: The Real Machine Sequence', landingAds: 'Industrial Sewing Machines Built for Serious Production' };
     return (labels[view] || view) + ' — Swami Enterprises';
   };
   descriptionFor = (view, id) => {
@@ -3076,6 +3121,7 @@ class Component extends DCLogic {
       machines: 'The full JACK industrial sewing machine range stocked by Swami Enterprises — lockstitch, overlock, interlock and bartack machines, real specifications.',
       industries: 'What Swami Enterprises’ JACK machines are used for — shirts, uniforms, denim, knitwear, bags and technical sewing.',
       solutions: 'We don’t just sell machines — installation, training, maintenance, spare parts and technical support from Swami Enterprises.',
+      accessories: 'Genuine accessories and spare parts from Golden Eagle, Pegasus, JUKI and Groz-Beckert — needles, blades, presser feet, thread cutters and more, stocked by Swami Enterprises.',
       finder: 'A short, honest questionnaire based on Swami Enterprises’ verified JACK machine data to find the right machine for your production.',
       compare: 'Compare JACK sewing machines side by side — real, verified specifications from Swami Enterprises.',
       about: 'Swami Enterprises — authorized Jack sewing machine dealer, Chanakya Place, New Delhi, trading since 2015.',
@@ -3672,6 +3718,7 @@ class Component extends DCLogic {
       isIndustries: view === 'industries',
       isSolutions: view === 'solutions',
       isCompare: view === 'compare',
+      isAccessories: view === 'accessories',
       isLogo: view === 'logo',
       isQuote: view === 'quote',
       isGuideStitch: view === 'guideStitch',
@@ -3852,6 +3899,9 @@ class Component extends DCLogic {
       goSolutions: () => this.goToView('solutions'),
       goProduct: () => this.goToProduct(this.state.selectedMachineId || 'jack-f6'),
       goSpotlightA3C: () => this.goToProduct('jack-a3c'),
+      goSpotlightF6: () => this.goToProduct('jack-f6'),
+      goSpotlightA4C: () => this.goToProduct('jack-a4c'),
+      goSpotlightC5T: () => this.goToProduct('jack-c5t'),
       goFinder: () => this.goToView('finder'),
       navHomeOpacity: view === 'home' ? 1 : 0.55,
       navMachinesOpacity: (view === 'machines' || view === 'product') ? 1 : 0.55,
@@ -3903,6 +3953,9 @@ class Component extends DCLogic {
       openContactAndClose: () => { this.setState({ mobileNavOpen: false }); this.openContact(); },
       openSearchAndCloseNav: () => { this.setState({ mobileNavOpen: false }); this.openSearch(); },
       goCompareAndClose: () => { this.setState({ mobileNavOpen: false }); this.goToView('compare'); },
+      goAccessoriesAndClose: () => { this.setState({ mobileNavOpen: false }); this.goToView('accessories'); },
+      goAccessories: () => this.goToView('accessories'),
+      navAccessoriesOpacity: view === 'accessories' ? 1 : 0.55,
       industryRows: this.industries.map((ind) => {
         const matches = this.machines.filter((m) => m.applications.some((a) => a.includes(ind.matchKey) || ind.matchKey.includes(a)));
         return {

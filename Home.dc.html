@@ -1453,6 +1453,20 @@ a:hover { color:#3D7BFF; }
         <div class="sw-btn sw-btn-light" style="margin-top:28px;display:inline-block;padding:14px 24px;border:1px solid rgba(247,247,245,0.35);color:#F5F5F7;font-size:14px;font-weight:600;cursor:pointer;border-radius:980px" onClick="{{ openContact }}">Request specification sheet</div>
       </div>
 
+      <sc-if value="{{ hasResources }}" hint-placeholder-val="{{ false }}">
+      <div style="background:#F5F5F7;padding:clamp(50px,7vw,70px) clamp(24px,8vw,80px)">
+        <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:24px">DOWNLOADS</div>
+        <div style="display:flex;flex-direction:column">
+          <sc-for list="{{ machineResources }}" as="res" hint-placeholder-count="1">
+            <a href="{{ res.href }}" target="_blank" rel="noopener" class="sw-row-card" style="display:flex;justify-content:space-between;align-items:center;padding:18px clamp(12px,2vw,20px);margin:0 -12px;border-top:1px solid rgba(0,0,0,0.1);text-decoration:none;cursor:pointer">
+              <div style="font-size:15px;color:#1D1D1F;font-weight:600">{{ res.label }}</div>
+              <span style="color:#0A5CFF;font-size:14px">Download →</span>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+
       <div style="background:#fff;padding:clamp(50px,7vw,70px) clamp(24px,8vw,80px)">
         <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:8px">SERVICE & SUPPORT</div>
         <div style="font-size:15px;color:#1D1D1F;line-height:1.7;max-width:640px">Every machine from Swami Enterprises comes with installation, training, maintenance, genuine spare parts, technical support and after-sales — as an authorized JACK dealer in Delhi. <span style="color:#6E6E73;font-style:italic">Ask a specialist for specific service-area and warranty details for your location.</span></div>
@@ -1797,6 +1811,7 @@ class Component extends DCLogic {
       imgId: 'lib-jack-f6',
       imgSrc: 'uploads/jack-f6-hero.jpg',
       imgPh: 'Drop: JACK F6 product photograph',
+      resources: [{ label: 'JACK F6 — Product Literature (PDF)', href: 'uploads/jack-f6-literature.pdf' }],
       youtubeId: '8_ympqgXpK0',
       specs: [
         ['Series', 'Lockstitch, direct drive'], ['Needle', 'DBx1, 11-18#'], ['Number of threads', '2'],
@@ -2007,6 +2022,7 @@ class Component extends DCLogic {
       operations: ['lockstitch', 'straight stitch'],
       searchTerms: ['z7', 'jack z7', 'lockstitch', 'programmable'],
       imgId: 'lib-z7', imgSrc: 'uploads/jack-z7-hero.jpg', imgPh: 'Drop: JACK Z7 photograph',
+      resources: [{ label: 'JACK Z7 — Product Literature (PDF)', href: 'uploads/jack-z7-literature.pdf' }],
       specs: [
         ['Series', 'Heavy-Duty, triple transport'], ['Feed', 'Needle feed + top feed + bottom feed (triple transport)'],
         ['Controls', 'Full digital touch panel'], ['Best for', 'Sofa, car seat, luggage, heavy leather goods'],
@@ -2080,6 +2096,7 @@ class Component extends DCLogic {
       operations: ["lockstitch","straight stitch"],
       searchTerms: ["a5e","jack a5e","lockstitch","straight stitch"],
       imgId: 'lib-a5e', imgSrc: 'uploads/jack-a5e-hero.jpg', imgPh: 'Drop: Jack A5E-B AMH2 photograph',
+      resources: [{ label: 'JACK A5E-B AMH2 — Product Literature (PDF)', href: 'uploads/jack-a5e-literature.pdf' }],
       specs: [
         ['Series', 'Lockstitch (A-series), AI-integrated'],
         ['Needle', 'DBx1, 11-18# / DPx5, 18-21#'],
@@ -2129,6 +2146,7 @@ class Component extends DCLogic {
       operations: ["lockstitch","straight stitch"],
       searchTerms: ["8558","jack 8558","lockstitch","straight stitch"],
       imgId: 'lib-8558', imgSrc: 'uploads/jack-8558-hero.jpg', imgPh: 'Drop: Jack JK-8558G photograph',
+      resources: [{ label: 'JACK JK-8558G — Product Literature (PDF)', href: 'uploads/jack-8558-literature.pdf' }],
       specs: [
         ['Series', 'Chain stitch, flatbed'],
         ['Needle', 'TVx7, various gauges, 1/2/3-needle'],
@@ -2202,6 +2220,7 @@ class Component extends DCLogic {
       operations: ["overlock","edge finishing"],
       searchTerms: ["c60","jack c60","overlock","edge finishing"],
       imgId: 'lib-c60', imgSrc: 'uploads/jack-c60-hero.jpg', imgPh: 'Drop: Jack C60+ photograph',
+      resources: [{ label: 'JACK C60+ — Product Literature (PDF)', href: 'uploads/jack-c60-literature.pdf' }],
       specs: [
         ['Series', 'Overlock, advanced'],
         ['Max sewing speed', 'Up to 6000 s.p.m.'],
@@ -2225,6 +2244,7 @@ class Component extends DCLogic {
       operations: ["overlock","edge finishing"],
       searchTerms: ["797","jack 797","overlock","edge finishing"],
       imgId: 'lib-797', imgSrc: 'uploads/jack-797-hero.jpg', imgPh: 'Drop: Jack JK-797 photograph',
+      resources: [{ label: 'JACK JK-797 — Product Literature (PDF)', href: 'uploads/jack-797-literature.pdf' }],
       specs: [
         ['Series', 'Overlock, small-arm'],
         ['Needle', 'DCx27, 9#–11#'],
@@ -2344,6 +2364,7 @@ class Component extends DCLogic {
       operations: ["interlock","coverstitch"],
       searchTerms: ["8670","jack 8670","interlock","coverstitch"],
       imgId: 'lib-8670', imgSrc: 'uploads/jack-8670-hero.jpg', imgPh: 'Drop: Jack JK-8670BDII/UT photograph',
+      resources: [{ label: 'JACK JK-8670 — Product Literature (PDF)', href: 'uploads/jack-8670-literature.pdf' }],
       specs: [
         ['Series', 'Interlock, small cylinder-bed'],
         ['Needle', 'UY128GAS, 11-14#'],
@@ -2388,6 +2409,7 @@ class Component extends DCLogic {
       operations: ["lockstitch","straight stitch"],
       searchTerms: ["h7","jack h7","lockstitch","straight stitch"],
       imgId: 'lib-h7', imgSrc: 'uploads/jack-h7-hero.jpg', imgPh: 'Drop: Jack H7 photograph',
+      resources: [{ label: 'JACK H7 — Product Literature (PDF)', href: 'uploads/jack-h7-literature.pdf' }],
       specs: [
         ['Series', 'Heavy-Duty, digitalized top feed'],
         ['Motor', '750W integrated motor'],
@@ -2524,6 +2546,7 @@ class Component extends DCLogic {
       operations: ["lockstitch","straight stitch"],
       searchTerms: ["s5","jack s5","lockstitch","straight stitch"],
       imgId: 'lib-s5', imgSrc: 'uploads/jack-s5-hero.jpg', imgPh: 'Drop: Jack S5 photograph',
+      resources: [{ label: 'JACK S5 — Product Literature (PDF)', href: 'uploads/jack-s5-literature.pdf' }],
       specs: [
         ['Series', 'Post bed'],
         ['Needle', 'INDPX5#16'],
@@ -2542,6 +2565,7 @@ class Component extends DCLogic {
       operations: ["bartack","pattern stitching"],
       searchTerms: ["t1900","jack t1900","bartack","pattern stitching"],
       imgId: 'lib-t1900', imgSrc: 'uploads/jk-t1900g.jpg', imgPh: 'Drop: Jack JK-T1900/1903 photograph',
+      resources: [{ label: 'JACK JK-T1900G — Product Literature (PDF)', href: 'uploads/jack-t1900-literature.pdf' }],
       specs: [
         ['Type', 'Bartack / button sewer'],
         ['Stitch field', '60 × 50mm'],
@@ -2633,6 +2657,7 @@ class Component extends DCLogic {
       operations: ["bartack","pattern stitching"],
       searchTerms: ["8740","jack 8740","bartack","pattern stitching"],
       imgId: 'lib-8740', imgSrc: 'uploads/jack-8740-hero.jpg', imgPh: 'Drop: Jack JK-8740 photograph',
+      resources: [{ label: 'JACK JK-8740C — Product Literature (PDF)', href: 'uploads/jack-8740-literature.pdf' }],
       specs: [
         ['Type', 'Feed-off-the-arm, multi-needle'],
         ['Needles / Threads', '4 needles / 6 thread'],
@@ -2692,6 +2717,10 @@ class Component extends DCLogic {
       operations: ["steam pressing","finishing"],
       searchTerms: ["steam press","ironing table","press","boiler","l5","vacuum table"],
       imgId: 'lib-l5-press', imgSrc: 'uploads/jack-l5-hero.jpg', imgPh: 'Drop: JACK L5 steam press photograph',
+      resources: [
+        { label: 'JACK L5 — Product Literature 1 (PDF)', href: 'uploads/jack-l5-literature-1.pdf' },
+        { label: 'JACK L5 — Product Literature 2 (PDF)', href: 'uploads/jack-l5-literature-2.pdf' },
+      ],
       specs: [
         ['Type', 'Rectangular ironing table with steam generator boiler'],
         ['Motor', 'Cyclonic vacuum motor, electromagnetic heat exchange, frequency-controlled'],
@@ -3752,6 +3781,8 @@ class Component extends DCLogic {
       hasDetailItems: !!((this.machines.find((x) => x.id === this.state.selectedMachineId) || this.machines[0]).detailItems || []).length,
       noDetailItems: !((this.machines.find((x) => x.id === this.state.selectedMachineId) || this.machines[0]).detailItems || []).length,
       detailItems: (this.machines.find((x) => x.id === this.state.selectedMachineId) || this.machines[0]).detailItems || [],
+      hasResources: !!((this.machines.find((x) => x.id === this.state.selectedMachineId) || this.machines[0]).resources || []).length,
+      machineResources: (this.machines.find((x) => x.id === this.state.selectedMachineId) || this.machines[0]).resources || [],
       relatedMachines: this.machines.filter((m) => m.id !== this.state.selectedMachineId && m.category === (this.machines.find((x) => x.id === this.state.selectedMachineId) || this.machines[0]).category).slice(0, 3).map((m) => ({ ...m, open: () => this.goToProduct(m.id) })),
       goCompare: () => this.goToView('compare'),
       navCompareOpacity: view === 'compare' ? 1 : 0.55,

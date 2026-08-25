@@ -105,7 +105,7 @@ a:hover { color:#3D7BFF; }
   <!-- NAV -->
   <div style="position:fixed;top:0;left:0;right:0;height:76px;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(24px,5vw,64px);display:{{ mobileBarDisplay }};background:{{ navBg }};backdropFilter:blur({{ navBlur }}px);WebkitBackdropFilter:blur({{ navBlur }}px);border-bottom:1px solid {{ navBorder }};transform:{{ navTransform }};transition:transform 0.32s cubic-bezier(0.4,0,0.2,1),background 0.4s ease">
     <div style="display:flex;align-items:center;gap:9px;cursor:pointer" onClick="{{ goHome }}">
-      <img src="uploads/swami-nav-logo.png" alt="Swami" style="height:56px;width:auto;object-fit:contain;transform:skewX(-10deg)">
+      <img src="uploads/swami-nav-logo-v2.png" alt="Swami" style="height:56px;width:auto;object-fit:contain;transform:skewX(-10deg)">
     </div>
     <span style="color:{{ navText }};font-size:20px;cursor:pointer;display:{{ hamburgerVisibleDisplay }}" onClick="{{ toggleMobileNav }}">☰</span>
   </div>
@@ -113,7 +113,7 @@ a:hover { color:#3D7BFF; }
   <!-- DESKTOP FULL-WIDTH BAR (Apple-style) -->
   <div style="position:fixed;top:0;left:0;right:0;height:52px;z-index:1001;display:{{ desktopNavDisplay }};align-items:center;justify-content:space-between;padding:0 clamp(24px,3vw,40px);background:{{ navBg }};backdropFilter:blur({{ navBlur }}px);WebkitBackdropFilter:blur({{ navBlur }}px);border-bottom:1px solid {{ navBorder }};transform:{{ navTransform }};transition:transform 0.32s cubic-bezier(0.4,0,0.2,1),background 0.4s ease">
     <div style="display:flex;align-items:center;gap:8px;cursor:pointer" onClick="{{ goHome }}">
-      <img src="uploads/swami-nav-logo.png" alt="Swami" style="height:38px;width:auto;object-fit:contain;transform:skewX(-10deg)">
+      <img src="uploads/swami-nav-logo-v2.png" alt="Swami" style="height:38px;width:auto;object-fit:contain;transform:skewX(-10deg)">
     </div>
     <div style="display:flex;align-items:center;gap:clamp(22px,2.2vw,34px)">
       <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navHomeOpacity }}" onClick="{{ goHome }}">Home</span>
@@ -223,7 +223,7 @@ a:hover { color:#3D7BFF; }
   <sc-if value="{{ mobileNavOpen }}" hint-placeholder-val="{{ false }}">
     <div style="position:fixed;inset:0;background:#050505;z-index:999;display:flex;flex-direction:column;justify-content:center;padding:80px clamp(28px,8vw,60px);gap:26px;animation:swFadeIn 0.3s ease both">
       <span style="position:absolute;top:26px;right:28px;color:#F5F5F7;font-size:24px;cursor:pointer" onClick="{{ toggleMobileNav }}">×</span>
-      <img src="uploads/swami-logo.png" alt="Swami Enterprises" style="height:44px;width:auto;object-fit:contain;position:absolute;top:24px;left:28px;transform:skewX(-10deg)">
+      <img src="uploads/swami-logo-v2.png" alt="Swami Enterprises" style="height:44px;width:auto;object-fit:contain;position:absolute;top:24px;left:28px;transform:skewX(-10deg)">
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goToViewAndClose }}" data-target="home">Home</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goMachinesAndClose }}">Machines</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goIndustriesAndClose }}">Industries</span>
@@ -583,7 +583,7 @@ a:hover { color:#3D7BFF; }
       <div style="background:#050505;padding:clamp(70px,9vw,110px) clamp(24px,8vw,80px) 96px">
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:clamp(28px,4vw,40px)">
           <div>
-            <img src="uploads/swami-logo.png" alt="Swami Enterprises" style="height:clamp(110px,14vw,160px);width:auto;object-fit:contain;display:block;transform:skewX(-10deg);filter:brightness(0) invert(1)">
+            <img src="uploads/swami-logo-v2.png" alt="Swami Enterprises" style="height:clamp(110px,14vw,160px);width:auto;object-fit:contain;display:block;transform:skewX(-10deg);filter:brightness(0) invert(1)">
             <div style="font-size:14px;color:#86868B;margin-top:16px;max-width:320px;line-height:1.6">A Delhi-headquartered partner serving customers across India, for industrial sewing machines and accessories — including JACK, Pegasus, JUKI, Golden Eagle, and Groz-Beckert — helping you find, install and maintain the right equipment for your production.</div>
             <div style="margin-top:24px;display:inline-block;padding:12px 24px;background:#0A5CFF;color:#fff;font-size:14px;font-weight:500;border-radius:980px;cursor:pointer" onClick="{{ openContact }}">Talk to a Specialist</div>
             <div style="display:flex;gap:14px;margin-top:28px">
@@ -1301,7 +1301,7 @@ a:hover { color:#3D7BFF; }
            would otherwise sit directly on top of these links on small
            screens — confirmed by testing, not a hypothetical. -->
       <div style="background:#050505;padding:clamp(40px,6vw,56px) clamp(24px,8vw,80px) calc(clamp(40px,6vw,56px) + 76px);display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center">
-        <img src="uploads/swami-logo.png" alt="Swami Enterprises" style="height:28px;width:auto;object-fit:contain;transform:skewX(-10deg)">
+        <img src="uploads/swami-logo-v2.png" alt="Swami Enterprises" style="height:28px;width:auto;object-fit:contain;transform:skewX(-10deg)">
         <div style="display:flex;gap:24px;flex-wrap:wrap;font-size:13px;color:#A1A1A6">
           <a href="tel:+919971336656" onClick="{{ trackCallClick }}" style="color:#A1A1A6;text-decoration:none">+91 99713 36656</a>
           <a href="{{ laWhatsappHref }}" target="_blank" rel="noopener noreferrer" onClick="{{ trackWhatsappClick }}" style="color:#A1A1A6;text-decoration:none">WhatsApp</a>

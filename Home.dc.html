@@ -105,7 +105,7 @@ a:hover { color:#3D7BFF; }
   <!-- NAV -->
   <div style="position:fixed;top:0;left:0;right:0;height:76px;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(24px,5vw,64px);display:{{ mobileBarDisplay }};background:{{ navBg }};backdropFilter:blur({{ navBlur }}px);WebkitBackdropFilter:blur({{ navBlur }}px);border-bottom:1px solid {{ navBorder }};transform:{{ navTransform }};transition:transform 0.32s cubic-bezier(0.4,0,0.2,1),background 0.4s ease">
     <div style="display:flex;align-items:center;gap:9px;cursor:pointer" onClick="{{ goHome }}">
-      <img src="uploads/swami-nav-logo.png" alt="Swami" style="height:56px;width:auto;object-fit:contain">
+      <img src="uploads/swami-nav-logo.png" alt="Swami" style="height:56px;width:auto;object-fit:contain;transform:skewX(-10deg)">
     </div>
     <span style="color:{{ navText }};font-size:20px;cursor:pointer;display:{{ hamburgerVisibleDisplay }}" onClick="{{ toggleMobileNav }}">☰</span>
   </div>
@@ -113,7 +113,7 @@ a:hover { color:#3D7BFF; }
   <!-- DESKTOP FULL-WIDTH BAR (Apple-style) -->
   <div style="position:fixed;top:0;left:0;right:0;height:52px;z-index:1001;display:{{ desktopNavDisplay }};align-items:center;justify-content:space-between;padding:0 clamp(24px,3vw,40px);background:{{ navBg }};backdropFilter:blur({{ navBlur }}px);WebkitBackdropFilter:blur({{ navBlur }}px);border-bottom:1px solid {{ navBorder }};transform:{{ navTransform }};transition:transform 0.32s cubic-bezier(0.4,0,0.2,1),background 0.4s ease">
     <div style="display:flex;align-items:center;gap:8px;cursor:pointer" onClick="{{ goHome }}">
-      <img src="uploads/swami-nav-logo.png" alt="Swami" style="height:38px;width:auto;object-fit:contain">
+      <img src="uploads/swami-nav-logo.png" alt="Swami" style="height:38px;width:auto;object-fit:contain;transform:skewX(-10deg)">
     </div>
     <div style="display:flex;align-items:center;gap:clamp(22px,2.2vw,34px)">
       <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navHomeOpacity }}" onClick="{{ goHome }}">Home</span>
@@ -223,7 +223,7 @@ a:hover { color:#3D7BFF; }
   <sc-if value="{{ mobileNavOpen }}" hint-placeholder-val="{{ false }}">
     <div style="position:fixed;inset:0;background:#050505;z-index:999;display:flex;flex-direction:column;justify-content:center;padding:80px clamp(28px,8vw,60px);gap:26px;animation:swFadeIn 0.3s ease both">
       <span style="position:absolute;top:26px;right:28px;color:#F5F5F7;font-size:24px;cursor:pointer" onClick="{{ toggleMobileNav }}">×</span>
-      <img src="uploads/swami-logo.png" alt="Swami Enterprises" style="height:44px;width:auto;object-fit:contain;position:absolute;top:24px;left:28px">
+      <img src="uploads/swami-logo.png" alt="Swami Enterprises" style="height:44px;width:auto;object-fit:contain;position:absolute;top:24px;left:28px;transform:skewX(-10deg)">
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goToViewAndClose }}" data-target="home">Home</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goMachinesAndClose }}">Machines</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goIndustriesAndClose }}">Industries</span>
@@ -378,9 +378,9 @@ a:hover { color:#3D7BFF; }
 
           <!-- GOLDEN EAGLE PRODUCTS -->
           <div style="margin-top:clamp(56px,8vw,80px)">
-            <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:28px;text-align:center">GOLDEN EAGLE PRODUCTS WE STOCK</div>
+            <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:28px;text-align:center">ACCESSORIES &amp; SPARE PARTS WE STOCK</div>
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(20px,3vw,24px)">
-              <sc-for list="{{ goldenEagleProducts }}" as="p" hint-placeholder-count="14">
+              <sc-for list="{{ accessoryPool }}" as="p" hint-placeholder-count="19">
                 <div style="background:#fff;border-radius:16px;overflow:hidden;cursor:pointer" onClick="{{ p.open }}">
                   <image-slot id="{{ p.id }}" shape="rect" src="{{ p.src }}" fit="cover" placeholder="{{ p.ph }}" style="width:100%;height:170px"></image-slot>
                   <div style="padding:16px 18px 20px">
@@ -583,7 +583,7 @@ a:hover { color:#3D7BFF; }
       <div style="background:#050505;padding:clamp(70px,9vw,110px) clamp(24px,8vw,80px) 96px">
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:clamp(28px,4vw,40px)">
           <div>
-            <img src="uploads/swami-logo.png" alt="Swami Enterprises" style="height:clamp(110px,14vw,160px);width:auto;object-fit:contain;display:block">
+            <img src="uploads/swami-logo.png" alt="Swami Enterprises" style="height:clamp(110px,14vw,160px);width:auto;object-fit:contain;display:block;transform:skewX(-10deg)">
             <div style="font-size:14px;color:#86868B;margin-top:16px;max-width:320px;line-height:1.6">A Delhi-headquartered partner serving customers across India, for industrial sewing machines and accessories — including JACK, Pegasus, JUKI, Golden Eagle, and Groz-Beckert — helping you find, install and maintain the right equipment for your production.</div>
             <div style="margin-top:24px;display:inline-block;padding:12px 24px;background:#0A5CFF;color:#fff;font-size:14px;font-weight:500;border-radius:980px;cursor:pointer" onClick="{{ openContact }}">Talk to a Specialist</div>
           </div>
@@ -1290,7 +1290,7 @@ a:hover { color:#3D7BFF; }
            would otherwise sit directly on top of these links on small
            screens — confirmed by testing, not a hypothetical. -->
       <div style="background:#050505;padding:clamp(40px,6vw,56px) clamp(24px,8vw,80px) calc(clamp(40px,6vw,56px) + 76px);display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center">
-        <img src="uploads/swami-logo.png" alt="Swami Enterprises" style="height:28px;width:auto;object-fit:contain">
+        <img src="uploads/swami-logo.png" alt="Swami Enterprises" style="height:28px;width:auto;object-fit:contain;transform:skewX(-10deg)">
         <div style="display:flex;gap:24px;flex-wrap:wrap;font-size:13px;color:#A1A1A6">
           <a href="tel:+919971336656" onClick="{{ trackCallClick }}" style="color:#A1A1A6;text-decoration:none">+91 99713 36656</a>
           <a href="{{ laWhatsappHref }}" target="_blank" rel="noopener noreferrer" onClick="{{ trackWhatsappClick }}" style="color:#A1A1A6;text-decoration:none">WhatsApp</a>
@@ -1550,19 +1550,19 @@ a:hover { color:#3D7BFF; }
             <image-slot id="{{ geProduct.id }}-detail" shape="rect" src="{{ geProduct.src }}" fit="contain" placeholder="{{ geProduct.ph }}" style="width:100%;height:clamp(280px,32vw,420px)"></image-slot>
           </div>
           <div>
-            <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#2997FF;margin-bottom:12px">GOLDEN EAGLE</div>
+            <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#2997FF;margin-bottom:12px;text-transform:uppercase">{{ geProduct.brand }}</div>
             <div style="font-weight:700;font-size:clamp(28px,4vw,44px);color:#1D1D1F;letter-spacing:-0.02em">{{ geProduct.name }}</div>
             <div style="font-size:15px;color:#6E6E73;margin-top:6px;font-weight:500">{{ geProduct.sub }}</div>
             <div style="font-size:16px;color:#3A3A3C;line-height:1.7;margin-top:20px;max-width:480px">{{ geProduct.desc }}</div>
             <div style="margin-top:28px;display:flex;gap:14px;flex-wrap:wrap">
               <span style="padding:13px 26px;background:#0A5CFF;color:#fff;font-size:15px;font-weight:500;border-radius:980px;cursor:pointer" onClick="{{ geProduct.askAboutProduct }}">Ask about pricing &amp; availability</span>
             </div>
-            <div style="font-size:13px;color:#86868B;margin-top:16px;max-width:480px;line-height:1.6">Stocked and sold by Swami Enterprises, Delhi — a Golden Eagle accessories partner. Full manufacturer specs available on request.</div>
+            <div style="font-size:13px;color:#86868B;margin-top:16px;max-width:480px;line-height:1.6">Stocked and sold by Swami Enterprises, Delhi — a {{ geProduct.brand }} accessories partner. Full manufacturer specs available on request.</div>
           </div>
         </div>
 
         <div style="margin-top:clamp(56px,8vw,80px)">
-          <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:20px">OTHER GOLDEN EAGLE PRODUCTS</div>
+          <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:20px;text-transform:uppercase">OTHER {{ geProduct.brand }} PRODUCTS</div>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px">
             <sc-for list="{{ geProduct.otherProducts }}" as="op" hint-placeholder-count="3">
               <div style="background:#fff;border-radius:16px;overflow:hidden;cursor:pointer" onClick="{{ op.open }}">
@@ -1708,7 +1708,7 @@ a:hover { color:#3D7BFF; }
       <div style="font-weight:800;font-size:clamp(28px,4.4vw,52px);color:#1D1D1F;letter-spacing:-0.02em;line-height:1.15;margin-top:16px;max-width:820px">Genuine parts, always in stock.</div>
       <div style="font-size:16px;color:#6E6E73;max-width:600px;margin-top:16px;line-height:1.6">Needles, blades, presser feet, thread cutters and more — from Golden Eagle, Pegasus, JUKI and Groz-Beckert. A breakdown costs you an hour, not a week.</div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(20px,3vw,24px);margin-top:48px">
-        <sc-for list="{{ goldenEagleProducts }}" as="p" hint-placeholder-count="14">
+        <sc-for list="{{ accessoryPool }}" as="p" hint-placeholder-count="19">
           <div style="background:#fff;border-radius:16px;overflow:hidden;cursor:pointer" onClick="{{ p.open }}">
             <image-slot id="{{ p.id }}-acc" shape="rect" src="{{ p.src }}" fit="cover" placeholder="{{ p.ph }}" style="width:100%;height:170px"></image-slot>
             <div style="padding:16px 18px 20px">
@@ -2883,6 +2883,21 @@ class Component extends DCLogic {
     { id: 'ge-needle-plates', slug: 'needle-plates-feed-dogs', src: 'uploads/golden-eagle-needle-plates.jpg', ph: 'Golden Eagle needle plates and feed dogs', name: 'Needle Plates & Feed Dogs', sub: 'Throat plates and feed dogs', desc: 'Needle (throat) plates and feed dogs for industrial sewing machines, sized to match specific machine models.', officialUrl: 'https://goldeneagle-sewingparts.com/sewing-machine-feed-dog.html' },
   ];
 
+  // Real Pegasus industrial machines, sourced from Pegasus Co., Ltd.'s official product
+  // pages (pegasus.co.jp/en/machine/series/) — genuine model photos and names only.
+  pegasusProducts = [
+    { id: 'pg-mxneo', slug: 'mxneo', brand: 'PEGASUS', src: 'uploads/pegasus-mxneo.jpg', ph: 'Pegasus MXneo overlock and safety stitch machine', name: 'MXneo', sub: 'Overlock & safety stitch machine series', desc: 'Pegasus’s MXneo series overlock and safety-stitch machine, with an electronic control panel for thread and stitch settings.', officialUrl: 'https://www.pegasus.co.jp/en/machine/series/s105' },
+    { id: 'pg-wx600p', slug: 'wx600p', brand: 'PEGASUS', src: 'uploads/pegasus-wx600p.jpg', ph: 'Pegasus WX600P interlock stitch machine', name: 'WX600P', sub: 'Oil-barrier cylinder-bed interlock stitch machine', desc: 'Pegasus’s WX600P series — an oil-barrier type, cylinder-bed interlock stitch machine used for hemming and binding on knitwear and activewear.', officialUrl: 'https://www.pegasus.co.jp/en/machine/series/s220' },
+    { id: 'pg-m900neo', slug: 'm900neo', brand: 'PEGASUS', src: 'uploads/pegasus-m900neo.jpg', ph: 'Pegasus M900neo overlock machine', name: 'M900neo', sub: 'Overlock machine, electronic control panel', desc: 'Pegasus’s M900neo overlock machine with a digital control panel for stitch length, differential feed and other settings.', officialUrl: 'https://www.pegasus.co.jp/en/machine/series/s106' },
+    { id: 'pg-soh500', slug: 'soh-500', brand: 'PEGASUS', src: 'uploads/pegasus-soh500.jpg', ph: 'Pegasus SOH-500 series machine', name: 'SOH-500', sub: 'SOH-500 series', desc: 'Pegasus’s SOH-500 series industrial sewing machine, shown here in its standard workstation mount.', officialUrl: 'https://www.pegasus.co.jp/en/machine/series/s301' },
+    { id: 'pg-fs700p', slug: 'fs700p', brand: 'PEGASUS', src: 'uploads/pegasus-fs700p.jpg', ph: 'Pegasus FS700P feed-off-the-arm machine', name: 'FS700P', sub: 'Feed-off-the-arm chainstitch machine series', desc: 'Pegasus’s FS700P series feed-off-the-arm chainstitch machine, used for seaming cylindrical garment parts such as sleeves and waistbands.', officialUrl: 'https://www.pegasus.co.jp/en/machine/series/s217' },
+  ];
+
+  // Combined accessory-brand catalogue — every brand array feeds one pool so the
+  // detail-page routing, listing page and "other products" rail work identically
+  // regardless of which brand a product belongs to.
+  get accessoryPool() { return this.goldenEagleProducts.concat(this.pegasusProducts); }
+
   componentDidMount() {
     if (typeof window === 'undefined') return;
     this.updateNavWidth = () => this.setState({ isNarrowNav: window.innerWidth < 980 });
@@ -2930,12 +2945,15 @@ class Component extends DCLogic {
       const path = window.location.pathname;
       const machineMatch = path.match(/^\/machines\/([a-z0-9-]+)/i);
       const geMatch = path.match(/^\/accessories\/golden-eagle\/([a-z0-9-]+)/i);
+      const pgMatch = path.match(/^\/accessories\/pegasus\/([a-z0-9-]+)/i);
       const viewFromPath = { '/machines': 'machines', '/industries': 'industries', '/solutions': 'solutions', '/finder': 'finder', '/compare': 'compare', '/accessories': 'accessories', '/after-sales-service': 'afterSales', '/about': 'about', '/request-quote': 'quote', '/guides/lockstitch-vs-overlock-vs-flatlock': 'guideStitch', '/guides/jack-f6-vs-jack-2002g': 'guideCompareF6', '/guides/machines-for-a-shirt-factory': 'guideShirtFactory', '/guides/industrial-vs-domestic-sewing-machines': 'guideIndustrialVsDomestic', '/guides/machines-for-a-knitwear-line': 'guideKnitwear', '/guides/setting-up-a-new-production-line': 'guideFactorySetup', '/industrial-sewing-machines': 'landingAds' };
       let next = null;
       if (machineMatch && this.machines.find((m) => m.id === machineMatch[1])) {
         next = { view: 'product', selectedMachineId: machineMatch[1] };
       } else if (geMatch && this.goldenEagleProducts.find((p) => p.slug === geMatch[1])) {
         next = { view: 'geProduct', selectedGeProductId: this.goldenEagleProducts.find((p) => p.slug === geMatch[1]).id };
+      } else if (pgMatch && this.pegasusProducts.find((p) => p.slug === pgMatch[1])) {
+        next = { view: 'geProduct', selectedGeProductId: this.pegasusProducts.find((p) => p.slug === pgMatch[1]).id };
       } else if (viewFromPath[path]) {
         next = { view: viewFromPath[path] };
       }
@@ -3142,8 +3160,9 @@ class Component extends DCLogic {
     if (view === 'home') return '/';
     if (view === 'product') return '/machines/' + (id || 'jack-f6');
     if (view === 'geProduct') {
-      const p = this.goldenEagleProducts.find((x) => x.id === id) || this.goldenEagleProducts[0];
-      return '/accessories/golden-eagle/' + p.slug;
+      const p = this.accessoryPool.find((x) => x.id === id) || this.accessoryPool[0];
+      const brandSlug = p.brand === 'PEGASUS' ? 'pegasus' : 'golden-eagle';
+      return '/accessories/' + brandSlug + '/' + p.slug;
     }
     if (view === 'quote') return '/request-quote';
     if (view === 'afterSales') return '/after-sales-service';
@@ -3163,8 +3182,8 @@ class Component extends DCLogic {
       return (m ? m.model + ' — ' : '') + 'Swami Enterprises';
     }
     if (view === 'geProduct') {
-      const p = this.goldenEagleProducts.find((x) => x.id === id) || this.goldenEagleProducts[0];
-      return p.name + ' — Golden Eagle — Swami Enterprises';
+      const p = this.accessoryPool.find((x) => x.id === id) || this.accessoryPool[0];
+      return p.name + ' — ' + (p.brand || 'Golden Eagle') + ' — Swami Enterprises';
     }
     const labels = { machines: 'Machines', industries: 'Industries', solutions: 'Solutions', finder: 'Find Your Machine', compare: 'Compare Machines', accessories: 'Accessories & Spare Parts', afterSales: 'After-Sales Service', about: 'About', quote: 'Request a Quote', guideStitch: 'Lockstitch vs Overlock vs Flatlock: Which Machine for Which Job', guideCompareF6: 'JACK F6 vs JACK 2002G: Which Lockstitch Machine Do You Need', guideShirtFactory: 'What Machines Does a Shirt Factory Actually Need', guideIndustrialVsDomestic: 'Industrial vs Domestic Sewing Machines: What Actually Changes', guideKnitwear: 'What Machines Does a Knitwear Line Actually Need', guideFactorySetup: 'Setting Up a New Production Line: The Real Machine Sequence', landingAds: 'Industrial Sewing Machines Built for Serious Production' };
     return (labels[view] || view) + ' — Swami Enterprises';
@@ -3177,8 +3196,8 @@ class Component extends DCLogic {
       return `${m.model} — ${m.purpose} Real specifications, ${m.detailItems && m.detailItems.length ? 'official photography, ' : ''}${m.youtubeId ? 'product video, ' : ''}available from Swami Enterprises, authorized JACK dealer, New Delhi.`;
     }
     if (view === 'geProduct') {
-      const p = this.goldenEagleProducts.find((x) => x.id === id) || this.goldenEagleProducts[0];
-      return `${p.name} — ${p.desc} Genuine Golden Eagle accessories, stocked by Swami Enterprises, New Delhi.`;
+      const p = this.accessoryPool.find((x) => x.id === id) || this.accessoryPool[0];
+      return `${p.name} — ${p.desc} Genuine ${p.brand || 'Golden Eagle'} accessories, stocked by Swami Enterprises, New Delhi.`;
     }
     const descs = {
       machines: 'The full JACK industrial sewing machine range stocked by Swami Enterprises — lockstitch, overlock, interlock and bartack machines, real specifications.',
@@ -3311,8 +3330,8 @@ class Component extends DCLogic {
     if (typeof window !== 'undefined') window.scrollTo(0, 0);
   };
   goToGeProduct = (id) => {
-    const p = this.goldenEagleProducts.find((x) => x.id === id) || this.goldenEagleProducts[0];
-    this.track('product_view', { id: p.id, model: p.name, category: 'Golden Eagle Accessory' });
+    const p = this.accessoryPool.find((x) => x.id === id) || this.accessoryPool[0];
+    this.track('product_view', { id: p.id, model: p.name, category: (p.brand || 'Golden Eagle') + ' Accessory' });
     this.setState({ view: 'geProduct', selectedGeProductId: p.id, contactOpen: false });
     this.syncUrl('geProduct', p.id);
     if (typeof window !== 'undefined') window.scrollTo(0, 0);
@@ -3947,13 +3966,15 @@ class Component extends DCLogic {
       isProduct: view === 'product',
       isGeProduct: view === 'geProduct',
       geProduct: (() => {
-        const p = this.goldenEagleProducts.find((x) => x.id === this.state.selectedGeProductId) || this.goldenEagleProducts[0];
+        const p = this.accessoryPool.find((x) => x.id === this.state.selectedGeProductId) || this.accessoryPool[0];
+        const brand = p.brand || 'Golden Eagle';
         return {
           ...p,
-          otherProducts: this.goldenEagleProducts.filter((x) => x.id !== p.id).map((x) => ({ ...x, open: () => this.goToGeProduct(x.id) })),
+          brand,
+          otherProducts: this.accessoryPool.filter((x) => x.id !== p.id && (x.brand || 'Golden Eagle') === brand).map((x) => ({ ...x, open: () => this.goToGeProduct(x.id) })),
           askAboutProduct: () => {
             this.track('contact_intent', { view: 'geProduct', machine: p.name });
-            const msg = `Hi Swami Enterprises, I'd like to know more about the Golden Eagle ${p.name} (${p.sub}) — availability and pricing?`;
+            const msg = `Hi Swami Enterprises, I'd like to know more about the ${brand} ${p.name} (${p.sub}) — availability and pricing?`;
             window.open('https://wa.me/919971336656?text=' + encodeURIComponent(msg), '_blank');
           },
         };
@@ -4140,6 +4161,7 @@ class Component extends DCLogic {
         { id: 'stitch-production', src: 'uploads/official-jack-f6-card2.webp', ph: 'Drop: production photo', label: 'PRODUCTION' },
       ],
       goldenEagleProducts: this.goldenEagleProducts.map((p) => ({ ...p, open: () => this.goToGeProduct(p.id) })),
+      accessoryPool: this.accessoryPool.map((p) => ({ ...p, open: () => this.goToGeProduct(p.id) })),
       capabilityItems: [
         { n: '01', title: 'Automated trimming', desc: 'Reduces manual thread cutting between operations, keeping the line moving.' },
         { n: '02', title: 'Direct-drive motor', desc: 'Built for efficient, quieter operation on the floor.' },

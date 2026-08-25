@@ -70,6 +70,7 @@
 @keyframes swFadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
 @keyframes swFadeIn { from { opacity:0; } to { opacity:1; } }
 body { margin:0; zoom:0.85; }
+.nav-mega-wrap:hover .nav-mega-panel { opacity:1 !important; pointer-events:auto !important; transform:translateY(0) !important; }
 /* Static brand logos (never user-uploaded) — the empty-state ring can lag a beat behind
    the real network on first paint; these never show an empty state, so hide it outright
    instead of racing the retry timing. */
@@ -113,7 +114,37 @@ a:hover { color:#3D7BFF; }
     </div>
     <div style="display:flex;align-items:center;gap:clamp(22px,2.2vw,34px)">
       <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navHomeOpacity }}" onClick="{{ goHome }}">Home</span>
-      <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navMachinesOpacity }}" onClick="{{ goMachines }}">Machines</span>
+      <div class="nav-mega-wrap" style="position:relative;height:52px;display:flex;align-items:center">
+        <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navMachinesOpacity }}" onClick="{{ goMachines }}">Machines</span>
+        <div class="nav-mega-panel" style="position:fixed;top:52px;left:0;right:0;background:#fff;border-bottom:1px solid rgba(0,0,0,0.08);box-shadow:0 24px 48px rgba(0,0,0,0.12);padding:44px clamp(24px,6vw,120px);opacity:0;pointer-events:none;transform:translateY(-6px);transition:opacity 0.2s ease,transform 0.2s ease">
+          <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:48px">
+            <div>
+              <div style="font-size:12px;font-weight:600;letter-spacing:0.04em;color:#86868B;margin-bottom:16px">EXPLORE</div>
+              <div style="display:flex;flex-direction:column;gap:12px">
+                <span style="font-size:19px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goMachines }}">All Machines</span>
+                <span style="font-size:19px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goFinder }}">Find Your Machine</span>
+                <span style="font-size:19px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goCompare }}">Compare</span>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:12px;font-weight:600;letter-spacing:0.04em;color:#86868B;margin-bottom:16px">BY CATEGORY</div>
+              <div style="display:flex;flex-direction:column;gap:12px">
+                <span style="font-size:15px;color:#1D1D1F;cursor:pointer" onClick="{{ goMachines }}">Lockstitch</span>
+                <span style="font-size:15px;color:#1D1D1F;cursor:pointer" onClick="{{ goMachines }}">Overlock</span>
+                <span style="font-size:15px;color:#1D1D1F;cursor:pointer" onClick="{{ goMachines }}">Interlock / Coverstitch</span>
+                <span style="font-size:15px;color:#1D1D1F;cursor:pointer" onClick="{{ goMachines }}">Pattern / Bartack</span>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:12px;font-weight:600;letter-spacing:0.04em;color:#86868B;margin-bottom:16px">FEATURED</div>
+              <div style="display:flex;flex-direction:column;gap:12px">
+                <span style="font-size:15px;color:#1D1D1F;cursor:pointer" onClick="{{ goProduct }}">JACK F6</span>
+                <span style="font-size:15px;color:#1D1D1F;cursor:pointer" onClick="{{ goSpotlightA3C }}">JACK A3C</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navIndustriesOpacity }}" onClick="{{ goIndustries }}">Industries</span>
       <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navSolutionsOpacity }}" onClick="{{ goSolutions }}">Solutions</span>
       <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navFinderOpacity }}" onClick="{{ goFinder }}">Find Your Machine</span>

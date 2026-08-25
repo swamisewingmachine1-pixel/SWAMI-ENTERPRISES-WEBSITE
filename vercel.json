@@ -10,6 +10,7 @@
     { "source": "/finder", "destination": "/Home.dc.html" },
     { "source": "/compare", "destination": "/Home.dc.html" },
     { "source": "/about", "destination": "/Home.dc.html" },
+    { "source": "/after-sales-service", "destination": "/Home.dc.html" },
     { "source": "/request-quote", "destination": "/Home.dc.html" },
     { "source": "/guides/:slug", "destination": "/Home.dc.html" },
     { "source": "/industrial-sewing-machines", "destination": "/Home.dc.html" },

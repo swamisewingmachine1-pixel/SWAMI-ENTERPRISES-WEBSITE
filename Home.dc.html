@@ -68,6 +68,7 @@
 <script src="./image-slot.js"></script>
 <style>
 @keyframes swFadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+@keyframes swGlobeScroll { from { transform:translateX(0); } to { transform:translateX(-50%); } }
 @keyframes swFadeIn { from { opacity:0; } to { opacity:1; } }
 body { margin:0; zoom:0.85; }
 .nav-mega-wrap:hover .nav-mega-panel { opacity:1 !important; pointer-events:auto !important; transform:translateY(0) !important; }
@@ -372,7 +373,14 @@ a:hover { color:#3D7BFF; }
       </div>
 
       <!-- BRAND SCALE DECLARATION -->
-      <div style="background:#050505;padding:clamp(80px,11vw,140px) clamp(24px,6vw,80px);text-align:center;animation:swFadeUp 0.7s ease 0.3s both;position:relative;overflow:hidden"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(760px,120vw);height:min(760px,120vw);border-radius:50%;overflow:hidden;opacity:0.4;pointer-events:none;box-shadow:inset 0 0 80px 20px #050505"><img src="uploads/india-globe.svg" alt="India, where Swami Enterprises operates" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div style="background:#050505;padding:clamp(80px,11vw,140px) clamp(24px,6vw,80px);text-align:center;animation:swFadeUp 0.7s ease 0.3s both;position:relative;overflow:hidden">
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(760px,120vw);height:min(760px,120vw);border-radius:50%;overflow:hidden;pointer-events:none;box-shadow:0 0 0 1px rgba(247,247,245,0.08)">
+          <div style="display:flex;height:100%;width:max-content;animation:swGlobeScroll 55s linear infinite">
+            <img src="uploads/world-map-scroll.svg" alt="World map, India highlighted — where Swami Enterprises operates" style="height:100%;width:auto;display:block;flex-shrink:0">
+            <img src="uploads/world-map-scroll.svg" alt="" aria-hidden="true" style="height:100%;width:auto;display:block;flex-shrink:0">
+          </div>
+          <div style="position:absolute;inset:0;background:radial-gradient(circle at 32% 28%,rgba(255,255,255,0.08),transparent 55%),radial-gradient(circle,transparent 52%,rgba(5,5,5,0.92) 100%)"></div>
+        </div>
         <div style="position:relative;z-index:1"><div style="font-weight:800;font-size:clamp(32px,5.2vw,64px);color:#F5F5F7;letter-spacing:-0.03em;line-height:1.1;max-width:920px;margin:0 auto;text-shadow:0 2px 24px rgba(0,0,0,0.8)">Not a shop that sells machines. A partner building India's industrial sewing infrastructure.</div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:clamp(32px,5vw,56px);max-width:920px;margin:clamp(56px,8vw,88px) auto 0">
           <div>

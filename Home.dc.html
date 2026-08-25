@@ -71,10 +71,13 @@
 @keyframes swFadeIn { from { opacity:0; } to { opacity:1; } }
 body { margin:0; zoom:0.85; }
 .nav-mega-wrap:hover .nav-mega-panel { opacity:1 !important; pointer-events:auto !important; transform:translateY(0) !important; }
+/* Mobile bar is 76px tall, desktop bar is 52px — the hero's margin-top must match
+   whichever one is actually visible at this width, or a gap/overlap shows up. */
+@media (min-width:980px) { .hero-video-wrap { margin-top:52px !important; min-height:calc(94vh - 52px) !important; } }
 /* Static brand logos (never user-uploaded) — the empty-state ring can lag a beat behind
    the real network on first paint; these never show an empty state, so hide it outright
    instead of racing the retry timing. */
-#jack-brand-logo::part(ring), #golden-eagle-logo::part(ring), #groz-beckert-logo::part(ring), #pegasus-logo::part(ring), #juki-logo::part(ring) { display:none !important; }
+#jack-brand-logo::part(ring), #golden-eagle-logo::part(ring), #groz-beckert-logo::part(ring), #pegasus-logo::part(ring), #juki-logo::part(ring), #hyo-logo::part(ring) { display:none !important; }
 a { color:#0A5CFF; text-decoration:none; }
 a:hover { color:#3D7BFF; }
 * { box-sizing:border-box; }
@@ -237,7 +240,7 @@ a:hover { color:#3D7BFF; }
 
       <!-- HERO: JACK videos, full-bleed, no text/photos. margin-top clears the now-permanently-
            opaque fixed nav so the video's top edge isn't hidden behind it. -->
-      <div style="min-height:calc(94vh - 76px);margin-top:76px;position:relative;background:#000;overflow:hidden;animation:swFadeUp 0.7s ease both">
+      <div class="hero-video-wrap" style="min-height:calc(94vh - 76px);margin-top:76px;position:relative;background:#000;overflow:hidden;animation:swFadeUp 0.7s ease both">
         <video id="hero-jack-video" autoplay muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;z-index:0" src="uploads/jack-hero-video.mp4"></video>
         <div style="position:absolute;bottom:28px;left:0;right:0;display:flex;justify-content:center;gap:10px;z-index:1">
           <div style="width:{{ heroVideoDot0Width }};height:6px;border-radius:3px;background:{{ heroVideoDot0Bg }};cursor:pointer;transition:width 0.3s ease" onClick="{{ goHeroVideo0 }}"></div>
@@ -306,7 +309,7 @@ a:hover { color:#3D7BFF; }
       <div style="background:#000;padding:clamp(64px,9vw,110px) clamp(24px,6vw,80px);animation:swFadeUp 0.7s ease 0.29s both">
         <div style="max-width:1280px;margin:0 auto">
           <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#2997FF;margin-bottom:14px;text-align:center">OUR GLOBAL PARTNERS</div>
-          <div style="font-weight:700;font-size:clamp(26px,3.6vw,42px);color:#F5F5F7;letter-spacing:-0.02em;text-align:center;max-width:720px;margin:0 auto">Five brands. One standard. Chosen, not just carried.</div>
+          <div style="font-weight:700;font-size:clamp(26px,3.6vw,42px);color:#F5F5F7;letter-spacing:-0.02em;text-align:center;max-width:720px;margin:0 auto">Six brands. One standard. Chosen, not just carried.</div>
           <div style="font-size:15px;color:#86868B;text-align:center;max-width:640px;margin:16px auto 0;line-height:1.6">Each brand in our lineup fills a specific gap — machines, needles, or genuine spares — so nothing on your floor is a compromise.</div>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(24px,4vw,32px);margin-top:clamp(40px,6vw,56px)">
             <div style="background:#0A0A0A;border:1px solid rgba(255,255,255,0.08);border-radius:28px;padding:clamp(40px,5vw,56px);display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform 0.25s ease" style-hover="transform:translateY(-4px)">
@@ -348,6 +351,14 @@ a:hover { color:#3D7BFF; }
               <div style="font-weight:700;font-size:22px;color:#F5F5F7;margin-top:24px">JUKI</div>
               <div style="font-size:15px;color:#A1A1A6;line-height:1.6;margin-top:10px">Globally trusted industrial sewing machines and solutions from Japan.</div>
               <div style="margin-top:20px;color:#2997FF;font-size:15px;cursor:pointer;display:inline-flex;align-items:center;gap:4px" onClick="{{ openContact }}">Ask about JUKI <span>›</span></div>
+            </div>
+            <div style="background:#0A0A0A;border:1px solid rgba(255,255,255,0.08);border-radius:28px;padding:clamp(40px,5vw,56px);display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform 0.25s ease" style-hover="transform:translateY(-4px)">
+              <div style="border-radius:18px;overflow:hidden;width:100%;height:clamp(64px,8vw,90px);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 28px rgba(0,0,0,0.3)">
+                <image-slot id="hyo-logo" shape="rect" src="uploads/hyo-logo.png" fit="cover" placeholder="HYO logo" style="width:100%;height:100%;max-width:100%;max-height:100%"></image-slot>
+              </div>
+              <div style="font-weight:700;font-size:22px;color:#F5F5F7;margin-top:24px">HYO</div>
+              <div style="font-size:15px;color:#A1A1A6;line-height:1.6;margin-top:10px">Servo drive motors for industrial sewing machines, 100% copper winding, exclusive for India.</div>
+              <div style="margin-top:20px;color:#2997FF;font-size:15px;cursor:pointer;display:inline-flex;align-items:center;gap:4px" onClick="{{ openContact }}">Ask about HYO motors <span>›</span></div>
             </div>
           </div>
 

@@ -4,6 +4,7 @@
     { "source": "/machines/:id", "destination": "/Home.dc.html" },
     { "source": "/accessories", "destination": "/Home.dc.html" },
     { "source": "/accessories/golden-eagle/:slug", "destination": "/Home.dc.html" },
+    { "source": "/accessories/pegasus/:slug", "destination": "/Home.dc.html" },
     { "source": "/machines", "destination": "/Home.dc.html" },
     { "source": "/industries", "destination": "/Home.dc.html" },
     { "source": "/solutions", "destination": "/Home.dc.html" },

@@ -77,7 +77,7 @@ body { margin:0; zoom:0.85; }
 /* Static brand logos (never user-uploaded) — the empty-state ring can lag a beat behind
    the real network on first paint; these never show an empty state, so hide it outright
    instead of racing the retry timing. */
-#jack-brand-logo::part(ring), #golden-eagle-logo::part(ring), #groz-beckert-logo::part(ring), #pegasus-logo::part(ring), #juki-logo::part(ring), #hyo-logo::part(ring) { display:none !important; }
+#jack-brand-logo::part(ring), #golden-eagle-logo::part(ring), #groz-beckert-logo::part(ring), #pegasus-logo::part(ring), #juki-logo::part(ring) { display:none !important; }
 a { color:#0A5CFF; text-decoration:none; }
 a:hover { color:#3D7BFF; }
 * { box-sizing:border-box; }
@@ -309,7 +309,7 @@ a:hover { color:#3D7BFF; }
       <div style="background:#000;padding:clamp(64px,9vw,110px) clamp(24px,6vw,80px);animation:swFadeUp 0.7s ease 0.29s both">
         <div style="max-width:1280px;margin:0 auto">
           <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#2997FF;margin-bottom:14px;text-align:center">OUR GLOBAL PARTNERS</div>
-          <div style="font-weight:700;font-size:clamp(26px,3.6vw,42px);color:#F5F5F7;letter-spacing:-0.02em;text-align:center;max-width:720px;margin:0 auto">Six brands. One standard. Chosen, not just carried.</div>
+          <div style="font-weight:700;font-size:clamp(26px,3.6vw,42px);color:#F5F5F7;letter-spacing:-0.02em;text-align:center;max-width:720px;margin:0 auto">Five brands. One standard. Chosen, not just carried.</div>
           <div style="font-size:15px;color:#86868B;text-align:center;max-width:640px;margin:16px auto 0;line-height:1.6">Each brand in our lineup fills a specific gap — machines, needles, or genuine spares — so nothing on your floor is a compromise.</div>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(24px,4vw,32px);margin-top:clamp(40px,6vw,56px)">
             <div style="background:#0A0A0A;border:1px solid rgba(255,255,255,0.08);border-radius:28px;padding:clamp(40px,5vw,56px);display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform 0.25s ease" style-hover="transform:translateY(-4px)">
@@ -351,14 +351,6 @@ a:hover { color:#3D7BFF; }
               <div style="font-weight:700;font-size:22px;color:#F5F5F7;margin-top:24px">JUKI</div>
               <div style="font-size:15px;color:#A1A1A6;line-height:1.6;margin-top:10px">Globally trusted industrial sewing machines and solutions from Japan.</div>
               <div style="margin-top:20px;color:#2997FF;font-size:15px;cursor:pointer;display:inline-flex;align-items:center;gap:4px" onClick="{{ openContact }}">Ask about JUKI <span>›</span></div>
-            </div>
-            <div style="background:#0A0A0A;border:1px solid rgba(255,255,255,0.08);border-radius:28px;padding:clamp(40px,5vw,56px);display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform 0.25s ease" style-hover="transform:translateY(-4px)">
-              <div style="border-radius:18px;overflow:hidden;width:100%;height:clamp(64px,8vw,90px);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 28px rgba(0,0,0,0.3)">
-                <image-slot id="hyo-logo" shape="rect" src="uploads/hyo-logo.png" fit="cover" placeholder="HYO logo" style="width:100%;height:100%;max-width:100%;max-height:100%"></image-slot>
-              </div>
-              <div style="font-weight:700;font-size:22px;color:#F5F5F7;margin-top:24px">HYO</div>
-              <div style="font-size:15px;color:#A1A1A6;line-height:1.6;margin-top:10px">Servo drive motors for industrial sewing machines, 100% copper winding, exclusive for India.</div>
-              <div style="margin-top:20px;color:#2997FF;font-size:15px;cursor:pointer;display:inline-flex;align-items:center;gap:4px" onClick="{{ openContact }}">Ask about HYO motors <span>›</span></div>
             </div>
           </div>
 
@@ -1803,7 +1795,7 @@ class Component extends DCLogic {
       operations: ['lockstitch', 'straight stitch'],
       searchTerms: ['f6', 'jack f6', 'lockstitch', 'shirt', 'shirts', 'uniform', 'garment'],
       imgId: 'lib-jack-f6',
-      imgSrc: 'uploads/f6-cutout-final.webp',
+      imgSrc: 'uploads/jack-f6-hero.jpg',
       imgPh: 'Drop: JACK F6 product photograph',
       youtubeId: '8_ympqgXpK0',
       specs: [
@@ -2014,7 +2006,7 @@ class Component extends DCLogic {
       applications: ['shirts', 'wovens', 'garments'],
       operations: ['lockstitch', 'straight stitch'],
       searchTerms: ['z7', 'jack z7', 'lockstitch', 'programmable'],
-      imgId: 'lib-z7', imgSrc: 'uploads/z7-cutout.webp', imgPh: 'Drop: JACK Z7 photograph',
+      imgId: 'lib-z7', imgSrc: 'uploads/jack-z7-hero.jpg', imgPh: 'Drop: JACK Z7 photograph',
       specs: [
         ['Series', 'Heavy-Duty, triple transport'], ['Feed', 'Needle feed + top feed + bottom feed (triple transport)'],
         ['Controls', 'Full digital touch panel'], ['Best for', 'Sofa, car seat, luggage, heavy leather goods'],
@@ -2181,7 +2173,7 @@ class Component extends DCLogic {
       applications: ["knitwear","wovens","garments"],
       operations: ["overlock","edge finishing"],
       searchTerms: ["c7-urus","jack c7-urus","overlock","edge finishing"],
-      imgId: 'lib-c7-urus', imgSrc: 'uploads/jack-c7-hero.webp', imgPh: 'Drop: Jack C7 URUS photograph',
+      imgId: 'lib-c7-urus', imgSrc: 'uploads/jack-c7-hero.jpg', imgPh: 'Drop: Jack C7 URUS photograph',
       specs: [
         ['Series', 'Overlock, AI-integrated'],
         ['Max sewing speed', '7000 s.p.m.'],
@@ -2209,7 +2201,7 @@ class Component extends DCLogic {
       applications: ["knitwear","wovens","garments"],
       operations: ["overlock","edge finishing"],
       searchTerms: ["c60","jack c60","overlock","edge finishing"],
-      imgId: 'lib-c60', imgSrc: 'uploads/jack-c60-hero.webp', imgPh: 'Drop: Jack C60+ photograph',
+      imgId: 'lib-c60', imgSrc: 'uploads/jack-c60-hero.jpg', imgPh: 'Drop: Jack C60+ photograph',
       specs: [
         ['Series', 'Overlock, advanced'],
         ['Max sewing speed', 'Up to 6000 s.p.m.'],
@@ -2232,7 +2224,7 @@ class Component extends DCLogic {
       applications: ["knitwear","wovens","garments"],
       operations: ["overlock","edge finishing"],
       searchTerms: ["797","jack 797","overlock","edge finishing"],
-      imgId: 'lib-797', imgSrc: 'uploads/jack-797-hero.webp', imgPh: 'Drop: Jack JK-797 photograph',
+      imgId: 'lib-797', imgSrc: 'uploads/jack-797-hero.jpg', imgPh: 'Drop: Jack JK-797 photograph',
       specs: [
         ['Series', 'Overlock, small-arm'],
         ['Needle', 'DCx27, 9#–11#'],
@@ -2351,7 +2343,7 @@ class Component extends DCLogic {
       applications: ["knitwear","activewear","garments"],
       operations: ["interlock","coverstitch"],
       searchTerms: ["8670","jack 8670","interlock","coverstitch"],
-      imgId: 'lib-8670', imgSrc: 'uploads/jack-8670-hero.webp', imgPh: 'Drop: Jack JK-8670BDII/UT photograph',
+      imgId: 'lib-8670', imgSrc: 'uploads/jack-8670-hero.jpg', imgPh: 'Drop: Jack JK-8670BDII/UT photograph',
       specs: [
         ['Series', 'Interlock, small cylinder-bed'],
         ['Needle', 'UY128GAS, 11-14#'],
@@ -2395,7 +2387,7 @@ class Component extends DCLogic {
       applications: ["shirts","wovens","garments"],
       operations: ["lockstitch","straight stitch"],
       searchTerms: ["h7","jack h7","lockstitch","straight stitch"],
-      imgId: 'lib-h7', imgSrc: 'uploads/jack-h7-hero.webp', imgPh: 'Drop: Jack H7 photograph',
+      imgId: 'lib-h7', imgSrc: 'uploads/jack-h7-hero.jpg', imgPh: 'Drop: Jack H7 photograph',
       specs: [
         ['Series', 'Heavy-Duty, digitalized top feed'],
         ['Motor', '750W integrated motor'],
@@ -2531,7 +2523,7 @@ class Component extends DCLogic {
       applications: ["shirts","wovens","garments"],
       operations: ["lockstitch","straight stitch"],
       searchTerms: ["s5","jack s5","lockstitch","straight stitch"],
-      imgId: 'lib-s5', imgSrc: 'uploads/jack-s5-hero.webp', imgPh: 'Drop: Jack S5 photograph',
+      imgId: 'lib-s5', imgSrc: 'uploads/jack-s5-hero.jpg', imgPh: 'Drop: Jack S5 photograph',
       specs: [
         ['Series', 'Post bed'],
         ['Needle', 'INDPX5#16'],
@@ -2549,7 +2541,7 @@ class Component extends DCLogic {
       applications: ["garments","bags","technical sewing"],
       operations: ["bartack","pattern stitching"],
       searchTerms: ["t1900","jack t1900","bartack","pattern stitching"],
-      imgId: 'lib-t1900', imgSrc: 'uploads/jk-t1900g.webp', imgPh: 'Drop: Jack JK-T1900/1903 photograph',
+      imgId: 'lib-t1900', imgSrc: 'uploads/jk-t1900g.jpg', imgPh: 'Drop: Jack JK-T1900/1903 photograph',
       specs: [
         ['Type', 'Bartack / button sewer'],
         ['Stitch field', '60 × 50mm'],
@@ -2640,7 +2632,7 @@ class Component extends DCLogic {
       applications: ["garments","bags","technical sewing"],
       operations: ["bartack","pattern stitching"],
       searchTerms: ["8740","jack 8740","bartack","pattern stitching"],
-      imgId: 'lib-8740', imgSrc: 'uploads/jack-8740-hero.webp', imgPh: 'Drop: Jack JK-8740 photograph',
+      imgId: 'lib-8740', imgSrc: 'uploads/jack-8740-hero.jpg', imgPh: 'Drop: Jack JK-8740 photograph',
       specs: [
         ['Type', 'Feed-off-the-arm, multi-needle'],
         ['Needles / Threads', '4 needles / 6 thread'],

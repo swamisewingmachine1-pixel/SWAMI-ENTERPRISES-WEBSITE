@@ -101,7 +101,7 @@ a:hover { color:#3D7BFF; }
   <!-- NAV -->
   <div style="position:fixed;top:0;left:0;right:0;height:76px;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(24px,5vw,64px);display:{{ mobileBarDisplay }};background:{{ navBg }};backdropFilter:blur({{ navBlur }}px);WebkitBackdropFilter:blur({{ navBlur }}px);border-bottom:1px solid {{ navBorder }};transform:{{ navTransform }};transition:transform 0.32s cubic-bezier(0.4,0,0.2,1),background 0.4s ease">
     <div style="display:flex;align-items:center;gap:9px;cursor:pointer" onClick="{{ goHome }}">
-      <span style="font-weight:700;font-size:16px;letter-spacing:0.12em;color:{{ navText }}">SWAMI</span>
+      <img src="uploads/swami-nav-logo.png" alt="Swami" style="height:22px;width:auto;object-fit:contain">
     </div>
     <span style="color:{{ navText }};font-size:20px;cursor:pointer;display:{{ hamburgerVisibleDisplay }}" onClick="{{ toggleMobileNav }}">☰</span>
   </div>
@@ -109,7 +109,7 @@ a:hover { color:#3D7BFF; }
   <!-- DESKTOP FULL-WIDTH BAR (Apple-style) -->
   <div style="position:fixed;top:0;left:0;right:0;height:52px;z-index:1001;display:{{ desktopNavDisplay }};align-items:center;justify-content:space-between;padding:0 clamp(24px,3vw,40px);background:{{ navBg }};backdropFilter:blur({{ navBlur }}px);WebkitBackdropFilter:blur({{ navBlur }}px);border-bottom:1px solid {{ navBorder }};transform:{{ navTransform }};transition:transform 0.32s cubic-bezier(0.4,0,0.2,1),background 0.4s ease">
     <div style="display:flex;align-items:center;gap:8px;cursor:pointer" onClick="{{ goHome }}">
-      <span style="font-weight:700;font-size:14px;letter-spacing:0.1em;color:{{ navText }}">SWAMI</span>
+      <img src="uploads/swami-nav-logo.png" alt="Swami" style="height:18px;width:auto;object-fit:contain">
     </div>
     <div style="display:flex;align-items:center;gap:clamp(22px,2.2vw,34px)">
       <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navHomeOpacity }}" onClick="{{ goHome }}">Home</span>

@@ -153,14 +153,14 @@ a:hover { color:#3D7BFF; }
           </div>
         </div>
       </div>
-      <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navIndustriesOpacity }}" onClick="{{ goIndustries }}">Industries</span>
-      <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navSolutionsOpacity }}" onClick="{{ goSolutions }}">Solutions</span>
-      <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navFinderOpacity }}" onClick="{{ goFinder }}">Find Your Machine</span>
-      <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navAboutOpacity }}" onClick="{{ goAbout }}">About</span>
       <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navAccessoriesOpacity }}" onClick="{{ goAccessories }}">Accessories &amp; Spare Parts</span>
       <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:0.55" onClick="{{ scrollToAccJuki }}">JUKI</span>
       <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:0.55" onClick="{{ scrollToAccPegasus }}">Pegasus</span>
+      <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navIndustriesOpacity }}" onClick="{{ goIndustries }}">Industries</span>
+      <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navSolutionsOpacity }}" onClick="{{ goSolutions }}">Solutions</span>
+      <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navFinderOpacity }}" onClick="{{ goFinder }}">Find Your Machine</span>
       <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navAfterSalesOpacity }}" onClick="{{ goAfterSales }}">After-Sales Service</span>
+      <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navAboutOpacity }}" onClick="{{ goAbout }}">About</span>
       <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navCompareOpacity }}" onClick="{{ goCompare }}">Compare{{ compareBadge }}</span>
     </div>
     <div style="display:flex;align-items:center;gap:18px">
@@ -233,14 +233,14 @@ a:hover { color:#3D7BFF; }
       <img src="uploads/swami-logo-v4.png" alt="Swami Enterprises" style="height:44px;width:auto;object-fit:contain;position:absolute;top:24px;left:28px;transform:skewX(-10deg)">
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goToViewAndClose }}" data-target="home">Home</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goMachinesAndClose }}">Machines</span>
-      <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goIndustriesAndClose }}">Industries</span>
-      <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goSolutionsAndClose }}">Solutions</span>
-      <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goFinderAndClose }}">Find Your Machine</span>
-      <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goAboutAndClose }}">About</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goAccessoriesAndClose }}">Accessories</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ scrollToAccJukiAndClose }}">JUKI</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ scrollToAccPegasusAndClose }}">Pegasus</span>
+      <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goIndustriesAndClose }}">Industries</span>
+      <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goSolutionsAndClose }}">Solutions</span>
+      <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goFinderAndClose }}">Find Your Machine</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goAfterSalesAndClose }}">After-Sales Service</span>
+      <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goAboutAndClose }}">About</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goCompareAndClose }}">Compare{{ compareBadge }}</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ openSearchAndCloseNav }}">Search</span>
       <span style="font-size:15px;color:#0A5CFF;cursor:pointer;margin-top:14px" onClick="{{ openContactAndClose }}">Talk to a Specialist →</span>
@@ -1762,6 +1762,16 @@ a:hover { color:#3D7BFF; }
 
       <div id="acc-golden-eagle" style="margin-top:56px;scroll-margin-top:100px">
         <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:20px">GOLDEN EAGLE</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:12px;margin-bottom:32px;max-width:900px">
+          <div style="text-align:center"><img src="uploads/ge-cat-scissors.jpg" alt="Scissors and Thread Cutters" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px"><div style="font-size:11px;color:#6E6E73;margin-top:6px;line-height:1.3">Scissors &amp; Cutters</div></div>
+          <div style="text-align:center"><img src="uploads/ge-cat-hooks.jpg" alt="Hooks and Bobbin Casters" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px"><div style="font-size:11px;color:#6E6E73;margin-top:6px;line-height:1.3">Hooks &amp; Bobbin Casters</div></div>
+          <div style="text-align:center"><img src="uploads/ge-cat-tension.jpg" alt="Thread Tension ASM and Bobbin Winder" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px"><div style="font-size:11px;color:#6E6E73;margin-top:6px;line-height:1.3">Thread Tension &amp; Winder</div></div>
+          <div style="text-align:center"><img src="uploads/ge-cat-folders.jpg" alt="Sewing Folders" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px"><div style="font-size:11px;color:#6E6E73;margin-top:6px;line-height:1.3">Sewing Folders</div></div>
+          <div style="text-align:center"><img src="uploads/ge-cat-knives.jpg" alt="Knives for Industrial Sewing Machines" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px"><div style="font-size:11px;color:#6E6E73;margin-top:6px;line-height:1.3">Knives</div></div>
+          <div style="text-align:center"><img src="uploads/ge-cat-presserfoot.jpg" alt="Presser foot, Needle plate, Feed dog" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px"><div style="font-size:11px;color:#6E6E73;margin-top:6px;line-height:1.3">Presser Foot &amp; Feed Dog</div></div>
+          <div style="text-align:center"><img src="uploads/ge-cat-cutting.jpg" alt="Cutting Machine and Machine Spare Parts" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px"><div style="font-size:11px;color:#6E6E73;margin-top:6px;line-height:1.3">Cutting Machine Parts</div></div>
+          <div style="text-align:center"><img src="uploads/ge-cat-abrasive.jpg" alt="Abrasive Belt and Grinding Stones" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px"><div style="font-size:11px;color:#6E6E73;margin-top:6px;line-height:1.3">Abrasive Belts</div></div>
+        </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(20px,3vw,24px)">
           <sc-for list="{{ goldenEagleProducts }}" as="p" hint-placeholder-count="14">
             <div style="background:#fff;border-radius:16px;overflow:hidden;cursor:pointer" onClick="{{ p.open }}">

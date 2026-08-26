@@ -3993,6 +3993,10 @@ class Component extends DCLogic {
       goProduct2002g: () => this.goToProduct('jack-2002g'),
       isLandingAds: view === 'landingAds',
       scrollToLaRecommend: this.scrollToLaRecommend,
+      scrollToAccGoldenEagle: this.scrollToAccGoldenEagle,
+      scrollToAccPegasus: this.scrollToAccPegasus,
+      scrollToAccJuki: this.scrollToAccJuki,
+      scrollToAccGrozBeckert: this.scrollToAccGrozBeckert,
       laFeaturedProducts: ['jack-f6', 'jack-2002g', 'jack-e4s', 'jack-w4'].map((id) => {
         const m = this.machines.find((x) => x.id === id);
         return m ? { id: m.id, model: m.model, purpose: m.purpose, category: m.category, imgSrc: m.imgSrc, imgPh: m.imgPh, imgId: 'la-' + m.id, open: () => this.goToProduct(m.id), getPrice: () => { this.track('price_request', { machine: m.id }); this.goQuote(m.id); } } : null;

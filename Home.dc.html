@@ -69,6 +69,10 @@
 <style>
 @keyframes swFadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
 @keyframes swGlobeScroll { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+@keyframes swPageTransitionFade { 0% { opacity:1; } 70% { opacity:1; } 100% { opacity:0; } }
+@keyframes swPageTransitionSpin { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
+.sw-page-transition { position:fixed; inset:0; z-index:5000; background:#050505; display:flex; align-items:center; justify-content:center; pointer-events:none; animation:swPageTransitionFade 0.55s ease both; }
+.sw-page-transition-spinner { width:34px; height:34px; border-radius:50%; border:2px solid rgba(247,247,245,0.15); border-top-color:#FF8A3D; animation:swPageTransitionSpin 0.7s linear infinite; }
 @keyframes swFadeIn { from { opacity:0; } to { opacity:1; } }
 body { margin:0; zoom:0.85; }
 .nav-mega-wrap:hover .nav-mega-panel { opacity:1 !important; pointer-events:auto !important; transform:translateY(0) !important; }
@@ -240,6 +244,10 @@ a:hover { color:#3D7BFF; }
       <span style="font-size:12px;font-weight:600;cursor:pointer;color:#fff;background:#0A5CFF;padding:9px 16px;border-radius:980px;white-space:nowrap" onClick="{{ goQuote }}">Request a Quote</span>
     </div>
   </div>
+
+  <sc-if value="{{ pageTransitioning }}" hint-placeholder-val="{{ false }}">
+    <div class="sw-page-transition"><div class="sw-page-transition-spinner"></div></div>
+  </sc-if>
 
   <sc-if value="{{ searchOpen }}" hint-placeholder-val="{{ false }}">
     <div style="position:fixed;inset:0;z-index:3000;background:#F5F5F7;display:flex;flex-direction:column;align-items:center;padding:14vh 24px 40px;animation:swFadeIn 0.2s ease both;overflow-y:auto" onClick="{{ closeSearch }}">
@@ -3643,10 +3651,17 @@ class Component extends DCLogic {
     this.syncUrl(view);
     if (typeof window !== 'undefined') window.scrollTo(0, 0);
   };
+  triggerPageTransition = () => {
+    this.setState({ pageTransitioning: true });
+    if (typeof window !== 'undefined') {
+      setTimeout(() => this.setState({ pageTransitioning: false }), 550);
+    }
+  };
   goToProduct = (id) => {
     const m = this.machines.find((x) => x.id === id);
     this.track('product_view', { id, model: m ? m.model : id, category: m ? m.category : undefined });
     this.recordRecentlyViewed(id);
+    this.triggerPageTransition();
     this.setState({ view: 'product', selectedMachineId: id, contactOpen: false });
     this.syncUrl('product', id);
     if (typeof window !== 'undefined') window.scrollTo(0, 0);
@@ -3654,6 +3669,7 @@ class Component extends DCLogic {
   goToGeProduct = (id) => {
     const p = this.accessoryPool.find((x) => x.id === id) || this.accessoryPool[0];
     this.track('product_view', { id: p.id, model: p.name, category: (p.brand || 'Golden Eagle') + ' Accessory' });
+    this.triggerPageTransition();
     this.setState({ view: 'geProduct', selectedGeProductId: p.id, contactOpen: false });
     this.syncUrl('geProduct', p.id);
     if (typeof window !== 'undefined') window.scrollTo(0, 0);
@@ -4141,6 +4157,7 @@ class Component extends DCLogic {
       isSolutions: view === 'solutions',
       isCompare: view === 'compare',
       isAccessories: view === 'accessories',
+      pageTransitioning: !!this.state.pageTransitioning,
       isAccGoldenEagle: view === 'accGoldenEagle',
       isAccPegasus: view === 'accPegasus',
       isAccJuki: view === 'accJuki',

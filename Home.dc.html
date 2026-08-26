@@ -2933,10 +2933,33 @@ class Component extends DCLogic {
     { id: 'pg-fs700p', slug: 'fs700p', brand: 'PEGASUS', src: 'uploads/pegasus-fs700p.jpg', ph: 'Pegasus FS700P feed-off-the-arm machine', name: 'FS700P', sub: 'Feed-off-the-arm chainstitch machine series', desc: 'Pegasus’s FS700P series feed-off-the-arm chainstitch machine, used for seaming cylindrical garment parts such as sleeves and waistbands.', officialUrl: 'https://www.pegasus.co.jp/en/machine/series/s217' },
   ];
 
+  // Real JUKI industrial sewing machines, sourced from JUKI's official industrial
+  // product catalogue (juki.co.jp/industrial_e/products_e/) — genuine model photos
+  // and names only, from the industrial division (not the home-sewing consumer line).
+  jukiProducts = [
+    { id: 'jk-ddl-8700', slug: 'ddl-8700', brand: 'JUKI', src: 'uploads/juki-ddl-8700.jpg', ph: 'JUKI DDL-8700 1-needle lockstitch machine', name: 'DDL-8700', sub: '1-needle, lockstitch machine', desc: "JUKI's standard 1-needle lockstitch machine, also offered as the DDL-8700-7 with an automatic thread trimmer and a new-model compact servomotor for energy saving.", officialUrl: 'https://www.juki.co.jp/industrial_e/products_e/apparel_e/1needle_lock_e/detail.php?cd=DDL-8700_E' },
+    { id: 'jk-mo-6800s', slug: 'mo-6800s', brand: 'JUKI', src: 'uploads/juki-mo-6800s.jpg', ph: 'JUKI MO-6800S overlock and safety stitch machine', name: 'MO-6800S Series', sub: 'High-speed overlock / safety stitch machine', desc: "JUKI's MO-6800S series overlock/safety-stitch machine — built for a wide range of sewing materials, with reduced operating noise and increased durability.", officialUrl: 'https://www.juki.co.jp/industrial_e/products_e/apparel_e/overlock_e/detail.php?cd=MO-6800S_E' },
+    { id: 'jk-lbh-1790an', slug: 'lbh-1790an', brand: 'JUKI', src: 'uploads/juki-lbh-1790an.jpg', ph: 'JUKI LBH-1790AN buttonholing machine', name: 'LBH-1790AN', sub: 'Computer-controlled, high-speed buttonholing system', desc: "JUKI's computer-controlled buttonholing sewing system, with built-in NFC for two-way data communication on sewing performance.", officialUrl: 'https://www.juki.co.jp/industrial_e/products_e/apparel_e/button_hole_e/detail.php?cd=LBH-1790AN_LBH-1790ANB_E' },
+    { id: 'jk-lk-1900c', slug: 'lk-1900c', brand: 'JUKI', src: 'uploads/juki-lk-1900c.jpg', ph: 'JUKI LK-1900C bartacking machine', name: 'LK-1900C Series', sub: 'Computer-controlled, high-speed bartacking system', desc: "JUKI's computer-controlled bartacking machine, sewing at up to 3,300 stitches per minute.", officialUrl: 'https://www.juki.co.jp/industrial_e/products_e/apparel_e/tacking_e/detail.php?cd=LK-1900C_E' },
+    { id: 'jk-ams-221en', slug: 'ams-221en', brand: 'JUKI', src: 'uploads/juki-ams-221en.jpg', ph: 'JUKI AMS-221EN pattern stitching machine', name: 'AMS-221EN Series', sub: 'Computer-controlled cycle machine with input function', desc: "JUKI's AMS-221EN series computer-controlled pattern-stitching (cycle) machine, built for productivity, energy conservation and stitch quality.", officialUrl: 'https://www.juki.co.jp/industrial_e/products_e/apparel_e/cycle_e/detail.php?cd=AMS-221EN_E' },
+    { id: 'jk-mb-1800a', slug: 'mb-1800a', brand: 'JUKI', src: 'uploads/juki-mb-1800a.jpg', ph: 'JUKI MB-1800A button sewing machine with button feeder', name: 'MB-1800A/BR10', sub: 'Button sewing machine with button feeder', desc: "JUKI's computer-controlled, dry-head button-sewing machine fitted with a button feeder, built for flexible small-lot production runs.", officialUrl: 'https://www.juki.co.jp/industrial_e/products_e/apparel_e/button_attach_e/detail.php?cd=MB-1800A/BR10_E' },
+  ];
+
+  // Real Groz-Beckert sewing-machine needles, sourced from Groz-Beckert's own Sewing
+  // Customer Portal (portal.groz-beckert.com) product pages — genuine per-model needle
+  // photos and specs only. A prior session pass found this portal apparently gated; on
+  // re-check the product catalogue and per-product images load without any login.
+  grozBeckertProducts = [
+    { id: 'gb-dbx1', slug: 'dbx1', brand: 'Groz-Beckert', src: 'uploads/groz-beckert-dbx1.jpg', ph: 'Groz-Beckert DBX1 sewing machine needle', name: 'DBx1', sub: 'System 1738 / 16x257, double lockstitch needle', desc: 'A straight, single-groove Groz-Beckert needle for double lockstitch (class 300) on woven fabrics and thin leather — used for shirts, blouses and trousers.', officialUrl: 'https://portal.groz-beckert.com/germany/sewing/products/773232/detail' },
+    { id: 'gb-dpx35', slug: 'dpx35', brand: 'Groz-Beckert', src: 'uploads/groz-beckert-dpx35.jpg', ph: 'Groz-Beckert 134-35/DPx35 sewing machine needle', name: '134-35 / DPx35', sub: 'Heavy-duty double lockstitch needle', desc: 'A heavier-gauge Groz-Beckert needle (system 134-35/DPx35) for double lockstitch on woven fabrics — used for jeans and airbag seams.', officialUrl: 'https://portal.groz-beckert.com/germany/sewing/products/716222/detail' },
+    { id: 'gb-uy128gas', slug: 'uy128gas', brand: 'Groz-Beckert', src: 'uploads/groz-beckert-uy128gas.jpg', ph: 'Groz-Beckert UY128GAS sewing machine needle', name: 'UY128GAS', sub: 'Double chain / cover chain stitch needle', desc: 'A double-groove Groz-Beckert needle (system UY128GAS/1280) for double chain stitch and cover chain stitch machines, used on knitwear, woven fabrics and soft clothing leather.', officialUrl: 'https://portal.groz-beckert.com/germany/sewing/products/704922/detail' },
+    { id: 'gb-dbxk5', slug: 'dbxk5', brand: 'Groz-Beckert', src: 'uploads/groz-beckert-dbxk5.jpg', ph: 'Groz-Beckert DBxK5 embroidery machine needle', name: 'DBxK5', sub: 'Single- and multihead embroidery needle', desc: "Groz-Beckert's DBxK5 system needle, built for single- and multihead embroidery machines on knitwear, woven fabrics and leather.", officialUrl: 'https://portal.groz-beckert.com/germany/sewing/products/756912/detail' },
+  ];
+
   // Combined accessory-brand catalogue — every brand array feeds one pool so the
   // detail-page routing, listing page and "other products" rail work identically
   // regardless of which brand a product belongs to.
-  get accessoryPool() { return this.goldenEagleProducts.concat(this.pegasusProducts); }
+  get accessoryPool() { return this.goldenEagleProducts.concat(this.pegasusProducts).concat(this.jukiProducts).concat(this.grozBeckertProducts); }
 
   componentDidMount() {
     if (typeof window === 'undefined') return;
@@ -2986,6 +3009,8 @@ class Component extends DCLogic {
       const machineMatch = path.match(/^\/machines\/([a-z0-9-]+)/i);
       const geMatch = path.match(/^\/accessories\/golden-eagle\/([a-z0-9-]+)/i);
       const pgMatch = path.match(/^\/accessories\/pegasus\/([a-z0-9-]+)/i);
+      const jkMatch = path.match(/^\/accessories\/juki\/([a-z0-9-]+)/i);
+      const gbMatch = path.match(/^\/accessories\/groz-beckert\/([a-z0-9-]+)/i);
       const viewFromPath = { '/machines': 'machines', '/industries': 'industries', '/solutions': 'solutions', '/finder': 'finder', '/compare': 'compare', '/accessories': 'accessories', '/after-sales-service': 'afterSales', '/about': 'about', '/request-quote': 'quote', '/guides/lockstitch-vs-overlock-vs-flatlock': 'guideStitch', '/guides/jack-f6-vs-jack-2002g': 'guideCompareF6', '/guides/machines-for-a-shirt-factory': 'guideShirtFactory', '/guides/industrial-vs-domestic-sewing-machines': 'guideIndustrialVsDomestic', '/guides/machines-for-a-knitwear-line': 'guideKnitwear', '/guides/setting-up-a-new-production-line': 'guideFactorySetup', '/industrial-sewing-machines': 'landingAds' };
       let next = null;
       if (machineMatch && this.machines.find((m) => m.id === machineMatch[1])) {
@@ -2994,6 +3019,10 @@ class Component extends DCLogic {
         next = { view: 'geProduct', selectedGeProductId: this.goldenEagleProducts.find((p) => p.slug === geMatch[1]).id };
       } else if (pgMatch && this.pegasusProducts.find((p) => p.slug === pgMatch[1])) {
         next = { view: 'geProduct', selectedGeProductId: this.pegasusProducts.find((p) => p.slug === pgMatch[1]).id };
+      } else if (jkMatch && this.jukiProducts.find((p) => p.slug === jkMatch[1])) {
+        next = { view: 'geProduct', selectedGeProductId: this.jukiProducts.find((p) => p.slug === jkMatch[1]).id };
+      } else if (gbMatch && this.grozBeckertProducts.find((p) => p.slug === gbMatch[1])) {
+        next = { view: 'geProduct', selectedGeProductId: this.grozBeckertProducts.find((p) => p.slug === gbMatch[1]).id };
       } else if (viewFromPath[path]) {
         next = { view: viewFromPath[path] };
       }
@@ -3201,7 +3230,7 @@ class Component extends DCLogic {
     if (view === 'product') return '/machines/' + (id || 'jack-f6');
     if (view === 'geProduct') {
       const p = this.accessoryPool.find((x) => x.id === id) || this.accessoryPool[0];
-      const brandSlug = p.brand === 'PEGASUS' ? 'pegasus' : 'golden-eagle';
+      const brandSlug = p.brand === 'PEGASUS' ? 'pegasus' : p.brand === 'JUKI' ? 'juki' : p.brand === 'Groz-Beckert' ? 'groz-beckert' : 'golden-eagle';
       return '/accessories/' + brandSlug + '/' + p.slug;
     }
     if (view === 'quote') return '/request-quote';

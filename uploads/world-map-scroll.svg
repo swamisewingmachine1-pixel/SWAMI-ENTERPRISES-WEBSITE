@@ -6,7 +6,7 @@
    width="2776.6"
    height="1163.1"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
+   xmlns:svg="http://www.w3.org/2000/svg"><rect x="-35.8" y="80" width="2776.6" height="1163.1" fill="#050505"/>
   <defs
      id="defs2913" />
   
@@ -8514,6 +8514,8 @@
   </g>
 
 <style>
+  .oceanxx { fill:#050505 !important; stroke:none !important; }
+  .antxx, .limitxx { fill:#141416 !important; stroke:#3a3a3c !important; }
   .landxx { fill:#1c1c1e; stroke:#3a3a3c; stroke-width:0.6; }
   #in { fill:#F5F5F7; }
   #in.pulse { animation: indiaPulse 2.6s ease-in-out infinite; }

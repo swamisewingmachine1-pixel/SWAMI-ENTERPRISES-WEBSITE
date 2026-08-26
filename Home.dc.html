@@ -1356,6 +1356,16 @@ a:hover { color:#3D7BFF; }
         <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:18px">THE MACHINE</div>
         <div style="font-weight:700;font-size:clamp(24px,3.2vw,36px);color:#F5F5F7;line-height:1.3;max-width:760px">{{ activeMachine.purpose }}</div>
         <div style="font-size:15px;color:#86868B;line-height:1.7;margin-top:20px;max-width:480px">Operation: {{ activeMachine.operationsText }}.</div>
+        <sc-if value="{{ hasRecommendedNeedle }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:28px;max-width:480px;background:rgba(10,92,255,0.08);border:1px solid rgba(10,92,255,0.2);border-radius:14px;padding:18px 22px;display:flex;gap:14px;align-items:flex-start">
+            <span style="font-size:18px">🧵</span>
+            <div>
+              <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#2997FF">RECOMMENDED NEEDLE</div>
+              <div style="font-size:15px;color:#F5F5F7;margin-top:4px;font-weight:600">{{ recommendedNeedle }}</div>
+              <div style="font-size:13px;color:#86868B;margin-top:4px">From JACK's specification for the {{ activeMachine.model }}. Ask a specialist to confirm the exact needle for your fabric weight.</div>
+            </div>
+          </div>
+        </sc-if>
       </div>
 
       <sc-if value="{{ isF6Active }}" hint-placeholder-val="{{ true }}">
@@ -4336,6 +4346,8 @@ class Component extends DCLogic {
         : [{ label: 'Specifications', value: 'Ask a specialist — full spec sheet available in-store' }]
       )(this.machines.find((x) => x.id === this.state.selectedMachineId) || this.machines[0]),
       applicationChips: (this.machines.find((x) => x.id === this.state.selectedMachineId) || this.machines[0]).applications.map((a) => a.replace(/\b\w/g, (c) => c.toUpperCase())),
+      recommendedNeedle: (((this.machines.find((x) => x.id === this.state.selectedMachineId) || this.machines[0]).specs || []).find(([label]) => label === 'Needle') || [])[1] || '',
+      hasRecommendedNeedle: !!(((this.machines.find((x) => x.id === this.state.selectedMachineId) || this.machines[0]).specs || []).find(([label]) => label === 'Needle')),
     };
   }
 }

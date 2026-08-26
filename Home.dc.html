@@ -153,13 +153,76 @@ a:hover { color:#3D7BFF; }
           </div>
         </div>
       </div>
-      <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navAccessoriesOpacity }}" onClick="{{ goAccessories }}">Accessories &amp; Spare Parts</span>
+      <div class="nav-mega-wrap" style="position:relative;height:52px;display:flex;align-items:center">
+        <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navAccessoriesOpacity }}" onClick="{{ goAccessories }}">Accessories &amp; Spare Parts</span>
+        <div class="nav-mega-panel" style="position:fixed;top:52px;left:0;right:0;background:#fff;border-bottom:1px solid rgba(0,0,0,0.08);box-shadow:0 24px 48px rgba(0,0,0,0.12);padding:44px clamp(24px,6vw,120px);opacity:0;pointer-events:none;transform:translateY(-6px);transition:opacity 0.2s ease,transform 0.2s ease">
+          <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:48px">
+            <div>
+              <div style="font-size:12px;font-weight:600;letter-spacing:0.04em;color:#86868B;margin-bottom:16px">EXPLORE</div>
+              <div style="display:flex;flex-direction:column;gap:12px">
+                <span style="font-size:19px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goAccessories }}">All Accessories</span>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:12px;font-weight:600;letter-spacing:0.04em;color:#86868B;margin-bottom:16px">BY BRAND</div>
+              <div style="display:flex;flex-direction:column;gap:12px">
+                <span style="font-size:15px;color:#1D1D1F;cursor:pointer" onClick="{{ scrollToAccGoldenEagle }}">Golden Eagle</span>
+                <span style="font-size:15px;color:#1D1D1F;cursor:pointer" onClick="{{ scrollToAccPegasus }}">Pegasus</span>
+                <span style="font-size:15px;color:#1D1D1F;cursor:pointer" onClick="{{ scrollToAccJuki }}">JUKI</span>
+                <span style="font-size:15px;color:#1D1D1F;cursor:pointer" onClick="{{ scrollToAccGrozBeckert }}">Groz-Beckert</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:0.55" onClick="{{ scrollToAccJuki }}">JUKI</span>
       <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:0.55" onClick="{{ scrollToAccPegasus }}">Pegasus</span>
-      <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navIndustriesOpacity }}" onClick="{{ goIndustries }}">Industries</span>
-      <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navSolutionsOpacity }}" onClick="{{ goSolutions }}">Solutions</span>
+      <div class="nav-mega-wrap" style="position:relative;height:52px;display:flex;align-items:center">
+        <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navIndustriesOpacity }}" onClick="{{ goIndustries }}">Industries</span>
+        <div class="nav-mega-panel" style="position:fixed;top:52px;left:0;right:0;background:#fff;border-bottom:1px solid rgba(0,0,0,0.08);box-shadow:0 24px 48px rgba(0,0,0,0.12);padding:44px clamp(24px,6vw,120px);opacity:0;pointer-events:none;transform:translateY(-6px);transition:opacity 0.2s ease,transform 0.2s ease">
+          <div style="max-width:1100px;margin:0 auto">
+            <div style="font-size:12px;font-weight:600;letter-spacing:0.04em;color:#86868B;margin-bottom:16px">WHAT ARE YOU MAKING?</div>
+            <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:24px">
+              <span style="font-size:15px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goIndustries }}">Shirts &amp; Light Wovens</span>
+              <span style="font-size:15px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goIndustries }}">Uniforms &amp; Institutional</span>
+              <span style="font-size:15px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goIndustries }}">Light Denim &amp; Workwear</span>
+              <span style="font-size:15px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goIndustries }}">Knitwear &amp; Activewear</span>
+              <span style="font-size:15px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goIndustries }}">Bags &amp; Technical Sewing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-mega-wrap" style="position:relative;height:52px;display:flex;align-items:center">
+        <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navSolutionsOpacity }}" onClick="{{ goSolutions }}">Solutions</span>
+        <div class="nav-mega-panel" style="position:fixed;top:52px;left:0;right:0;background:#fff;border-bottom:1px solid rgba(0,0,0,0.08);box-shadow:0 24px 48px rgba(0,0,0,0.12);padding:44px clamp(24px,6vw,120px);opacity:0;pointer-events:none;transform:translateY(-6px);transition:opacity 0.2s ease,transform 0.2s ease">
+          <div style="max-width:1100px;margin:0 auto">
+            <div style="font-size:12px;font-weight:600;letter-spacing:0.04em;color:#86868B;margin-bottom:16px">WHERE ARE YOU IN THE PROCESS?</div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px">
+              <span style="font-size:15px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goSolutions }}">Starting Your First Line</span>
+              <span style="font-size:15px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goSolutions }}">Upgrading a Machine</span>
+              <span style="font-size:15px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goSolutions }}">Scaling Production</span>
+              <span style="font-size:15px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goSolutions }}">Consulting on Setup</span>
+            </div>
+          </div>
+        </div>
+      </div>
       <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navFinderOpacity }}" onClick="{{ goFinder }}">Find Your Machine</span>
-      <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navAfterSalesOpacity }}" onClick="{{ goAfterSales }}">After-Sales Service</span>
+      <div class="nav-mega-wrap" style="position:relative;height:52px;display:flex;align-items:center">
+        <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navAfterSalesOpacity }}" onClick="{{ goAfterSales }}">After-Sales Service</span>
+        <div class="nav-mega-panel" style="position:fixed;top:52px;left:0;right:0;background:#fff;border-bottom:1px solid rgba(0,0,0,0.08);box-shadow:0 24px 48px rgba(0,0,0,0.12);padding:44px clamp(24px,6vw,120px);opacity:0;pointer-events:none;transform:translateY(-6px);transition:opacity 0.2s ease,transform 0.2s ease">
+          <div style="max-width:1100px;margin:0 auto">
+            <div style="font-size:12px;font-weight:600;letter-spacing:0.04em;color:#86868B;margin-bottom:16px">OUR SERVICE STANDARD</div>
+            <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:24px">
+              <span style="font-size:15px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goAfterSales }}">Installation</span>
+              <span style="font-size:15px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goAfterSales }}">Training</span>
+              <span style="font-size:15px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goAfterSales }}">Maintenance</span>
+              <span style="font-size:15px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goAfterSales }}">Spare Parts</span>
+              <span style="font-size:15px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goAfterSales }}">Technical Support</span>
+              <span style="font-size:15px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goAfterSales }}">After-Sales</span>
+            </div>
+          </div>
+        </div>
+      </div>
       <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navAboutOpacity }}" onClick="{{ goAbout }}">About</span>
       <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navCompareOpacity }}" onClick="{{ goCompare }}">Compare{{ compareBadge }}</span>
     </div>

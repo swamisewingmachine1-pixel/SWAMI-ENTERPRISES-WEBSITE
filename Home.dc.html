@@ -159,6 +159,7 @@ a:hover { color:#3D7BFF; }
               <div style="font-size:12px;font-weight:600;letter-spacing:0.04em;color:#86868B;margin-bottom:16px">EXPLORE</div>
               <div style="display:flex;flex-direction:column;gap:12px">
                 <span style="font-size:19px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goMachines }}">All Machines</span>
+                <span style="font-size:19px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goMaqiMachines }}">MAQI Machines</span>
                 <span style="font-size:19px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goFinder }}">Find Your Machine</span>
                 <span style="font-size:19px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goCompare }}">Compare</span>
               </div>
@@ -323,6 +324,7 @@ a:hover { color:#3D7BFF; }
       <span class="sw-wordmark sw-wordmark--white" style="font-size:26px;position:absolute;top:24px;left:28px">SW<span class="sw-wordmark sw-wordmark--white" style="margin-left:-0.16em">A</span>MI</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goToViewAndClose }}" data-target="home">Home</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goMachinesAndClose }}">Machines</span>
+      <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goMaqiMachinesAndClose }}">MAQI Machines</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goAccessoriesAndClose }}">Accessories</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goIndustriesAndClose }}">Industries</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goSolutionsAndClose }}">Solutions</span>
@@ -1350,6 +1352,12 @@ a:hover { color:#3D7BFF; }
 
       <input type="text" placeholder="Search by model, category or application — try “F6”, “lockstitch”, “denim”" value="{{ machineQuery }}" onChange="{{ onMachineQueryChange }}" style="width:100%;max-width:640px;margin-top:32px;padding:16px 0;border:none;border-bottom:1px solid rgba(0,0,0,0.2);background:transparent;font-size:16px;font-family:'Manrope',sans-serif;color:#1D1D1F;outline:none"></input>
 
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:24px">
+        <sc-for list="{{ machineBrandPills }}" as="bp" hint-placeholder-count="3">
+          <span style="padding:9px 18px;border-radius:980px;background:{{ bp.bg }};border:1px solid rgba(0,0,0,0.12);color:{{ bp.color }};font-size:13px;font-weight:600;cursor:pointer" onClick="{{ bp.select }}">{{ bp.label }}</span>
+        </sc-for>
+      </div>
+
       <div style="display:flex;gap:28px;flex-wrap:wrap;margin-top:28px;font-size:13px;color:#6E6E73">
         <span style="cursor:pointer;border-bottom:1px solid rgba(0,0,0,0.15)" onClick="{{ goFinder }}">Not sure? Find Your Machine →</span>
         <span style="cursor:pointer" onClick="{{ focusMachineSearch }}">Try “lockstitch”, “denim”, “overlock”</span>
@@ -2097,6 +2105,7 @@ class Component extends DCLogic {
     scrollPct: 0,
     navHidden: false,
     machineQuery: '',
+    machineBrand: 'all',
     openIndustry: null,
     openSolution: null,
     compareIds: [],
@@ -3326,6 +3335,436 @@ class Component extends DCLogic {
       ],
       highlightTags: ['High-carbon precision-ground blade', 'Multi-material cutting'],
     },
+
+    // Real MAQI Lockstitch-series industrial sewing machines, sourced from MAQI's
+    // official English-language site (en.chinamaqi.com/product/product/flat-seam,
+    // 3 listing pages, 17 real models total — the site does not list ~24, only 17).
+    // Each model's own detail page (en.chinamaqi.com/product/detail/<id>, linked
+    // below as officialUrl) was opened individually for its real cover photo and
+    // feature-bullet copy. IMPORTANT: MAQI's numeric spec tables ("产品参数" tab)
+    // render as an image on their site, not text, so exact numbers (max s.p.m.,
+    // needle system, stitch length, motor wattage) could not be read/verified and
+    // are deliberately left out below rather than guessed — only the feature
+    // bullets MAQI actually publishes in text are used for specs/capabilities.
+    {
+      id: 'maqi-q7t',
+      model: 'MAQI Q7T',
+      manufacturer: 'MAQI',
+      category: 'Lockstitch',
+      purpose: "MAQI's Q7T is an electronically controlled lockstitch machine built around quiet operation — silent electronic backtack, double-knife thread trimming that leaves a short thread end, and a closed automatic oil-pan lubrication system that keeps the machine and fabric free of oil stains.",
+      applications: ['garments', 'wovens'],
+      operations: ['lockstitch', 'straight stitch'],
+      searchTerms: ['q7t', 'maqi q7t', 'maqi', 'lockstitch'],
+      imgId: 'lib-maqi-q7t', imgSrc: 'uploads/maqi-q7t-hero.jpg', imgPh: 'MAQI Q7T lockstitch sewing machine',
+      officialUrl: 'https://en.chinamaqi.com/product/detail/109',
+      specs: [
+        ['Series', 'Lockstitch, electronically controlled'],
+        ['Thread trimming', 'Electronic double-knife trimming, quiet and stable'],
+        ['Backtack', 'Electronic needle-distance, silent backstitch'],
+        ['Presser foot lift', 'Electronic, quiet and smooth'],
+        ['Lubrication', 'Closed oil pan, automatic'],
+        ['Availability', 'Order on request'],
+      ],
+      capabilityItems: [
+        { n: '01', title: 'Silent electronic backtack', desc: 'Electronic needle-distance control gives a quiet backstitch instead of the mechanical clatter of an older head.' },
+        { n: '02', title: 'Double-knife thread trimming', desc: 'Cuts a short thread end automatically, cutting down on manual trimming between pieces.' },
+        { n: '03', title: 'Closed-pan automatic lubrication', desc: 'A sealed, automatic oil pan keeps the table and finished garments free of oil stains.' },
+      ],
+      highlightTags: ['Silent electronic backtack', 'Double-knife trimming', 'Closed-pan lubrication'],
+    },
+    {
+      id: 'maqi-q7ls',
+      model: 'MAQI Q7Ls',
+      manufacturer: 'MAQI',
+      category: 'Lockstitch',
+      purpose: "MAQI's Q7Ls is a two-step-motor lockstitch machine from MAQI's large-sewing-space \"THE-MAX\" line — stepper-driven double-knife thread cutting that leaves a roughly 3mm thread tail, a sensorless easy-lift knee support, closed automatic lubrication, and optional nest-free (basting-free) technology.",
+      applications: ['garments', 'wovens'],
+      operations: ['lockstitch', 'straight stitch'],
+      searchTerms: ['q7ls', 'maqi q7ls', 'maqi', 'lockstitch', 'the-max'],
+      imgId: 'lib-maqi-q7ls', imgSrc: 'uploads/maqi-q7ls-hero.jpg', imgPh: 'MAQI Q7Ls lockstitch sewing machine',
+      officialUrl: 'https://en.chinamaqi.com/product/detail/2200',
+      specs: [
+        ['Series', 'Lockstitch, THE-MAX large sewing space'],
+        ['Motor', 'Two step motors ("two-drive")'],
+        ['Thread trimming', 'Stepper double-knife, ultra-short ~3mm thread tail'],
+        ['Knee support', 'Sensorless, easy-lift'],
+        ['Lubrication', 'Closed oil pan, automatic'],
+        ['Options', 'Nest-free (basting-free) technology'],
+        ['Availability', 'Order on request'],
+      ],
+      capabilityItems: [
+        { n: '01', title: 'Two step-motor drive', desc: 'A two-motor ("two-drive") stepper setup behind the large-space THE-MAX line.' },
+        { n: '02', title: 'Ultra-short thread trim', desc: 'Stepper-controlled double-knife cutting leaves roughly a 3mm thread tail.' },
+        { n: '03', title: 'Sensorless knee support', desc: 'An easy-lift knee lifter without extra sensor wiring to maintain.' },
+      ],
+      highlightTags: ['Two step-motor drive', '~3mm thread tail', 'Nest-free option'],
+    },
+    {
+      id: 'maqi-q6ls-the-max',
+      model: 'MAQI Q6Ls THE-MAX',
+      manufacturer: 'MAQI',
+      category: 'Lockstitch',
+      purpose: "MAQI's Q6Ls THE-MAX is the large-sewing-space model in MAQI's THE-MAX line, built for bulkier work under the arm — dual-blade smart thread cutting with an ultra-short thread tail, and a sensorless, easy-lift knee support.",
+      applications: ['garments', 'wovens'],
+      operations: ['lockstitch', 'straight stitch'],
+      searchTerms: ['q6ls', 'the-max', 'maqi q6ls', 'maqi', 'lockstitch'],
+      imgId: 'lib-maqi-q6ls-the-max', imgSrc: 'uploads/maqi-q6ls-the-max-hero.jpg', imgPh: 'MAQI Q6Ls THE-MAX lockstitch sewing machine',
+      officialUrl: 'https://en.chinamaqi.com/product/detail/2169',
+      specs: [
+        ['Series', 'Lockstitch, THE-MAX large sewing space'],
+        ['Thread trimming', 'Dual-blade smart cutting, ~3mm thread tail'],
+        ['Knee support', 'Sensorless, easy-lift'],
+        ['Sewing space', 'Boundless / oversized under-arm space'],
+        ['Availability', 'Order on request'],
+      ],
+      capabilityItems: [
+        { n: '01', title: 'Oversized sewing space', desc: 'Part of the THE-MAX line, built with extra room under the arm for bulkier pieces.' },
+        { n: '02', title: 'Dual-blade smart cutting', desc: 'Cuts to a short, consistent thread tail (around 3mm) automatically.' },
+      ],
+      highlightTags: ['Oversized sewing space', 'Dual-blade smart cutting', '~3mm thread tail'],
+    },
+    {
+      id: 'maqi-q5tt',
+      model: 'MAQI Q5Tt',
+      manufacturer: 'MAQI',
+      category: 'Lockstitch',
+      purpose: "MAQI's Q5Tt is a two-motor (\"two-drive\") step-motor smart sewing machine with 0.1mm-precision electronic needle-pitch control and nine built-in stitch patterns. MAQI states a wide material range — from light gauze and stockings up to thick stacked material (quoted as up to 120+ layers of A4 paper or 16 layers of denim).",
+      applications: ['garments', 'wovens', 'knitwear'],
+      operations: ['lockstitch', 'straight stitch'],
+      searchTerms: ['q5tt', 'maqi q5tt', 'maqi', 'lockstitch'],
+      imgId: 'lib-maqi-q5tt', imgSrc: 'uploads/maqi-q5tt-hero.jpg', imgPh: 'MAQI Q5Tt lockstitch sewing machine',
+      officialUrl: 'https://en.chinamaqi.com/product/detail/2172',
+      specs: [
+        ['Series', 'Lockstitch, step-motor, two-drive'],
+        ['Needle pitch', 'Electronic, 0.1mm precision'],
+        ['Stitch patterns', '9 built-in patterns'],
+        ['Material range (MAQI-stated)', 'Up to 120+ layers of A4 paper, or 16 layers of denim, gauze, stockings or copper foil'],
+        ['Wiring', 'Fully enclosed at the rear of the head'],
+        ['Availability', 'Order on request'],
+      ],
+      capabilityItems: [
+        { n: '01', title: '0.1mm precision needle pitch', desc: 'Electronic needle-distance control for finer, more consistent stitch length than a mechanical setting.' },
+        { n: '02', title: 'Wide stated material range', desc: 'MAQI quotes a range from light gauze and stockings up to thick stacked material — 120+ layers of A4 paper or 16 layers of denim.' },
+        { n: '03', title: 'Nine stitch patterns', desc: 'Nine built-in stitch patterns selectable from the control panel.' },
+      ],
+      highlightTags: ['0.1mm needle pitch', '9 stitch patterns', 'Wide material range'],
+    },
+    {
+      id: 'maqi-ls5490-4c',
+      model: 'MAQI LS5490-4C',
+      manufacturer: 'MAQI',
+      category: 'Lockstitch',
+      purpose: "MAQI's LS5490-4C is an upper-differential intelligent flat sewing machine built for pleating and gathering work — a servo-driven upper differential presser foot, a dual-rack lower differential mechanism, and digital pleat programming across up to 9 segments.",
+      applications: ['garments', 'wovens'],
+      operations: ['lockstitch', 'pleating'],
+      searchTerms: ['ls5490-4c', 'ls5490', 'maqi ls5490', 'maqi', 'lockstitch', 'pleating'],
+      imgId: 'lib-maqi-ls5490-4c', imgSrc: 'uploads/maqi-ls5490-4c-hero.jpg', imgPh: 'MAQI LS5490-4C pleating lockstitch sewing machine',
+      officialUrl: 'https://en.chinamaqi.com/product/detail/2179',
+      specs: [
+        ['Series', 'Lockstitch, upper differential, four-automatic'],
+        ['Presser foot', 'Servo-driven upper differential, dedicated pleating foot'],
+        ['Lower feed', 'Dual-rack lower differential mechanism'],
+        ['Pleat programming', 'Digital, programmable up to 9 segments'],
+        ['Availability', 'Order on request'],
+      ],
+      capabilityItems: [
+        { n: '01', title: 'Servo upper differential foot', desc: 'A servo-driven upper differential presser foot for controlled gathering and pleating.' },
+        { n: '02', title: 'Digital, segmented pleat control', desc: 'Pleat timing can be programmed digitally across up to 9 segments instead of relying on a fixed mechanical cam.' },
+      ],
+      highlightTags: ['Servo upper differential foot', 'Up to 9-segment pleat programming'],
+    },
+    {
+      id: 'maqi-q2pro',
+      model: 'MAQI Q2Pro',
+      manufacturer: 'MAQI',
+      category: 'Lockstitch',
+      purpose: "MAQI's Q2Pro is a direct-drive computerized lockstitch machine with automatic thread trimming — a round-knife trimmer, one-key needle-position compensation with an integrated work light, an LCD control display, and a wide 90–280V operating-voltage range for unstable power supplies.",
+      applications: ['garments', 'wovens'],
+      operations: ['lockstitch', 'straight stitch'],
+      searchTerms: ['q2pro', 'maqi q2pro', 'maqi', 'lockstitch'],
+      imgId: 'lib-maqi-q2pro', imgSrc: 'uploads/maqi-q2pro-hero.jpg', imgPh: 'MAQI Q2Pro lockstitch sewing machine',
+      officialUrl: 'https://en.chinamaqi.com/product/detail/113',
+      specs: [
+        ['Series', 'Lockstitch, direct drive, auto trimmer'],
+        ['Thread trimmer', 'Round-knife, automatic'],
+        ['Needle compensation', 'One-key, with integrated LED work light'],
+        ['Display', 'LCD control panel'],
+        ['Operating voltage', '90–280V wide range'],
+        ['Availability', 'Order on request'],
+      ],
+      capabilityItems: [
+        { n: '01', title: 'One-key needle compensation', desc: 'Needle-position compensation and a built-in work light at a single control, for faster setup between jobs.' },
+        { n: '02', title: 'Wide 90–280V voltage range', desc: 'Keeps running through the voltage swings common on an unstable factory supply.' },
+      ],
+      highlightTags: ['Auto round-knife trimmer', 'One-key needle compensation', '90–280V wide voltage'],
+    },
+    {
+      id: 'maqi-q1pro',
+      model: 'MAQI Q1Pro',
+      manufacturer: 'MAQI',
+      category: 'Lockstitch',
+      purpose: "MAQI's Q1Pro is a direct-drive computerized lockstitch machine with integrated intelligent control electronics, one-key needle-position compensation with a built-in work light, an LCD display, and the same wide 90–280V operating-voltage range as the Q2Pro.",
+      applications: ['garments', 'wovens'],
+      operations: ['lockstitch', 'straight stitch'],
+      searchTerms: ['q1pro', 'maqi q1pro', 'maqi', 'lockstitch'],
+      imgId: 'lib-maqi-q1pro', imgSrc: 'uploads/maqi-q1pro-hero.jpg', imgPh: 'MAQI Q1Pro lockstitch sewing machine',
+      officialUrl: 'https://en.chinamaqi.com/product/detail/112',
+      specs: [
+        ['Series', 'Lockstitch, direct drive'],
+        ['Control', 'Integrated intelligent control electronics'],
+        ['Needle compensation', 'One-key, with integrated LED work light'],
+        ['Display', 'LCD control panel'],
+        ['Operating voltage', '90–280V wide range'],
+        ['Availability', 'Order on request'],
+      ],
+      capabilityItems: [
+        { n: '01', title: 'Integrated intelligent control', desc: 'Direct-drive head with the control electronics built into the machine rather than a separate control box.' },
+        { n: '02', title: 'One-key needle compensation', desc: 'Needle-position compensation and a built-in work light at a single control.' },
+      ],
+      highlightTags: ['Direct-drive head', 'One-key needle compensation', '90–280V wide voltage'],
+    },
+    {
+      id: 'maqi-ls8450te',
+      model: 'MAQI LS8450Te',
+      manufacturer: 'MAQI',
+      category: 'Lockstitch',
+      purpose: "MAQI's LS8450Te is a double-needle, step-motor, semi-dry-head computerized lockstitch machine — 0.1mm-precision electronic needle pitch, automatic presser-foot lift, a straight-knife thread trimmer, and electronic switching between the left and right needle.",
+      applications: ['garments', 'wovens'],
+      operations: ['lockstitch', 'double-needle stitch'],
+      searchTerms: ['ls8450te', 'maqi ls8450te', 'maqi', 'lockstitch', 'double needle'],
+      imgId: 'lib-maqi-ls8450te', imgSrc: 'uploads/maqi-ls8450te-hero.jpg', imgPh: 'MAQI LS8450Te double-needle lockstitch sewing machine',
+      officialUrl: 'https://en.chinamaqi.com/product/detail/155',
+      specs: [
+        ['Series', 'Lockstitch, double needle, step motor'],
+        ['Needle pitch', 'Electronic, 0.1mm precision'],
+        ['Head', 'Semi-dry, micro-oil'],
+        ['Presser foot lift', 'Automatic'],
+        ['Thread trimmer', 'Straight knife'],
+        ['Needle switching', 'Electronic, left/right'],
+        ['Availability', 'Order on request'],
+      ],
+      capabilityItems: [
+        { n: '01', title: 'Electronic left/right needle switch', desc: 'Switches between the left and right needle electronically rather than by manual mechanical adjustment.' },
+        { n: '02', title: 'Semi-dry, micro-oil head', desc: 'Keeps oil use to a minimum, reducing stains on double-needle parallel-seam work.' },
+      ],
+      highlightTags: ['Double needle', 'Electronic needle switching', 'Semi-dry head'],
+    },
+    {
+      id: 'maqi-ls8420dp-5',
+      model: 'MAQI LS 8420DP-5',
+      manufacturer: 'MAQI',
+      category: 'Lockstitch',
+      purpose: "MAQI's LS 8420DP-5 is a direct-drive double-needle lockstitch machine with a 3-stage adjustable LED work light, one-key needle-position compensation, MAQI's own electronic control box with a USB port, and a semi-dry (micro-oil) head.",
+      applications: ['garments', 'wovens'],
+      operations: ['lockstitch', 'double-needle stitch'],
+      searchTerms: ['ls8420dp-5', 'ls8420dp', 'maqi ls8420dp', 'maqi', 'lockstitch', 'double needle'],
+      imgId: 'lib-maqi-ls8420dp-5', imgSrc: 'uploads/maqi-ls8420dp-5-hero.jpg', imgPh: 'MAQI LS 8420DP-5 double-needle lockstitch sewing machine',
+      officialUrl: 'https://en.chinamaqi.com/product/detail/156',
+      specs: [
+        ['Series', 'Lockstitch, double needle, direct drive'],
+        ['Work light', '3-stage adjustable LED, with needle compensation'],
+        ['Control box', "MAQI's own electronic control, USB port"],
+        ['Head', 'Semi-dry, micro-oil'],
+        ['Availability', 'Order on request'],
+      ],
+      capabilityItems: [
+        { n: '01', title: '3-stage adjustable LED + needle compensation', desc: 'Adjustable work lighting paired with needle-position compensation at the same control.' },
+        { n: '02', title: 'Own electronic control box with USB', desc: "MAQI's in-house control electronics include a USB port for settings/updates." },
+      ],
+      highlightTags: ['Double needle', '3-stage LED light', 'USB control box'],
+    },
+    {
+      id: 'maqi-ls202ft',
+      model: 'MAQI LS202Ft',
+      manufacturer: 'MAQI',
+      category: 'Lockstitch',
+      purpose: "MAQI's LS202Ft is an electronic (computerized) top-and-bottom-feed lockstitch machine with a large hook and hand wheel and a round-knife thread trimmer, built for heavier feed work than a standard lockstitch head.",
+      applications: ['garments', 'wovens', 'heavier material'],
+      operations: ['lockstitch', 'top-and-bottom feed'],
+      searchTerms: ['ls202ft', 'maqi ls202ft', 'maqi', 'lockstitch'],
+      imgId: 'lib-maqi-ls202ft', imgSrc: 'uploads/maqi-ls202ft-hero.jpg', imgPh: 'MAQI LS202Ft top-and-bottom feed lockstitch sewing machine',
+      officialUrl: 'https://en.chinamaqi.com/product/detail/157',
+      specs: [
+        ['Series', 'Lockstitch, electronic top-and-bottom feed'],
+        ['Hook', 'Large hook'],
+        ['Hand wheel', 'Large hand wheel'],
+        ['Thread trimmer', 'Round knife'],
+        ['Availability', 'Order on request'],
+      ],
+      capabilityItems: [
+        { n: '01', title: 'Large hook and hand wheel', desc: 'Sized up from a standard lockstitch head for heavier feed material.' },
+        { n: '02', title: 'Electronic thread tension', desc: 'Thread tension is set electronically rather than by a mechanical dial.' },
+      ],
+      highlightTags: ['Large hook', 'Top-and-bottom feed', 'Round-knife trimmer'],
+    },
+    {
+      id: 'maqi-ls640e',
+      model: 'MAQI LS640E',
+      manufacturer: 'MAQI',
+      category: 'Lockstitch',
+      purpose: "MAQI's LS640E is an electronic top-and-bottom-feed lockstitch machine with an oversized sewing space and a stepper-motor-driven presser foot for a lighter, adjustable lift.",
+      applications: ['garments', 'wovens'],
+      operations: ['lockstitch', 'top-and-bottom feed'],
+      searchTerms: ['ls640e', 'maqi ls640e', 'maqi', 'lockstitch'],
+      imgId: 'lib-maqi-ls640e', imgSrc: 'uploads/maqi-ls640e-hero.jpg', imgPh: 'MAQI LS640E top-and-bottom feed lockstitch sewing machine',
+      officialUrl: 'https://en.chinamaqi.com/product/detail/161',
+      specs: [
+        ['Series', 'Lockstitch, electronic top-and-bottom feed'],
+        ['Sewing space', 'Oversized ("super huge")'],
+        ['Presser foot', 'Stepper-motor driven, adjustable lift'],
+        ['Availability', 'Order on request'],
+      ],
+      capabilityItems: [
+        { n: '01', title: 'Oversized sewing space', desc: 'Extra room under the arm for bulkier pieces than a standard lockstitch head.' },
+        { n: '02', title: 'Stepper-motor presser foot', desc: 'Lighter, adjustable presser-foot lift driven by a stepper motor instead of a manual lever.' },
+      ],
+      highlightTags: ['Oversized sewing space', 'Stepper-motor presser foot'],
+    },
+    {
+      id: 'maqi-ls0303ft-ii',
+      model: 'MAQI LS0303Ft-II',
+      manufacturer: 'MAQI',
+      category: 'Lockstitch',
+      purpose: "MAQI's LS0303Ft-II is an electronic top-and-bottom-feed lockstitch machine with stepper-motor control, silent electronic reverse stitching, nine built-in stitch patterns, voice-guided one-touch operation, and a round-knife thread trimmer.",
+      applications: ['garments', 'wovens'],
+      operations: ['lockstitch', 'top-and-bottom feed'],
+      searchTerms: ['ls0303ft-ii', 'ls0303ft', 'maqi ls0303ft', 'maqi', 'lockstitch'],
+      imgId: 'lib-maqi-ls0303ft-ii', imgSrc: 'uploads/maqi-ls0303ft-ii-hero.jpg', imgPh: 'MAQI LS0303Ft-II top-and-bottom feed lockstitch sewing machine',
+      officialUrl: 'https://en.chinamaqi.com/product/detail/2180',
+      specs: [
+        ['Series', 'Lockstitch, electronic top-and-bottom feed'],
+        ['Motor', 'Stepper motor control'],
+        ['Reverse stitching', 'Electronic needle pitch, silent'],
+        ['Stitch patterns', '9 built-in patterns'],
+        ['Operation', 'Voice navigation, one-touch'],
+        ['Thread trimmer', 'Round knife'],
+        ['Availability', 'Order on request'],
+      ],
+      capabilityItems: [
+        { n: '01', title: 'Voice-guided one-touch operation', desc: 'Voice prompts pair with one-touch controls to simplify setup on the floor.' },
+        { n: '02', title: 'Silent electronic reverse', desc: 'Stepper-controlled reverse stitching runs quietly compared with a mechanical reverse lever.' },
+      ],
+      highlightTags: ['9 stitch patterns', 'Voice-guided one-touch', 'Silent electronic reverse'],
+    },
+    {
+      id: 'maqi-ls0313ft',
+      model: 'MAQI LS0313Ft',
+      manufacturer: 'MAQI',
+      category: 'Lockstitch',
+      purpose: "MAQI's LS0313Ft is an electronic top-and-bottom-feed lockstitch machine with stepper-motor control, nine built-in stitch patterns, and an oversized sewing space for bulkier work.",
+      applications: ['garments', 'wovens'],
+      operations: ['lockstitch', 'top-and-bottom feed'],
+      searchTerms: ['ls0313ft', 'maqi ls0313ft', 'maqi', 'lockstitch'],
+      imgId: 'lib-maqi-ls0313ft', imgSrc: 'uploads/maqi-ls0313ft-hero.jpg', imgPh: 'MAQI LS0313Ft top-and-bottom feed lockstitch sewing machine',
+      officialUrl: 'https://en.chinamaqi.com/product/detail/2181',
+      specs: [
+        ['Series', 'Lockstitch, electronic top-and-bottom feed'],
+        ['Motor', 'Stepper motor control'],
+        ['Stitch patterns', '9 built-in patterns'],
+        ['Sewing space', 'Boundless / oversized'],
+        ['Availability', 'Order on request'],
+      ],
+      capabilityItems: [
+        { n: '01', title: 'Nine stitch patterns', desc: 'Nine built-in stitch patterns on the electronic control.' },
+        { n: '02', title: 'Oversized sewing space', desc: 'Extra room under the arm for bulkier pieces.' },
+      ],
+      highlightTags: ['9 stitch patterns', 'Oversized sewing space'],
+    },
+    {
+      id: 'maqi-ls3820dp',
+      model: 'MAQI LS3820DP',
+      manufacturer: 'MAQI',
+      category: 'Lockstitch',
+      purpose: "MAQI lists the LS3820DP under its Lockstitch series, but its own product page names it a \"direct drive chain stitch sewing machine\" with a curved-needle construction and a puller/feed panel — closer to a chainstitch/blind-stitch head than a standard lockstitch. Confirm the exact stitch type with a specialist before ordering.",
+      applications: ['garments'],
+      operations: ['chainstitch (per MAQI\'s own product description)'],
+      searchTerms: ['ls3820dp', 'maqi ls3820dp', 'maqi', 'chainstitch'],
+      imgId: 'lib-maqi-ls3820dp', imgSrc: 'uploads/maqi-ls3820dp-hero.jpg', imgPh: 'MAQI LS3820DP sewing machine',
+      officialUrl: 'https://en.chinamaqi.com/product/detail/2182',
+      specs: [
+        ['Series', "Listed as Lockstitch by MAQI; product page names it a chain stitch machine"],
+        ['Needle', 'Curved-needle construction'],
+        ['Feed', 'Linkage part, puller/feed panel'],
+        ['Speed/oil', 'Low speed, oil-supplied head'],
+        ['Availability', 'Order on request'],
+      ],
+      capabilityItems: [
+        { n: '01', title: 'Curved-needle construction', desc: 'A curved-needle, linkage-driven mechanism rather than a straight-needle lockstitch head.' },
+        { n: '02', title: 'Puller feed panel', desc: 'A dedicated puller panel to help feed material through at a controlled rate.' },
+      ],
+      highlightTags: ['Curved-needle construction', 'Puller feed panel'],
+    },
+    {
+      id: 'maqi-ls5200mx-td4',
+      model: 'MAQI LS5200MX-TD4',
+      manufacturer: 'MAQI',
+      category: 'Lockstitch',
+      purpose: "MAQI's LS5200MX-TD4 is a computerized lockstitch machine with a built-in edge cutter, a 26mm feed range for bulkier stacked material, and 0.1mm-precision electronic needle-pitch control. MAQI states it handles material from light stockings and gauze up to thick stacks (quoted as up to 120+ layers of A4 paper or 16 layers of denim).",
+      applications: ['garments', 'wovens'],
+      operations: ['lockstitch', 'edge trimming'],
+      searchTerms: ['ls5200mx-td4', 'ls5200mx', 'maqi ls5200mx', 'maqi', 'lockstitch', 'edge cutter'],
+      imgId: 'lib-maqi-ls5200mx-td4', imgSrc: 'uploads/maqi-ls5200mx-td4-hero.jpg', imgPh: 'MAQI LS5200MX-TD4 lockstitch sewing machine with edge cutter',
+      officialUrl: 'https://en.chinamaqi.com/product/detail/2183',
+      specs: [
+        ['Series', 'Lockstitch, computerized, with edge cutter'],
+        ['Needle pitch', 'Electronic, 0.1mm precision'],
+        ['Feed range', '26mm large-range fabric feeding space'],
+        ['Material range (MAQI-stated)', 'Up to 120+ layers of A4 paper, or 16 layers of denim, gauze, stockings or copper foil'],
+        ['Availability', 'Order on request'],
+      ],
+      capabilityItems: [
+        { n: '01', title: 'Built-in edge cutter', desc: 'Trims the fabric edge as it feeds, in the same pass as the stitch.' },
+        { n: '02', title: '26mm feed range', desc: 'A larger feed range than a standard lockstitch head, for bulkier stacked material.' },
+      ],
+      highlightTags: ['Built-in edge cutter', '26mm feed range', '0.1mm needle pitch'],
+    },
+    {
+      id: 'maqi-ls9520dp-qb',
+      model: 'MAQI LS9520DP/QB',
+      manufacturer: 'MAQI',
+      category: 'Lockstitch',
+      purpose: "MAQI's LS9520DP/QB is a direct-drive lockstitch machine with a built-in edge cutter and QB (wrapping) construction, aimed at seams on bags and heavier material that need a trimmed, wrapped edge in the same pass.",
+      applications: ['bags', 'heavier material'],
+      operations: ['lockstitch', 'edge trimming', 'wrapping'],
+      searchTerms: ['ls9520dp', 'ls9520dp/qb', 'maqi ls9520dp', 'maqi', 'lockstitch', 'edge cutter', 'bags'],
+      imgId: 'lib-maqi-ls9520dp-qb', imgSrc: 'uploads/maqi-ls9520dp-qb-hero.png', imgPh: 'MAQI LS9520DP/QB lockstitch sewing machine with edge cutter',
+      officialUrl: 'https://en.chinamaqi.com/product/detail/154',
+      specs: [
+        ['Series', 'Lockstitch, direct drive, with edge cutter'],
+        ['Construction', 'QB wrapping construction'],
+        ['Cutter', 'Advanced cutter construction, quick and convenient'],
+        ['Availability', 'Order on request'],
+      ],
+      capabilityItems: [
+        { n: '01', title: 'QB wrapping construction', desc: 'Built to wrap and stitch an edge in one pass, suited to bag and heavy-material seams.' },
+        { n: '02', title: 'Quick edge cutter', desc: 'An edge cutter built into the feed for trimmed seams without a separate cutting step.' },
+      ],
+      highlightTags: ['QB wrapping construction', 'Built-in edge cutter'],
+    },
+    {
+      id: 'maqi-ls202dp',
+      model: 'MAQI LS 202DP',
+      manufacturer: 'MAQI',
+      category: 'Lockstitch',
+      purpose: "MAQI's LS 202DP is a direct-drive lockstitch machine with a large hook built for heavier material, a simple integrated control box, a built-in work light and a built-in bobbin winder.",
+      applications: ['garments', 'heavier material'],
+      operations: ['lockstitch', 'straight stitch'],
+      searchTerms: ['ls202dp', 'maqi ls202dp', 'maqi', 'lockstitch'],
+      imgId: 'lib-maqi-ls202dp', imgSrc: 'uploads/maqi-ls202dp-hero.jpg', imgPh: 'MAQI LS 202DP lockstitch sewing machine with big hook',
+      officialUrl: 'https://en.chinamaqi.com/product/detail/158',
+      specs: [
+        ['Series', 'Lockstitch, direct drive, big hook'],
+        ['Hook', 'Large hook, for heavy material'],
+        ['Control box', 'Simple integrated control box'],
+        ['Extras', 'Built-in light, built-in bobbin winder'],
+        ['Availability', 'Order on request'],
+      ],
+      capabilityItems: [
+        { n: '01', title: 'Large hook for heavy material', desc: 'Sized up from a standard lockstitch head for thicker fabric and heavier seams.' },
+        { n: '02', title: 'Built-in light and winder', desc: 'A work light and bobbin winder built into the head rather than added on separately.' },
+      ],
+      highlightTags: ['Large hook, heavy material', 'Built-in light & winder'],
+    },
   ];
 
   garmentDefs = [
@@ -4081,6 +4520,9 @@ class Component extends DCLogic {
   toggleSolution = (key) => this.setState((s) => ({ openSolution: s.openSolution === key ? null : key }));
 
   onMachineQueryChange = (e) => this.setState({ machineQuery: e.target.value });
+  setMachineBrand = (brand) => this.setState({ machineBrand: brand });
+  goMaqiMachines = () => { this.setState({ machineBrand: 'MAQI' }); this.goToView('machines'); };
+  goMaqiMachinesAndClose = () => { this.setState({ mobileNavOpen: false, machineBrand: 'MAQI' }); this.goToView('machines'); };
   focusMachineSearch = () => {
     if (typeof document === 'undefined') return;
     const input = document.querySelector('input[placeholder^="Search by model"]');
@@ -4140,11 +4582,14 @@ class Component extends DCLogic {
   }
 
   renderVals() {
-    const { view, contactOpen, contactSubmitted, finderStep, finderAnswers, machineQuery } = this.state;
+    const { view, contactOpen, contactSubmitted, finderStep, finderAnswers, machineQuery, machineBrand } = this.state;
     const q = (machineQuery || '').trim().toLowerCase();
+    const brandFilteredMachines = (machineBrand && machineBrand !== 'all')
+      ? this.machines.filter((m) => m.manufacturer === machineBrand)
+      : this.machines;
     const machineResults = !q
-      ? this.machines
-      : this.machines.filter((m) => m.searchTerms.some((t) => t.includes(q) || q.includes(t)));
+      ? brandFilteredMachines
+      : brandFilteredMachines.filter((m) => m.searchTerms.some((t) => t.includes(q) || q.includes(t)));
 
     const q2 = (this.state.searchQuery || '').trim().toLowerCase();
     const searchGroups = [];
@@ -4492,6 +4937,7 @@ class Component extends DCLogic {
       goHome: () => this.goToView('home'),
       goAbout: () => this.goToView('about'),
       goMachines: () => this.goToView('machines'),
+      goMaqiMachines: this.goMaqiMachines,
       goIndustries: () => this.goToView('industries'),
       goSolutions: () => this.goToView('solutions'),
       goProduct: () => this.goToProduct(this.state.selectedMachineId || 'jack-f6'),
@@ -4543,6 +4989,7 @@ class Component extends DCLogic {
       openContactFromSearch: () => { this.closeSearch(); this.openContact(); },
       goToViewAndClose: (v) => { this.goToView(v); this.setState({ mobileNavOpen: false }); },
       goMachinesAndClose: () => { this.goToView('machines'); this.setState({ mobileNavOpen: false }); },
+      goMaqiMachinesAndClose: this.goMaqiMachinesAndClose,
       goIndustriesAndClose: () => { this.goToView('industries'); this.setState({ mobileNavOpen: false }); },
       goSolutionsAndClose: () => { this.goToView('solutions'); this.setState({ mobileNavOpen: false }); },
       goFinderAndClose: () => { this.goToView('finder'); this.setState({ mobileNavOpen: false }); },
@@ -4589,6 +5036,17 @@ class Component extends DCLogic {
       })(),
       phoneDisplay: '+91 99713 36656',
       machineQuery: this.state.machineQuery,
+      machineBrandPills: [
+        { key: 'all', label: 'All Brands' },
+        { key: 'JACK', label: 'JACK' },
+        { key: 'MAQI', label: 'MAQI' },
+      ].map((b) => ({
+        ...b,
+        isActive: (machineBrand || 'all') === b.key,
+        bg: (machineBrand || 'all') === b.key ? '#1D1D1F' : '#fff',
+        color: (machineBrand || 'all') === b.key ? '#fff' : '#1D1D1F',
+        select: () => this.setMachineBrand(b.key),
+      })),
       onMachineQueryChange: this.onMachineQueryChange,
       focusMachineSearch: this.focusMachineSearch,
       machineResults: machineResults.map((m, i) => ({

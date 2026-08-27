@@ -1450,7 +1450,10 @@ a:hover { color:#3D7BFF; }
           <div style="font-size:16px;color:#1D1D1F;line-height:1.7">A domestic or older mechanical machine can't sustain high stitch speed through a full production shift without stitch quality degrading. The F6's built-in servo motor and computerized control hold consistent speed and stitch quality at up to 5000 stitches per minute — the difference between predictable output and rework.</div>
         </div>
       </div>
-      <div style="background:#F5F5F7;padding:0 clamp(24px,8vw,80px) clamp(70px,10vw,110px)">
+      </sc-if>
+
+      <sc-if value="{{ hasCapabilities }}" hint-placeholder-val="{{ true }}">
+      <div style="background:#F5F5F7;padding:clamp(70px,10vw,110px) clamp(24px,8vw,80px) clamp(70px,10vw,110px)">
         <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:36px">KEY CAPABILITIES</div>
         <div style="display:flex;flex-direction:column">
           <sc-for list="{{ capabilityItems }}" as="cap" hint-placeholder-count="4">
@@ -1463,6 +1466,13 @@ a:hover { color:#3D7BFF; }
             </div>
           </sc-for>
         </div>
+        <sc-if value="{{ hasHighlightTags }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:36px">
+          <sc-for list="{{ highlightTags }}" as="tag" hint-placeholder-count="3">
+            <span style="padding:9px 16px;border-radius:100px;background:#1D1D1F;color:#F5F5F7;font-size:13px;font-weight:600">{{ tag }}</span>
+          </sc-for>
+        </div>
+        </sc-if>
       </div>
       </sc-if>
 
@@ -2235,6 +2245,13 @@ class Component extends DCLogic {
         ['Motor', 'Built-in silent, energy-saving servo motor'], ['Lubrication', 'Semi-dry head, oil-free'],
         ['Feed', 'Automatic, computerized, auto thread trimmer'], ['Availability', 'In stock'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'Built-in servo motor', desc: 'Runs up to 5000 stitches per minute on a built-in silent servo motor — holds consistent speed through a full shift instead of degrading like an older mechanical head.' },
+        { n: '02', title: 'Automatic thread trimmer', desc: 'Computerized feed with an auto thread trimmer cuts the thread between operations without the operator reaching for scissors.' },
+        { n: '03', title: 'Oil-free semi-dry head', desc: 'Semi-dry, oil-free lubrication keeps the sewing table and finished garments free of oil stains.' },
+        { n: '04', title: 'Auto presser-foot lift', desc: 'The presser foot lifts automatically to 6mm (13mm by hand) — less manual adjustment between pieces.' },
+      ],
+      highlightTags: ['5000 s.p.m. servo motor', 'Auto thread trimmer', 'Oil-free, clean sewing', 'Auto foot lift'],
       detailItems: [
         { id: 'f6-detail-panel', src: 'uploads/card5.webp', ph: 'Drop: control panel macro', label: 'CONTROL PANEL', n: '01', note: 'Speed and settings sit under a digital display rather than mechanical dials.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
         { id: 'f6-detail-needle', src: 'uploads/f6-jack-needle.webp', ph: 'Drop: needle & presser foot macro', label: 'NEEDLE & PRESSER FOOT', n: '02', note: 'The work area where thread meets fabric — precision at the point of the stitch.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
@@ -2257,6 +2274,11 @@ class Component extends DCLogic {
         ['Max sewing speed', 'Up to 3000 s.p.m.'], ['Best for', 'Shirts, jeans, non-woven bags, shoes, bags'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'Large-hook heavy-duty head', desc: 'A large hook and heavy DPx17 needle (22#) let it punch through thicker material than a standard lockstitch head — built for jeans, non-woven bags and shoes, not just shirts.' },
+        { n: '02', title: 'Long 12mm stitch length', desc: "A 12mm max stitch length is more than double a standard machine's — useful for basting and heavier seams where a fine stitch isn't the point." },
+      ],
+      highlightTags: ['Large-hook heavy-duty head', '12mm stitch length', 'DPx17 needle'],
       detailItems: [
         { id: '2002g-detail-1', src: 'uploads/official-jack-2002g-card2.webp', ph: 'Official product photograph', label: 'STITCH DETAIL', n: '01', note: 'A closer look at the JACK 2002G\'s feed and stitch point, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
         { id: '2002g-detail-2', src: 'uploads/official-jack-2002g-card3.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '02', note: 'The complete JACK 2002G machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
@@ -2277,6 +2299,12 @@ class Component extends DCLogic {
         ['Feature', 'Built-in edge cutter and piping device'], ['Best for', 'Shirts, suits, pants, down jackets'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'Built-in edge cutter', desc: 'Trims fabric as it feeds, so the edge comes out clean without a separate trimming pass.' },
+        { n: '02', title: 'Integrated piping device', desc: 'Attaches piping in the same pass as the seam — no separate piping step.' },
+        { n: '03', title: 'Runs up to 4000 s.p.m.', desc: 'Enough headroom for shirt, suit and pants production lines.' },
+      ],
+      highlightTags: ['Built-in edge cutter', 'Integrated piping device', '4000 s.p.m.'],
       detailItems: [
         { id: '5558g-detail-1', src: 'uploads/official-jack-5558g-card2.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK 5558G machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
         { id: '5558g-detail-2', src: 'uploads/official-jack-5558g-card3.webp', ph: 'Official product photograph', label: 'EDGE CUTTER DETAIL', n: '02', note: 'The JACK 5558G\'s built-in edge cutter, which trims fabric as it feeds, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
@@ -2297,6 +2325,12 @@ class Component extends DCLogic {
         ['Feature', 'Stable built-in edge cutter, stepping-motor foot lift'], ['Best for', 'Shirts, suits, pants, down jackets'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'Digital edge cutter', desc: 'Trims the fabric edge as it feeds — more stable and consistent than a purely mechanical cutter.' },
+        { n: '02', title: 'Stepping-motor foot lift', desc: 'The presser foot lifts via a stepping motor rather than a hand lever, so foot height is repeatable pass after pass.' },
+        { n: '03', title: 'Runs up to 4000 s.p.m.', desc: 'Enough speed for shirt, suit and pants production.' },
+      ],
+      highlightTags: ['Digital edge cutter', 'Stepping-motor foot lift', '4000 s.p.m.'],
       detailItems: [
         { id: '5559f-detail-1', src: 'uploads/official-jack-5559f-card2.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK 5559F machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
         { id: '5559f-detail-2', src: 'uploads/official-jack-5559f-card4.webp', ph: 'Official product photograph', label: 'CONTROL PANEL', n: '02', note: 'The JACK 5559F\'s digital control panel, where speed and stitch settings are set, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
@@ -2318,6 +2352,12 @@ class Component extends DCLogic {
         ['Control system', 'Jack NTB system with Octopus "Nine-Brain" AI chip'], ['Motor', 'Direct-drive integrated servo motor'],
         ['Feed', 'Computerized, auto-trimmer, auto backtack, auto foot lift'], ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'AI Nine-Brain chip', desc: "The Jack NTB system with an Octopus \"Nine-Brain\" AI chip adjusts sewing parameters automatically instead of leaving every setting to the operator." },
+        { n: '02', title: 'Auto trim, backtack & foot lift', desc: 'Auto thread trimmer, auto backtack and auto foot lift run in sequence — three manual steps become one continuous motion.' },
+        { n: '03', title: 'Direct-drive servo motor', desc: 'Holds speed up to 5000 stitches per minute without the belt losses of an older mechanical head.' },
+      ],
+      highlightTags: ['AI Nine-Brain chip', 'Auto trim + backtack + foot lift', '5000 s.p.m. direct drive'],
       youtubeId: 'HVx6o33NR8U',
       detailItems: [
         { id: 'a4c-detail-1', src: 'uploads/jack-a4c-detail.webp', ph: 'Detail photograph', label: 'CONTROL DETAIL', n: '01', note: 'The Jack NTB control system, with the Octopus “Nine-Brain” AI chip.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
@@ -2341,6 +2381,12 @@ class Component extends DCLogic {
         ['Controls', 'One-key reset intelligent panel, LED light'], ['Motor', 'Single-shaft, integrated energy-saving motor'],
         ['Best for', 'T-shirts, underwear, jeans, mid-to-high-level clothing'], ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'L/M/H feed selector', desc: 'An L/M/H feed selector lever switches between light, medium and heavy fabric settings without stopping to reconfigure the machine.' },
+        { n: '02', title: '40-50% faster start/stop', desc: 'Start/stop response is cut by 40-50%, so the machine reacts faster at the start and end of every seam — less wasted motion per piece.' },
+        { n: '03', title: 'Sealed, leak-free oil tray', desc: 'An enclosed needle bar and sealed oil tray keep oil off the fabric and the floor.' },
+      ],
+      highlightTags: ['L/M/H feed selector', '40-50% faster start/stop', 'Sealed, leak-free oil tray'],
       youtubeId: 'PrBaPHgFia8',
       detailItems: [
         { id: 'e4s-detail-1', src: 'uploads/official-jack-e4s-card2.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK E4S machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
@@ -2362,6 +2408,11 @@ class Component extends DCLogic {
         ['Max sewing speed', 'Up to 6000 s.p.m.'], ['Best for', 'Heavy materials, extra-heavy denim'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'Digital top feed', desc: 'Pulls heavy material through evenly instead of letting it bunch or shift under the foot.' },
+        { n: '02', title: 'Runs up to 6000 s.p.m.', desc: 'Sustains high speed even on extra-heavy denim — well above what a standard overlock head can handle on thick material.' },
+      ],
+      highlightTags: ['Digital top feed', '6000 s.p.m. on heavy denim'],
       detailItems: [
         { id: 'c5t-detail-1', src: 'uploads/official-jack-c5t-card2.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK C5T machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
         { id: 'c5t-detail-2', src: 'uploads/official-jack-c5t-card4.webp', ph: 'Official product photograph', label: 'TOP FEED DETAIL', n: '02', note: 'The top feed mechanism that helps move heavier fabric through evenly, from JACK’s official documentation.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
@@ -2382,6 +2433,12 @@ class Component extends DCLogic {
         ['Stitch length', '1.5–4.5mm'], ['Stitch width', '5.6 / 6.4mm'], ['Differential ratio', '0.65–1.3'],
         ['Max speed', '5500 s.p.m.'], ['Weight', '48–64 kg (model-dependent)'], ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: '0.65-1.3 differential feed', desc: 'Lets the operator gather or stretch the seam on the fly — one dial for both directions instead of swapping parts.' },
+        { n: '02', title: '3-needle / 5-thread seam', desc: '3 needles and 5 threads in one pass build a stronger interlock seam than a single-needle machine, without a second trip through the line.' },
+        { n: '03', title: 'Runs up to 5500 s.p.m.', desc: 'Real headroom over a basic interlock head.' },
+      ],
+      highlightTags: ['0.65-1.3 differential feed', '3-needle / 5-thread seam', '5500 s.p.m.'],
       detailItems: [
         { id: 'w4-detail-1', src: 'uploads/official-jack-w4-card4.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK W4 machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
         { id: 'w4-detail-2', src: 'uploads/official-jack-w4-card6.webp', ph: 'Official product photograph', label: 'STITCH DETAIL', n: '02', note: 'A closer look at the JACK W4\'s feed and stitch point, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
@@ -2402,6 +2459,12 @@ class Component extends DCLogic {
         ['Stitch length', '1.5–4.5mm'], ['Differential ratio', '0.6–1.8'], ['Preset / max speed', '4500 / 6000 s.p.m.'],
         ['Features', 'Step motor, upper trim, holder device'], ['Weight', '51–61 kg'], ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'Wider differential range', desc: "A 0.6-1.8 differential ratio — wider than the W4's — handles a bigger range of stretch and gather without changing machines." },
+        { n: '02', title: 'Step-motor auto trimmer', desc: 'A step-motor-driven upper trimmer and holder device automates thread handling that would otherwise need a manual snip.' },
+        { n: '03', title: '6000 s.p.m. top speed', desc: '500 stitches per minute higher than the W4, for higher-volume interlock runs.' },
+      ],
+      highlightTags: ['Wider 0.6-1.8 differential range', 'Step-motor auto trimmer', '6000 s.p.m. top speed'],
       detailItems: [
         { id: 'k7-detail-1', src: 'uploads/official-jack-k7-card2.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK K7 machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
         { id: 'k7-detail-2', src: 'uploads/official-jack-k7-card4.webp', ph: 'Official product photograph', label: 'STITCH DETAIL', n: '02', note: 'A closer look at the JACK K7\'s feed and stitch point, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
@@ -2422,6 +2485,11 @@ class Component extends DCLogic {
         ['Zig-zag width', '1.5–5.0mm'], ['Footlifter height', '12–16mm'], ['Needle', '558'],
         ['Max speed', '2500rpm'], ['Weight', '210 / 255 kg'], ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: '5-42mm eyelet range', desc: 'Eyelet length adjusts from 5mm to 42mm and zig-zag width from 1.5mm to 5.0mm — one machine covers a wide range of eyelet and pattern sizes instead of needing separate machines per size.' },
+        { n: '02', title: 'Single multifunction pedal', desc: "Drives the whole operation, so the operator isn't switching between multiple controls mid-cycle." },
+      ],
+      highlightTags: ['5-42mm eyelet range', 'Single multifunction pedal', '1.5-5.0mm zig-zag width'],
       youtubeId: 'yo8F40gTw1o',
       detailItems: [
         { id: '9820g-detail-1', src: 'uploads/official-jack-9820g-card2.webp', ph: 'Official product photograph', label: 'EYELET DETAIL', n: '01', note: 'Maximum precision and symmetry in eyelets and circles.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
@@ -2444,6 +2512,11 @@ class Component extends DCLogic {
         ['Controls', 'Full digital touch panel'], ['Best for', 'Sofa, car seat, luggage, heavy leather goods'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'Triple transport feed', desc: 'Needle feed plus top and bottom feed working together pull thick, multi-layer material through evenly where a single-feed machine would slip or bunch.' },
+        { n: '02', title: 'Full digital touch panel', desc: 'Replaces mechanical dial adjustment for stitch and speed settings.' },
+      ],
+      highlightTags: ['Triple transport feed', 'Full digital touch panel', 'Built for heavy leather'],
       detailItems: [
         { id: 'z7-detail-1', src: 'uploads/official-jack-z7-card3.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK Z7 machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
         { id: 'z7-detail-2', src: 'uploads/official-jack-z7-card5.webp', ph: 'Official product photograph', label: 'CONTROL PANEL', n: '02', note: 'Full digital touch panel.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
@@ -2472,6 +2545,12 @@ class Component extends DCLogic {
         ['Best for', 'General garment stitching, production lines'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: '5.5Nm direct-drive torque', desc: 'A direct-drive servo motor delivering up to 5.5Nm of torque keeps stitch speed steady even as it pushes through thicker seam allowances.' },
+        { n: '02', title: 'Auto trim + auto backtack', desc: 'Auto thread trimmer and auto backtack handle the start and end of every seam automatically.' },
+        { n: '03', title: 'Knee-operated presser lift', desc: 'Frees both hands for positioning fabric instead of reaching for a lever.' },
+      ],
+      highlightTags: ['5.5Nm direct-drive torque', 'Auto trim + auto backtack', 'Knee-operated presser lift'],
       youtubeId: 'cXDsVv6Z3zs',
       detailItems: [
         { id: 'a2c-detail-1', src: 'uploads/official-jack-a2c-card2.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK A2C machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
@@ -2501,6 +2580,11 @@ class Component extends DCLogic {
         ['Best for', 'General garment stitching, production lines'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'One-key reset panel', desc: 'An intelligent operation panel with one-key reset returns the machine to its default settings in a single press instead of walking back through a menu.' },
+        { n: '02', title: 'Auto trim, backtack & foot lift', desc: "Auto thread trimmer, auto backtack and auto foot lift run together — a step up in automation from the A2C's manual bartack lever." },
+      ],
+      highlightTags: ['One-key reset panel', 'Auto trim, backtack & foot lift'],
     },
     {
       id: 'jack-a5e',
@@ -2522,6 +2606,12 @@ class Component extends DCLogic {
         ['Best for', 'Shirts, suits, pants, down jackets'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'Largest-in-class workspace', desc: 'A 305 × 130mm operating space — the largest in its class — gives more room to maneuver bulky garment sections under the needle.' },
+        { n: '02', title: 'Adapts to fabric thickness', desc: 'AI integration reads and adapts to changing fabric thickness mid-seam instead of requiring the operator to stop and readjust.' },
+        { n: '03', title: 'Auto trim, backtack & foot lift', desc: "Keeps the operator's hands on the fabric, not the controls." },
+      ],
+      highlightTags: ['Largest-in-class 305×130mm workspace', 'AI adapts to fabric thickness', 'Auto trim, backtack & foot lift'],
       youtubeId: 'ry1mefI3PIw',
       detailItems: [
         { id: 'a5e-detail-1', src: 'uploads/official-jack-a5e-card2.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK A5E-B AMH2 machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
@@ -2547,6 +2637,11 @@ class Component extends DCLogic {
         ['Best for', 'Shirts, suits, pants, down jackets'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: '300mm sewing space', desc: 'Gives more clearance for bulky sections than a standard-throat lockstitch head.' },
+        { n: '02', title: 'Sealed, stain-free oil pan', desc: 'Keeps the machine running without leaving oil stains on light-colored fabric.' },
+      ],
+      highlightTags: ['300mm sewing space', 'Sealed, stain-free oil pan'],
       detailItems: [
         { id: 'a6fe-detail-1', src: 'uploads/official-jack-a6fe-card2.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK A6F-E machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
         { id: 'a6fe-detail-2', src: 'uploads/official-jack-a6fe-card4.webp', ph: 'Official product photograph', label: 'STITCH DETAIL', n: '02', note: 'A closer look at the JACK A6F-E\'s feed and stitch point, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
@@ -2570,6 +2665,11 @@ class Component extends DCLogic {
         ['Best for', 'Umbrella, denim, T-shirt (chain stitch)'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: '1/2/3-needle configurations', desc: 'Available in 1, 2 or 3-needle setups on the same flatbed — match the configuration to the seam without buying a different machine.' },
+        { n: '02', title: 'Runs up to 4000 s.p.m.', desc: 'Enough speed for umbrella, denim and T-shirt chain-stitch work.' },
+      ],
+      highlightTags: ['1/2/3-needle configurations', '4000 s.p.m. chain stitch'],
       detailItems: [
         { id: '8558-detail-1', src: 'uploads/official-jack-8558-card2.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK JK-8558G machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
         { id: '8558-detail-2', src: 'uploads/official-jack-8558-card4.webp', ph: 'Official product photograph', label: 'EDGE CUTTER DETAIL', n: '02', note: 'The JACK JK-8558G\'s built-in edge cutter, which trims fabric as it feeds, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
@@ -2593,6 +2693,11 @@ class Component extends DCLogic {
         ['Best for', 'Umbrella, denim, T-shirt (chain-stitch work)'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'Auto cornering', desc: 'Turns corners automatically mid-seam instead of the operator pivoting the fabric by hand.' },
+        { n: '02', title: 'Built-in presser-foot lifter', desc: 'Part of the machine rather than a bolt-on accessory, so foot height stays consistent.' },
+      ],
+      highlightTags: ['Auto cornering', 'Built-in presser-foot lifter', 'Double-needle stitching'],
       detailItems: [
         { id: '58450-detail-1', src: 'uploads/official-jack-58450-card2.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK JK-58450J machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
         { id: '58450-detail-2', src: 'uploads/official-jack-58450-card4.webp', ph: 'Official product photograph', label: 'STITCH DETAIL', n: '02', note: 'A closer look at the JACK JK-58450J\'s feed and stitch point, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
@@ -2620,6 +2725,13 @@ class Component extends DCLogic {
         ['Best for', 'T-shirts, underwear, jeans, mid-to-high-level clothing'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'Auto-adjusts to fabric thickness', desc: 'Reads fabric thickness in real time and automatically increases torque up to 9.2Nm — the machine adapts to a thickness change instead of the operator switching settings mid-seam.' },
+        { n: '02', title: 'Photocell auto-sew mode', desc: 'A fully automatic photocell sewing mode can start and stop the stitch on its own, alongside manual and semi-automatic modes for different jobs.' },
+        { n: '03', title: 'Short-thread auto cutter', desc: 'The automatic electric thread cutter leaves as little as 5mm of thread remaining — less trimming waste and cleaner starts.' },
+        { n: '04', title: 'Industry 4.0 WiFi', desc: 'Built-in WiFi makes it Industry 4.0 ready, so production data can be tracked without extra hardware.' },
+      ],
+      highlightTags: ['Auto-adjusts to fabric thickness', '7000 s.p.m.', 'Industry 4.0 WiFi built in', 'Photocell auto-sew mode'],
       youtubeId: 'HVwzptwAyYw',
       detailItems: [
         { id: 'c7-urus-detail-1', src: 'uploads/official-jack-c7urus-card2.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK C7 URUS machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
@@ -2645,6 +2757,12 @@ class Component extends DCLogic {
         ['Best for', 'T-shirts, underwear, jeans, mid-to-high-level clothing'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'Built-in production counter', desc: 'A production counter built into the touch screen tracks output per operator without a separate tally system.' },
+        { n: '02', title: 'Voice-guided touch panel', desc: 'Voice guidance walks the operator through settings changes on the panel itself.' },
+        { n: '03', title: 'RFID + WiFi tracking', desc: 'Built-in RFID and WiFi support factory-floor tracking without bolting on separate hardware.' },
+      ],
+      highlightTags: ['Built-in production counter', 'Voice-guided touch panel', 'RFID + WiFi tracking'],
       detailItems: [
         { id: 'c60-detail-1', src: 'uploads/official-jack-c60-card2.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK C60+ machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
         { id: 'c60-detail-2', src: 'uploads/official-jack-c60-card4.webp', ph: 'Official product photograph', label: 'STITCH DETAIL', n: '02', note: 'A closer look at the JACK C60+\'s feed and stitch point, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
@@ -2668,6 +2786,11 @@ class Component extends DCLogic {
         ['Best for', 'T-shirts, underwear, jeans, mid-to-high-level clothing'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'Compact small-arm bed', desc: 'A small cylinder-bed arm gives more clearance for turning tight, curved seams than a standard-size overlock bed.' },
+        { n: '02', title: 'Runs up to 7000 s.p.m.', desc: 'Among the fastest overlock speeds in the lineup.' },
+      ],
+      highlightTags: ['Compact small-arm bed', '7000 s.p.m.'],
       youtubeId: 'qadBCFbypZI',
       detailItems: [
         { id: '797-detail-1', src: 'uploads/official-jack-797-card2.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK JK-797 machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
@@ -2695,6 +2818,12 @@ class Component extends DCLogic {
         ['Best for', 'T-shirts, underwear, jeans, mid-to-high-level clothing'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'Adapts to fabric thickness', desc: 'An AI chip reads fabric thickness in real time and adapts automatically, from heavy to light fabric, without the operator resetting the machine.' },
+        { n: '02', title: '20mm clearance rhombic arm', desc: 'A rhombic arm with 20mm edge-to-foot clearance and nano-ceramic thread guides reduce thread friction and give more room to work fabric under the foot.' },
+        { n: '03', title: '9.2Nm transport torque', desc: 'Holds feed steady even as fabric weight changes mid-seam.' },
+      ],
+      highlightTags: ['AI adapts to fabric thickness', '20mm clearance rhombic arm', '9.2Nm transport torque', 'Reduced vibration & noise'],
       detailItems: [
         { id: 'k7-ut-detail-1', src: 'uploads/official-jack-k7-card2.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK K7-UT machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
         { id: 'k7-ut-detail-2', src: 'uploads/official-jack-k7-card4.webp', ph: 'Official product photograph', label: 'STITCH DETAIL', n: '02', note: 'A closer look at the JACK K7-UT\'s feed and stitch point, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
@@ -2718,6 +2847,11 @@ class Component extends DCLogic {
         ['Best for', 'T-shirts, underwear, jeans, mid-to-high-level clothing'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'Full-automatic auto trimmer', desc: 'Full-automatic feed with an auto thread trimmer removes a manual snip at the end of every seam.' },
+        { n: '02', title: 'One-key reset, digital display', desc: 'A digital speed display with one-key reset makes speed changes precise and repeatable instead of guessing off a dial.' },
+      ],
+      highlightTags: ['Full-automatic auto trimmer', 'One-key reset, digital display'],
       youtubeId: 'hmj4QU9owR0',
       detailItems: [
         { id: 'w5e-ut-detail-1', src: 'uploads/official-jack-w5eut-card4.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK W5E-UT machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
@@ -2742,6 +2876,11 @@ class Component extends DCLogic {
         ['Best for', 'T-shirts, underwear, jeans, mid-to-high-level clothing'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'Full touch-screen + voice guide', desc: 'A full touch-screen panel with voice guide replaces a bank of mechanical switches for setup and adjustment.' },
+        { n: '02', title: 'Active Feed auto trimmer', desc: 'The Active Feed system with auto thread trimmer is built for the most demanding, highest-volume interlock lines Jack makes.' },
+      ],
+      highlightTags: ['Full touch-screen + voice guide', 'Active Feed auto trimmer', '6000 s.p.m.'],
       youtubeId: '5DHxowo2qRM',
       detailItems: [
         { id: 'k10-detail-1', src: 'uploads/official-jack-k10-card2.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK K10+-UT machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
@@ -2765,6 +2904,11 @@ class Component extends DCLogic {
         ['Best for', 'Shirts, suits, pants, down jackets'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: '3-needle / 5-thread seam', desc: 'Builds a stronger interlock seam in a single pass than a simpler 2-thread machine.' },
+        { n: '02', title: 'Runs up to 4500 s.p.m.', desc: 'High-speed cylinder-bed interlock production.' },
+      ],
+      highlightTags: ['3-needle / 5-thread seam', '4500 s.p.m.'],
       detailItems: [
         { id: '8787-detail-1', src: 'uploads/official-jack-8787-card2.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK JK-8787-01GX356/UT machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
         { id: '8787-detail-2', src: 'uploads/official-jack-8787-card4.webp', ph: 'Official product photograph', label: 'STITCH DETAIL', n: '02', note: 'A closer look at the JACK JK-8787-01GX356/UT\'s feed and stitch point, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
@@ -2788,6 +2932,11 @@ class Component extends DCLogic {
         ['Best for', 'T-shirts, underwear, jeans, mid-to-high-level clothing'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'Small cylinder-bed design', desc: 'A small cylinder-bed platform gives more room to turn tight seams like cuffs and collars than a standard-size interlock bed.' },
+        { n: '02', title: 'Runs up to 4500 s.p.m.', desc: 'High-speed small-bed interlock work.' },
+      ],
+      highlightTags: ['Small cylinder-bed design', '4500 s.p.m.'],
       detailItems: [
         { id: '8670-detail-1', src: 'uploads/official-jack-8670-card2.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK JK-8670BDII/UT machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
         { id: '8670-detail-2', src: 'uploads/official-jack-8670-card4.webp', ph: 'Official product photograph', label: 'CONTROL DETAIL', n: '02', note: 'A closer look at the JACK JK-8670BDII/UT\'s control and adjustment dials, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
@@ -2810,6 +2959,11 @@ class Component extends DCLogic {
         ['Best for', 'T-shirts, underwear, jeans, mid-to-high-level clothing'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'Multi-needle parallel rows', desc: 'A multi-needle head sews several parallel rows in a single pass for elastic attaching, tape and waistband work.' },
+        { n: '02', title: 'Runs up to 3500 s.p.m.', desc: 'Across all needles simultaneously.' },
+      ],
+      highlightTags: ['Multi-needle parallel rows', '3500 s.p.m.'],
       detailItems: [
         { id: '8009-detail-1', src: 'uploads/official-jack-8009-card2.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK JK-8009VCDII/UTL machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
         { id: '8009-detail-2', src: 'uploads/official-jack-8009-card4.webp', ph: 'Official product photograph', label: 'CONTROL DETAIL', n: '02', note: 'A closer look at the JACK JK-8009VCDII/UTL\'s control and adjustment dials, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
@@ -2836,6 +2990,13 @@ class Component extends DCLogic {
         ['Best for', 'Sofa, car seat, luggage, gloves, bags, shoes'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: '16-level stepper foot lift', desc: 'A stepper-motor-controlled presser foot lifts through 16 adjustable levels — fine control over foot height instead of a single fixed lift.' },
+        { n: '02', title: 'Pierces 10+ leather layers', desc: 'Pierces 10+ layers of leather and handles 8 layers cleanly — headroom most lockstitch heads don\'t have for heavy leather goods.' },
+        { n: '03', title: '1.3-5.5mm stitch range', desc: 'Stitch length adjusts on a graduated scale, covering fine and heavy-duty seams on the same machine.' },
+        { n: '04', title: 'Digital knee lifter + LED', desc: 'A digital knee lifter with micro-lift and double-row LED lighting gives fine control and better visibility at the needle.' },
+      ],
+      highlightTags: ['Pierces 10+ leather layers', '16-level stepper foot lift', '1.3-5.5mm stitch range', 'Digital knee lifter + LED'],
       youtubeId: 'KOV7nM89jaU',
       detailItems: [
         { id: 'h7-detail-1', src: 'uploads/official-jack-h7-card2.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK H7 machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
@@ -2862,6 +3023,12 @@ class Component extends DCLogic {
         ['Best for', 'Shirts, jeans, non-woven bags, shoes, bags'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: '3 stepper motors + main shaft', desc: 'Three independent stepper motors (needle bar plus two rollers) plus the main shaft motor give roller-feed sewing more precise, noiseless control than a single-motor post-bed machine.' },
+        { n: '02', title: '3mm-precision thread trim', desc: 'The thread trimmer cuts to 3mm precision, leaving a short, consistent thread tail instead of an untrimmed stray end.' },
+        { n: '03', title: '110+ layer perforation capacity', desc: 'Penetrates 110+ layers of A4 paper — a proxy for how much material thickness the needle can reliably punch through.' },
+      ],
+      highlightTags: ['3 stepper motors + main shaft', '3mm-precision thread trim', '110+ layer perforation capacity'],
     },
     {
       id: 'jack-h2',
@@ -2880,6 +3047,11 @@ class Component extends DCLogic {
         ['Best for', 'Sofa, car seat, luggage, gloves, bags'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'Top & bottom direct-drive feed', desc: 'Direct-drive top-and-bottom feeding pulls heavy material through evenly, built for sofa, car seat, luggage and bag work.' },
+        { n: '02', title: 'Heavy-duty needle', desc: "A DPx17 20-23# needle is sized for heavy material most standard lockstitch needles can't punch through cleanly." },
+      ],
+      highlightTags: ['Top & bottom direct-drive feed', 'Heavy 20-23# needle'],
       youtubeId: 'cSn_czBFi1Q',
       detailItems: [
         { id: 'h2-detail-1', src: 'uploads/official-jack-h2-card2.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK H2 machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
@@ -2903,6 +3075,11 @@ class Component extends DCLogic {
         ['Best for', 'Shirts, suits, pants, down jackets'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'Separated side cutter', desc: 'Trims the fabric edge as it feeds, leaving a neat cutting edge without a second trimming pass.' },
+        { n: '02', title: 'Heavy-duty needle build', desc: "Built with the same heavy DPx17 20-23# needle as Jack's other heavy-duty lockstitch heads, for durability on thicker seams." },
+      ],
+      highlightTags: ['Separated side cutter', 'Heavy-duty build'],
       detailItems: [
         { id: 'h5k-detail-1', src: 'uploads/official-jack-h5k-card1.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK H5K machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
         { id: 'h5k-detail-2', src: 'uploads/official-jack-h5k-card3.webp', ph: 'Official product photograph', label: 'STITCH DETAIL', n: '02', note: 'A closer look at the JACK H5K\'s feed and stitch point, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
@@ -2925,6 +3102,11 @@ class Component extends DCLogic {
         ['Best for', 'Sofa, car seat, luggage, shoes'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'Top & bottom auto feed', desc: 'Full-automatic top-and-bottom feeding handles 8-layer leather work without the layers shifting or bunching mid-seam.' },
+        { n: '02', title: 'Large working space', desc: 'Gives more room to maneuver bulky leather panels than a standard-throat machine.' },
+      ],
+      highlightTags: ['Top & bottom auto feed', '8-layer leather capability'],
       detailItems: [
         { id: '2030-detail-1', src: 'uploads/official-jack-2030-card2.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK JK-2030G machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
         { id: '2030-detail-2', src: 'uploads/official-jack-2030-card4.webp', ph: 'Official product photograph', label: 'STITCH DETAIL', n: '02', note: 'A closer look at the JACK JK-2030G\'s feed and stitch point, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
@@ -2947,6 +3129,11 @@ class Component extends DCLogic {
         ['Best for', 'Sofa, car seat, luggage, shoes'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'Compound feed system', desc: 'Compound feeding (needle plus alternating presser feet) sews up to 8 layers of leather without slipping.' },
+        { n: '02', title: 'Large working space', desc: 'Suits bulky sofa, car seat, luggage and shoe assemblies.' },
+      ],
+      highlightTags: ['Compound feed system', '8-layer leather capability'],
       detailItems: [
         { id: '2060-detail-1', src: 'uploads/official-jack-2060-card2.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK JK-2060G machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
         { id: '2060-detail-2', src: 'uploads/official-jack-2060-card4.webp', ph: 'Official product photograph', label: 'STITCH DETAIL', n: '02', note: 'A closer look at the JACK JK-2060G\'s feed and stitch point, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
@@ -2970,6 +3157,11 @@ class Component extends DCLogic {
         ['Best for', 'Shirts, suits, pants, down jackets'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'Post-bed design', desc: "Gives clearance to sew around cylindrical or raised sections that a flat-bed lockstitch machine can't reach." },
+        { n: '02', title: 'Runs up to 3000 s.p.m.', desc: 'Enough speed for shirt, suit and pants production.' },
+      ],
+      highlightTags: ['Post-bed design', '3000 s.p.m.'],
     },
     {
       id: 'jack-t1900',
@@ -2991,6 +3183,12 @@ class Component extends DCLogic {
         ['Best for', 'Elastic bands, labels, bags, shoes, reinforcement seams'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: '60×50mm stitch field', desc: 'Covers most bartack and button-sewing patterns without repositioning the fabric.' },
+        { n: '02', title: 'Touch-screen pattern preview', desc: 'A touch-screen panel with pattern preview and voice guidance lets the operator confirm the pattern before sewing, cutting down misfires.' },
+        { n: '03', title: 'Three configurable variants', desc: 'Shank buttons, auto button feeder, and chain-cutter suction cover different button and bartack setups on one base machine.' },
+      ],
+      highlightTags: ['60×50mm stitch field', 'Touch-screen pattern preview', 'Voice-guided setup'],
       youtubeId: 'h-mAsDvoRak',
       detailItems: [
         { id: 't1900-detail-1', src: 'uploads/official-jack-t1900-card2.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK JK-T1900/1903 machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
@@ -3017,6 +3215,13 @@ class Component extends DCLogic {
         ['Connectivity', 'Industry 4.0 cloud connectivity'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: '360° rotating head', desc: 'Sews in any direction without repositioning the fabric template between sections of a pattern.' },
+        { n: '02', title: 'Folds in under 1 minute', desc: 'Goes from a 220×250cm working footprint down to 104×205cm in under a minute — real floor space back when it\'s not in use.' },
+        { n: '03', title: '30% lighter aircraft-aluminium head', desc: 'Reduces wear on the drive components compared to a standard build.' },
+        { n: '04', title: 'DXF file compatible', desc: 'Patterns come straight from design software instead of being programmed by hand at the machine.' },
+      ],
+      highlightTags: ['360° rotating head', 'Folds in under 1 minute', '30% lighter aircraft-aluminium head', 'DXF file compatible'],
     },
     {
       id: 'jack-1790',
@@ -3035,6 +3240,11 @@ class Component extends DCLogic {
         ['Best for', 'Keyhole seams: shirts, cardigans, work clothes, jeans'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: '4200 s.p.m. buttonhole speed', desc: 'Enough speed to keep pace with a shirt or cardigan production line.' },
+        { n: '02', title: 'Purpose-built keyhole needle', desc: 'Sized with a DPx5 12# needle suited specifically to keyhole seams on shirts, cardigans and work clothes.' },
+      ],
+      highlightTags: ['4200 s.p.m. buttonhole speed', 'Purpose-built keyhole needle'],
       youtubeId: '3zHdgHo-LyI',
       detailItems: [
         { id: '1790-detail-1', src: 'uploads/official-jack-1790-card2.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK JK-T1790G machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
@@ -3058,6 +3268,11 @@ class Component extends DCLogic {
         ['Best for', 'General feed-off-the-arm work'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'Mechatronic direct drive', desc: 'Avoids the belt losses of a clutch-motor feed-off-the-arm machine.' },
+        { n: '02', title: 'Runs up to 3500 s.p.m.', desc: 'Across general feed-off-the-arm work.' },
+      ],
+      highlightTags: ['Mechatronic direct drive', '3500 s.p.m.'],
       detailItems: [
         { id: '9270-detail-1', src: 'uploads/official-jack-9270-card2.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK JK-T9270D/9280D machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
         { id: '9270-detail-2', src: 'uploads/official-jack-9270-card4.webp', ph: 'Official product photograph', label: 'STITCH DETAIL', n: '02', note: 'A closer look at the JACK JK-T9270D/9280D\'s feed and stitch point, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },
@@ -3081,6 +3296,11 @@ class Component extends DCLogic {
         ['Best for', 'Shirts, suits, pants, down jackets'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: '4-needle / 6-thread seam', desc: 'Builds a stronger feed-off-arm interlock seam in one pass than a simpler 2-needle setup.' },
+        { n: '02', title: 'Runs up to 3200 s.p.m.', desc: 'For shirt, suit, pants and down-jacket work.' },
+      ],
+      highlightTags: ['4-needle / 6-thread seam', '3200 s.p.m.'],
       youtubeId: 'Ugjih99-ON8',
       detailItems: [
         { id: '8740-detail-1', src: 'uploads/official-jack-8740-card2.webp', ph: 'Official product photograph', label: 'MACHINE DETAIL', n: '01', note: 'The complete JACK JK-8740 machine head, from JACK\'s official documentation.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
@@ -3103,6 +3323,11 @@ class Component extends DCLogic {
         ['Footprint', 'Foldable for easy transport and storage'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: '1400×950mm sewing area', desc: "Jack's largest foldable template bed, with room for big pattern pieces in one setup." },
+        { n: '02', title: 'Folds down for storage', desc: "A large-format machine that doesn't need a permanently dedicated floor footprint." },
+      ],
+      highlightTags: ['1400×950mm sewing area', 'Foldable for storage'],
     },
     {
       id: 'jack-t3-cutter',
@@ -3122,6 +3347,12 @@ class Component extends DCLogic {
         ['Features', 'Integrated sharpening stone, automatic lubrication & motor cooling'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'Genuine Swedish HSS blade', desc: 'Holds an edge longer through multiple layers of fabric than a generic blade.' },
+        { n: '02', title: 'Integrated sharpening stone', desc: 'Keeps the blade sharp on the machine — no separate sharpening step between cutting sessions.' },
+        { n: '03', title: 'Auto lubrication & cooling', desc: 'Runs continuously through long cutting sessions without overheating.' },
+      ],
+      highlightTags: ['Genuine Swedish HSS blade', 'Integrated sharpening stone', 'Auto lubrication & cooling'],
     },
     {
       id: 'jack-l5-press',
@@ -3143,6 +3374,12 @@ class Component extends DCLogic {
         ['Boiler options', 'Jack U5 / F2 (3.5L, 2500W) / 2035 (3.5L, 1250W) / T7602 (2L stainless steel, 1250W)'],
         ['Availability', 'Order on request — boiler capacity selected to your floor'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'Cyclonic vacuum + heat exchange', desc: 'A cyclonic vacuum motor with electromagnetic heat exchange pulls steam and moisture down through the table for a flatter, drier finish than a basic vacuum table.' },
+        { n: '02', title: 'Frequency-controlled vacuum', desc: 'Vacuum strength can be tuned to the fabric instead of running at one fixed setting.' },
+        { n: '03', title: 'Selectable boiler capacity', desc: 'Boiler capacity ranges from a 2L stainless steel unit to a 3.5L 2500W unit — matched to how much steam your floor actually needs.' },
+      ],
+      highlightTags: ['Cyclonic vacuum + heat exchange', 'Frequency-controlled vacuum', 'Selectable boiler capacity'],
     },
     {
       id: 'jack-tailor-scissors',
@@ -3160,6 +3397,11 @@ class Component extends DCLogic {
         ['Suitable for', 'Fabric, patterns, interfacing, lightweight leather'],
         ['Availability', 'Order on request'],
       ],
+      capabilityItems: [
+        { n: '01', title: 'High-carbon precision-ground blade', desc: 'Holds a cleaner cut longer than a basic stamped-steel blade.' },
+        { n: '02', title: 'Multi-material cutting', desc: 'Rated for fabric, patterns, interfacing and lightweight leather — one pair covers most cutting tasks on a tailoring bench.' },
+      ],
+      highlightTags: ['High-carbon precision-ground blade', 'Multi-material cutting'],
     },
   ];
 
@@ -4551,12 +4793,10 @@ class Component extends DCLogic {
       jukiProducts: this.jukiProducts.map((p) => ({ ...p, open: () => this.goToGeProduct(p.id) })),
       grozBeckertProducts: this.grozBeckertProducts.map((p) => ({ ...p, open: () => this.goToGeProduct(p.id) })),
       accessoryPool: this.accessoryPool.map((p) => ({ ...p, open: () => this.goToGeProduct(p.id) })),
-      capabilityItems: [
-        { n: '01', title: 'Automated trimming', desc: 'Reduces manual thread cutting between operations, keeping the line moving.' },
-        { n: '02', title: 'Direct-drive motor', desc: 'Built for efficient, quieter operation on the floor.' },
-        { n: '03', title: 'Digital control panel', desc: 'Adjust settings directly, without mechanical guesswork.' },
-        { n: '04', title: 'Consistent stitch quality', desc: 'Engineered for high-speed work without sacrificing precision.' },
-      ],
+      capabilityItems: (this.machines.find((x) => x.id === this.state.selectedMachineId) || this.machines[0]).capabilityItems || [],
+      hasCapabilities: !!((this.machines.find((x) => x.id === this.state.selectedMachineId) || this.machines[0]).capabilityItems || []).length,
+      highlightTags: (this.machines.find((x) => x.id === this.state.selectedMachineId) || this.machines[0]).highlightTags || [],
+      hasHighlightTags: !!((this.machines.find((x) => x.id === this.state.selectedMachineId) || this.machines[0]).highlightTags || []).length,
       specRows: ((m) => (m.specs && m.specs.length)
         ? m.specs.map(([label, value]) => ({ label, value }))
         : [{ label: 'Specifications', value: 'Ask a specialist — full spec sheet available in-store' }]

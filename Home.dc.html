@@ -111,7 +111,7 @@ body { margin:0; zoom:0.85; }
 /* Static brand logos (never user-uploaded) — the empty-state ring can lag a beat behind
    the real network on first paint; these never show an empty state, so hide it outright
    instead of racing the retry timing. */
-#jack-brand-logo::part(ring), #golden-eagle-logo::part(ring), #groz-beckert-logo::part(ring) { display:none !important; }
+#jack-brand-logo::part(ring), #maqi-brand-logo::part(ring), #pegasus-brand-logo::part(ring), #juki-brand-logo::part(ring), #golden-eagle-logo::part(ring), #groz-beckert-logo::part(ring) { display:none !important; }
 a { color:#0A5CFF; text-decoration:none; }
 a:hover { color:#3D7BFF; }
 * { box-sizing:border-box; }
@@ -160,6 +160,8 @@ a:hover { color:#3D7BFF; }
               <div style="display:flex;flex-direction:column;gap:12px">
                 <span style="font-size:19px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goMachines }}">All Machines</span>
                 <span style="font-size:19px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goMaqiMachines }}">MAQI Machines</span>
+                <span style="font-size:19px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goPegasusMachines }}">Pegasus Machines</span>
+                <span style="font-size:19px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goJukiMachines }}">JUKI Machines</span>
                 <span style="font-size:19px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goFinder }}">Find Your Machine</span>
                 <span style="font-size:19px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goCompare }}">Compare</span>
               </div>
@@ -325,6 +327,8 @@ a:hover { color:#3D7BFF; }
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goToViewAndClose }}" data-target="home">Home</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goMachinesAndClose }}">Machines</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goMaqiMachinesAndClose }}">MAQI Machines</span>
+      <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goPegasusMachinesAndClose }}">Pegasus Machines</span>
+      <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goJukiMachinesAndClose }}">JUKI Machines</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goAccessoriesAndClose }}">Accessories</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goIndustriesAndClose }}">Industries</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goSolutionsAndClose }}">Solutions</span>
@@ -426,9 +430,9 @@ a:hover { color:#3D7BFF; }
       <div style="background:#000;padding:clamp(64px,9vw,110px) clamp(24px,6vw,80px);animation:swFadeUp 0.7s ease 0.29s both">
         <div style="max-width:1280px;margin:0 auto">
           <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#2997FF;margin-bottom:14px;text-align:center">OUR GLOBAL PARTNERS</div>
-          <div style="font-weight:700;font-size:clamp(26px,3.6vw,42px);color:#F5F5F7;letter-spacing:-0.02em;text-align:center;max-width:720px;margin:0 auto">Five brands. One standard. Chosen, not just carried.</div>
+          <div style="font-weight:700;font-size:clamp(26px,3.6vw,42px);color:#F5F5F7;letter-spacing:-0.02em;text-align:center;max-width:720px;margin:0 auto">Six brands. One standard. Chosen, not just carried.</div>
           <div style="font-size:15px;color:#86868B;text-align:center;max-width:640px;margin:16px auto 0;line-height:1.6">Each brand in our lineup fills a specific gap — machines, needles, or genuine spares — so nothing on your floor is a compromise.</div>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(24px,4vw,32px);margin-top:clamp(40px,6vw,56px)">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(24px,4vw,32px);margin-top:clamp(40px,6vw,56px)">
             <div style="background:#0A0A0A;border:1px solid rgba(255,255,255,0.08);border-radius:28px;padding:clamp(40px,5vw,56px);display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform 0.25s ease" style-hover="transform:translateY(-4px)">
               <div style="background:#fff;border-radius:18px;padding:clamp(20px,3vw,28px);width:100%;height:clamp(64px,8vw,90px);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 28px rgba(0,0,0,0.3)">
                 <image-slot id="jack-brand-logo" shape="rect" src="uploads/jack-official-logo.png" fit="contain" placeholder="JACK logo" style="width:100%;height:100%;max-width:100%;max-height:100%"></image-slot>
@@ -438,8 +442,32 @@ a:hover { color:#3D7BFF; }
               <div style="margin-top:20px;color:#2997FF;font-size:15px;cursor:pointer;display:inline-flex;align-items:center;gap:4px" onClick="{{ goMachines }}">Browse machines <span>›</span></div>
             </div>
             <div style="background:#0A0A0A;border:1px solid rgba(255,255,255,0.08);border-radius:28px;padding:clamp(40px,5vw,56px);display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform 0.25s ease" style-hover="transform:translateY(-4px)">
-              <div style="background:#fff;border-radius:18px;padding:clamp(20px,3vw,28px);width:100%;height:clamp(64px,8vw,90px);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 28px rgba(0,0,0,0.3);overflow:hidden">
-                <image-slot id="golden-eagle-logo" shape="rect" src="uploads/golden-eagle-logo.jpg" fit="cover" placeholder="Golden Eagle logo" style="width:100%;height:100%;max-width:100%;max-height:100%;transform:scale(1.35)"></image-slot>
+              <div style="background:#fff;border-radius:18px;padding:clamp(20px,3vw,28px);width:100%;height:clamp(64px,8vw,90px);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 28px rgba(0,0,0,0.3)">
+                <image-slot id="maqi-brand-logo" shape="rect" src="uploads/maqi-logo.png" fit="contain" placeholder="MAQI logo" style="width:100%;height:100%;max-width:100%;max-height:100%"></image-slot>
+              </div>
+              <div style="font-weight:700;font-size:22px;color:#F5F5F7;margin-top:24px">MAQI</div>
+              <div style="font-size:15px;color:#A1A1A6;line-height:1.6;margin-top:10px">Industrial lockstitch sewing machines, engineered for high-volume production lines.</div>
+              <div style="margin-top:20px;color:#2997FF;font-size:15px;cursor:pointer;display:inline-flex;align-items:center;gap:4px" onClick="{{ goMaqiMachines }}">Browse machines <span>›</span></div>
+            </div>
+            <div style="background:#0A0A0A;border:1px solid rgba(255,255,255,0.08);border-radius:28px;padding:clamp(40px,5vw,56px);display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform 0.25s ease" style-hover="transform:translateY(-4px)">
+              <div style="background:#fff;border-radius:18px;padding:clamp(20px,3vw,28px);width:100%;height:clamp(64px,8vw,90px);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 28px rgba(0,0,0,0.3)">
+                <image-slot id="pegasus-brand-logo" shape="rect" src="uploads/pegasus-logo.png" fit="contain" placeholder="Pegasus logo" style="width:100%;height:100%;max-width:100%;max-height:100%"></image-slot>
+              </div>
+              <div style="font-weight:700;font-size:22px;color:#F5F5F7;margin-top:24px">Pegasus</div>
+              <div style="font-size:15px;color:#A1A1A6;line-height:1.6;margin-top:10px">Overlock, interlock and coverstitch machines, precision-built in Japan for knitwear production.</div>
+              <div style="margin-top:20px;color:#2997FF;font-size:15px;cursor:pointer;display:inline-flex;align-items:center;gap:4px" onClick="{{ goPegasusMachines }}">Browse machines <span>›</span></div>
+            </div>
+            <div style="background:#0A0A0A;border:1px solid rgba(255,255,255,0.08);border-radius:28px;padding:clamp(40px,5vw,56px);display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform 0.25s ease" style-hover="transform:translateY(-4px)">
+              <div style="background:#fff;border-radius:18px;padding:clamp(20px,3vw,28px);width:100%;height:clamp(64px,8vw,90px);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 28px rgba(0,0,0,0.3)">
+                <image-slot id="juki-brand-logo" shape="rect" src="uploads/juki-logo.svg" fit="contain" placeholder="JUKI logo" style="width:100%;height:100%;max-width:100%;max-height:100%"></image-slot>
+              </div>
+              <div style="font-weight:700;font-size:22px;color:#F5F5F7;margin-top:24px">JUKI</div>
+              <div style="font-size:15px;color:#A1A1A6;line-height:1.6;margin-top:10px">Globally trusted industrial sewing machines and solutions, engineered in Japan.</div>
+              <div style="margin-top:20px;color:#2997FF;font-size:15px;cursor:pointer;display:inline-flex;align-items:center;gap:4px" onClick="{{ goJukiMachines }}">Browse machines <span>›</span></div>
+            </div>
+            <div style="background:#0A0A0A;border:1px solid rgba(255,255,255,0.08);border-radius:28px;padding:clamp(40px,5vw,56px);display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform 0.25s ease" style-hover="transform:translateY(-4px)">
+              <div style="background:#fff;border-radius:18px;padding:clamp(20px,3vw,28px);width:100%;height:clamp(64px,8vw,90px);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 28px rgba(0,0,0,0.3)">
+                <image-slot id="golden-eagle-logo" shape="rect" src="uploads/golden-eagle-logo.jpg" fit="contain" placeholder="Golden Eagle logo" style="width:100%;height:100%;max-width:100%;max-height:100%"></image-slot>
               </div>
               <div style="font-weight:700;font-size:22px;color:#F5F5F7;margin-top:24px">Golden Eagle</div>
               <div style="font-size:15px;color:#A1A1A6;line-height:1.6;margin-top:10px">Genuine spares &amp; accessories — needles, cutting blades, abrasive belts, presser feet, and thread cutters.</div>
@@ -469,11 +497,11 @@ a:hover { color:#3D7BFF; }
         <div style="position:relative;z-index:1"><div style="font-weight:800;font-size:clamp(32px,5.2vw,64px);color:#F5F5F7;letter-spacing:-0.03em;line-height:1.1;max-width:920px;margin:0 auto;text-shadow:0 2px 24px rgba(0,0,0,0.8)">Not a shop that sells machines. A partner building India's industrial sewing infrastructure.</div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:clamp(32px,5vw,56px);max-width:920px;margin:clamp(56px,8vw,88px) auto 0">
           <div>
-            <div style="font-weight:800;font-size:clamp(36px,5vw,58px);color:#F5F5F7;letter-spacing:-0.02em">5</div>
+            <div style="font-weight:800;font-size:clamp(36px,5vw,58px);color:#F5F5F7;letter-spacing:-0.02em">6</div>
             <div style="font-size:13px;font-weight:600;letter-spacing:0.08em;color:#6E6E73;margin-top:8px">GLOBAL BRANDS<br>PARTNERED</div>
           </div>
           <div>
-            <div style="font-weight:800;font-size:clamp(36px,5vw,58px);color:#F5F5F7;letter-spacing:-0.02em">40+</div>
+            <div style="font-weight:800;font-size:clamp(36px,5vw,58px);color:#F5F5F7;letter-spacing:-0.02em">70+</div>
             <div style="font-size:13px;font-weight:600;letter-spacing:0.08em;color:#6E6E73;margin-top:8px">MACHINES IN<br>ACTIVE CATALOG</div>
           </div>
           <div>
@@ -3765,6 +3793,162 @@ class Component extends DCLogic {
       ],
       highlightTags: ['Large hook, heavy material', 'Built-in light & winder'],
     },
+
+    // Real Pegasus industrial sewing machines, sourced from Pegasus's official English
+    // site (pegasus.co.jp/en/machine/series/<code>) — genuine model photos and series
+    // descriptions only. Pegasus's own site does not publish full numeric spec tables
+    // (max s.p.m., needle system etc.) for these series pages in text form, so exact
+    // numbers are deliberately left out below rather than guessed.
+    {
+      id: 'pegasus-mxneo',
+      model: 'Pegasus MXneo',
+      manufacturer: 'Pegasus',
+      category: 'Overlock',
+      purpose: "Pegasus's MXneo series overlock and safety-stitch machine, with an electronic control panel for thread and stitch settings.",
+      applications: ['garments', 'wovens', 'knitwear'],
+      operations: ['overlock', 'safety stitch'],
+      searchTerms: ['mxneo', 'pegasus mxneo', 'pegasus', 'overlock'],
+      imgId: 'lib-pegasus-mxneo', imgSrc: 'uploads/pegasus-mxneo.jpg', imgPh: 'Pegasus MXneo overlock and safety stitch machine',
+      officialUrl: 'https://www.pegasus.co.jp/en/machine/series/s105',
+      highlightTags: ['Overlock & safety stitch', 'Electronic control panel'],
+    },
+    {
+      id: 'pegasus-wx600p',
+      model: 'Pegasus WX600P',
+      manufacturer: 'Pegasus',
+      category: 'Interlock / Coverstitch',
+      purpose: "Pegasus's WX600P series — an oil-barrier type, cylinder-bed interlock stitch machine used for hemming and binding on knitwear and activewear.",
+      applications: ['knitwear', 'activewear'],
+      operations: ['interlock', 'hemming', 'binding'],
+      searchTerms: ['wx600p', 'pegasus wx600p', 'pegasus', 'interlock', 'knitwear'],
+      imgId: 'lib-pegasus-wx600p', imgSrc: 'uploads/pegasus-wx600p.jpg', imgPh: 'Pegasus WX600P interlock stitch machine',
+      officialUrl: 'https://www.pegasus.co.jp/en/machine/series/s220',
+      highlightTags: ['Oil-barrier cylinder bed', 'Hemming & binding'],
+    },
+    {
+      id: 'pegasus-m900neo',
+      model: 'Pegasus M900neo',
+      manufacturer: 'Pegasus',
+      category: 'Overlock',
+      purpose: "Pegasus's M900neo overlock machine with a digital control panel for stitch length, differential feed and other settings.",
+      applications: ['garments', 'wovens', 'knitwear'],
+      operations: ['overlock', 'edge finishing'],
+      searchTerms: ['m900neo', 'pegasus m900neo', 'pegasus', 'overlock'],
+      imgId: 'lib-pegasus-m900neo', imgSrc: 'uploads/pegasus-m900neo.jpg', imgPh: 'Pegasus M900neo overlock machine',
+      officialUrl: 'https://www.pegasus.co.jp/en/machine/series/s106',
+      highlightTags: ['Digital control panel', 'Adjustable differential feed'],
+    },
+    {
+      id: 'pegasus-soh-500',
+      model: 'Pegasus SOH-500',
+      manufacturer: 'Pegasus',
+      category: 'Sewing Machine',
+      purpose: "Pegasus's SOH-500 series industrial sewing machine, shown here in its standard workstation mount. Pegasus's own series page does not state the exact stitch type in text, so it is not asserted here — ask Swami Enterprises for the specific application this series is built for.",
+      applications: ['garments'],
+      operations: [],
+      searchTerms: ['soh-500', 'soh500', 'pegasus soh-500', 'pegasus'],
+      imgId: 'lib-pegasus-soh500', imgSrc: 'uploads/pegasus-soh500.jpg', imgPh: 'Pegasus SOH-500 series machine',
+      officialUrl: 'https://www.pegasus.co.jp/en/machine/series/s301',
+    },
+    {
+      id: 'pegasus-fs700p',
+      model: 'Pegasus FS700P',
+      manufacturer: 'Pegasus',
+      category: 'Chainstitch',
+      purpose: "Pegasus's FS700P series feed-off-the-arm chainstitch machine, used for seaming cylindrical garment parts such as sleeves and waistbands.",
+      applications: ['garments', 'wovens'],
+      operations: ['chainstitch', 'feed-off-the-arm'],
+      searchTerms: ['fs700p', 'pegasus fs700p', 'pegasus', 'chainstitch'],
+      imgId: 'lib-pegasus-fs700p', imgSrc: 'uploads/pegasus-fs700p.jpg', imgPh: 'Pegasus FS700P feed-off-the-arm machine',
+      officialUrl: 'https://www.pegasus.co.jp/en/machine/series/s217',
+      highlightTags: ['Feed-off-the-arm', 'Cylindrical seaming'],
+    },
+
+    // Real JUKI industrial sewing machines, sourced from JUKI's official industrial
+    // product catalogue (juki.co.jp/industrial_e/products_e/) — genuine model photos
+    // and names only, from the industrial division (not the home-sewing consumer line).
+    // JUKI's series pages don't publish a single consolidated numeric spec table in
+    // the same text form as the JACK/MAQI pages, so numeric specs are left out except
+    // where a figure (e.g. max speed) is stated directly in the product description.
+    {
+      id: 'juki-ddl-8700',
+      model: 'JUKI DDL-8700',
+      manufacturer: 'JUKI',
+      category: 'Lockstitch',
+      purpose: "JUKI's standard 1-needle lockstitch machine, also offered as the DDL-8700-7 with an automatic thread trimmer and a new-model compact servomotor for energy saving.",
+      applications: ['garments', 'wovens'],
+      operations: ['lockstitch', 'straight stitch'],
+      searchTerms: ['ddl-8700', 'juki ddl-8700', 'juki', 'lockstitch'],
+      imgId: 'lib-juki-ddl-8700', imgSrc: 'uploads/juki-ddl-8700.jpg', imgPh: 'JUKI DDL-8700 1-needle lockstitch machine',
+      officialUrl: 'https://www.juki.co.jp/industrial_e/products_e/apparel_e/1needle_lock_e/detail.php?cd=DDL-8700_E',
+      highlightTags: ['1-needle lockstitch', 'Compact servomotor (DDL-8700-7)'],
+    },
+    {
+      id: 'juki-mo-6800s',
+      model: 'JUKI MO-6800S Series',
+      manufacturer: 'JUKI',
+      category: 'Overlock',
+      purpose: "JUKI's MO-6800S series overlock/safety-stitch machine — built for a wide range of sewing materials, with reduced operating noise and increased durability.",
+      applications: ['garments', 'wovens', 'knitwear'],
+      operations: ['overlock', 'safety stitch'],
+      searchTerms: ['mo-6800s', 'juki mo-6800s', 'juki', 'overlock'],
+      imgId: 'lib-juki-mo-6800s', imgSrc: 'uploads/juki-mo-6800s.jpg', imgPh: 'JUKI MO-6800S overlock and safety stitch machine',
+      officialUrl: 'https://www.juki.co.jp/industrial_e/products_e/apparel_e/overlock_e/detail.php?cd=MO-6800S_E',
+      highlightTags: ['Wide material range', 'Reduced noise, higher durability'],
+    },
+    {
+      id: 'juki-lbh-1790an',
+      model: 'JUKI LBH-1790AN',
+      manufacturer: 'JUKI',
+      category: 'Buttonholing',
+      purpose: "JUKI's computer-controlled buttonholing sewing system, with built-in NFC for two-way data communication on sewing performance.",
+      applications: ['garments', 'shirts'],
+      operations: ['buttonholing'],
+      searchTerms: ['lbh-1790an', 'juki lbh-1790an', 'juki', 'buttonhole'],
+      imgId: 'lib-juki-lbh-1790an', imgSrc: 'uploads/juki-lbh-1790an.jpg', imgPh: 'JUKI LBH-1790AN buttonholing machine',
+      officialUrl: 'https://www.juki.co.jp/industrial_e/products_e/apparel_e/button_hole_e/detail.php?cd=LBH-1790AN_LBH-1790ANB_E',
+      highlightTags: ['Computer-controlled buttonholing', 'Built-in NFC data communication'],
+    },
+    {
+      id: 'juki-lk-1900c',
+      model: 'JUKI LK-1900C Series',
+      manufacturer: 'JUKI',
+      category: 'Bartacking',
+      purpose: "JUKI's computer-controlled bartacking machine, sewing at up to 3,300 stitches per minute.",
+      applications: ['garments'],
+      operations: ['bartacking'],
+      searchTerms: ['lk-1900c', 'juki lk-1900c', 'juki', 'bartack'],
+      imgId: 'lib-juki-lk-1900c', imgSrc: 'uploads/juki-lk-1900c.jpg', imgPh: 'JUKI LK-1900C bartacking machine',
+      officialUrl: 'https://www.juki.co.jp/industrial_e/products_e/apparel_e/tacking_e/detail.php?cd=LK-1900C_E',
+      specs: [['Max sewing speed', 'Up to 3,300 s.p.m.']],
+      highlightTags: ['Computer-controlled bartacking', 'Up to 3,300 s.p.m.'],
+    },
+    {
+      id: 'juki-ams-221en',
+      model: 'JUKI AMS-221EN Series',
+      manufacturer: 'JUKI',
+      category: 'Pattern Stitching',
+      purpose: "JUKI's AMS-221EN series computer-controlled pattern-stitching (cycle) machine, built for productivity, energy conservation and stitch quality.",
+      applications: ['garments'],
+      operations: ['pattern stitching'],
+      searchTerms: ['ams-221en', 'juki ams-221en', 'juki', 'pattern stitching', 'cycle machine'],
+      imgId: 'lib-juki-ams-221en', imgSrc: 'uploads/juki-ams-221en.jpg', imgPh: 'JUKI AMS-221EN pattern stitching machine',
+      officialUrl: 'https://www.juki.co.jp/industrial_e/products_e/apparel_e/cycle_e/detail.php?cd=AMS-221EN_E',
+      highlightTags: ['Computer-controlled cycle machine', 'Input function'],
+    },
+    {
+      id: 'juki-mb-1800a',
+      model: 'JUKI MB-1800A/BR10',
+      manufacturer: 'JUKI',
+      category: 'Button Sewing',
+      purpose: "JUKI's computer-controlled, dry-head button-sewing machine fitted with a button feeder, built for flexible small-lot production runs.",
+      applications: ['garments'],
+      operations: ['button sewing'],
+      searchTerms: ['mb-1800a', 'juki mb-1800a', 'juki', 'button sewing'],
+      imgId: 'lib-juki-mb-1800a', imgSrc: 'uploads/juki-mb-1800a.jpg', imgPh: 'JUKI MB-1800A button sewing machine with button feeder',
+      officialUrl: 'https://www.juki.co.jp/industrial_e/products_e/apparel_e/button_attach_e/detail.php?cd=MB-1800A/BR10_E',
+      highlightTags: ['Dry-head button sewing', 'Built-in button feeder'],
+    },
   ];
 
   garmentDefs = [
@@ -4523,6 +4707,10 @@ class Component extends DCLogic {
   setMachineBrand = (brand) => this.setState({ machineBrand: brand });
   goMaqiMachines = () => { this.setState({ machineBrand: 'MAQI' }); this.goToView('machines'); };
   goMaqiMachinesAndClose = () => { this.setState({ mobileNavOpen: false, machineBrand: 'MAQI' }); this.goToView('machines'); };
+  goPegasusMachines = () => { this.setState({ machineBrand: 'Pegasus' }); this.goToView('machines'); };
+  goPegasusMachinesAndClose = () => { this.setState({ mobileNavOpen: false, machineBrand: 'Pegasus' }); this.goToView('machines'); };
+  goJukiMachines = () => { this.setState({ machineBrand: 'JUKI' }); this.goToView('machines'); };
+  goJukiMachinesAndClose = () => { this.setState({ mobileNavOpen: false, machineBrand: 'JUKI' }); this.goToView('machines'); };
   focusMachineSearch = () => {
     if (typeof document === 'undefined') return;
     const input = document.querySelector('input[placeholder^="Search by model"]');
@@ -4938,6 +5126,8 @@ class Component extends DCLogic {
       goAbout: () => this.goToView('about'),
       goMachines: () => this.goToView('machines'),
       goMaqiMachines: this.goMaqiMachines,
+      goPegasusMachines: this.goPegasusMachines,
+      goJukiMachines: this.goJukiMachines,
       goIndustries: () => this.goToView('industries'),
       goSolutions: () => this.goToView('solutions'),
       goProduct: () => this.goToProduct(this.state.selectedMachineId || 'jack-f6'),
@@ -4990,6 +5180,8 @@ class Component extends DCLogic {
       goToViewAndClose: (v) => { this.goToView(v); this.setState({ mobileNavOpen: false }); },
       goMachinesAndClose: () => { this.goToView('machines'); this.setState({ mobileNavOpen: false }); },
       goMaqiMachinesAndClose: this.goMaqiMachinesAndClose,
+      goPegasusMachinesAndClose: this.goPegasusMachinesAndClose,
+      goJukiMachinesAndClose: this.goJukiMachinesAndClose,
       goIndustriesAndClose: () => { this.goToView('industries'); this.setState({ mobileNavOpen: false }); },
       goSolutionsAndClose: () => { this.goToView('solutions'); this.setState({ mobileNavOpen: false }); },
       goFinderAndClose: () => { this.goToView('finder'); this.setState({ mobileNavOpen: false }); },
@@ -5040,6 +5232,8 @@ class Component extends DCLogic {
         { key: 'all', label: 'All Brands' },
         { key: 'JACK', label: 'JACK' },
         { key: 'MAQI', label: 'MAQI' },
+        { key: 'Pegasus', label: 'Pegasus' },
+        { key: 'JUKI', label: 'JUKI' },
       ].map((b) => ({
         ...b,
         isActive: (machineBrand || 'all') === b.key,

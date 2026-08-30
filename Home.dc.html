@@ -1667,6 +1667,57 @@ a:hover { color:#3D7BFF; }
           </div>
         </div>
 
+        <sc-if value="{{ geProduct.hasTechSpecs }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#0A0A0A;border-radius:24px;margin-top:clamp(56px,8vw,80px);padding:clamp(40px,6vw,64px) clamp(24px,6vw,56px)">
+            <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:8px">TECHNICAL SPECIFICATIONS</div>
+            <div style="font-size:13px;color:#5A5A5A;margin-bottom:28px">Sourced from {{ geProduct.brand }}'s official product data, mat. no. {{ geProduct.matNo }}.</div>
+            <div style="border-radius:18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);padding:8px clamp(20px,3vw,28px)">
+              <sc-for list="{{ geProduct.geSpecRows }}" as="row" hint-placeholder-count="5">
+                <div style="display:flex;justify-content:space-between;padding:16px 0;border-top:1px solid rgba(247,247,245,0.1);gap:16px">
+                  <span style="font-size:14px;color:#A1A1A6">{{ row.label }}</span>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#F5F5F7;text-align:right">{{ row.value }}</span>
+                </div>
+              </sc-for>
+            </div>
+
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(24px,4vw,32px);margin-top:clamp(32px,5vw,44px)">
+              <div>
+                <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:10px">NEEDLE FORM</div>
+                <div style="font-size:14px;color:#F5F5F7;line-height:1.6">{{ geProduct.needleFormDescription }}</div>
+              </div>
+              <div>
+                <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:10px">TECHNICAL SEWING APPLICATION</div>
+                <div style="font-size:14px;color:#F5F5F7;line-height:1.6">{{ geProduct.technicalApplication }} <span style="color:#6E6E73">(stitch type class {{ geProduct.stitchTypeClass }})</span></div>
+              </div>
+              <div>
+                <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:10px">RECOMMENDED FOR</div>
+                <div style="font-size:14px;color:#F5F5F7;line-height:1.6">{{ geProduct.recommendedForText }}</div>
+              </div>
+              <div>
+                <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:10px">EXAMPLES OF USE</div>
+                <div style="font-size:14px;color:#F5F5F7;line-height:1.6">{{ geProduct.examplesOfUseText }}</div>
+              </div>
+              <div>
+                <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:10px">AVAILABLE POINT STYLES</div>
+                <div style="font-size:14px;color:#F5F5F7;line-height:1.6;font-family:'IBM Plex Mono',monospace">{{ geProduct.pointStylesText }}</div>
+              </div>
+              <div>
+                <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:10px">AVAILABLE NEEDLE SIZES (NM)</div>
+                <div style="font-size:14px;color:#F5F5F7;line-height:1.6;font-family:'IBM Plex Mono',monospace">{{ geProduct.needleSizesText }}</div>
+              </div>
+              <div>
+                <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:10px">COATINGS AVAILABLE</div>
+                <div style="font-size:14px;color:#F5F5F7;line-height:1.6">{{ geProduct.coatingsText }}</div>
+              </div>
+              <div>
+                <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:10px">CUSTOMARY NEEDLE DESIGNATIONS</div>
+                <div style="font-size:14px;color:#F5F5F7;line-height:1.6">{{ geProduct.customaryDesignationsText }}</div>
+              </div>
+            </div>
+            <div class="sw-btn sw-btn-light" style="margin-top:clamp(32px,5vw,44px);display:inline-block;padding:14px 24px;border:1px solid rgba(247,247,245,0.35);color:#F5F5F7;font-size:14px;font-weight:600;cursor:pointer;border-radius:980px" onClick="{{ geProduct.askAboutProduct }}">Ask about pricing &amp; availability</div>
+          </div>
+        </sc-if>
+
         <div style="margin-top:clamp(56px,8vw,80px)">
           <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:20px;text-transform:uppercase">OTHER {{ geProduct.brand }} PRODUCTS</div>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px">
@@ -3985,10 +4036,18 @@ class Component extends DCLogic {
   // photos and specs only. A prior session pass found this portal apparently gated; on
   // re-check the product catalogue and per-product images load without any login.
   grozBeckertProducts = [
-    { id: 'gb-dbx1', slug: 'dbx1', brand: 'Groz-Beckert', src: 'uploads/groz-beckert-dbx1.jpg', ph: 'Groz-Beckert DBX1 sewing machine needle', name: 'DBx1', sub: 'System 1738 / 16x257, double lockstitch needle', desc: 'A straight, single-groove Groz-Beckert needle for double lockstitch (class 300) on woven fabrics and thin leather — used for shirts, blouses and trousers.', officialUrl: 'https://portal.groz-beckert.com/germany/sewing/products/773232/detail' },
-    { id: 'gb-dpx35', slug: 'dpx35', brand: 'Groz-Beckert', src: 'uploads/groz-beckert-dpx35.jpg', ph: 'Groz-Beckert 134-35/DPx35 sewing machine needle', name: '134-35 / DPx35', sub: 'Heavy-duty double lockstitch needle', desc: 'A heavier-gauge Groz-Beckert needle (system 134-35/DPx35) for double lockstitch on woven fabrics — used for jeans and airbag seams.', officialUrl: 'https://portal.groz-beckert.com/germany/sewing/products/716222/detail' },
-    { id: 'gb-uy128gas', slug: 'uy128gas', brand: 'Groz-Beckert', src: 'uploads/groz-beckert-uy128gas.jpg', ph: 'Groz-Beckert UY128GAS sewing machine needle', name: 'UY128GAS', sub: 'Double chain / cover chain stitch needle', desc: 'A double-groove Groz-Beckert needle (system UY128GAS/1280) for double chain stitch and cover chain stitch machines, used on knitwear, woven fabrics and soft clothing leather.', officialUrl: 'https://portal.groz-beckert.com/germany/sewing/products/704922/detail' },
-    { id: 'gb-dbxk5', slug: 'dbxk5', brand: 'Groz-Beckert', src: 'uploads/groz-beckert-dbxk5.jpg', ph: 'Groz-Beckert DBxK5 embroidery machine needle', name: 'DBxK5', sub: 'Single- and multihead embroidery needle', desc: "Groz-Beckert's DBxK5 system needle, built for single- and multihead embroidery machines on knitwear, woven fabrics and leather.", officialUrl: 'https://portal.groz-beckert.com/germany/sewing/products/756912/detail' },
+    { id: 'gb-dbx1', slug: 'dbx1', brand: 'Groz-Beckert', src: 'uploads/groz-beckert-dbx1.jpg', ph: 'Groz-Beckert DBX1 sewing machine needle', name: 'DBx1', sub: 'System 1738 / 16x257, double lockstitch needle', desc: 'A straight, single-groove Groz-Beckert needle for double lockstitch (class 300) on woven fabrics and thin leather — used for shirts, blouses and trousers.', officialUrl: 'https://portal.groz-beckert.com/germany/sewing/products/773232/detail',
+      matNo: '773232', customaryDesignations: ['1738', '16X257', '16X231', '71X1', 'DLX1', '287 WH', 'DBX257', '14:25'], furtherPointDesignations: ['SET', 'RD'], needleFormDescription: 'Straight needle with single groove and scarf', technicalApplication: 'Double lock stitch', stitchTypeClass: '300', recommendedFor: ['Woven fabrics', 'Thin leather'], examplesOfUse: ['Shirts', 'Blouses', 'Trousers'], pointStyles: ['R', 'FFG', 'FG', 'G', 'RS', 'SD', 'SKL'], needleSizes: ['55/7', '60/8', '65/9', '70/10', '75/11', '80/12', '85/13', '90/14', '100/16', '110/18', '200/25'], coatings: ['Chromium'],
+      specs: [['Overall length', '37.4 mm'], ['Length butt to eye', '33.9 mm'], ['Shank length', '16.5 mm'], ['Shank diameter', '1.62 mm'], ['Packing unit', '100 needles']] },
+    { id: 'gb-dpx35', slug: 'dpx35', brand: 'Groz-Beckert', src: 'uploads/groz-beckert-dpx35.jpg', ph: 'Groz-Beckert 134-35/DPx35 sewing machine needle', name: '134-35 / DPx35', sub: 'Heavy-duty double lockstitch needle', desc: 'A heavier-gauge Groz-Beckert needle (system 134-35/DPx35) for double lockstitch on woven fabrics — used for jeans and airbag seams.', officialUrl: 'https://portal.groz-beckert.com/germany/sewing/products/716222/detail',
+      matNo: '716222', customaryDesignations: ['DPX35 B', 'DPX85 B', '2134-35 SUK', '2134-85 SUK', 'SY 7217', 'SY 7225', '32:10'], furtherPointDesignations: ['SUK', 'B BALL', 'M BALL', 'SI', 'BPM', 'LAC', 'R SUK', 'U', 'R KB'], needleFormDescription: 'Straight needle with single groove and scarf', technicalApplication: 'Double lock stitch', stitchTypeClass: '300', recommendedFor: ['Woven fabrics'], examplesOfUse: ['Jeans', 'Airbags'], pointStyles: ['D', 'DH', 'FFG', 'FG', 'LL', 'LR', 'PCL', 'R', 'S', 'SD', 'SKL'], needleSizes: ['90/14', '100/16', '110/18', '120/19', '130/21'], coatings: ['Chromium'],
+      specs: [['Overall length', '43.0 mm'], ['Length butt to eye', '38.1 mm'], ['Shank length', '13.5 mm'], ['Shank diameter', '2.0 mm'], ['Packing unit', '100 needles']] },
+    { id: 'gb-uy128gas', slug: 'uy128gas', brand: 'Groz-Beckert', src: 'uploads/groz-beckert-uy128gas.jpg', ph: 'Groz-Beckert UY128GAS sewing machine needle', name: 'UY128GAS', sub: 'Double chain / cover chain stitch needle', desc: 'A double-groove Groz-Beckert needle (system UY128GAS/1280) for double chain stitch and cover chain stitch machines, used on knitwear, woven fabrics and soft clothing leather.', officialUrl: 'https://portal.groz-beckert.com/germany/sewing/products/704922/detail',
+      matNo: '704922', customaryDesignations: ['TVX3', 'DVXG9', 'UY 124 GS', '149X3', 'MY 1044', '1280', 'SY 3650', '38:00'], furtherPointDesignations: ['STU', 'STUB', 'S BALL', 'SET RT', 'EH', 'H SET', 'NEW RD', 'R STU'], needleFormDescription: 'Straight needle with double groove and scarf', technicalApplication: 'Double chain stitch, Cover chain stitch', stitchTypeClass: '400, 600', recommendedFor: ['Lightweight to medium-weight knitwear and woven fabrics', 'Soft leather for clothing'], examplesOfUse: ['Jeans', 'Suits'], pointStyles: ['FFG', 'RG'], needleSizes: ['60/8', '65/9', '70/10', '75/11', '80/12', '85/13', '90/14', '100/16', '110/18', '120/19', '125/20', '130/21', '140/22', '150/22', '160/23', '170'], coatings: ['Chromium', 'GEBEDUR™'],
+      specs: [['Overall length', '44.6 mm'], ['Length butt to eye', '38.9 mm'], ['Shank length', '14.5 mm'], ['Shank diameter', '2.0 mm'], ['Packing unit', '100 needles']] },
+    { id: 'gb-dbxk5', slug: 'dbxk5', brand: 'Groz-Beckert', src: 'uploads/groz-beckert-dbxk5.jpg', ph: 'Groz-Beckert DBxK5 embroidery machine needle', name: 'DBxK5', sub: 'Single- and multihead embroidery needle', desc: "Groz-Beckert's DBxK5 system needle, built for single- and multihead embroidery machines on knitwear, woven fabrics and leather.", officialUrl: 'https://portal.groz-beckert.com/germany/sewing/products/756912/detail',
+      matNo: '756912', furtherPointDesignations: ['STU', 'STUB', 'S BALL', 'SET RT', 'EH', 'H SET', 'NEW RD', 'R STU'], needleFormDescription: 'Straight needle with single groove and scarf', technicalApplication: 'Single and multihead embroidery', stitchTypeClass: '300', recommendedFor: ['Knitwear', 'Woven fabrics', 'Leather'], examplesOfUse: ['All kinds of embroidery'], pointStyles: ['FFG', 'FG', 'R', 'RG', 'TR'], needleSizes: ['60/8', '65/9', '70/10', '75/11', '80/12', '85/13', '90/14', '100/16', '110/18'], coatings: ['Chromium'],
+      specs: [['Overall length', '37.8 mm'], ['Length butt to eye', '33.9 mm'], ['Shank length', '16.5 mm'], ['Shank diameter', '1.63 mm'], ['Packing unit', '100 needles']] },
   ];
 
   // Combined accessory-brand catalogue — every brand array feeds one pool so the
@@ -5113,6 +5172,15 @@ class Component extends DCLogic {
         return {
           ...p,
           brand,
+          hasTechSpecs: !!p.specs,
+          geSpecRows: (p.specs || []).map(([label, value]) => ({ label, value })),
+          pointStylesText: (p.pointStyles || []).join(', '),
+          needleSizesText: (p.needleSizes || []).join(', '),
+          coatingsText: (p.coatings || []).join(', '),
+          customaryDesignationsText: (p.customaryDesignations || []).join(', '),
+          furtherPointDesignationsText: (p.furtherPointDesignations || []).join(', '),
+          recommendedForText: (p.recommendedFor || []).join(', '),
+          examplesOfUseText: (p.examplesOfUse || []).join(', '),
           otherProducts: this.accessoryPool.filter((x) => x.id !== p.id && (x.brand || 'Golden Eagle') === brand).map((x) => ({ ...x, open: () => this.goToGeProduct(x.id) })),
           askAboutProduct: () => {
             this.track('contact_intent', { view: 'geProduct', machine: p.name });

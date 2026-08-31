@@ -347,13 +347,25 @@ a:hover { color:#3D7BFF; }
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
     <div style="width:100%;padding-bottom:{{ heroBottomPad }}">
 
-      <!-- HERO: JACK videos, full-bleed, no text/photos. margin-top clears the now-permanently-
-           opaque fixed nav so the video's top edge isn't hidden behind it. -->
+      <!-- HERO: a rotating carousel across every brand we carry (JACK real product
+           videos, plus a real photo per other brand), each with its own caption and
+           a link straight into that brand's page. margin-top clears the now-
+           permanently-opaque fixed nav so the slide's top edge isn't hidden behind it. -->
       <div class="hero-video-wrap" style="min-height:calc(94vh - 76px);margin-top:76px;position:relative;background:#000;overflow:hidden;animation:swFadeUp 0.7s ease both">
-        <video id="hero-jack-video" autoplay muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;z-index:0" src="uploads/jack-hero-video.mp4"></video>
-        <div style="position:absolute;bottom:28px;left:0;right:0;display:flex;justify-content:center;gap:10px;z-index:1">
-          <div style="width:{{ heroVideoDot0Width }};height:6px;border-radius:3px;background:{{ heroVideoDot0Bg }};cursor:pointer;transition:width 0.3s ease" onClick="{{ goHeroVideo0 }}"></div>
-          <div style="width:{{ heroVideoDot1Width }};height:6px;border-radius:3px;background:{{ heroVideoDot1Bg }};cursor:pointer;transition:width 0.3s ease" onClick="{{ goHeroVideo1 }}"></div>
+        <video id="hero-video-el" autoplay muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;z-index:0;display:{{ heroVideoDisplay }}" src="uploads/jack-hero-video.mp4"></video>
+        <sc-if value="{{ heroIsImageSlide }}" hint-placeholder-val="{{ false }}">
+          <img src="{{ currentHeroSlide.src }}" alt="{{ currentHeroSlide.brand }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0">
+        </sc-if>
+        <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,0.6),rgba(0,0,0,0.05) 42%,rgba(0,0,0,0.2));z-index:1;pointer-events:none"></div>
+        <div style="position:absolute;left:clamp(24px,6vw,80px);right:clamp(24px,6vw,80px);bottom:clamp(72px,10vw,112px);z-index:2;max-width:620px">
+          <div style="font-size:13px;font-weight:700;letter-spacing:0.1em;color:#fff;opacity:0.9">{{ currentHeroSlide.brand }}</div>
+          <div style="font-weight:700;font-size:clamp(22px,3.2vw,36px);color:#fff;margin-top:12px;line-height:1.25;text-shadow:0 2px 20px rgba(0,0,0,0.55)">{{ currentHeroSlide.tagline }}</div>
+          <div style="margin-top:24px;display:inline-block;padding:14px 28px;background:#fff;color:#1D1D1F;font-size:14px;font-weight:600;border-radius:980px;cursor:pointer" onClick="{{ currentHeroSlide.go }}">{{ currentHeroSlide.ctaLabel }}</div>
+        </div>
+        <div style="position:absolute;bottom:28px;left:0;right:0;display:flex;justify-content:center;gap:8px;z-index:2">
+          <sc-for list="{{ heroDots }}" as="d" hint-placeholder-count="8">
+            <div style="width:{{ d.width }};height:6px;border-radius:3px;background:{{ d.bg }};cursor:pointer;transition:width 0.3s ease" onClick="{{ d.go }}"></div>
+          </sc-for>
         </div>
       </div>
 
@@ -2209,7 +2221,7 @@ class Component extends DCLogic {
     selectedMachineId: 'jack-f6',
     selectedGeProductId: 'ge-abrasive-belts',
     selectedGarmentType: 'tshirt',
-    heroVideoIndex: 0,
+    heroSlideIndex: 0,
   };
 
   // "+ Compare" on a card: quick-add, tracked separately from the compare page's
@@ -4154,35 +4166,46 @@ class Component extends DCLogic {
     this.updateNavWidth();
     window.addEventListener('resize', this.updateNavWidth);
 
-    // Hero video playlist: plays each real video in sequence, advancing to the next on
-    // 'ended' and looping back to the first — a real multi-video rotation, not a single
-    // looping clip. Also forces .muted directly (some browsers ignore the bare `muted`
-    // HTML attribute at autoplay time) and retries .play() until the element exists.
-    this.heroPlaylist = ['uploads/jack-hero-video.mp4', 'uploads/jack-intelligent-solution.mp4'];
-    this.goHeroVideo = (i) => {
-      const v = document.getElementById('hero-jack-video');
-      if (!v) return;
-      this.setState({ heroVideoIndex: i });
-      v.src = this.heroPlaylist[i];
-      v.muted = true;
-      v.play().catch(() => {});
+    // Hero brand carousel: rotates through every brand we carry, not just JACK — real
+    // JACK product videos plus a real product/marketing photo for each other brand
+    // (MAQI, Pegasus, JUKI, SINGER, Golden Eagle, Groz-Beckert), each with its own
+    // caption and a CTA into that brand's own page. Video slides advance on 'ended';
+    // image slides advance on a timer. Forces .muted directly (some browsers ignore
+    // the bare `muted` HTML attribute at autoplay time) and retries until the video
+    // element exists.
+    this.playHeroSlide = (i) => {
+      clearTimeout(this._heroImgTimer);
+      const slide = this.getHeroSlides()[i];
+      const v = document.getElementById('hero-video-el');
+      if (slide.type === 'video') {
+        if (v) { v.src = slide.src; v.muted = true; v.play().catch(() => {}); }
+      } else {
+        if (v) v.pause();
+        this._heroImgTimer = setTimeout(() => {
+          const next = (this.state.heroSlideIndex + 1) % this.getHeroSlides().length;
+          this.setState({ heroSlideIndex: next });
+          this.playHeroSlide(next);
+        }, 5000);
+      }
+    };
+    this.goHeroSlide = (i) => {
+      this.setState({ heroSlideIndex: i });
+      this.playHeroSlide(i);
     };
     let heroVideoTries = 0;
     const tryPlayHeroVideo = () => {
       heroVideoTries++;
-      const v = document.getElementById('hero-jack-video');
+      const v = document.getElementById('hero-video-el');
       if (v) {
-        v.muted = true;
-        v.play().catch(() => {});
         if (!v._heroEndedBound) {
           v._heroEndedBound = true;
           v.addEventListener('ended', () => {
-            const next = (this.state.heroVideoIndex + 1) % this.heroPlaylist.length;
-            this.setState({ heroVideoIndex: next });
-            v.src = this.heroPlaylist[next];
-            v.play().catch(() => {});
+            const next = (this.state.heroSlideIndex + 1) % this.getHeroSlides().length;
+            this.setState({ heroSlideIndex: next });
+            this.playHeroSlide(next);
           });
         }
+        this.playHeroSlide(this.state.heroSlideIndex || 0);
         return;
       }
       if (heroVideoTries < 10) setTimeout(tryPlayHeroVideo, 300);
@@ -4566,6 +4589,16 @@ class Component extends DCLogic {
     this._pageEnteredAt = Date.now();
     this._pageEnteredPath = path;
   };
+  getHeroSlides = () => [
+    { type: 'video', src: 'uploads/jack-hero-video.mp4', brand: 'JACK', tagline: 'Intelligent garment manufacturing, total solution provider.', ctaLabel: 'View JACK Machines', go: () => this.goToView('machines') },
+    { type: 'video', src: 'uploads/jack-intelligent-solution.mp4', brand: 'JACK', tagline: 'Shanghai stock listed — the machines behind India’s garment factories.', ctaLabel: 'View JACK Machines', go: () => this.goToView('machines') },
+    { type: 'image', src: 'uploads/maqi-q7t-hero.jpg', brand: 'MAQI', tagline: 'Smart, electronically controlled lockstitch machines for high-volume production.', ctaLabel: 'View MAQI Machines', go: this.goMaqiMachines },
+    { type: 'image', src: 'uploads/pegasus-mxneo.jpg', brand: 'PEGASUS', tagline: 'Precision overlock and interlock machines, built in Japan.', ctaLabel: 'View Pegasus Machines', go: this.goPegasusMachines },
+    { type: 'image', src: 'uploads/juki-ddl-8700.jpg', brand: 'JUKI', tagline: 'Globally trusted industrial sewing machines and solutions.', ctaLabel: 'View JUKI Machines', go: this.goJukiMachines },
+    { type: 'image', src: 'uploads/singer-s8150-hero.jpg', brand: 'SINGER', tagline: 'Original since 1851 — now in industrial lockstitch and overlock machines.', ctaLabel: 'View SINGER Machines', go: this.goSingerMachines },
+    { type: 'image', src: 'uploads/golden-eagle-hooks.jpg', brand: 'GOLDEN EAGLE', tagline: 'Genuine hooks, bobbins and bobbin cases, always in stock.', ctaLabel: 'Browse Spare Parts', go: () => this.goToView('accGoldenEagle') },
+    { type: 'image', src: 'uploads/gb-banner-forest.jpg', brand: 'GROZ-BECKERT', tagline: 'Precision needles from the world’s leading needle manufacturer.', ctaLabel: 'Browse Needles', go: () => this.goToView('accGrozBeckert') },
+  ];
   goToView = (view) => {
     if (view !== this.state.view) {
       if (view === 'finder') this.track('finder_started', {});
@@ -5048,12 +5081,14 @@ class Component extends DCLogic {
           open: () => this.setState({ selectedGarmentType: g.key }),
         };
       }),
-      heroVideoDot0Width: this.state.heroVideoIndex === 0 ? '28px' : '10px',
-      heroVideoDot1Width: this.state.heroVideoIndex === 1 ? '28px' : '10px',
-      heroVideoDot0Bg: this.state.heroVideoIndex === 0 ? '#fff' : 'rgba(255,255,255,0.4)',
-      heroVideoDot1Bg: this.state.heroVideoIndex === 1 ? '#fff' : 'rgba(255,255,255,0.4)',
-      goHeroVideo0: () => this.goHeroVideo(0),
-      goHeroVideo1: () => this.goHeroVideo(1),
+      currentHeroSlide: this.getHeroSlides()[this.state.heroSlideIndex || 0],
+      heroIsImageSlide: this.getHeroSlides()[this.state.heroSlideIndex || 0].type === 'image',
+      heroVideoDisplay: this.getHeroSlides()[this.state.heroSlideIndex || 0].type === 'video' ? 'block' : 'none',
+      heroDots: this.getHeroSlides().map((s, i) => ({
+        width: (this.state.heroSlideIndex || 0) === i ? '28px' : '10px',
+        bg: (this.state.heroSlideIndex || 0) === i ? '#fff' : 'rgba(255,255,255,0.4)',
+        go: () => this.goHeroSlide(i),
+      })),
       isGarmentTshirt: this.state.selectedGarmentType === 'tshirt',
       isGarmentJacket: this.state.selectedGarmentType === 'jacket',
       isGarmentJeans: this.state.selectedGarmentType === 'jeans',

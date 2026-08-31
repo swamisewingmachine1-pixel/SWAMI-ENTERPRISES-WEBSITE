@@ -111,7 +111,7 @@ body { margin:0; zoom:0.85; }
 /* Static brand logos (never user-uploaded) — the empty-state ring can lag a beat behind
    the real network on first paint; these never show an empty state, so hide it outright
    instead of racing the retry timing. */
-#jack-brand-logo::part(ring), #maqi-brand-logo::part(ring), #pegasus-brand-logo::part(ring), #juki-brand-logo::part(ring), #singer-brand-logo::part(ring), #spartak-brand-logo::part(ring), #golden-eagle-brand-logo::part(ring), #groz-beckert-logo::part(ring) { display:none !important; }
+#jack-brand-logo::part(ring), #maqi-brand-logo::part(ring), #pegasus-brand-logo::part(ring), #juki-brand-logo::part(ring), #singer-brand-logo::part(ring), #golden-eagle-brand-logo::part(ring), #groz-beckert-logo::part(ring) { display:none !important; }
 a { color:#0A5CFF; text-decoration:none; }
 a:hover { color:#3D7BFF; }
 * { box-sizing:border-box; }
@@ -163,7 +163,6 @@ a:hover { color:#3D7BFF; }
                 <span style="font-size:19px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goPegasusMachines }}">Pegasus Machines</span>
                 <span style="font-size:19px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goJukiMachines }}">JUKI Machines</span>
                 <span style="font-size:19px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goSingerMachines }}">SINGER Machines</span>
-                <span style="font-size:19px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goSpartakMachines }}">SPARTAK Machines</span>
                 <span style="font-size:19px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goFinder }}">Find Your Machine</span>
                 <span style="font-size:19px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goCompare }}">Compare</span>
               </div>
@@ -332,7 +331,6 @@ a:hover { color:#3D7BFF; }
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goPegasusMachinesAndClose }}">Pegasus Machines</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goJukiMachinesAndClose }}">JUKI Machines</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goSingerMachinesAndClose }}">SINGER Machines</span>
-      <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goSpartakMachinesAndClose }}">SPARTAK Machines</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goAccessoriesAndClose }}">Accessories</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goIndustriesAndClose }}">Industries</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goSolutionsAndClose }}">Solutions</span>
@@ -446,7 +444,7 @@ a:hover { color:#3D7BFF; }
       <div style="background:#000;padding:clamp(64px,9vw,110px) clamp(24px,6vw,80px);animation:swFadeUp 0.7s ease 0.29s both">
         <div style="max-width:1280px;margin:0 auto">
           <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#2997FF;margin-bottom:14px;text-align:center">OUR GLOBAL PARTNERS</div>
-          <div style="font-weight:700;font-size:clamp(26px,3.6vw,42px);color:#F5F5F7;letter-spacing:-0.02em;text-align:center;max-width:720px;margin:0 auto">Eight brands. One standard. Chosen, not just carried.</div>
+          <div style="font-weight:700;font-size:clamp(26px,3.6vw,42px);color:#F5F5F7;letter-spacing:-0.02em;text-align:center;max-width:720px;margin:0 auto">Seven brands. One standard. Chosen, not just carried.</div>
           <div style="font-size:15px;color:#86868B;text-align:center;max-width:640px;margin:16px auto 0;line-height:1.6">Each brand in our lineup fills a specific gap — machines, needles, or genuine spares — so nothing on your floor is a compromise.</div>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(24px,4vw,32px);margin-top:clamp(40px,6vw,56px)">
             <div style="background:#0A0A0A;border:1px solid rgba(255,255,255,0.08);border-radius:28px;padding:clamp(40px,5vw,56px);display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform 0.25s ease" style-hover="transform:translateY(-4px)">
@@ -491,14 +489,6 @@ a:hover { color:#3D7BFF; }
             </div>
             <div style="background:#0A0A0A;border:1px solid rgba(255,255,255,0.08);border-radius:28px;padding:clamp(40px,5vw,56px);display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform 0.25s ease" style-hover="transform:translateY(-4px)">
               <div style="background:#fff;border-radius:18px;padding:clamp(20px,3vw,28px);width:100%;height:clamp(64px,8vw,90px);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 28px rgba(0,0,0,0.3)">
-                <image-slot id="spartak-brand-logo" shape="rect" src="uploads/spartak-logo.png" fit="contain" placeholder="SPARTAK logo" style="width:100%;height:100%;max-width:100%;max-height:100%"></image-slot>
-              </div>
-              <div style="font-weight:700;font-size:22px;color:#F5F5F7;margin-top:24px">SPARTAK</div>
-              <div style="font-size:15px;color:#A1A1A6;line-height:1.6;margin-top:10px">Industrial lockstitch and overlock machines from Zhejiang Hover Tech, Zhejiang, China.</div>
-              <div style="margin-top:20px;color:#2997FF;font-size:15px;cursor:pointer;display:inline-flex;align-items:center;gap:4px" onClick="{{ goSpartakMachines }}">Browse machines <span>›</span></div>
-            </div>
-            <div style="background:#0A0A0A;border:1px solid rgba(255,255,255,0.08);border-radius:28px;padding:clamp(40px,5vw,56px);display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform 0.25s ease" style-hover="transform:translateY(-4px)">
-              <div style="background:#fff;border-radius:18px;padding:clamp(20px,3vw,28px);width:100%;height:clamp(64px,8vw,90px);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 28px rgba(0,0,0,0.3)">
                 <image-slot id="golden-eagle-brand-logo" shape="rect" src="uploads/golden-eagle-logo-crop.jpg" fit="contain" placeholder="Golden Eagle logo" style="width:100%;height:100%;max-width:100%;max-height:100%"></image-slot>
               </div>
               <div style="font-weight:700;font-size:22px;color:#F5F5F7;margin-top:24px">Golden Eagle</div>
@@ -529,11 +519,11 @@ a:hover { color:#3D7BFF; }
         <div style="position:relative;z-index:1"><div style="font-weight:800;font-size:clamp(32px,5.2vw,64px);color:#F5F5F7;letter-spacing:-0.03em;line-height:1.1;max-width:920px;margin:0 auto;text-shadow:0 2px 24px rgba(0,0,0,0.8)">Not a shop that sells machines. A partner building India's industrial sewing infrastructure.</div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:clamp(32px,5vw,56px);max-width:920px;margin:clamp(56px,8vw,88px) auto 0">
           <div>
-            <div style="font-weight:800;font-size:clamp(36px,5vw,58px);color:#F5F5F7;letter-spacing:-0.02em">8</div>
+            <div style="font-weight:800;font-size:clamp(36px,5vw,58px);color:#F5F5F7;letter-spacing:-0.02em">7</div>
             <div style="font-size:13px;font-weight:600;letter-spacing:0.08em;color:#6E6E73;margin-top:8px">GLOBAL BRANDS<br>PARTNERED</div>
           </div>
           <div>
-            <div style="font-weight:800;font-size:clamp(36px,5vw,58px);color:#F5F5F7;letter-spacing:-0.02em">101+</div>
+            <div style="font-weight:800;font-size:clamp(36px,5vw,58px);color:#F5F5F7;letter-spacing:-0.02em">74+</div>
             <div style="font-size:13px;font-weight:600;letter-spacing:0.08em;color:#6E6E73;margin-top:8px">MACHINES IN<br>ACTIVE CATALOG</div>
           </div>
           <div>
@@ -4103,388 +4093,6 @@ class Component extends DCLogic {
       specs: [['MRP (SINGER India)', '₹44,050 (incl. all taxes)'], ['Threads', '5-thread overlock'], ['Motor', 'Direct drive, up to 70% power saving']],
       highlightTags: ['5-thread overlock', 'Up to 70% power saving'],
     },
-
-    // Real SPARTAK industrial machines — SPARTAK is a brand of ZHEJIANG HOVER TECH
-    // SEWING MACHINE CO.,LTD, sourced from the brand's own official site
-    // (chinaxiangke.com/sbd/en/). Only the LOCKSTITCH SERIES and OVERLOCK STITCH
-    // SERIES are carried here (the site's other four series — Interlock,
-    // Multineedle, Specialized, Automatic Units — are out of scope). Product
-    // photos are the real hero images from each model's own detail page.
-    // SPARTAK's detail pages present their "Parameter" spec tables as images
-    // (not selectable text), so no numeric spec table could be transcribed
-    // without inventing numbers — specs are intentionally omitted here, and the
-    // `purpose` line is SPARTAK's own one-line product description, taken
-    // verbatim from its product listing pages, where one was published.
-    {
-      id: 'spartak-st-i7-d4',
-      model: 'SPARTAK ST-i7-D4',
-      manufacturer: 'SPARTAK',
-      category: 'Lockstitch',
-      purpose: "SPARTAK's ST-i7-D4 is a fully intelligent computerized high speed stepping motor lockstitch machine.",
-      applications: ['garments', 'wovens'],
-      operations: ['lockstitch', 'straight stitch'],
-      searchTerms: ['st-i7-d4', 'sti7d4', 'spartak st-i7-d4', 'spartak', 'lockstitch'],
-      imgId: 'lib-spartak-st-i7-d4', imgSrc: 'uploads/spartak-st-i7-d4-hero.png', imgPh: 'SPARTAK ST-i7-D4 computerized lockstitch machine',
-      officialUrl: 'https://www.chinaxiangke.com/sbd/en/product/64',
-      specs: [['Needle system', 'DBX1 11#-18#'], ['Max stitch length', '6 mm'], ['Presser foot lift', '5-13 mm'], ['Max sewing speed', '5,000 s.p.m.'], ['Weight', '50/47 kg'], ['Dimensions', '70×25×56 cm']],
-      highlightTags: ['Computerized stepping motor', 'Fully intelligent'],
-    },
-    {
-      id: 'spartak-st-e980',
-      model: 'SPARTAK ST-E980',
-      manufacturer: 'SPARTAK',
-      category: 'Lockstitch',
-      purpose: "SPARTAK's ST-E980 is a multiple motor drive, high speed intelligent digital lockstitch machine.",
-      applications: ['garments', 'wovens'],
-      operations: ['lockstitch', 'straight stitch'],
-      searchTerms: ['st-e980', 'ste980', 'spartak st-e980', 'spartak', 'lockstitch'],
-      imgId: 'lib-spartak-st-e980', imgSrc: 'uploads/spartak-st-e980-hero.png', imgPh: 'SPARTAK ST-E980 multi-motor digital lockstitch machine',
-      officialUrl: 'https://www.chinaxiangke.com/sbd/en/product/46',
-      specs: [['Needle system', 'DBX1 11#-18#'], ['Max stitch length', '5 mm'], ['Presser foot lift', '5-13 mm'], ['Max sewing speed', '5,000 s.p.m.'], ['Weight', '47/40 kg'], ['Dimensions', '70×25×56 cm']],
-      highlightTags: ['Multiple motor drive', 'Intelligent digital control'],
-    },
-    {
-      id: 'spartak-st-e780',
-      model: 'SPARTAK ST-E780',
-      manufacturer: 'SPARTAK',
-      category: 'Lockstitch',
-      purpose: "SPARTAK's ST-E780 is a stepper motor three-drive lockstitch machine.",
-      applications: ['garments', 'wovens'],
-      operations: ['lockstitch', 'straight stitch'],
-      searchTerms: ['st-e780', 'ste780', 'spartak st-e780', 'spartak', 'lockstitch'],
-      imgId: 'lib-spartak-st-e780', imgSrc: 'uploads/spartak-st-e780-hero.png', imgPh: 'SPARTAK ST-E780 stepper motor lockstitch machine',
-      officialUrl: 'https://www.chinaxiangke.com/sbd/en/product/37',
-      specs: [['Needle system', 'DBX1/DPX1 11#-21#'], ['Max stitch length', '5 mm'], ['Presser foot lift', '5-13 mm'], ['Max sewing speed', '5,000 s.p.m.'], ['Weight', '47/40 kg'], ['Dimensions', '65×29×58 cm']],
-      highlightTags: ['Stepper motor three-drive'],
-    },
-    {
-      id: 'spartak-st-e780a',
-      model: 'SPARTAK ST-E780A',
-      manufacturer: 'SPARTAK',
-      category: 'Lockstitch',
-      purpose: "SPARTAK's ST-E780A is a stepper motor high speed automatic lockstitch machine.",
-      applications: ['garments', 'wovens'],
-      operations: ['lockstitch', 'straight stitch', 'auto thread trimming'],
-      searchTerms: ['st-e780a', 'ste780a', 'spartak st-e780a', 'spartak', 'lockstitch'],
-      imgId: 'lib-spartak-st-e780a', imgSrc: 'uploads/spartak-st-e780a-hero.png', imgPh: 'SPARTAK ST-E780A automatic lockstitch machine',
-      officialUrl: 'https://www.chinaxiangke.com/sbd/en/product/45',
-      specs: [['Needle system', 'DBX1/DPX1 11#-21#'], ['Max stitch length', '5 mm'], ['Presser foot lift', '5-13 mm'], ['Max sewing speed', '5,000 s.p.m.'], ['Weight', '43/40.5 kg'], ['Dimensions', '62×27×54 cm']],
-      highlightTags: ['Stepper motor', 'High speed automatic'],
-    },
-    {
-      id: 'spartak-st-e680',
-      model: 'SPARTAK ST-E680',
-      manufacturer: 'SPARTAK',
-      category: 'Lockstitch',
-      purpose: "SPARTAK's ST-E680 is a stepper motor needle feed lockstitch machine.",
-      applications: ['garments', 'wovens'],
-      operations: ['lockstitch', 'needle feed'],
-      searchTerms: ['st-e680', 'ste680', 'spartak st-e680', 'spartak', 'lockstitch', 'needle feed'],
-      imgId: 'lib-spartak-st-e680', imgSrc: 'uploads/spartak-st-e680-hero.png', imgPh: 'SPARTAK ST-E680 needle feed lockstitch machine',
-      officialUrl: 'https://www.chinaxiangke.com/sbd/en/product/44',
-      specs: [['Needle system', 'DBX1 11#-18#'], ['Max stitch length', '5 mm'], ['Presser foot lift', '5-13 mm'], ['Max sewing speed', '4,000 s.p.m.'], ['Weight', '47/40 kg'], ['Dimensions', '70×25×56 cm']],
-      highlightTags: ['Stepper motor', 'Needle feed'],
-    },
-    {
-      id: 'spartak-st-e590-d6',
-      model: 'SPARTAK ST-E590-D6',
-      manufacturer: 'SPARTAK',
-      category: 'Lockstitch',
-      purpose: "SPARTAK's ST-E590-D6 is a double stepper motor, four-drive differential feeding, touch screen intelligent lockstitch machine with a rear puller device.",
-      applications: ['garments', 'wovens'],
-      operations: ['lockstitch', 'differential feed'],
-      searchTerms: ['st-e590-d6', 'ste590d6', 'spartak st-e590-d6', 'spartak', 'lockstitch', 'differential feed', 'puller'],
-      imgId: 'lib-spartak-st-e590-d6', imgSrc: 'uploads/spartak-st-e590-d6-hero.png', imgPh: 'SPARTAK ST-E590-D6 differential feed lockstitch machine with rear puller',
-      officialUrl: 'https://www.chinaxiangke.com/sbd/en/product/84',
-      specs: [['Needle system', 'DBX1 11#-18#'], ['Max stitch length', '6 mm'], ['Presser foot lift', '5-13 mm'], ['Max sewing speed', '4,000 s.p.m.'], ['Weight', '55/52.4 kg'], ['Dimensions', '65×27×54 cm']],
-      highlightTags: ['Touch screen intelligent control', 'Rear puller device'],
-    },
-    {
-      id: 'spartak-st-e590-d4',
-      model: 'SPARTAK ST-E590-D4',
-      manufacturer: 'SPARTAK',
-      category: 'Lockstitch',
-      purpose: "SPARTAK's ST-E590-D4 is a double stepper motor, four-drive differential feeding, touch screen intelligent lockstitch machine.",
-      applications: ['garments', 'wovens'],
-      operations: ['lockstitch', 'differential feed'],
-      searchTerms: ['st-e590-d4', 'ste590d4', 'spartak st-e590-d4', 'spartak', 'lockstitch', 'differential feed'],
-      imgId: 'lib-spartak-st-e590-d4', imgSrc: 'uploads/spartak-st-e590-d4-hero.png', imgPh: 'SPARTAK ST-E590-D4 differential feed lockstitch machine',
-      officialUrl: 'https://www.chinaxiangke.com/sbd/en/product/43',
-      specs: [['Needle system', 'DBX1 11#-18#'], ['Max stitch length', '6 mm'], ['Presser foot lift', '5-13 mm'], ['Max sewing speed', '4,000 s.p.m.'], ['Weight', '47/40 kg'], ['Dimensions', '65×29×58 cm']],
-      highlightTags: ['Touch screen intelligent control', 'Four-drive differential feed'],
-    },
-    {
-      id: 'spartak-st-e590s',
-      model: 'SPARTAK ST-E590S',
-      manufacturer: 'SPARTAK',
-      category: 'Lockstitch',
-      purpose: "SPARTAK's ST-E590S is a double stepper motor, cylinder bed, differential feeding, touch screen intelligent lockstitch machine.",
-      applications: ['garments', 'wovens'],
-      operations: ['lockstitch', 'differential feed'],
-      searchTerms: ['st-e590s', 'ste590s', 'spartak st-e590s', 'spartak', 'lockstitch', 'cylinder bed'],
-      imgId: 'lib-spartak-st-e590s', imgSrc: 'uploads/spartak-st-e590s-hero.png', imgPh: 'SPARTAK ST-E590S cylinder bed lockstitch machine',
-      officialUrl: 'https://www.chinaxiangke.com/sbd/en/product/85',
-      specs: [['Needle system', 'DBX1 11#-18#'], ['Max stitch length', '6 mm'], ['Presser foot lift', '5-13 mm'], ['Max sewing speed', '4,000 s.p.m.'], ['Weight', '53/50 kg'], ['Dimensions', '65×27×56 cm']],
-      highlightTags: ['Cylinder bed', 'Touch screen intelligent control'],
-    },
-    {
-      id: 'spartak-st-e580a',
-      model: 'SPARTAK ST-E580A',
-      manufacturer: 'SPARTAK',
-      category: 'Lockstitch',
-      purpose: "SPARTAK's ST-E580A is a stepper motor high speed automatic lockstitch machine with a side cutter.",
-      applications: ['garments', 'wovens'],
-      operations: ['lockstitch', 'side cutting'],
-      searchTerms: ['st-e580a', 'ste580a', 'spartak st-e580a', 'spartak', 'lockstitch', 'side cutter'],
-      imgId: 'lib-spartak-st-e580a', imgSrc: 'uploads/spartak-st-e580a-hero.png', imgPh: 'SPARTAK ST-E580A lockstitch machine with side cutter',
-      officialUrl: 'https://www.chinaxiangke.com/sbd/en/product/83',
-      specs: [['Needle system', 'DBX1 11#-18#'], ['Max stitch length', '5 mm'], ['Presser foot lift', '5-13 mm'], ['Max sewing speed', '4,000 s.p.m.'], ['Weight', '45/43 – 48/46 kg (by variant)'], ['Dimensions', '65×27×54 cm']],
-      highlightTags: ['Built-in side cutter', 'High speed automatic'],
-    },
-    {
-      id: 'spartak-st-e480s',
-      model: 'SPARTAK ST-E480S',
-      manufacturer: 'SPARTAK',
-      category: 'Lockstitch',
-      purpose: "SPARTAK's ST-E480S is a stepper motor, cylinder bed, high speed automatic lockstitch machine.",
-      applications: ['garments', 'wovens'],
-      operations: ['lockstitch', 'straight stitch'],
-      searchTerms: ['st-e480s', 'ste480s', 'spartak st-e480s', 'spartak', 'lockstitch', 'cylinder bed'],
-      imgId: 'lib-spartak-st-e480s', imgSrc: 'uploads/spartak-st-e480s-hero.png', imgPh: 'SPARTAK ST-E480S cylinder bed lockstitch machine',
-      officialUrl: 'https://www.chinaxiangke.com/sbd/en/product/40',
-      specs: [['Needle system', 'DBX1 11#-18#'], ['Max stitch length', '5 mm'], ['Presser foot lift', '5-13 mm'], ['Max sewing speed', '4,500 s.p.m.'], ['Weight', '48/46 – 51/49 kg (by variant)'], ['Dimensions', '65×27×56 cm']],
-      highlightTags: ['Cylinder bed', 'High speed automatic'],
-    },
-    {
-      id: 'spartak-st-e380d',
-      model: 'SPARTAK ST-E380D',
-      manufacturer: 'SPARTAK',
-      category: 'Lockstitch',
-      purpose: "SPARTAK's ST-E380D is a direct-drive integrated chain stitch machine, listed by SPARTAK within its Lockstitch series.",
-      applications: ['garments', 'wovens'],
-      operations: ['chainstitch'],
-      searchTerms: ['st-e380d', 'ste380d', 'spartak st-e380d', 'spartak', 'chain stitch'],
-      imgId: 'lib-spartak-st-e380d', imgSrc: 'uploads/spartak-st-e380d-hero.png', imgPh: 'SPARTAK ST-E380D direct-drive chain stitch machine',
-      officialUrl: 'https://www.chinaxiangke.com/sbd/en/product/88',
-      specs: [['Needle system', 'TVx7 11#-16# / TVx5 18#-21#'], ['Needle configurations', 'Single, double, or triple needle'], ['Max stitch length', '7 mm'], ['Presser foot lift', '15 mm'], ['Max sewing speed', '3,000 s.p.m.'], ['Weight', '43/45.5 kg'], ['Dimensions', '70×27×54.5 cm']],
-      highlightTags: ['Direct-drive integrated motor', 'Chain stitch'],
-    },
-    {
-      id: 'spartak-st-e380nd',
-      model: 'SPARTAK ST-E380ND',
-      manufacturer: 'SPARTAK',
-      category: 'Lockstitch',
-      purpose: "SPARTAK's ST-E380ND is a stepper motor high speed automatic chain stitch machine, listed by SPARTAK within its Lockstitch series.",
-      applications: ['garments', 'wovens'],
-      operations: ['chainstitch'],
-      searchTerms: ['st-e380nd', 'ste380nd', 'spartak st-e380nd', 'spartak', 'chain stitch'],
-      imgId: 'lib-spartak-st-e380nd', imgSrc: 'uploads/spartak-st-e380nd-hero.png', imgPh: 'SPARTAK ST-E380ND automatic chain stitch machine',
-      officialUrl: 'https://www.chinaxiangke.com/sbd/en/product/95',
-      specs: [['Needle system', 'TVx7 11#-16# / TVx5 18#-21#'], ['Needle configurations', 'Single, double, or triple needle'], ['Max stitch length', '7 mm'], ['Presser foot lift', '15 mm'], ['Max sewing speed', '3,000 s.p.m.'], ['Weight', '49.5/47 – 52.5/50 kg (by variant)'], ['Dimensions', '70×27×54.5 cm']],
-      highlightTags: ['Stepper motor', 'High speed automatic chain stitch'],
-    },
-    {
-      id: 'spartak-st-e280',
-      model: 'SPARTAK ST-E280',
-      manufacturer: 'SPARTAK',
-      category: 'Lockstitch',
-      purpose: "SPARTAK's ST-E280 is a high speed automatic lockstitch machine.",
-      applications: ['garments', 'wovens'],
-      operations: ['lockstitch', 'straight stitch'],
-      searchTerms: ['st-e280', 'ste280', 'spartak st-e280', 'spartak', 'lockstitch'],
-      imgId: 'lib-spartak-st-e280', imgSrc: 'uploads/spartak-st-e280-hero.png', imgPh: 'SPARTAK ST-E280 high speed automatic lockstitch machine',
-      officialUrl: 'https://www.chinaxiangke.com/sbd/en/product/39',
-      specs: [['Needle system', 'DBX1 11#-18# / DPX1 18#-21#'], ['Max stitch length', '5-7 mm'], ['Presser foot lift', '5-13 mm'], ['Max sewing speed', '5,000 s.p.m.'], ['Weight', '40/38 kg'], ['Dimensions', '63×25×54 cm']],
-      highlightTags: ['High speed automatic'],
-    },
-    {
-      id: 'spartak-st-e180',
-      model: 'SPARTAK ST-E180',
-      manufacturer: 'SPARTAK',
-      category: 'Lockstitch',
-      purpose: "SPARTAK's ST-E180 is a high speed lockstitch machine.",
-      applications: ['garments', 'wovens'],
-      operations: ['lockstitch', 'straight stitch'],
-      searchTerms: ['st-e180', 'ste180', 'spartak st-e180', 'spartak', 'lockstitch'],
-      imgId: 'lib-spartak-st-e180', imgSrc: 'uploads/spartak-st-e180-hero.png', imgPh: 'SPARTAK ST-E180 high speed lockstitch machine',
-      officialUrl: 'https://www.chinaxiangke.com/sbd/en/product/38',
-      specs: [['Needle system', 'DBX1 11#-18# / DPX1 18#-21#'], ['Max stitch length', '5-7 mm'], ['Presser foot lift', '5-13 mm'], ['Max sewing speed', '5,000 s.p.m.'], ['Weight', '39/37 kg'], ['Dimensions', '63×25×54 cm']],
-      highlightTags: ['High speed lockstitch'],
-    },
-    {
-      id: 'spartak-st-e70-d6',
-      model: 'SPARTAK ST-E70-D6',
-      manufacturer: 'SPARTAK',
-      category: 'Lockstitch',
-      purpose: "SPARTAK's ST-E70-D6 is a stepper motor high speed automatic lockstitch machine with an RP (rear puller) device.",
-      applications: ['garments', 'wovens'],
-      operations: ['lockstitch', 'straight stitch'],
-      searchTerms: ['st-e70-d6', 'ste70d6', 'spartak st-e70-d6', 'spartak', 'lockstitch', 'puller'],
-      imgId: 'lib-spartak-st-e70-d6', imgSrc: 'uploads/spartak-st-e70-d6-hero.png', imgPh: 'SPARTAK ST-E70-D6 lockstitch machine with rear puller device',
-      officialUrl: 'https://www.chinaxiangke.com/sbd/en/product/36',
-      specs: [['Needle system', 'DBX1 11#-18# / DPX1 18#-21#'], ['Max stitch length', '5 mm'], ['Presser foot lift', '5-13 mm'], ['Max sewing speed', '4,500 s.p.m.'], ['Weight', '47/40 kg'], ['Dimensions', '65×29×58 cm (78.5×26×51.5 cm, long-bed variant)']],
-      highlightTags: ['Stepper motor', 'Rear puller (RP) device'],
-    },
-    {
-      id: 'spartak-st-i9nd',
-      model: 'SPARTAK ST-i9ND',
-      manufacturer: 'SPARTAK',
-      category: 'Overlock',
-      purpose: "SPARTAK's ST-i9ND is a super high speed automatic stepper motor overlock machine.",
-      applications: ['garments', 'wovens', 'knitwear'],
-      operations: ['overlock', 'edge finishing'],
-      searchTerms: ['st-i9nd', 'sti9nd', 'spartak st-i9nd', 'spartak', 'overlock'],
-      imgId: 'lib-spartak-st-i9nd', imgSrc: 'uploads/spartak-st-i9nd-hero.png', imgPh: 'SPARTAK ST-i9ND automatic stepper motor overlock machine',
-      officialUrl: 'https://www.chinaxiangke.com/sbd/en/product/77',
-      specs: [['Needles', '1-3 (by configuration)'], ['Needle gauge', '#11-#18'], ['Loopers', '3-6 (by configuration)'], ['Differential feed ratio', '0.7-2'], ['Presser foot lift', '8 mm'], ['Max sewing speed', '7,000 s.p.m.'], ['Weight', '38.5/36 kg'], ['Dimensions', '52×36×49 cm']],
-      highlightTags: ['Super high speed', 'Automatic stepper motor'],
-    },
-    {
-      id: 'spartak-st-s90nd',
-      model: 'SPARTAK ST-S90ND',
-      manufacturer: 'SPARTAK',
-      category: 'Overlock',
-      purpose: "SPARTAK's ST-S90ND is an overlock machine in SPARTAK's S90 series. SPARTAK's own product page does not publish additional descriptive text for this model beyond its name, so no further claims are made here.",
-      applications: ['garments', 'wovens', 'knitwear'],
-      operations: ['overlock', 'edge finishing'],
-      searchTerms: ['st-s90nd', 'sts90nd', 'spartak st-s90nd', 'spartak', 'overlock'],
-      imgId: 'lib-spartak-st-s90nd', imgSrc: 'uploads/spartak-st-s90nd-hero.png', imgPh: 'SPARTAK ST-S90ND overlock machine',
-      officialUrl: 'https://www.chinaxiangke.com/sbd/en/product/31',
-      specs: [['Needles', '1-3 (by configuration)'], ['Needle gauge', '#11-#18'], ['Loopers', '3-6 (by configuration)'], ['Differential feed ratio', '0.7-2'], ['Presser foot lift', '6 mm'], ['Max sewing speed', '7,000 s.p.m.'], ['Weight', '39/36 kg'], ['Dimensions', '51.5×36×56 cm']],
-    },
-    {
-      id: 'spartak-st-s80d',
-      model: 'SPARTAK ST-S80D',
-      manufacturer: 'SPARTAK',
-      category: 'Overlock',
-      purpose: "SPARTAK's ST-S80D is a super high speed overlock machine.",
-      applications: ['garments', 'wovens', 'knitwear'],
-      operations: ['overlock', 'edge finishing'],
-      searchTerms: ['st-s80d', 'sts80d', 'spartak st-s80d', 'spartak', 'overlock'],
-      imgId: 'lib-spartak-st-s80d', imgSrc: 'uploads/spartak-st-s80d-hero.png', imgPh: 'SPARTAK ST-S80D super high speed overlock machine',
-      officialUrl: 'https://www.chinaxiangke.com/sbd/en/product/30',
-      highlightTags: ['Super high speed'],
-    },
-    {
-      id: 'spartak-st-s90tnd',
-      model: 'SPARTAK ST-S90TND',
-      manufacturer: 'SPARTAK',
-      category: 'Overlock',
-      purpose: "SPARTAK's ST-S90TND is a high speed automatic step motor overlock machine with variable top feed.",
-      applications: ['garments', 'wovens', 'knitwear'],
-      operations: ['overlock', 'edge finishing', 'variable top feed'],
-      searchTerms: ['st-s90tnd', 'sts90tnd', 'spartak st-s90tnd', 'spartak', 'overlock', 'top feed'],
-      imgId: 'lib-spartak-st-s90tnd', imgSrc: 'uploads/spartak-st-s90tnd-hero.png', imgPh: 'SPARTAK ST-S90TND overlock machine with variable top feed',
-      officialUrl: 'https://www.chinaxiangke.com/sbd/en/product/35',
-      specs: [['Needles', '1-3 (by configuration)'], ['Needle gauge', '#14-#18'], ['Loopers', '4-6 (by configuration)'], ['Differential feed ratio', '0.7-2 – 0.8-1.5 (by configuration)'], ['Presser foot lift', '6 mm'], ['Max sewing speed', '6,000 s.p.m.'], ['Weight', '42/33 kg'], ['Dimensions', '51.5×36×56 cm']],
-      highlightTags: ['Automatic step motor', 'Variable top feed'],
-    },
-    {
-      id: 'spartak-st-s90td',
-      model: 'SPARTAK ST-S90TD',
-      manufacturer: 'SPARTAK',
-      category: 'Overlock',
-      purpose: "SPARTAK's ST-S90TD is a high speed overlock machine with variable top feed.",
-      applications: ['garments', 'wovens', 'knitwear'],
-      operations: ['overlock', 'edge finishing', 'variable top feed'],
-      searchTerms: ['st-s90td', 'sts90td', 'spartak st-s90td', 'spartak', 'overlock', 'top feed'],
-      imgId: 'lib-spartak-st-s90td', imgSrc: 'uploads/spartak-st-s90td-hero.png', imgPh: 'SPARTAK ST-S90TD overlock machine with variable top feed',
-      officialUrl: 'https://www.chinaxiangke.com/sbd/en/product/34',
-      highlightTags: ['Variable top feed', 'High speed'],
-    },
-    {
-      id: 'spartak-st-qs90d',
-      model: 'SPARTAK ST-QS90D',
-      manufacturer: 'SPARTAK',
-      category: 'Overlock',
-      purpose: "SPARTAK's ST-QS90D is a small cylinder bed, super high speed overlock machine.",
-      applications: ['garments', 'wovens', 'knitwear'],
-      operations: ['overlock', 'edge finishing'],
-      searchTerms: ['st-qs90d', 'stqs90d', 'spartak st-qs90d', 'spartak', 'overlock', 'cylinder bed'],
-      imgId: 'lib-spartak-st-qs90d', imgSrc: 'uploads/spartak-st-qs90d-hero.png', imgPh: 'SPARTAK ST-QS90D small cylinder bed overlock machine',
-      officialUrl: 'https://www.chinaxiangke.com/sbd/en/product/25',
-      highlightTags: ['Small cylinder bed', 'Super high speed'],
-    },
-    {
-      id: 'spartak-st-qs90td',
-      model: 'SPARTAK ST-QS90TD',
-      manufacturer: 'SPARTAK',
-      category: 'Overlock',
-      purpose: "SPARTAK's ST-QS90TD is a small cylinder bed, super high speed overlock machine with variable top feed.",
-      applications: ['garments', 'wovens', 'knitwear'],
-      operations: ['overlock', 'edge finishing', 'variable top feed'],
-      searchTerms: ['st-qs90td', 'stqs90td', 'spartak st-qs90td', 'spartak', 'overlock', 'cylinder bed', 'top feed'],
-      imgId: 'lib-spartak-st-qs90td', imgSrc: 'uploads/spartak-st-qs90td-hero.png', imgPh: 'SPARTAK ST-QS90TD small cylinder bed overlock machine with variable top feed',
-      officialUrl: 'https://www.chinaxiangke.com/sbd/en/product/26',
-      highlightTags: ['Small cylinder bed', 'Variable top feed'],
-    },
-    {
-      id: 'spartak-st-s90pd-nmc',
-      model: 'SPARTAK ST-S90PD/NMC',
-      manufacturer: 'SPARTAK',
-      category: 'Overlock',
-      purpose: "SPARTAK's ST-S90PD/NMC is an overlock machine in SPARTAK's S90 series. SPARTAK's own product page does not publish additional descriptive text for this model beyond its name, so no further claims are made here.",
-      applications: ['garments', 'wovens', 'knitwear'],
-      operations: ['overlock', 'edge finishing'],
-      searchTerms: ['st-s90pd/nmc', 'sts90pdnmc', 'spartak st-s90pd/nmc', 'spartak', 'overlock'],
-      imgId: 'lib-spartak-st-s90pd-nmc', imgSrc: 'uploads/spartak-st-s90pd-nmc-hero.png', imgPh: 'SPARTAK ST-S90PD/NMC overlock machine',
-      officialUrl: 'https://www.chinaxiangke.com/sbd/en/product/33',
-    },
-    {
-      id: 'spartak-st-s90pd-erp',
-      model: 'SPARTAK ST-S90PD/ERP',
-      manufacturer: 'SPARTAK',
-      category: 'Overlock',
-      purpose: "SPARTAK's ST-S90PD/ERP is an overlock machine in SPARTAK's S90 series. SPARTAK's own product page does not publish additional descriptive text for this model beyond its name, so no further claims are made here.",
-      applications: ['garments', 'wovens', 'knitwear'],
-      operations: ['overlock', 'edge finishing'],
-      searchTerms: ['st-s90pd/erp', 'sts90pderp', 'spartak st-s90pd/erp', 'spartak', 'overlock'],
-      imgId: 'lib-spartak-st-s90pd-erp', imgSrc: 'uploads/spartak-st-s90pd-erp-hero.png', imgPh: 'SPARTAK ST-S90PD/ERP overlock machine',
-      officialUrl: 'https://www.chinaxiangke.com/sbd/en/product/32',
-      specs: [['Needles', '1-3 (by configuration)'], ['Needle gauge', '#11-#18'], ['Loopers', '2-6 (by configuration)'], ['Differential feed ratio', '0.7-2'], ['Presser foot lift', '6 mm'], ['Max sewing speed', '7,000 s.p.m.'], ['Weight', '39/36 kg'], ['Dimensions', '51.5×36×56 cm']],
-    },
-    {
-      id: 'spartak-st-s75nd',
-      model: 'SPARTAK ST-S75ND',
-      manufacturer: 'SPARTAK',
-      category: 'Overlock',
-      purpose: "SPARTAK's ST-S75ND is a high speed automatic stepper motor overlock machine.",
-      applications: ['garments', 'wovens', 'knitwear'],
-      operations: ['overlock', 'edge finishing'],
-      searchTerms: ['st-s75nd', 'sts75nd', 'spartak st-s75nd', 'spartak', 'overlock'],
-      imgId: 'lib-spartak-st-s75nd', imgSrc: 'uploads/spartak-st-s75nd-hero.png', imgPh: 'SPARTAK ST-S75ND automatic stepper motor overlock machine',
-      officialUrl: 'https://www.chinaxiangke.com/sbd/en/product/29',
-      specs: [['Needles', '1-3 (by configuration)'], ['Needle gauge', '#11-#18'], ['Loopers', '4-6 (by configuration)'], ['Differential feed ratio', '0.7-2'], ['Presser foot lift', '6 mm'], ['Max sewing speed', '6,000 s.p.m.'], ['Weight', '37.5/34.5 kg'], ['Dimensions', '51.5×36×56 cm']],
-      highlightTags: ['Automatic stepper motor'],
-    },
-    {
-      id: 'spartak-st-s70d',
-      model: 'SPARTAK ST-S70D',
-      manufacturer: 'SPARTAK',
-      category: 'Overlock',
-      purpose: "SPARTAK's ST-S70D is a high speed direct drive overlock machine.",
-      applications: ['garments', 'wovens', 'knitwear'],
-      operations: ['overlock', 'edge finishing'],
-      searchTerms: ['st-s70d', 'sts70d', 'spartak st-s70d', 'spartak', 'overlock', 'direct drive'],
-      imgId: 'lib-spartak-st-s70d', imgSrc: 'uploads/spartak-st-s70d-hero.png', imgPh: 'SPARTAK ST-S70D direct drive overlock machine',
-      officialUrl: 'https://www.chinaxiangke.com/sbd/en/product/28',
-      specs: [['Needles', '1-3 (by configuration)'], ['Needle gauge', '#11-#18'], ['Loopers', '4-6 (by configuration)'], ['Differential feed ratio', '0.7-2'], ['Presser foot lift', '6 mm'], ['Max sewing speed', '6,000 s.p.m.'], ['Weight', '36/33 kg'], ['Dimensions', '51.5×36×56 cm']],
-      highlightTags: ['Direct drive', 'High speed'],
-    },
-    {
-      id: 'spartak-st-s65d',
-      model: 'SPARTAK ST-S65D',
-      manufacturer: 'SPARTAK',
-      category: 'Overlock',
-      purpose: "SPARTAK's ST-S65D is a direct drive overlock machine.",
-      applications: ['garments', 'wovens', 'knitwear'],
-      operations: ['overlock', 'edge finishing'],
-      searchTerms: ['st-s65d', 'sts65d', 'spartak st-s65d', 'spartak', 'overlock', 'direct drive'],
-      imgId: 'lib-spartak-st-s65d', imgSrc: 'uploads/spartak-st-s65d-hero.png', imgPh: 'SPARTAK ST-S65D direct drive overlock machine',
-      officialUrl: 'https://www.chinaxiangke.com/sbd/en/product/27',
-      specs: [['Needles', '1-3 (by configuration)'], ['Needle gauge', '#11-#18'], ['Loopers', '4-6 (by configuration)'], ['Differential feed ratio', '0.7-2'], ['Presser foot lift', '6 mm'], ['Max sewing speed', '5,500 s.p.m.'], ['Weight', '32.5/29.5 kg'], ['Dimensions', '47×35.5×52.5 cm']],
-      highlightTags: ['Direct drive'],
-    },
   ];
 
   garmentDefs = [
@@ -4998,10 +4606,6 @@ class Component extends DCLogic {
     { type: 'image', src: 'uploads/pegasus-homepage-hero.jpg', brand: 'PEGASUS', tagline: 'New trend with M900neo — Pegasus’s latest overlock series, built in Japan.', ctaLabel: 'View Pegasus Machines', go: this.goPegasusMachines },
     { type: 'image', src: 'uploads/juki-homepage-hero2.jpg', brand: 'JUKI', tagline: 'Globally trusted industrial sewing machines and solutions.', ctaLabel: 'View JUKI Machines', go: this.goJukiMachines },
     { type: 'image', src: 'uploads/singer-homepage-hero.jpg', brand: 'SINGER', tagline: 'Introducing a global icon — original since 1851.', ctaLabel: 'View SINGER Machines', go: this.goSingerMachines },
-    // SPARTAK's homepage (chinaxiangke.com) is a shared parent-company site for two
-    // sewing-machine brands (RUIYANG and SPARTAK); this is the real SPARTAK-branded
-    // homepage banner slide from that site (shouye2.jpg), not a generic product photo.
-    { type: 'image', src: 'uploads/spartak-homepage-hero.jpg', brand: 'SPARTAK', tagline: 'SPARTAK Sewing Machine — lockstitch and overlock machines from Zhejiang Hover Tech.', ctaLabel: 'View SPARTAK Machines', go: this.goSpartakMachines },
     { type: 'image', src: 'uploads/golden-eagle-hooks.jpg', brand: 'GOLDEN EAGLE', tagline: 'Genuine hooks, bobbins and bobbin cases, always in stock.', ctaLabel: 'Browse Spare Parts', go: () => this.goToView('accGoldenEagle') },
     { type: 'image', src: 'uploads/gb-banner-forest.jpg', brand: 'GROZ-BECKERT', tagline: 'Precision needles from the world’s leading needle manufacturer.', ctaLabel: 'Browse Needles', go: () => this.goToView('accGrozBeckert') },
   ];
@@ -5304,8 +4908,6 @@ class Component extends DCLogic {
   goJukiMachinesAndClose = () => { this.setState({ mobileNavOpen: false, machineBrand: 'JUKI' }); this.goToView('machines'); };
   goSingerMachines = () => { this.setState({ machineBrand: 'SINGER' }); this.goToView('machines'); };
   goSingerMachinesAndClose = () => { this.setState({ mobileNavOpen: false, machineBrand: 'SINGER' }); this.goToView('machines'); };
-  goSpartakMachines = () => { this.setState({ machineBrand: 'SPARTAK' }); this.goToView('machines'); };
-  goSpartakMachinesAndClose = () => { this.setState({ mobileNavOpen: false, machineBrand: 'SPARTAK' }); this.goToView('machines'); };
   focusMachineSearch = () => {
     if (typeof document === 'undefined') return;
     const input = document.querySelector('input[placeholder^="Search by model"]');
@@ -5736,7 +5338,6 @@ class Component extends DCLogic {
       goPegasusMachines: this.goPegasusMachines,
       goJukiMachines: this.goJukiMachines,
       goSingerMachines: this.goSingerMachines,
-      goSpartakMachines: this.goSpartakMachines,
       goIndustries: () => this.goToView('industries'),
       goSolutions: () => this.goToView('solutions'),
       goProduct: () => this.goToProduct(this.state.selectedMachineId || 'jack-f6'),
@@ -5792,7 +5393,6 @@ class Component extends DCLogic {
       goPegasusMachinesAndClose: this.goPegasusMachinesAndClose,
       goJukiMachinesAndClose: this.goJukiMachinesAndClose,
       goSingerMachinesAndClose: this.goSingerMachinesAndClose,
-      goSpartakMachinesAndClose: this.goSpartakMachinesAndClose,
       goIndustriesAndClose: () => { this.goToView('industries'); this.setState({ mobileNavOpen: false }); },
       goSolutionsAndClose: () => { this.goToView('solutions'); this.setState({ mobileNavOpen: false }); },
       goFinderAndClose: () => { this.goToView('finder'); this.setState({ mobileNavOpen: false }); },
@@ -5846,7 +5446,6 @@ class Component extends DCLogic {
         { key: 'Pegasus', label: 'Pegasus' },
         { key: 'JUKI', label: 'JUKI' },
         { key: 'SINGER', label: 'SINGER' },
-        { key: 'SPARTAK', label: 'SPARTAK' },
       ].map((b) => ({
         ...b,
         isActive: (machineBrand || 'all') === b.key,

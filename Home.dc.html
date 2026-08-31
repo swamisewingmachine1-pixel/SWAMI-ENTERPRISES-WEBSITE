@@ -1695,7 +1695,7 @@ a:hover { color:#3D7BFF; }
             <sc-if value="{{ geProduct.matNo }}" hint-placeholder-val="{{ false }}">
               <div style="font-size:13px;color:#5A5A5A;margin-bottom:28px">Sourced from {{ geProduct.brand }}'s official product data, mat. no. {{ geProduct.matNo }}.</div>
             </sc-if>
-            <sc-if value="{{ geProduct.isNeedleBrand }}" hint-placeholder-val="{{ false }}">
+            <sc-if value="{{ geProduct.isNeedleBrandWithoutMatNo }}" hint-placeholder-val="{{ false }}">
               <div style="font-size:13px;color:#5A5A5A;margin-bottom:28px">Sourced from {{ geProduct.brand }}'s own product catalogue.</div>
             </sc-if>
             <div style="border-radius:18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);padding:8px clamp(20px,3vw,28px)">
@@ -4264,7 +4264,7 @@ class Component extends DCLogic {
         }
       }
       const view = next ? next.view : 'home';
-      const id = next ? (next.selectedMachineId || this.state.selectedMachineId) : undefined;
+      const id = next ? (next.selectedMachineId || next.selectedGeProductId || this.state.selectedMachineId || this.state.selectedGeProductId) : undefined;
       if (next) this.setState(next);
       document.title = this.titleFor(view, id);
       this.setMeta('name', 'description', this.descriptionFor(view, id));
@@ -5314,6 +5314,7 @@ class Component extends DCLogic {
           brand,
           hasTechSpecs: !!p.specs,
           isNeedleBrand: !!p.needleFormDescription,
+          isNeedleBrandWithoutMatNo: !!p.needleFormDescription && !p.matNo,
           geSpecRows: (p.specs || []).map(([label, value]) => ({ label, value })),
           pointStylesText: (p.pointStyles || []).join(', '),
           needleSizesText: (p.needleSizes || []).join(', '),

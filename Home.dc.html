@@ -1680,7 +1680,12 @@ a:hover { color:#3D7BFF; }
         <sc-if value="{{ geProduct.hasTechSpecs }}" hint-placeholder-val="{{ false }}">
           <div style="background:#0A0A0A;border-radius:24px;margin-top:clamp(56px,8vw,80px);padding:clamp(40px,6vw,64px) clamp(24px,6vw,56px)">
             <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:8px">TECHNICAL SPECIFICATIONS</div>
-            <div style="font-size:13px;color:#5A5A5A;margin-bottom:28px">Sourced from {{ geProduct.brand }}'s official product data, mat. no. {{ geProduct.matNo }}.</div>
+            <sc-if value="{{ geProduct.matNo }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:13px;color:#5A5A5A;margin-bottom:28px">Sourced from {{ geProduct.brand }}'s official product data, mat. no. {{ geProduct.matNo }}.</div>
+            </sc-if>
+            <sc-if value="{{ geProduct.isNeedleBrand }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:13px;color:#5A5A5A;margin-bottom:28px">Sourced from {{ geProduct.brand }}'s own product catalogue.</div>
+            </sc-if>
             <div style="border-radius:18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);padding:8px clamp(20px,3vw,28px)">
               <sc-for list="{{ geProduct.geSpecRows }}" as="row" hint-placeholder-count="5">
                 <div style="display:flex;justify-content:space-between;padding:16px 0;border-top:1px solid rgba(247,247,245,0.1);gap:16px">
@@ -1690,40 +1695,42 @@ a:hover { color:#3D7BFF; }
               </sc-for>
             </div>
 
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(24px,4vw,32px);margin-top:clamp(32px,5vw,44px)">
-              <div>
-                <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:10px">NEEDLE FORM</div>
-                <div style="font-size:14px;color:#F5F5F7;line-height:1.6">{{ geProduct.needleFormDescription }}</div>
+            <sc-if value="{{ geProduct.isNeedleBrand }}" hint-placeholder-val="{{ false }}">
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(24px,4vw,32px);margin-top:clamp(32px,5vw,44px)">
+                <div>
+                  <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:10px">NEEDLE FORM</div>
+                  <div style="font-size:14px;color:#F5F5F7;line-height:1.6">{{ geProduct.needleFormDescription }}</div>
+                </div>
+                <div>
+                  <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:10px">TECHNICAL SEWING APPLICATION</div>
+                  <div style="font-size:14px;color:#F5F5F7;line-height:1.6">{{ geProduct.technicalApplication }} <span style="color:#6E6E73">(stitch type class {{ geProduct.stitchTypeClass }})</span></div>
+                </div>
+                <div>
+                  <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:10px">RECOMMENDED FOR</div>
+                  <div style="font-size:14px;color:#F5F5F7;line-height:1.6">{{ geProduct.recommendedForText }}</div>
+                </div>
+                <div>
+                  <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:10px">EXAMPLES OF USE</div>
+                  <div style="font-size:14px;color:#F5F5F7;line-height:1.6">{{ geProduct.examplesOfUseText }}</div>
+                </div>
+                <div>
+                  <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:10px">AVAILABLE POINT STYLES</div>
+                  <div style="font-size:14px;color:#F5F5F7;line-height:1.6;font-family:'IBM Plex Mono',monospace">{{ geProduct.pointStylesText }}</div>
+                </div>
+                <div>
+                  <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:10px">AVAILABLE NEEDLE SIZES (NM)</div>
+                  <div style="font-size:14px;color:#F5F5F7;line-height:1.6;font-family:'IBM Plex Mono',monospace">{{ geProduct.needleSizesText }}</div>
+                </div>
+                <div>
+                  <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:10px">COATINGS AVAILABLE</div>
+                  <div style="font-size:14px;color:#F5F5F7;line-height:1.6">{{ geProduct.coatingsText }}</div>
+                </div>
+                <div>
+                  <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:10px">CUSTOMARY NEEDLE DESIGNATIONS</div>
+                  <div style="font-size:14px;color:#F5F5F7;line-height:1.6">{{ geProduct.customaryDesignationsText }}</div>
+                </div>
               </div>
-              <div>
-                <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:10px">TECHNICAL SEWING APPLICATION</div>
-                <div style="font-size:14px;color:#F5F5F7;line-height:1.6">{{ geProduct.technicalApplication }} <span style="color:#6E6E73">(stitch type class {{ geProduct.stitchTypeClass }})</span></div>
-              </div>
-              <div>
-                <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:10px">RECOMMENDED FOR</div>
-                <div style="font-size:14px;color:#F5F5F7;line-height:1.6">{{ geProduct.recommendedForText }}</div>
-              </div>
-              <div>
-                <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:10px">EXAMPLES OF USE</div>
-                <div style="font-size:14px;color:#F5F5F7;line-height:1.6">{{ geProduct.examplesOfUseText }}</div>
-              </div>
-              <div>
-                <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:10px">AVAILABLE POINT STYLES</div>
-                <div style="font-size:14px;color:#F5F5F7;line-height:1.6;font-family:'IBM Plex Mono',monospace">{{ geProduct.pointStylesText }}</div>
-              </div>
-              <div>
-                <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:10px">AVAILABLE NEEDLE SIZES (NM)</div>
-                <div style="font-size:14px;color:#F5F5F7;line-height:1.6;font-family:'IBM Plex Mono',monospace">{{ geProduct.needleSizesText }}</div>
-              </div>
-              <div>
-                <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:10px">COATINGS AVAILABLE</div>
-                <div style="font-size:14px;color:#F5F5F7;line-height:1.6">{{ geProduct.coatingsText }}</div>
-              </div>
-              <div>
-                <div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#6E6E73;margin-bottom:10px">CUSTOMARY NEEDLE DESIGNATIONS</div>
-                <div style="font-size:14px;color:#F5F5F7;line-height:1.6">{{ geProduct.customaryDesignationsText }}</div>
-              </div>
-            </div>
+            </sc-if>
             <div class="sw-btn sw-btn-light" style="margin-top:clamp(32px,5vw,44px);display:inline-block;padding:14px 24px;border:1px solid rgba(247,247,245,0.35);color:#F5F5F7;font-size:14px;font-weight:600;cursor:pointer;border-radius:980px" onClick="{{ geProduct.askAboutProduct }}">Ask about pricing &amp; availability</div>
           </div>
         </sc-if>
@@ -4089,20 +4096,32 @@ class Component extends DCLogic {
   ];
 
   goldenEagleProducts = [
-    { id: 'ge-abrasive-belts', slug: 'abrasive-belts', src: 'uploads/golden-eagle-abrasive-belts.jpg', ph: 'Golden Eagle abrasive belts', name: 'Abrasive Belts', sub: 'FC1002 series', desc: 'Abrasive belts for sewing machine sharpening and finishing work, from Golden Eagle’s FC1002 series.', officialUrl: 'https://goldeneagle-sewingparts.com/sewing-machine-abrasive-belt.html' },
-    { id: 'ge-thread-cutters', slug: 'thread-cutters', src: 'uploads/golden-eagle-thread-cutters.jpg', ph: 'Golden Eagle thread cutters', name: 'Thread Cutters', sub: 'Handheld snips', desc: 'Handheld thread-cutting snips, sold individually or in sets, in Golden Eagle’s standard handle colours.', officialUrl: 'https://goldeneagle-sewingparts.com/thread-cutter.html' },
-    { id: 'ge-nippers-set', slug: 'thread-nippers', src: 'uploads/golden-eagle-nippers-set.jpg', ph: 'Golden Eagle thread nippers', name: 'Thread Nippers', sub: 'Curved-blade trimmers', desc: 'Curved-blade thread nippers for fast trimming between operations on the line, available in a set of handle colours.', officialUrl: 'https://goldeneagle-sewingparts.com/thread-cutter.html' },
-    { id: 'ge-nipper-red', slug: 'thread-nipper', src: 'uploads/golden-eagle-nipper-red.jpg', ph: 'Golden Eagle thread nipper', name: 'Thread Nipper', sub: 'Spring-action trimmer', desc: 'A single spring-action thread nipper — the same trimmer as the nipper set, sold individually.', officialUrl: 'https://goldeneagle-sewingparts.com/thread-cutter.html' },
-    { id: 'ge-scissors-knives', slug: 'scissors-and-knives', src: 'uploads/golden-eagle-scissors-knives.jpg', ph: 'Golden Eagle scissors and cutting knives', name: 'Scissors & Cutting Knives', sub: 'Tailoring scissors, straight & serrated blades', desc: 'Tailoring scissors and cutting-machine knives — straight and serrated blade options for different cutting jobs.', officialUrl: 'https://goldeneagle-sewingparts.com/scissors.html' },
+    { id: 'ge-abrasive-belts', slug: 'abrasive-belts', src: 'uploads/golden-eagle-abrasive-belts.jpg', ph: 'Golden Eagle abrasive belts', name: 'Abrasive Belts', sub: 'FC1002 series', desc: 'Abrasive belts for sewing machine sharpening and finishing work, from Golden Eagle’s FC1002 series.', officialUrl: 'https://goldeneagle-sewingparts.com/sewing-machine-abrasive-belt.html',
+      specs: [['Width range', '300mm – 1650mm'], ['Length range', '260mm – 4000mm'], ['Installed power', '0.75kW – 2.2kW'], ['Grit options', '80 / 120 / 150 / 240 mesh'], ['Series', 'FC1002, FC1006, FC1008, FC1028']] },
+    { id: 'ge-thread-cutters', slug: 'thread-cutters', src: 'uploads/golden-eagle-thread-cutters.jpg', ph: 'Golden Eagle thread cutters', name: 'Thread Cutters', sub: 'Handheld snips', desc: 'Handheld thread-cutting snips, sold individually or in sets, in Golden Eagle’s standard handle colours.', officialUrl: 'https://goldeneagle-sewingparts.com/thread-cutter.html',
+      specs: [['Model range', 'TC-801, TC-805, TC-805A, TC-805B'], ['Blade material', 'SK2 / T10 steel'], ['Blade length', '~40mm'], ['Total length', '~123–125mm'], ['Packing', '12 pcs/box, 1440 pcs/carton']] },
+    { id: 'ge-nippers-set', slug: 'thread-nippers', src: 'uploads/golden-eagle-nippers-set.jpg', ph: 'Golden Eagle thread nippers', name: 'Thread Nippers', sub: 'Curved-blade trimmers', desc: 'Curved-blade thread nippers for fast trimming between operations on the line, available in a set of handle colours.', officialUrl: 'https://goldeneagle-sewingparts.com/thread-cutter.html',
+      specs: [['Model', 'TC-801 (mixed-colour box)'], ['Blade material', 'T10 stainless steel'], ['Handle length', '~105mm'], ['Total length', '~123mm']] },
+    { id: 'ge-nipper-red', slug: 'thread-nipper', src: 'uploads/golden-eagle-nipper-red.jpg', ph: 'Golden Eagle thread nipper', name: 'Thread Nipper', sub: 'Spring-action trimmer', desc: 'A single spring-action thread nipper — the same trimmer as the nipper set, sold individually.', officialUrl: 'https://goldeneagle-sewingparts.com/thread-cutter.html',
+      specs: [['Model', 'TC-805 (red/blue handle)'], ['Blade material', 'Stainless steel'], ['Handle', 'Plastic, colour-coded']] },
+    { id: 'ge-scissors-knives', slug: 'scissors-and-knives', src: 'uploads/golden-eagle-scissors-knives.jpg', ph: 'Golden Eagle scissors and cutting knives', name: 'Scissors & Cutting Knives', sub: 'Tailoring scissors, straight & serrated blades', desc: 'Tailoring scissors and cutting-machine knives — straight and serrated blade options for different cutting jobs.', officialUrl: 'https://goldeneagle-sewingparts.com/scissors.html',
+      specs: [['Model range', 'GE-A1 / GE-A2 / GE-A3'], ['Sizes', '205mm, 185mm, 165mm'], ['Material', 'Stainless steel']] },
     { id: 'ge-thread-tension', slug: 'thread-tension-assembly', src: 'uploads/golden-eagle-thread-tension.jpg', ph: 'Golden Eagle thread tension assembly', name: 'Thread Tension Assembly', sub: 'Thread Tension ASM series', desc: 'Thread tension assemblies for industrial sewing machines, from Golden Eagle’s Thread Tension ASM series.', officialUrl: 'https://goldeneagle-sewingparts.com/' },
-    { id: 'ge-bobbins', slug: 'bobbins', src: 'uploads/golden-eagle-bobbins.jpg', ph: 'Golden Eagle bobbins', name: 'Bobbins', sub: 'Boxes of genuine bobbins', desc: 'Genuine sewing machine bobbins, sold boxed in bulk packs for industrial use.', officialUrl: 'https://goldeneagle-sewingparts.com/sewing-machine-bobbins.html' },
-    { id: 'ge-hemmer-feet', slug: 'hemmer-feet', src: 'uploads/golden-eagle-hemmer-feet.jpg', ph: 'Golden Eagle hemmer feet', name: 'Hemmer Feet', sub: 'Presser foot attachments', desc: 'Hemmer foot attachments for folding and hemming fabric edges as they’re sewn.', officialUrl: 'https://goldeneagle-sewingparts.com/sewing-machines-presser-foot.html' },
-    { id: 'ge-bobbin-case', slug: 'bobbin-case', src: 'uploads/golden-eagle-bobbin-case.jpg', ph: 'Golden Eagle bobbin case', name: 'Bobbin Case', sub: 'Model BC-DB1-NBL', desc: 'A genuine Golden Eagle bobbin case, model BC-DB1-NBL.', officialUrl: 'https://goldeneagle-sewingparts.com/hooks-bobbins-and-bobbin-cases.html' },
+    { id: 'ge-bobbins', slug: 'bobbins', src: 'uploads/golden-eagle-bobbins.jpg', ph: 'Golden Eagle bobbins', name: 'Bobbins', sub: 'Boxes of genuine bobbins', desc: 'Genuine sewing machine bobbins, sold boxed in bulk packs for industrial use.', officialUrl: 'https://goldeneagle-sewingparts.com/sewing-machine-bobbins.html',
+      specs: [['Model', 'GESX-272152A and related GESX series'], ['Material', 'Aluminium'], ['Fits', 'BC-DB1-NBL bobbin case'], ['Compatible with', 'JUKI, Brother, SINGER industrial machines'], ['Packing', '100 pcs/box']] },
+    { id: 'ge-hemmer-feet', slug: 'hemmer-feet', src: 'uploads/golden-eagle-hemmer-feet.jpg', ph: 'Golden Eagle hemmer feet', name: 'Hemmer Feet', sub: 'Presser foot attachments', desc: 'Hemmer foot attachments for folding and hemming fabric edges as they’re sewn.', officialUrl: 'https://goldeneagle-sewingparts.com/sewing-machines-presser-foot.html',
+      specs: [['Model', 'Q7 adjustable edge-guide roller hem foot'], ['Hem width range', '0.1mm – 13mm'], ['Fits', '1-needle industrial lockstitch machines']] },
+    { id: 'ge-bobbin-case', slug: 'bobbin-case', src: 'uploads/golden-eagle-bobbin-case.jpg', ph: 'Golden Eagle bobbin case', name: 'Bobbin Case', sub: 'Model BC-DB1-NBL', desc: 'A genuine Golden Eagle bobbin case, model BC-DB1-NBL.', officialUrl: 'https://goldeneagle-sewingparts.com/hooks-bobbins-and-bobbin-cases.html',
+      specs: [['Model', 'BC-DB1-NBL'], ['Compatible with', 'JUKI, Brother, SINGER industrial machines']] },
     { id: 'ge-bobbin-winder', slug: 'bobbin-winder', src: 'uploads/golden-eagle-bobbin-winder.jpg', ph: 'Golden Eagle bobbin winder', name: 'Bobbin Winder', sub: 'Machine-mount winder assembly', desc: 'A bobbin winder assembly that mounts to the machine to wind bobbins ready for use.', officialUrl: 'https://goldeneagle-sewingparts.com/sewing-machine-bobbins.html' },
-    { id: 'ge-hooks', slug: 'hooks', src: 'uploads/golden-eagle-hooks.jpg', ph: 'Golden Eagle rotary hooks', name: 'Rotary Hooks', sub: 'Hook, bobbin & bobbin case sets', desc: 'Rotary hooks, sold alongside matching bobbins and bobbin cases as a set.', officialUrl: 'https://goldeneagle-sewingparts.com/hooks-bobbins-and-bobbin-cases.html' },
-    { id: 'ge-sewing-folders', slug: 'sewing-folders', src: 'uploads/golden-eagle-sewing-folders.jpg', ph: 'Golden Eagle sewing folders and binders', name: 'Sewing Folders & Binders', sub: 'Fabric-guide attachments', desc: 'Folder and binder attachments that guide and fold fabric edges automatically as they’re sewn.', officialUrl: 'https://goldeneagle-sewingparts.com/' },
-    { id: 'ge-skiving-knives', slug: 'skiving-knives', src: 'uploads/golden-eagle-skiving-knives.jpg', ph: 'Golden Eagle leather skiving bell knives', name: 'Skiving Bell Knives', sub: 'Part No. 201K, leather skiving', desc: 'Bell knives for leather-skiving machines — thins leather edges for folding and stitching. Part No. 201K.', officialUrl: 'https://goldeneagle-sewingparts.com/' },
-    { id: 'ge-needle-plates', slug: 'needle-plates-feed-dogs', src: 'uploads/golden-eagle-needle-plates.jpg', ph: 'Golden Eagle needle plates and feed dogs', name: 'Needle Plates & Feed Dogs', sub: 'Throat plates and feed dogs', desc: 'Needle (throat) plates and feed dogs for industrial sewing machines, sized to match specific machine models.', officialUrl: 'https://goldeneagle-sewingparts.com/sewing-machine-feed-dog.html' },
+    { id: 'ge-hooks', slug: 'hooks', src: 'uploads/golden-eagle-hooks.jpg', ph: 'Golden Eagle rotary hooks', name: 'Rotary Hooks', sub: 'Hook, bobbin & bobbin case sets', desc: 'Rotary hooks, sold alongside matching bobbins and bobbin cases as a set.', officialUrl: 'https://goldeneagle-sewingparts.com/hooks-bobbins-and-bobbin-cases.html',
+      specs: [['Model range', 'GEH-7.94B, GEM-B1H(6-5)TR, GEM-A1(6-7), GEM-875TR'], ['Compatible with', 'BROTHER BAS-6150/6200, TYPICAL GC6872/6875 and similar machines'], ['Packing', '1 pc/small box, 6–12 pcs/carton']] },
+    { id: 'ge-sewing-folders', slug: 'sewing-folders', src: 'uploads/golden-eagle-sewing-folders.jpg', ph: 'Golden Eagle sewing folders and binders', name: 'Sewing Folders & Binders', sub: 'Fabric-guide attachments', desc: 'Folder and binder attachments that guide and fold fabric edges automatically as they’re sewn.', officialUrl: 'https://goldeneagle-sewingparts.com/sewing-folders.html',
+      specs: [['Model range', 'KS101, DY161, A10, A30 (F355)'], ['Purpose', 'Binding of curved edges'], ['Fits', '1-needle lockstitch machines'], ['Tape size (Overlock Folder)', '40mm']] },
+    { id: 'ge-skiving-knives', slug: 'skiving-knives', src: 'uploads/golden-eagle-skiving-knives.jpg', ph: 'Golden Eagle leather skiving bell knives', name: 'Skiving Bell Knives', sub: 'Part No. 201K, leather skiving', desc: 'Bell knives for leather-skiving machines — thins leather edges for folding and stitching. Part No. 201K.', officialUrl: 'https://goldeneagle-sewingparts.com/skiving-bell-knives.html',
+      specs: [['Model', 'FC1200-GE / 201K'], ['Type', 'Round bell knife'], ['Application', 'Leather skiving machines']] },
+    { id: 'ge-needle-plates', slug: 'needle-plates-feed-dogs', src: 'uploads/golden-eagle-needle-plates.jpg', ph: 'Golden Eagle needle plates and feed dogs', name: 'Needle Plates & Feed Dogs', sub: 'Throat plates and feed dogs', desc: 'Needle (throat) plates and feed dogs for industrial sewing machines, sized to match specific machine models.', officialUrl: 'https://goldeneagle-sewingparts.com/sewing-machine-feed-dog.html',
+      specs: [['Model range', '12481 (9T/11T/13T/15T/17T/22T), 272153, 149057'], ['Finish', 'Electroplated'], ['Tooth counts available', '9T to 22T']] },
   ];
 
   // Real Groz-Beckert sewing-machine needles, sourced from Groz-Beckert's own Sewing
@@ -5249,6 +5268,7 @@ class Component extends DCLogic {
           ...p,
           brand,
           hasTechSpecs: !!p.specs,
+          isNeedleBrand: !!p.needleFormDescription,
           geSpecRows: (p.specs || []).map(([label, value]) => ({ label, value })),
           pointStylesText: (p.pointStyles || []).join(', '),
           needleSizesText: (p.needleSizes || []).join(', '),

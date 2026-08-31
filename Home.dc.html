@@ -4589,13 +4589,23 @@ class Component extends DCLogic {
     this._pageEnteredAt = Date.now();
     this._pageEnteredPath = path;
   };
+  // Every non-JACK slide below uses the real hero/banner image each brand runs on
+  // its own official website homepage (not a generic product photo) — sourced
+  // directly from their own site: Pegasus's own homepage slider banner
+  // (pegasus.co.jp), JUKI's own homepage slideshow banner (juki.co.jp), SINGER
+  // India's own homepage banner (shop.singerindia.com, the same M3330 banner the
+  // dealer showed us), and MAQI's own real headquarters photo (en.chinamaqi.com,
+  // used prominently on their site). Golden Eagle's own site has no distinct hero
+  // banner (just a logo/icon header), so its real product photo is kept honestly
+  // instead of inventing one. Groz-Beckert's slide reuses the real campaign banner
+  // already sourced for their accessories page.
   getHeroSlides = () => [
     { type: 'video', src: 'uploads/jack-hero-video.mp4', brand: 'JACK', tagline: 'Intelligent garment manufacturing, total solution provider.', ctaLabel: 'View JACK Machines', go: () => this.goToView('machines') },
     { type: 'video', src: 'uploads/jack-intelligent-solution.mp4', brand: 'JACK', tagline: 'Shanghai stock listed — the machines behind India’s garment factories.', ctaLabel: 'View JACK Machines', go: () => this.goToView('machines') },
-    { type: 'image', src: 'uploads/maqi-q7t-hero.jpg', brand: 'MAQI', tagline: 'Smart, electronically controlled lockstitch machines for high-volume production.', ctaLabel: 'View MAQI Machines', go: this.goMaqiMachines },
-    { type: 'image', src: 'uploads/pegasus-mxneo.jpg', brand: 'PEGASUS', tagline: 'Precision overlock and interlock machines, built in Japan.', ctaLabel: 'View Pegasus Machines', go: this.goPegasusMachines },
-    { type: 'image', src: 'uploads/juki-ddl-8700.jpg', brand: 'JUKI', tagline: 'Globally trusted industrial sewing machines and solutions.', ctaLabel: 'View JUKI Machines', go: this.goJukiMachines },
-    { type: 'image', src: 'uploads/singer-s8150-hero.jpg', brand: 'SINGER', tagline: 'Original since 1851 — now in industrial lockstitch and overlock machines.', ctaLabel: 'View SINGER Machines', go: this.goSingerMachines },
+    { type: 'image', src: 'uploads/maqi-homepage-hero.jpg', brand: 'MAQI', tagline: 'MAQI Technology Group — the real headquarters behind our smart lockstitch machines.', ctaLabel: 'View MAQI Machines', go: this.goMaqiMachines },
+    { type: 'image', src: 'uploads/pegasus-homepage-hero.jpg', brand: 'PEGASUS', tagline: 'New trend with M900neo — Pegasus’s latest overlock series, built in Japan.', ctaLabel: 'View Pegasus Machines', go: this.goPegasusMachines },
+    { type: 'image', src: 'uploads/juki-homepage-hero2.jpg', brand: 'JUKI', tagline: 'Globally trusted industrial sewing machines and solutions.', ctaLabel: 'View JUKI Machines', go: this.goJukiMachines },
+    { type: 'image', src: 'uploads/singer-homepage-hero.jpg', brand: 'SINGER', tagline: 'Introducing a global icon — original since 1851.', ctaLabel: 'View SINGER Machines', go: this.goSingerMachines },
     { type: 'image', src: 'uploads/golden-eagle-hooks.jpg', brand: 'GOLDEN EAGLE', tagline: 'Genuine hooks, bobbins and bobbin cases, always in stock.', ctaLabel: 'Browse Spare Parts', go: () => this.goToView('accGoldenEagle') },
     { type: 'image', src: 'uploads/gb-banner-forest.jpg', brand: 'GROZ-BECKERT', tagline: 'Precision needles from the world’s leading needle manufacturer.', ctaLabel: 'Browse Needles', go: () => this.goToView('accGrozBeckert') },
   ];

@@ -111,7 +111,7 @@ body { margin:0; zoom:0.85; }
 /* Static brand logos (never user-uploaded) — the empty-state ring can lag a beat behind
    the real network on first paint; these never show an empty state, so hide it outright
    instead of racing the retry timing. */
-#jack-brand-logo::part(ring), #maqi-brand-logo::part(ring), #pegasus-brand-logo::part(ring), #juki-brand-logo::part(ring), #golden-eagle-brand-logo::part(ring), #groz-beckert-logo::part(ring) { display:none !important; }
+#jack-brand-logo::part(ring), #maqi-brand-logo::part(ring), #pegasus-brand-logo::part(ring), #juki-brand-logo::part(ring), #singer-brand-logo::part(ring), #golden-eagle-brand-logo::part(ring), #groz-beckert-logo::part(ring) { display:none !important; }
 a { color:#0A5CFF; text-decoration:none; }
 a:hover { color:#3D7BFF; }
 * { box-sizing:border-box; }
@@ -162,6 +162,7 @@ a:hover { color:#3D7BFF; }
                 <span style="font-size:19px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goMaqiMachines }}">MAQI Machines</span>
                 <span style="font-size:19px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goPegasusMachines }}">Pegasus Machines</span>
                 <span style="font-size:19px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goJukiMachines }}">JUKI Machines</span>
+                <span style="font-size:19px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goSingerMachines }}">SINGER Machines</span>
                 <span style="font-size:19px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goFinder }}">Find Your Machine</span>
                 <span style="font-size:19px;font-weight:600;color:#1D1D1F;cursor:pointer" onClick="{{ goCompare }}">Compare</span>
               </div>
@@ -329,6 +330,7 @@ a:hover { color:#3D7BFF; }
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goMaqiMachinesAndClose }}">MAQI Machines</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goPegasusMachinesAndClose }}">Pegasus Machines</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goJukiMachinesAndClose }}">JUKI Machines</span>
+      <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goSingerMachinesAndClose }}">SINGER Machines</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goAccessoriesAndClose }}">Accessories</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goIndustriesAndClose }}">Industries</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goSolutionsAndClose }}">Solutions</span>
@@ -430,7 +432,7 @@ a:hover { color:#3D7BFF; }
       <div style="background:#000;padding:clamp(64px,9vw,110px) clamp(24px,6vw,80px);animation:swFadeUp 0.7s ease 0.29s both">
         <div style="max-width:1280px;margin:0 auto">
           <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#2997FF;margin-bottom:14px;text-align:center">OUR GLOBAL PARTNERS</div>
-          <div style="font-weight:700;font-size:clamp(26px,3.6vw,42px);color:#F5F5F7;letter-spacing:-0.02em;text-align:center;max-width:720px;margin:0 auto">Six brands. One standard. Chosen, not just carried.</div>
+          <div style="font-weight:700;font-size:clamp(26px,3.6vw,42px);color:#F5F5F7;letter-spacing:-0.02em;text-align:center;max-width:720px;margin:0 auto">Seven brands. One standard. Chosen, not just carried.</div>
           <div style="font-size:15px;color:#86868B;text-align:center;max-width:640px;margin:16px auto 0;line-height:1.6">Each brand in our lineup fills a specific gap — machines, needles, or genuine spares — so nothing on your floor is a compromise.</div>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(24px,4vw,32px);margin-top:clamp(40px,6vw,56px)">
             <div style="background:#0A0A0A;border:1px solid rgba(255,255,255,0.08);border-radius:28px;padding:clamp(40px,5vw,56px);display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform 0.25s ease" style-hover="transform:translateY(-4px)">
@@ -467,6 +469,14 @@ a:hover { color:#3D7BFF; }
             </div>
             <div style="background:#0A0A0A;border:1px solid rgba(255,255,255,0.08);border-radius:28px;padding:clamp(40px,5vw,56px);display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform 0.25s ease" style-hover="transform:translateY(-4px)">
               <div style="background:#fff;border-radius:18px;padding:clamp(20px,3vw,28px);width:100%;height:clamp(64px,8vw,90px);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 28px rgba(0,0,0,0.3)">
+                <image-slot id="singer-brand-logo" shape="rect" src="uploads/singer-logo.png" fit="contain" placeholder="SINGER logo" style="width:100%;height:100%;max-width:100%;max-height:100%"></image-slot>
+              </div>
+              <div style="font-weight:700;font-size:22px;color:#F5F5F7;margin-top:24px">SINGER</div>
+              <div style="font-size:15px;color:#A1A1A6;line-height:1.6;margin-top:10px">The world's most recognized sewing machine name, original since 1851 — now in industrial lockstitch and overlock machines.</div>
+              <div style="margin-top:20px;color:#2997FF;font-size:15px;cursor:pointer;display:inline-flex;align-items:center;gap:4px" onClick="{{ goSingerMachines }}">Browse machines <span>›</span></div>
+            </div>
+            <div style="background:#0A0A0A;border:1px solid rgba(255,255,255,0.08);border-radius:28px;padding:clamp(40px,5vw,56px);display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform 0.25s ease" style-hover="transform:translateY(-4px)">
+              <div style="background:#fff;border-radius:18px;padding:clamp(20px,3vw,28px);width:100%;height:clamp(64px,8vw,90px);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 28px rgba(0,0,0,0.3)">
                 <image-slot id="golden-eagle-brand-logo" shape="rect" src="uploads/golden-eagle-logo-crop.jpg" fit="contain" placeholder="Golden Eagle logo" style="width:100%;height:100%;max-width:100%;max-height:100%"></image-slot>
               </div>
               <div style="font-weight:700;font-size:22px;color:#F5F5F7;margin-top:24px">Golden Eagle</div>
@@ -497,11 +507,11 @@ a:hover { color:#3D7BFF; }
         <div style="position:relative;z-index:1"><div style="font-weight:800;font-size:clamp(32px,5.2vw,64px);color:#F5F5F7;letter-spacing:-0.03em;line-height:1.1;max-width:920px;margin:0 auto;text-shadow:0 2px 24px rgba(0,0,0,0.8)">Not a shop that sells machines. A partner building India's industrial sewing infrastructure.</div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:clamp(32px,5vw,56px);max-width:920px;margin:clamp(56px,8vw,88px) auto 0">
           <div>
-            <div style="font-weight:800;font-size:clamp(36px,5vw,58px);color:#F5F5F7;letter-spacing:-0.02em">6</div>
+            <div style="font-weight:800;font-size:clamp(36px,5vw,58px);color:#F5F5F7;letter-spacing:-0.02em">7</div>
             <div style="font-size:13px;font-weight:600;letter-spacing:0.08em;color:#6E6E73;margin-top:8px">GLOBAL BRANDS<br>PARTNERED</div>
           </div>
           <div>
-            <div style="font-weight:800;font-size:clamp(36px,5vw,58px);color:#F5F5F7;letter-spacing:-0.02em">70+</div>
+            <div style="font-weight:800;font-size:clamp(36px,5vw,58px);color:#F5F5F7;letter-spacing:-0.02em">74+</div>
             <div style="font-size:13px;font-weight:600;letter-spacing:0.08em;color:#6E6E73;margin-top:8px">MACHINES IN<br>ACTIVE CATALOG</div>
           </div>
           <div>
@@ -4000,6 +4010,70 @@ class Component extends DCLogic {
       officialUrl: 'https://www.juki.co.jp/industrial_e/products_e/apparel_e/button_attach_e/detail.php?cd=MB-1800A/BR10_E',
       highlightTags: ['Dry-head button sewing', 'Built-in button feeder'],
     },
+
+    // Real SINGER industrial machines, sourced from SINGER India's own store
+    // (shop.singerindia.com/product/<slug>) — genuine model photos, MRP and
+    // feature-bullet copy only. SINGER's product pages don't publish a
+    // numeric spec table (max s.p.m., needle system etc.) in text form, so
+    // those are left out; MRP is included as a spec row since SINGER India
+    // publishes it directly (unlike JACK/MAQI/Pegasus/JUKI, sold here only
+    // through the authorized-dealer/ask-for-pricing model).
+    {
+      id: 'singer-ss9900',
+      model: 'SINGER SS 9900',
+      manufacturer: 'SINGER',
+      category: 'Lockstitch',
+      purpose: 'A direct-drive single-needle lockstitch machine with an energy-saving built-in motor, fully automatic lubrication and a quick-response integrated control system in the head.',
+      applications: ['garments', 'wovens'],
+      operations: ['lockstitch', 'straight stitch'],
+      searchTerms: ['ss9900', 'ss 9900', 'singer ss9900', 'singer', 'lockstitch'],
+      imgId: 'lib-singer-ss9900', imgSrc: 'uploads/singer-ss9900-hero.jpg', imgPh: 'SINGER SS 9900 direct drive lockstitch machine',
+      officialUrl: 'https://shop.singerindia.com/product/ss-9900/',
+      specs: [['MRP (SINGER India)', '₹30,920 (incl. all taxes)'], ['Motor', 'Energy-saving direct drive, Qixing motor & control box']],
+      highlightTags: ['Direct-drive built-in motor', 'Automatic lubrication'],
+    },
+    {
+      id: 'singer-ss9900t',
+      model: 'SINGER SS 9900 T',
+      manufacturer: 'SINGER',
+      category: 'Lockstitch',
+      purpose: "SINGER's SS 9900 T is the SS 9900 fitted with an auto thread trimmer and single-shaft mechanism, for single-needle lockstitch work with faster changeovers between pieces.",
+      applications: ['garments', 'wovens'],
+      operations: ['lockstitch', 'straight stitch', 'auto thread trimming'],
+      searchTerms: ['ss9900t', 'ss 9900 t', 'singer ss9900t', 'singer', 'lockstitch', 'thread trimmer'],
+      imgId: 'lib-singer-ss9900t', imgSrc: 'uploads/singer-ss9900t-hero.jpg', imgPh: 'SINGER SS 9900 T lockstitch machine with auto thread trimmer',
+      officialUrl: 'https://shop.singerindia.com/product/ss-9900-t/',
+      specs: [['MRP (SINGER India)', '₹33,650 (incl. all taxes)'], ['Motor', 'Qixing motor & control box'], ['Thread trimming', 'Automatic']],
+      highlightTags: ['Auto thread trimmer', 'Single-shaft mechanism'],
+    },
+    {
+      id: 'singer-s8140',
+      model: 'SINGER S 8140',
+      manufacturer: 'SINGER',
+      category: 'Overlock',
+      purpose: "SINGER's S 8140 is a direct-drive four-thread overlock machine built for up to 70% lower power consumption, with automatic lubrication (with oil filter), needle position control and easily adjustable differential feed.",
+      applications: ['garments', 'wovens', 'knitwear'],
+      operations: ['overlock', 'edge finishing'],
+      searchTerms: ['s8140', 's 8140', 'singer s8140', 'singer', 'overlock', 'four thread'],
+      imgId: 'lib-singer-s8140', imgSrc: 'uploads/singer-s8140-hero.jpg', imgPh: 'SINGER S 8140 four thread overlock machine',
+      officialUrl: 'https://shop.singerindia.com/product/s-8140/',
+      specs: [['MRP (SINGER India)', '₹43,110 (incl. all taxes)'], ['Threads', '4-thread overlock'], ['Motor', 'Direct drive, up to 70% power saving']],
+      highlightTags: ['4-thread overlock', 'Up to 70% power saving'],
+    },
+    {
+      id: 'singer-s8150',
+      model: 'SINGER S 8150',
+      manufacturer: 'SINGER',
+      category: 'Overlock',
+      purpose: "SINGER's S 8150 is a direct-drive five-thread overlock machine, sharing the S 8140's power-saving direct-drive motor, automatic lubrication and adjustable differential feed with an extra thread for safety-stitch style seams.",
+      applications: ['garments', 'wovens', 'knitwear'],
+      operations: ['overlock', 'safety stitch', 'edge finishing'],
+      searchTerms: ['s8150', 's 8150', 'singer s8150', 'singer', 'overlock', 'five thread'],
+      imgId: 'lib-singer-s8150', imgSrc: 'uploads/singer-s8150-hero.jpg', imgPh: 'SINGER S 8150 five thread overlock machine',
+      officialUrl: 'https://shop.singerindia.com/product/s-8150/',
+      specs: [['MRP (SINGER India)', '₹44,050 (incl. all taxes)'], ['Threads', '5-thread overlock'], ['Motor', 'Direct drive, up to 70% power saving']],
+      highlightTags: ['5-thread overlock', 'Up to 70% power saving'],
+    },
   ];
 
   garmentDefs = [
@@ -4770,6 +4844,8 @@ class Component extends DCLogic {
   goPegasusMachinesAndClose = () => { this.setState({ mobileNavOpen: false, machineBrand: 'Pegasus' }); this.goToView('machines'); };
   goJukiMachines = () => { this.setState({ machineBrand: 'JUKI' }); this.goToView('machines'); };
   goJukiMachinesAndClose = () => { this.setState({ mobileNavOpen: false, machineBrand: 'JUKI' }); this.goToView('machines'); };
+  goSingerMachines = () => { this.setState({ machineBrand: 'SINGER' }); this.goToView('machines'); };
+  goSingerMachinesAndClose = () => { this.setState({ mobileNavOpen: false, machineBrand: 'SINGER' }); this.goToView('machines'); };
   focusMachineSearch = () => {
     if (typeof document === 'undefined') return;
     const input = document.querySelector('input[placeholder^="Search by model"]');
@@ -5196,6 +5272,7 @@ class Component extends DCLogic {
       goMaqiMachines: this.goMaqiMachines,
       goPegasusMachines: this.goPegasusMachines,
       goJukiMachines: this.goJukiMachines,
+      goSingerMachines: this.goSingerMachines,
       goIndustries: () => this.goToView('industries'),
       goSolutions: () => this.goToView('solutions'),
       goProduct: () => this.goToProduct(this.state.selectedMachineId || 'jack-f6'),
@@ -5250,6 +5327,7 @@ class Component extends DCLogic {
       goMaqiMachinesAndClose: this.goMaqiMachinesAndClose,
       goPegasusMachinesAndClose: this.goPegasusMachinesAndClose,
       goJukiMachinesAndClose: this.goJukiMachinesAndClose,
+      goSingerMachinesAndClose: this.goSingerMachinesAndClose,
       goIndustriesAndClose: () => { this.goToView('industries'); this.setState({ mobileNavOpen: false }); },
       goSolutionsAndClose: () => { this.goToView('solutions'); this.setState({ mobileNavOpen: false }); },
       goFinderAndClose: () => { this.goToView('finder'); this.setState({ mobileNavOpen: false }); },
@@ -5302,6 +5380,7 @@ class Component extends DCLogic {
         { key: 'MAQI', label: 'MAQI' },
         { key: 'Pegasus', label: 'Pegasus' },
         { key: 'JUKI', label: 'JUKI' },
+        { key: 'SINGER', label: 'SINGER' },
       ].map((b) => ({
         ...b,
         isActive: (machineBrand || 'all') === b.key,

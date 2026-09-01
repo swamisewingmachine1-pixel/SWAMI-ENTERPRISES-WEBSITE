@@ -5035,6 +5035,11 @@ class Component extends DCLogic {
     if (q2) {
       const mHits = this.machines.filter((m) => m.searchTerms.some((t) => t.includes(q2) || q2.includes(t)));
       if (mHits.length) searchGroups.push({ label: 'MACHINES', items: mHits.map((m) => ({ title: m.model, sub: m.category, go: () => { this.closeSearch(); this.goToProduct(m.id); } })) });
+      const aHits = this.accessoryPool.filter((p) => {
+        const hay = [p.name, p.sub, p.brand, p.slug, ...(p.customaryDesignations || []), ...(p.furtherPointDesignations || [])].join(' ').toLowerCase();
+        return hay.includes(q2);
+      });
+      if (aHits.length) searchGroups.push({ label: 'SPARE PARTS', items: aHits.map((p) => ({ title: p.name, sub: (p.brand || 'Golden Eagle') + ' — ' + p.sub, go: () => { this.closeSearch(); this.goToGeProduct(p.id); } })) });
       const iHits = this.industries.filter((i) => i.name.toLowerCase().includes(q2));
       if (iHits.length) searchGroups.push({ label: 'INDUSTRIES', items: iHits.map((i) => ({ title: i.name, sub: 'Industry', go: () => { this.closeSearch(); this.goToView('industries'); } })) });
       const sHits = this.solutions.filter((s) => s.name.toLowerCase().includes(q2));

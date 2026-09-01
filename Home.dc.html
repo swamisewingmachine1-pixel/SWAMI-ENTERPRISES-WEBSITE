@@ -27,13 +27,27 @@
     "@type": "PostalAddress",
     "streetAddress": "E-2/73, 30 Feet Road, Block C, Chanakya Place I",
     "addressLocality": "New Delhi",
-    "postalCode": "110058",
+    "postalCode": "110059",
     "addressCountry": "IN"
   },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "09:00",
+      "closes": "20:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Sunday"],
+      "opens": "09:00",
+      "closes": "15:00"
+    }
+  ],
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "4.8",
-    "reviewCount": "102"
+    "reviewCount": "119"
   }
 }
 </script>
@@ -4532,21 +4546,42 @@ class Component extends DCLogic {
   // prices, or availability claims beyond what's already verified elsewhere on the site.
   setProductJsonLd = (view, id) => {
     let el = document.getElementById('product-jsonld');
-    if (view !== 'product') { if (el) el.remove(); return; }
-    const m = this.machines.find((x) => x.id === id);
-    if (!m) { if (el) el.remove(); return; }
-    if (!el) { el = document.createElement('script'); el.type = 'application/ld+json'; el.id = 'product-jsonld'; document.head.appendChild(el); }
-    el.textContent = JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'Product',
-      name: m.model,
-      brand: { '@type': 'Brand', name: m.manufacturer || 'JACK' },
-      category: m.category,
-      description: m.purpose,
-      image: 'https://swamienterprises.online/' + m.imgSrc,
-      url: 'https://swamienterprises.online/machines/' + m.id,
-      manufacturer: { '@type': 'Organization', name: 'JACK' },
-    });
+    if (view === 'product') {
+      const m = this.machines.find((x) => x.id === id);
+      if (!m) { if (el) el.remove(); return; }
+      if (!el) { el = document.createElement('script'); el.type = 'application/ld+json'; el.id = 'product-jsonld'; document.head.appendChild(el); }
+      const brandName = m.manufacturer || 'JACK';
+      el.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: m.model,
+        brand: { '@type': 'Brand', name: brandName },
+        category: m.category,
+        description: m.purpose,
+        image: 'https://swamienterprises.online/' + m.imgSrc,
+        url: 'https://swamienterprises.online/machines/' + m.id,
+        manufacturer: { '@type': 'Organization', name: brandName },
+      });
+      return;
+    }
+    if (view === 'geProduct') {
+      const p = this.accessoryPool.find((x) => x.id === id);
+      if (!p) { if (el) el.remove(); return; }
+      if (!el) { el = document.createElement('script'); el.type = 'application/ld+json'; el.id = 'product-jsonld'; document.head.appendChild(el); }
+      const brandName = p.brand || 'Golden Eagle';
+      el.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: p.name,
+        brand: { '@type': 'Brand', name: brandName },
+        description: p.desc,
+        image: 'https://swamienterprises.online/' + p.src,
+        url: 'https://swamienterprises.online' + this.urlPath('geProduct', p.id),
+        manufacturer: { '@type': 'Organization', name: brandName },
+      });
+      return;
+    }
+    if (el) el.remove();
   };
   // Product intelligence: every meaningful business action fires a named event through Vercel
   // Web Analytics (the site's existing host, so no separate backend/database to run). This is

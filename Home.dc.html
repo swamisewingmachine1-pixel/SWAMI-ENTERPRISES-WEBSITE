@@ -1612,7 +1612,10 @@ a:hover { color:#3D7BFF; }
         <div style="font-size:14px;color:#6E6E73;margin-bottom:28px;max-width:560px">Genuine consumables commonly stocked for industrial machines like the {{ activeMachine.model }} — ask a specialist to confirm the exact part number for your machine.</div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px">
           <sc-for list="{{ machineAccessories }}" as="ma" hint-placeholder-count="4">
-            <div style="background:#F5F5F7;border-radius:16px;overflow:hidden;cursor:pointer" onClick="{{ ma.open }}">
+            <div style="background:#F5F5F7;border-radius:16px;overflow:hidden;cursor:pointer;position:relative" onClick="{{ ma.open }}">
+              <sc-if value="{{ ma.isMatchedNeedle }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;top:10px;left:10px;z-index:1;background:#0A5CFF;color:#fff;font-size:10px;font-weight:700;letter-spacing:0.04em;padding:4px 9px;border-radius:980px">MATCHES THIS MACHINE'S NEEDLE SYSTEM</div>
+              </sc-if>
               <image-slot id="{{ ma.id }}-macc" shape="rect" src="{{ ma.src }}" fit="cover" placeholder="{{ ma.ph }}" style="width:100%;height:140px"></image-slot>
               <div style="padding:14px 16px 18px">
                 <div style="font-weight:600;font-size:14px;color:#1D1D1F">{{ ma.name }}</div>
@@ -5635,10 +5638,27 @@ class Component extends DCLogic {
       applicationChips: (this.machines.find((x) => x.id === this.state.selectedMachineId) || this.machines[0]).applications.map((a) => a.replace(/\b\w/g, (c) => c.toUpperCase())),
       recommendedNeedle: (((this.machines.find((x) => x.id === this.state.selectedMachineId) || this.machines[0]).specs || []).find(([label]) => label === 'Needle') || [])[1] || '',
       hasRecommendedNeedle: !!(((this.machines.find((x) => x.id === this.state.selectedMachineId) || this.machines[0]).specs || []).find(([label]) => label === 'Needle')),
-      machineAccessories: ['ge-bobbins', 'ge-needle-plates', 'ge-thread-tension', 'ge-hemmer-feet']
-        .map((id) => this.accessoryPool.find((p) => p.id === id))
-        .filter(Boolean)
-        .map((p) => ({ ...p, open: () => this.goToGeProduct(p.id) })),
+      // Real needle-system match: the machine's own "Needle" spec (e.g. "DBx1, 11-18#",
+      // taken from JACK's/the manufacturer's own spec sheet — see recommendedNeedle above)
+      // is compared against the real Groz-Beckert needle system names already in the
+      // catalog. Only shown when the systems genuinely match (normalized, ignoring
+      // spaces/dashes/slashes) — no invented compatibility claims.
+      machineAccessories: (() => {
+        const m = this.machines.find((x) => x.id === this.state.selectedMachineId) || this.machines[0];
+        const needleSpec = ((m.specs || []).find(([label]) => label === 'Needle') || [])[1] || '';
+        const norm = (s) => (s || '').split(',')[0].toLowerCase().replace(/[\s\-\/]/g, '');
+        const code = norm(needleSpec);
+        const matchedNeedle = code ? this.grozBeckertProducts.find((p) => {
+          const pn = norm(p.name);
+          return pn && (code.includes(pn) || pn.includes(code));
+        }) : null;
+        const fallbackIds = ['ge-bobbins', 'ge-needle-plates', 'ge-thread-tension', 'ge-hemmer-feet'];
+        const ids = matchedNeedle ? [matchedNeedle.id, ...fallbackIds.filter((id) => id !== matchedNeedle.id)] : fallbackIds;
+        return ids.slice(0, 4)
+          .map((id) => this.accessoryPool.find((p) => p.id === id))
+          .filter(Boolean)
+          .map((p) => ({ ...p, open: () => this.goToGeProduct(p.id), isMatchedNeedle: matchedNeedle && p.id === matchedNeedle.id }));
+      })(),
     };
   }
 }

@@ -1511,6 +1511,7 @@ a:hover { color:#3D7BFF; }
         </div>
         <div style="display:flex;gap:20px;margin-top:32px;flex-wrap:wrap">
           <span class="sw-btn sw-btn-dark" style="padding:15px 28px;background:#0A5CFF;color:#fff;font-size:16px;font-weight:500;cursor:pointer;border-radius:980px" onClick="{{ goQuoteFromProduct }}">Request a Quote</span>
+          <span class="sw-btn" style="padding:15px 28px;background:#25D366;color:#fff;font-size:16px;font-weight:500;cursor:pointer;border-radius:980px" onClick="{{ askAboutMachineOnWhatsapp }}">Ask on WhatsApp</span>
           <span class="sw-btn sw-btn-light" style="padding:15px 28px;border:1px solid #1D1D1F;color:#1D1D1F;font-size:16px;font-weight:500;cursor:pointer;border-radius:980px" onClick="{{ openContact }}">Talk to a Specialist</span>
         </div>
       </div>
@@ -4726,6 +4727,27 @@ class Component extends DCLogic {
   };
   stopProp = (e) => e.stopPropagation();
   openContact = () => { this.track('contact_intent', { view: this.state.view, machine: this.state.selectedMachineId }); this.setState({ contactOpen: true, contactSubmitted: false, contactName: '', contactPhone: '', contactMessage: '' }); };
+  // Lightweight typo-tolerant search (no external search service needed): plain
+  // substring match first, falling back to per-word edit-distance matching so a
+  // near-miss like "gros beckert" or "grozbekert" still finds "Groz-Beckert".
+  levenshtein = (a, b) => {
+    const dp = [];
+    for (let i = 0; i <= a.length; i++) { dp[i] = [i]; }
+    for (let j = 0; j <= b.length; j++) { dp[0][j] = j; }
+    for (let i = 1; i <= a.length; i++) {
+      for (let j = 1; j <= b.length; j++) {
+        dp[i][j] = a[i - 1] === b[j - 1] ? dp[i - 1][j - 1] : 1 + Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]);
+      }
+    }
+    return dp[a.length][b.length];
+  };
+  fuzzyIncludes = (haystack, query) => {
+    if (!query) return true;
+    if (haystack.includes(query)) return true;
+    const hWords = haystack.split(/[\s\-\/,]+/).filter(Boolean);
+    const qWords = query.split(/[\s\-\/,]+/).filter(Boolean);
+    return qWords.every((qw) => qw.length >= 3 && hWords.some((hw) => this.levenshtein(hw, qw) <= Math.max(1, Math.floor(qw.length / 4))));
+  };
   closeContact = () => this.setState({ contactOpen: false });
   onContactNameChange = (e) => this.setState({ contactName: e.target.value });
   onContactPhoneChange = (e) => this.setState({ contactPhone: e.target.value });
@@ -5033,16 +5055,16 @@ class Component extends DCLogic {
     const q2 = (this.state.searchQuery || '').trim().toLowerCase();
     const searchGroups = [];
     if (q2) {
-      const mHits = this.machines.filter((m) => m.searchTerms.some((t) => t.includes(q2) || q2.includes(t)));
+      const mHits = this.machines.filter((m) => m.searchTerms.some((t) => t.includes(q2) || q2.includes(t) || this.fuzzyIncludes(t, q2)));
       if (mHits.length) searchGroups.push({ label: 'MACHINES', items: mHits.map((m) => ({ title: m.model, sub: m.category, go: () => { this.closeSearch(); this.goToProduct(m.id); } })) });
       const aHits = this.accessoryPool.filter((p) => {
         const hay = [p.name, p.sub, p.brand, p.slug, ...(p.customaryDesignations || []), ...(p.furtherPointDesignations || [])].join(' ').toLowerCase();
-        return hay.includes(q2);
+        return this.fuzzyIncludes(hay, q2);
       });
       if (aHits.length) searchGroups.push({ label: 'SPARE PARTS', items: aHits.map((p) => ({ title: p.name, sub: (p.brand || 'Golden Eagle') + ' — ' + p.sub, go: () => { this.closeSearch(); this.goToGeProduct(p.id); } })) });
-      const iHits = this.industries.filter((i) => i.name.toLowerCase().includes(q2));
+      const iHits = this.industries.filter((i) => this.fuzzyIncludes(i.name.toLowerCase(), q2));
       if (iHits.length) searchGroups.push({ label: 'INDUSTRIES', items: iHits.map((i) => ({ title: i.name, sub: 'Industry', go: () => { this.closeSearch(); this.goToView('industries'); } })) });
-      const sHits = this.solutions.filter((s) => s.name.toLowerCase().includes(q2));
+      const sHits = this.solutions.filter((s) => this.fuzzyIncludes(s.name.toLowerCase(), q2));
       if (sHits.length) searchGroups.push({ label: 'SOLUTIONS', items: sHits.map((s) => ({ title: s.name, sub: 'Solution', go: () => { this.closeSearch(); this.goToView('solutions'); } })) });
       const serviceNames = ['Installation', 'Training', 'Maintenance', 'Spare Parts', 'Technical Support', 'After-Sales'];
       const svHits = serviceNames.filter((s) => s.toLowerCase().includes(q2));
@@ -5296,6 +5318,12 @@ class Component extends DCLogic {
       quoteWhatsappAgain: this.quoteWhatsappAgain,
       goQuote: () => this.goQuote(),
       goQuoteFromProduct: () => this.goQuote(this.state.selectedMachineId),
+      askAboutMachineOnWhatsapp: () => {
+        const m = this.machines.find((x) => x.id === this.state.selectedMachineId) || this.machines[0];
+        this.track('contact_intent', { view: 'product', machine: m.id });
+        const msg = `Hi Swami Enterprises, I'd like a wholesale/bulk quote for the ${m.model}. Could you share pricing and availability?`;
+        window.open('https://wa.me/919971336656?text=' + encodeURIComponent(msg), '_blank');
+      },
       activeMachine: (() => {
         const m = this.machines.find((x) => x.id === this.state.selectedMachineId) || this.machines[0];
         return {

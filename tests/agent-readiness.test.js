@@ -103,10 +103,30 @@ test('exists and mentions recovery links', () => {
 });
 
 console.log('llms.txt');
-test('has a "when to use" / recommendation section', () => {
+test('has a literal "When to Use This" agent-instructions section', () => {
   const body = fs.readFileSync(path.join(root, 'llms.txt'), 'utf8');
-  assert.ok(/when to recommend/i.test(body));
+  assert.ok(/## When to Use This/i.test(body));
   assert.ok(/Not a fit/i.test(body));
+});
+
+console.log('agent-instructions.txt');
+test('exists as a standalone file with the same when-to-use guidance', () => {
+  const body = fs.readFileSync(path.join(root, 'agent-instructions.txt'), 'utf8');
+  assert.ok(/## When to Use This/i.test(body));
+  assert.ok(body.includes('Request a Bulk Quote'));
+  assert.ok(body.includes('swamienterprises.online/llms.txt'));
+});
+test('is referenced from Home.dc.html via <link rel="agent-instructions">', () => {
+  const homeHtml = fs.readFileSync(path.join(root, 'Home.dc.html'), 'utf8');
+  assert.ok(homeHtml.includes('<link rel="agent-instructions" href="https://swamienterprises.online/agent-instructions.txt">'));
+});
+test('agent-instructions.js is the single source shared by both outputs', () => {
+  const shared = fs.readFileSync(path.join(root, 'scripts', 'agent-instructions.js'), 'utf8');
+  const llms = fs.readFileSync(path.join(root, 'llms.txt'), 'utf8');
+  const standalone = fs.readFileSync(path.join(root, 'agent-instructions.txt'), 'utf8');
+  assert.ok(shared.includes('## When to Use This'));
+  assert.ok(llms.includes('Buying a JACK industrial sewing machine'));
+  assert.ok(standalone.includes('Buying a JACK industrial sewing machine'));
 });
 
 console.log('Home.dc.html');
@@ -122,6 +142,16 @@ test('LocalBusiness/Organization JSON-LD has name, description, and contactPoint
   assert.ok(data.contactPoint && data.contactPoint.email && data.contactPoint.contactType);
   assert.ok(data.address);
   assert.ok(Array.isArray(data['@type']) && data['@type'].includes('Organization'));
+  assert.ok(Array.isArray(data.alternateName) && data.alternateName.length > 0, 'missing alternateName for brand disambiguation');
+  assert.strictEqual(data.foundingDate, '2015');
+});
+test('has a separate WebSite JSON-LD block for brand disambiguation', () => {
+  const blocks = [...homeHtml.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(m => JSON.parse(m[1]));
+  const website = blocks.find(b => b['@type'] === 'WebSite');
+  assert.ok(website, 'no WebSite JSON-LD block found');
+  assert.strictEqual(website.name, 'Swami Enterprises');
+  assert.ok(website.alternateName);
+  assert.strictEqual(website.url, 'https://swamienterprises.online/');
 });
 test('dc-runtime script block still parses as valid JS', () => {
   const start = homeHtml.indexOf('<script type="text/x-dc" data-dc-script>');

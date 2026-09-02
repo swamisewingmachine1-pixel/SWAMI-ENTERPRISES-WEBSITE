@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Static site (Home.dc.html) + a couple of Vercel serverless functions under /api for the lead dashboard. Not a Next.js/framework project — no build step.",
   "scripts": {
-    "generate-manifest": "node scripts/gen-llms.js && node scripts/gen-manifest.js",
+    "generate-manifest": "node scripts/gen-llms.js && node scripts/gen-agent-instructions.js && node scripts/gen-manifest.js",
     "test": "node tests/agent-readiness.test.js"
   },
   "dependencies": {

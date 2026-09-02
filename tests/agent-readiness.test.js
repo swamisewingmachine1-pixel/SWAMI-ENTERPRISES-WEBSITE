@@ -176,5 +176,11 @@ test('includes /contact and /privacy', () => {
   assert.ok(sm.includes('/privacy</loc>'));
 });
 
+console.log('image-slot.js');
+test('ignores an unresolved "{{ }}" template placeholder as src instead of fetching it', () => {
+  const body = fs.readFileSync(path.join(root, 'image-slot.js'), 'utf8');
+  assert.ok(/if \(\/\^\\\{\\\{\.\*\\\}\\\}\$\/\.test\(srcAttr\.trim\(\)\)\) srcAttr = '';/.test(body), 'missing the unresolved-placeholder guard in _render()');
+});
+
 if (failures) { console.error('\n' + failures + ' test(s) failed'); process.exit(1); }
 console.log('\nAll tests passed');

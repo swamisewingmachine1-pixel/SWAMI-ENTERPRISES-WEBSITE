@@ -1117,7 +1117,13 @@
       // (Claude wrote it into the HTML) so it passes through unchanged.
       let stored = this.id ? getSlot(this.id) : this._local;
       if (stored && stored.u && !/^data:image\//i.test(stored.u)) stored = null;
-      const srcAttr = this.getAttribute('src') || '';
+      // The host page writes this element's src/id/placeholder from "{{ }}" template
+      // bindings (see the class comment above). Before the framework's first data-bound
+      // render runs, those attributes can briefly hold the literal, unresolved
+      // "{{ expr }}" text rather than a real URL — treat that as "no src yet" instead of
+      // fetching the literal string as an image (a guaranteed 404 on every page load).
+      let srcAttr = this.getAttribute('src') || '';
+      if (/^\{\{.*\}\}$/.test(srcAttr.trim())) srcAttr = '';
       this._userUrl = (stored && stored.u) || null;
       const url = this._userUrl || srcAttr;
       // Don't clobber an in-flight reframe with a store-triggered re-render.

@@ -6,6 +6,7 @@
 <title>Swami Enterprises — Industrial Sewing Machines & Bulk Spare Parts, Pan-India</title>
 <meta name="description" content="Authorized JACK dealer based in Delhi, supplying industrial sewing machines and genuine spare parts (JACK, MAQI, Pegasus, JUKI, SINGER, Golden Eagle, Groz-Beckert) to garment factories and bulk buyers across India. Wholesale and bulk orders, installation, training, AMC and after-sales — trading since 2015.">
 <link rel="canonical" href="https://swamienterprises.online/">
+<link rel="llms.txt" href="https://swamienterprises.online/llms.txt">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Swami Enterprises">
 <meta property="og:title" content="Swami Enterprises — Industrial Sewing Machines & Bulk Spare Parts, Pan-India">
@@ -4610,6 +4611,21 @@ class Component extends DCLogic {
         image: 'https://swamienterprises.online/' + p.src,
         url: 'https://swamienterprises.online' + this.urlPath('geProduct', p.id),
         manufacturer: { '@type': 'Organization', name: brandName },
+      });
+      return;
+    }
+    const guideLabels = { guideStitch: 'Lockstitch vs Overlock vs Flatlock: Which Machine for Which Job', guideCompareF6: 'JACK F6 vs JACK 2002G: Which Lockstitch Machine Do You Need', guideShirtFactory: 'What Machines Does a Shirt Factory Actually Need', guideIndustrialVsDomestic: 'Industrial vs Domestic Sewing Machines: What Actually Changes', guideKnitwear: 'What Machines Does a Knitwear Line Actually Need', guideFactorySetup: 'Setting Up a New Production Line: The Real Machine Sequence' };
+    if (guideLabels[view]) {
+      if (!el) { el = document.createElement('script'); el.type = 'application/ld+json'; el.id = 'product-jsonld'; document.head.appendChild(el); }
+      el.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'TechArticle',
+        headline: guideLabels[view],
+        description: this.descriptionFor(view, id),
+        url: 'https://swamienterprises.online' + this.urlPath(view, id),
+        author: { '@type': 'Organization', name: 'Swami Enterprises' },
+        publisher: { '@type': 'Organization', name: 'Swami Enterprises', url: 'https://swamienterprises.online' },
+        mainEntityOfPage: 'https://swamienterprises.online' + this.urlPath(view, id),
       });
       return;
     }

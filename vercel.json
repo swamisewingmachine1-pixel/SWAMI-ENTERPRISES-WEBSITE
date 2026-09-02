@@ -1,5 +1,6 @@
 {
   "rewrites": [
+    { "source": "/(.*)", "has": [{ "type": "header", "key": "Accept", "value": ".*text/markdown.*" }], "destination": "/api/markdown" },
     { "source": "/", "destination": "/Home.dc.html" },
     { "source": "/machines/:id", "destination": "/Home.dc.html" },
     { "source": "/accessories", "destination": "/Home.dc.html" },
@@ -13,6 +14,8 @@
     { "source": "/finder", "destination": "/Home.dc.html" },
     { "source": "/compare", "destination": "/Home.dc.html" },
     { "source": "/about", "destination": "/Home.dc.html" },
+    { "source": "/contact", "destination": "/Home.dc.html" },
+    { "source": "/privacy", "destination": "/Home.dc.html" },
     { "source": "/after-sales-service", "destination": "/Home.dc.html" },
     { "source": "/request-quote", "destination": "/Home.dc.html" },
     { "source": "/guides/:slug", "destination": "/Home.dc.html" },
@@ -29,6 +32,10 @@
     {
       "source": "/uploads/(.*)",
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800, stale-while-revalidate=2592000" }]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [{ "key": "Vary", "value": "Accept, Accept-Encoding" }]
     }
   ]
 }

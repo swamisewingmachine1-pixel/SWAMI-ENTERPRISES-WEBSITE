@@ -1098,7 +1098,7 @@ a:hover { color:#3D7BFF; }
         <div style="font-size:15px;color:#6E6E73;margin-top:16px;line-height:1.6">Both are computerized lockstitch machines from JACK. The real difference isn't quality — it's what each one is built to handle.</div>
 
         <div style="margin-top:44px;font-weight:700;font-size:22px;color:#1D1D1F">JACK F6 — speed, for lighter material</div>
-        <div style="font-size:15px;color:#1D1D1F;line-height:1.75;margin-top:12px">Built-in silent servo motor, up to 5000 stitches per minute, automatic thread trimmer. This is the machine for high-speed, consistent production runs on shirts, wovens, and uniforms — work where speed and stitch consistency matter more than handling very heavy material.</div>
+        <div style="font-size:15px;color:#1D1D1F;line-height:1.75;margin-top:12px">Built-in silent servo motor, up to 5000 stitches per minute, built-in thread-cutting knife (manual trim, not automatic). This is the machine for high-speed, consistent production runs on shirts, wovens, and uniforms — work where speed and stitch consistency matter more than handling very heavy material.</div>
 
         <div style="margin-top:36px;font-weight:700;font-size:22px;color:#1D1D1F">JACK 2002G — heavier material, larger stitch</div>
         <div style="font-size:15px;color:#1D1D1F;line-height:1.75;margin-top:12px">Large-hook lockstitch, up to 3000 stitches per minute — slower than the F6, but with a 12mm max stitch length (vs the F6's 5mm) and a heavier DPx17 22# needle. It's positioned for shirts, jeans, non-woven bags, and shoes — material the F6 isn't built for.</div>
@@ -2451,7 +2451,7 @@ class Component extends DCLogic {
       model: 'JACK F6',
       manufacturer: 'JACK',
       category: 'Lockstitch',
-      purpose: 'Direct-drive computerized lockstitch machine running up to 5000 s.p.m. on a built-in silent servo motor, with oil-free semi-dry lubrication and an automatic thread trimmer for shirts, wovens and uniform work.',
+      purpose: 'Direct-drive computerized lockstitch machine running up to 5000 s.p.m. on a built-in silent servo motor, with oil-free semi-dry lubrication and a built-in thread-cutting knife for shirts, wovens and uniform work.',
       applications: ['shirts', 'wovens', 'uniforms', 'institutional garments'],
       operations: ['lockstitch', 'straight stitch'],
       searchTerms: ['f6', 'jack f6', 'lockstitch', 'shirt', 'shirts', 'uniform', 'garment'],
@@ -2462,17 +2462,17 @@ class Component extends DCLogic {
       youtubeId: '8_ympqgXpK0',
       specs: [
         ['Series', 'Lockstitch, direct drive'], ['Needle', 'DBx1, 11-18#'], ['Number of threads', '2'],
-        ['Max stitch length', '5mm'], ['Presser foot lift (hand/auto)', '13mm / 6mm'], ['Max sewing speed', '5000 s.p.m.'],
+        ['Max stitch length', '5mm'], ['Presser foot lift', 'Manual, knee-operated'], ['Max sewing speed', '5000 s.p.m.'],
         ['Motor', 'Built-in silent, energy-saving servo motor'], ['Lubrication', 'Semi-dry head, oil-free'],
-        ['Feed', 'Automatic, computerized, auto thread trimmer'], ['Availability', 'In stock'],
+        ['Thread trimming', 'Built-in knife, manual'], ['Availability', 'In stock'],
       ],
       capabilityItems: [
         { n: '01', title: 'Built-in servo motor', desc: 'Runs up to 5000 stitches per minute on a built-in silent servo motor — holds consistent speed through a full shift instead of degrading like an older mechanical head.' },
-        { n: '02', title: 'Automatic thread trimmer', desc: 'Computerized feed with an auto thread trimmer cuts the thread between operations without the operator reaching for scissors.' },
+        { n: '02', title: 'Built-in thread-cutting knife', desc: 'An integrated knife lets you cut the thread by hand at the end of a seam, right at the head — trimming is manual on the F6, not automatic (JACK’s A2C and A4C add auto-trim above this model).' },
         { n: '03', title: 'Oil-free semi-dry head', desc: 'Semi-dry, oil-free lubrication keeps the sewing table and finished garments free of oil stains.' },
-        { n: '04', title: 'Auto presser-foot lift', desc: 'The presser foot lifts automatically to 6mm (13mm by hand) — less manual adjustment between pieces.' },
+        { n: '04', title: 'Elbow-operated bartack lever', desc: 'The bartack lever sits within easy reach and can be pressed with the elbow, leaving both hands free to guide the fabric.' },
       ],
-      highlightTags: ['5000 s.p.m. servo motor', 'Auto thread trimmer', 'Oil-free, clean sewing', 'Auto foot lift'],
+      highlightTags: ['5000 s.p.m. servo motor', 'Built-in thread-cutting knife', 'Oil-free, clean sewing', 'Elbow-operated bartack lever'],
       detailItems: [
         { id: 'f6-detail-panel', src: 'uploads/card5.webp', ph: 'Drop: control panel macro', label: 'CONTROL PANEL', n: '01', note: 'Speed and settings sit under a digital display rather than mechanical dials.', layout: '1fr 1fr', imgOrder: 1, textOrder: 2 },
         { id: 'f6-detail-needle', src: 'uploads/f6-jack-needle.webp', ph: 'Drop: needle & presser foot macro', label: 'NEEDLE & PRESSER FOOT', n: '02', note: 'The work area where thread meets fabric — precision at the point of the stitch.', layout: '1fr 1fr', imgOrder: 2, textOrder: 1 },

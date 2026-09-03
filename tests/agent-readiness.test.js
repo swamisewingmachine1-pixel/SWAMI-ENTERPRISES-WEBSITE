@@ -176,6 +176,20 @@ test('includes /contact and /privacy', () => {
   assert.ok(sm.includes('/privacy</loc>'));
 });
 
+console.log('JACK F6 factual accuracy');
+test('does not claim an automatic thread trimmer or automatic presser-foot lift (verified against jack-sewing.com: F6 is the "Basic" model — integrated knife is manual, foot lift is knee-operated; auto-trim is a named upsell on the A2C/A4C)', () => {
+  const f6Match = homeHtml.match(/id: 'jack-f6',[\s\S]*?highlightTags: \[[^\]]*\]/);
+  assert.ok(f6Match, 'could not find the jack-f6 catalog entry');
+  const f6Block = f6Match[0];
+  assert.ok(!/automatic thread trimmer/i.test(f6Block), 'F6 block still claims an automatic thread trimmer');
+  assert.ok(!/auto (thread trim|presser-foot lift|foot lift)/i.test(f6Block), 'F6 block still claims an auto-trim or auto-lift feature');
+  assert.ok(/manual/i.test(f6Block), 'F6 block should describe trimming/foot lift as manual');
+});
+test('the F6 vs 2002G guide does not claim F6 has an automatic thread trimmer', () => {
+  const guideSection = homeHtml.slice(homeHtml.indexOf('GUIDE: JACK F6 VS JACK 2002G'), homeHtml.indexOf('GUIDE: MACHINES FOR A SHIRT FACTORY'));
+  assert.ok(!/automatic thread trimmer/i.test(guideSection));
+});
+
 console.log('image-slot.js');
 test('ignores an unresolved "{{ }}" template placeholder as src instead of fetching it', () => {
   const body = fs.readFileSync(path.join(root, 'image-slot.js'), 'utf8');

@@ -17,6 +17,7 @@ function grab(varName) {
 const machines = grab('machines');
 const golden = grab('goldenEagleProducts');
 const grozB = grab('grozBeckertProducts');
+const dayang = grab('dayangProducts');
 const BASE = 'https://swamienterprises.online';
 
 const manifest = {};
@@ -48,16 +49,16 @@ for (const m of machines) {
 }
 
 // ---- Accessories ----
-for (const p of golden.concat(grozB)) {
+for (const p of golden.concat(grozB).concat(dayang)) {
   const brand = p.brand || 'Golden Eagle';
-  const brandSlug = brand === 'Groz-Beckert' ? 'groz-beckert' : 'golden-eagle';
+  const brandSlug = brand === 'Groz-Beckert' ? 'groz-beckert' : brand === 'DAYANG' ? 'dayang' : 'golden-eagle';
   let md = '# ' + p.name + '\n\n';
   md += '**Brand:** ' + brand + (p.sub ? ('  \n**' + p.sub + '**') : '') + '\n\n';
   md += (p.desc || '') + '\n\n';
   if (p.specs && p.specs.length) {
     md += '## Specifications\n\n| Spec | Value |\n| --- | --- |\n' + specsTable(p.specs) + '\n\n';
   }
-  md += 'Genuine ' + brand + ' part, stocked by Swami Enterprises, New Delhi. [Request a quote](' + BASE + '/request-quote) or [contact us](' + BASE + '/contact).\n';
+  md += 'Genuine ' + brand + ' product, stocked by Swami Enterprises, New Delhi. [Request a quote](' + BASE + '/request-quote) or [contact us](' + BASE + '/contact).\n';
   manifest['/accessories/' + brandSlug + '/' + p.slug] = {
     title: p.name + ' — ' + brand + ' — Swami Enterprises',
     description: p.desc,
@@ -351,10 +352,10 @@ The full industrial sewing machine range stocked by Swami Enterprises — ${mach
 };
 manifest['/accessories'] = {
   title: 'Accessories & Spare Parts — Swami Enterprises',
-  description: 'Genuine accessories and spare parts from Golden Eagle and Groz-Beckert, stocked by Swami Enterprises.',
+  description: 'Genuine accessories, spare parts and cutting machines from Golden Eagle, Groz-Beckert and DAYANG, stocked by Swami Enterprises.',
   markdown: `# Accessories & Spare Parts
 
-Genuine accessories and spare parts from Golden Eagle and Groz-Beckert — needles, blades, presser feet, thread cutters, bobbins, hooks, folders and more. See [Golden Eagle products](${BASE}/accessories/golden-eagle) and [Groz-Beckert needles](${BASE}/accessories/groz-beckert), or the full list in [llms.txt](${BASE}/llms.txt).
+Genuine accessories, spare parts and cutting machines from Golden Eagle, Groz-Beckert and DAYANG — needles, blades, presser feet, thread cutters, bobbins, hooks, folders, fabric cutting machines and more. See [Golden Eagle products](${BASE}/accessories/golden-eagle), [Groz-Beckert needles](${BASE}/accessories/groz-beckert) and [DAYANG cutting machines](${BASE}/accessories/dayang), or the full list in [llms.txt](${BASE}/llms.txt).
 `,
 };
 manifest['/accessories/golden-eagle'] = {
@@ -371,6 +372,14 @@ manifest['/accessories/groz-beckert'] = {
   markdown: `# Groz-Beckert Needles
 
 Genuine Groz-Beckert industrial sewing machine needles, stocked by Swami Enterprises, including real needle-system compatibility matching to machines we sell. See [llms.txt](${BASE}/llms.txt) for the full list with links.
+`,
+};
+manifest['/accessories/dayang'] = {
+  title: 'DAYANG Cutting Machines — Swami Enterprises',
+  description: 'Round-knife fabric cutting machines from DAYANG, stocked by Swami Enterprises.',
+  markdown: `# DAYANG Cutting Machines
+
+Round-knife fabric cutting machines from DAYANG (Zhejiang DAYANG Sewing Machine Co., Ltd), stocked by Swami Enterprises, New Delhi — a DAYANG stocking partner, not an authorized distributor. See [llms.txt](${BASE}/llms.txt) for the full list with links.
 `,
 };
 manifest['/industries'] = {

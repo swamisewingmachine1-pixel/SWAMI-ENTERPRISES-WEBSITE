@@ -18,11 +18,12 @@ function grab(varName) {
 const machines = grab('machines');
 const golden = grab('goldenEagleProducts');
 const grozB = grab('grozBeckertProducts');
+const dayang = grab('dayangProducts');
 
 const out = [];
 out.push('# Swami Enterprises');
 out.push('');
-out.push("> Industrial sewing machine dealer and spare parts supplier based in New Delhi, India, serving garment factories and bulk/wholesale buyers pan-India (Delhi NCR, Tirupur, Ludhiana, Surat, Kolkata and other garment hubs). Authorized JACK dealer, trading since 2015. Also carries MAQI, Pegasus, JUKI, and SINGER industrial machines, and Golden Eagle / Groz-Beckert spare parts and needles, as a stocking partner (not an authorized distributor for those brands).");
+out.push("> Industrial sewing machine dealer and spare parts supplier based in New Delhi, India, serving garment factories and bulk/wholesale buyers pan-India (Delhi NCR, Tirupur, Ludhiana, Surat, Kolkata and other garment hubs). Authorized JACK dealer, trading since 2015. Also carries MAQI, Pegasus, JUKI, and SINGER industrial machines, Golden Eagle / Groz-Beckert spare parts and needles, and DAYANG fabric cutting machines, as a stocking partner (not an authorized distributor for those brands).");
 out.push('');
 out.push('Website: https://swamienterprises.online');
 out.push('Contact: https://swamienterprises.online/contact');
@@ -58,6 +59,12 @@ for (const p of grozB) {
   out.push('- [' + p.name + '](https://swamienterprises.online/accessories/groz-beckert/' + p.slug + ') \u2014 ' + p.sub + '. ' + p.desc);
 }
 out.push('');
+out.push('## DAYANG cutting machines');
+out.push('');
+for (const p of dayang) {
+  out.push('- [' + p.name + '](https://swamienterprises.online/accessories/dayang/' + p.slug + ') — ' + p.sub + '. ' + p.desc);
+}
+out.push('');
 out.push('## Guides');
 out.push('');
 out.push('- [Lockstitch vs. Overlock vs. Flatlock](https://swamienterprises.online/guides/lockstitch-vs-overlock-vs-flatlock)');
@@ -77,4 +84,4 @@ out.push('- [Request a Bulk Quote](https://swamienterprises.online/request-quote
 out.push('');
 
 fs.writeFileSync(path.join(root, 'llms.txt'), out.join('\n'));
-console.log('wrote llms.txt, ' + out.join('\n').length + ' chars, ' + machines.length + ' machines, ' + golden.length + ' golden eagle, ' + grozB.length + ' groz-beckert');
+console.log('wrote llms.txt, ' + out.join('\n').length + ' chars, ' + machines.length + ' machines, ' + golden.length + ' golden eagle, ' + grozB.length + ' groz-beckert, ' + dayang.length + ' dayang');

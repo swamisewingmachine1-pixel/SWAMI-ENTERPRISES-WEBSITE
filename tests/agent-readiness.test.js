@@ -39,7 +39,7 @@ test('covers every static route also present in vercel.json', () => {
 });
 test('has an entry for every machine and accessory page', () => {
   const html = fs.readFileSync(path.join(root, 'Home.dc.html'), 'utf8');
-  const idCount = (html.match(/\n\s*id: '(jack|ge-|gb-)/g) || []).length;
+  const idCount = (html.match(/\n\s*id: '(jack|ge-|gb-|dy-)/g) || []).length;
   assert.ok(Object.keys(manifest).length >= idCount, 'manifest has fewer entries than catalog items');
 });
 test('every entry has non-empty title, description, and markdown', () => {
@@ -188,6 +188,35 @@ test('does not claim an automatic thread trimmer or automatic presser-foot lift 
 test('the F6 vs 2002G guide does not claim F6 has an automatic thread trimmer', () => {
   const guideSection = homeHtml.slice(homeHtml.indexOf('GUIDE: JACK F6 VS JACK 2002G'), homeHtml.indexOf('GUIDE: MACHINES FOR A SHIRT FACTORY'));
   assert.ok(!/automatic thread trimmer/i.test(guideSection));
+});
+
+console.log('DAYANG cutting machine addition');
+test('vercel.json routes /accessories/dayang and /accessories/dayang/:slug', () => {
+  const cfg = JSON.parse(fs.readFileSync(path.join(root, 'vercel.json'), 'utf8'));
+  assert.ok(cfg.rewrites.some(r => r.source === '/accessories/dayang'));
+  assert.ok(cfg.rewrites.some(r => r.source === '/accessories/dayang/:slug'));
+});
+test('is wired into routing, accessoryPool, and renderVals consistently', () => {
+  assert.ok(/dayangProducts = \[/.test(homeHtml));
+  assert.ok(/get accessoryPool\(\) \{ return this\.goldenEagleProducts\.concat\(this\.grozBeckertProducts\)\.concat\(this\.dayangProducts\); \}/.test(homeHtml));
+  assert.ok(/isAccDayang: view === 'accDayang'/.test(homeHtml));
+  assert.ok(/goAccDayang: \(\) => this\.goToView\('accDayang'\)/.test(homeHtml));
+  assert.ok(/'\/accessories\/dayang': 'accDayang'/.test(homeHtml));
+});
+test('route-manifest.json has real, non-fabricated DAYANG product data (CZD-3, 550W, real specs)', () => {
+  const entry = manifest['/accessories/dayang/diamond'];
+  assert.ok(entry, 'missing manifest entry for the DAYANG Diamond product');
+  assert.ok(entry.markdown.includes('CZD-3'));
+  assert.ok(entry.markdown.includes('550W'));
+  assert.ok(entry.markdown.includes('2800'));
+});
+test('explicitly disclaims authorized-distributor status for DAYANG (stocking partner only)', () => {
+  const dayangSection = homeHtml.slice(homeHtml.indexOf('DAYANG CUTTING MACHINES (standalone page)'), homeHtml.indexOf('AFTER-SALES SERVICE -->'));
+  assert.ok(/not an authorized DAYANG distributor/i.test(dayangSection));
+});
+test('otherProducts section is hidden when a brand has only one product (no empty "OTHER DAYANG PRODUCTS" block)', () => {
+  assert.ok(/hasOtherProducts/.test(homeHtml));
+  assert.ok(/<sc-if value="\{\{ geProduct\.hasOtherProducts \}\}"/.test(homeHtml));
 });
 
 console.log('image-slot.js');

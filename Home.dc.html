@@ -92,6 +92,57 @@
   }
 }
 </script>
+<!-- FAQPage schema matching the "PAN-INDIA ORDERS — COMMON QUESTIONS" section on the homepage.
+     Real questions and answers only, matching the visible copy word for word — no fabricated
+     minimum-order numbers, GST claims, or delivery-time promises. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do you ship industrial sewing machines and spare parts outside Delhi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We regularly dispatch single-machine and bulk/wholesale orders — JACK, MAQI, Pegasus, JUKI and SINGER machines, and Golden Eagle, Groz-Beckert and DAYANG accessories — from our Chanakya Place, New Delhi showroom to garment factories and buyers across India."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does dispatch take for an order outside Delhi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on the destination and order size. Tell us what you need and a specialist confirms the dispatch timeline for your location before you commit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a minimum order quantity for bulk or wholesale pricing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "There's no fixed minimum. Tell us the quantity you need — from a single machine to a full production-line order — and a specialist quotes accordingly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I pay for a bulk or wholesale order?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We don't process payments on this website. Every order is confirmed directly with our team, by phone, WhatsApp or in person — the same way whether you're in Delhi or anywhere else in India."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you provide installation, training or after-sales support outside Delhi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our showroom and hands-on service team are based in Delhi. For orders elsewhere in India, ask a specialist for the specific service-area and support details for your location before you order."
+      }
+    }
+  ]
+}
+</script>
 <!-- Every route now rewrites to this same file (see vercel.json), so relative asset paths like
      "./support.js" or "uploads/x.jpg" must resolve against the site root regardless of the
      actual requested path (e.g. /machines/jack-f6), not against that path's own directory. -->
@@ -455,6 +506,32 @@ a:hover { color:#3D7BFF; }
               <div style="font-size:15px;color:#F5F5F7;line-height:1.6"><span style="color:#0A5CFF;font-weight:700">1.</span> Tell us the machines/parts and quantity you need — WhatsApp, call, or the quote form.</div>
               <div style="font-size:15px;color:#F5F5F7;line-height:1.6"><span style="color:#0A5CFF;font-weight:700">2.</span> A specialist confirms bulk/wholesale pricing and dispatch timeline for your location.</div>
               <div style="font-size:15px;color:#F5F5F7;line-height:1.6"><span style="color:#0A5CFF;font-weight:700">3.</span> Every machine is tested and run on real material before it's packed and shipped.</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="max-width:960px;margin:clamp(48px,6vw,64px) auto 0;border-top:1px solid rgba(247,247,245,0.14);padding-top:clamp(40px,5vw,56px)">
+          <div style="font-size:13px;font-weight:600;letter-spacing:0.06em;color:#2997FF;margin-bottom:24px">PAN-INDIA ORDERS — COMMON QUESTIONS</div>
+          <div style="display:flex;flex-direction:column;gap:28px">
+            <div>
+              <div style="font-weight:700;font-size:16px;color:#F5F5F7">Do you ship industrial sewing machines and spare parts outside Delhi?</div>
+              <div style="font-size:14px;color:#A1A1A6;line-height:1.7;margin-top:8px">Yes. We regularly dispatch single-machine and bulk/wholesale orders — JACK, MAQI, Pegasus, JUKI and SINGER machines, and Golden Eagle, Groz-Beckert and DAYANG accessories — from our Chanakya Place, New Delhi showroom to garment factories and buyers across India.</div>
+            </div>
+            <div>
+              <div style="font-weight:700;font-size:16px;color:#F5F5F7">How long does dispatch take for an order outside Delhi?</div>
+              <div style="font-size:14px;color:#A1A1A6;line-height:1.7;margin-top:8px">It depends on the destination and order size. Tell us what you need and a specialist confirms the dispatch timeline for your location before you commit.</div>
+            </div>
+            <div>
+              <div style="font-weight:700;font-size:16px;color:#F5F5F7">Is there a minimum order quantity for bulk or wholesale pricing?</div>
+              <div style="font-size:14px;color:#A1A1A6;line-height:1.7;margin-top:8px">There's no fixed minimum. Tell us the quantity you need — from a single machine to a full production-line order — and a specialist quotes accordingly.</div>
+            </div>
+            <div>
+              <div style="font-weight:700;font-size:16px;color:#F5F5F7">How do I pay for a bulk or wholesale order?</div>
+              <div style="font-size:14px;color:#A1A1A6;line-height:1.7;margin-top:8px">We don't process payments on this website. Every order is confirmed directly with our team, by phone, WhatsApp or in person — the same way whether you're in Delhi or anywhere else in India.</div>
+            </div>
+            <div>
+              <div style="font-weight:700;font-size:16px;color:#F5F5F7">Do you provide installation, training or after-sales support outside Delhi?</div>
+              <div style="font-size:14px;color:#A1A1A6;line-height:1.7;margin-top:8px">Our showroom and hands-on service team are based in Delhi. For orders elsewhere in India, ask a specialist for the specific service-area and support details for your location before you order.</div>
             </div>
           </div>
         </div>

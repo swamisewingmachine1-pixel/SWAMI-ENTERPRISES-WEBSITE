@@ -65,6 +65,18 @@ for (const p of dayang) {
   out.push('- [' + p.name + '](https://swamienterprises.online/accessories/dayang/' + p.slug + ') — ' + p.sub + '. ' + p.desc);
 }
 out.push('');
+out.push('## Pan-India orders — common questions');
+out.push('');
+out.push('**Do you ship industrial sewing machines and spare parts outside Delhi?** Yes. We regularly dispatch single-machine and bulk/wholesale orders — JACK, MAQI, Pegasus, JUKI and SINGER machines, and Golden Eagle, Groz-Beckert and DAYANG accessories — from our Chanakya Place, New Delhi showroom to garment factories and buyers across India.');
+out.push('');
+out.push('**How long does dispatch take for an order outside Delhi?** It depends on the destination and order size. Tell us what you need and a specialist confirms the dispatch timeline for your location before you commit.');
+out.push('');
+out.push('**Is there a minimum order quantity for bulk or wholesale pricing?** There\'s no fixed minimum. Tell us the quantity you need — from a single machine to a full production-line order — and a specialist quotes accordingly.');
+out.push('');
+out.push('**How do I pay for a bulk or wholesale order?** We don\'t process payments on this website. Every order is confirmed directly with our team, by phone, WhatsApp or in person — the same way whether you\'re in Delhi or anywhere else in India.');
+out.push('');
+out.push('**Do you provide installation, training or after-sales support outside Delhi?** Our showroom and hands-on service team are based in Delhi. For orders elsewhere in India, ask a specialist for the specific service-area and support details for your location before you order.');
+out.push('');
 out.push('## Guides');
 out.push('');
 out.push('- [Lockstitch vs. Overlock vs. Flatlock](https://swamienterprises.online/guides/lockstitch-vs-overlock-vs-flatlock)');

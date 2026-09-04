@@ -153,6 +153,23 @@ test('has a separate WebSite JSON-LD block for brand disambiguation', () => {
   assert.ok(website.alternateName);
   assert.strictEqual(website.url, 'https://swamienterprises.online/');
 });
+test('has a FAQPage JSON-LD block matching the visible pan-India FAQ copy word for word', () => {
+  const blocks = [...homeHtml.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(m => JSON.parse(m[1]));
+  const faq = blocks.find(b => b['@type'] === 'FAQPage');
+  assert.ok(faq, 'no FAQPage JSON-LD block found');
+  assert.ok(faq.mainEntity.length >= 5);
+  for (const q of faq.mainEntity) {
+    assert.strictEqual(q['@type'], 'Question');
+    assert.ok(homeHtml.includes(q.name), `question "${q.name}" not found verbatim in visible page copy`);
+    assert.ok(homeHtml.includes(q.acceptedAnswer.text), `answer for "${q.name}" not found verbatim in visible page copy`);
+  }
+});
+test('pan-India FAQ does not fabricate a minimum order number, GST claim, or delivery-time promise', () => {
+  const faqSection = homeHtml.slice(homeHtml.indexOf('HOW BULK ORDERS WORK'), homeHtml.indexOf('MACHINE SPOTLIGHT'));
+  assert.ok(!/\d+\s*(day|days|hour|hours|week|weeks)\b/i.test(faqSection), 'FAQ should not promise a specific delivery timeframe');
+  assert.ok(!/\bGST\b/.test(faqSection), 'FAQ should not make an unconfirmed GST-billing claim');
+  assert.ok(!/minimum.*\d+\s*(piece|pieces|unit|units)/i.test(faqSection), 'FAQ should not state a specific fabricated minimum order quantity');
+});
 test('dc-runtime script block still parses as valid JS', () => {
   const start = homeHtml.indexOf('<script type="text/x-dc" data-dc-script>');
   const contentStart = homeHtml.indexOf('>', start) + 1;

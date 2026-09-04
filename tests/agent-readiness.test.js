@@ -218,6 +218,11 @@ test('otherProducts section is hidden when a brand has only one product (no empt
   assert.ok(/hasOtherProducts/.test(homeHtml));
   assert.ok(/<sc-if value="\{\{ geProduct\.hasOtherProducts \}\}"/.test(homeHtml));
 });
+test('footer tagline and site-wide brand mentions include DAYANG (no stale "Golden Eagle & Groz-Beckert only" copy)', () => {
+  assert.ok(/AUTHORIZED JACK DEALER · GOLDEN EAGLE, GROZ-BECKERT &amp; DAYANG PARTNER/.test(homeHtml));
+  assert.ok(homeHtml.includes('JACK, MAQI, Pegasus, JUKI, SINGER, Golden Eagle, Groz-Beckert, and DAYANG'));
+  assert.ok(!homeHtml.includes('(JACK, MAQI, Pegasus, JUKI, SINGER, Golden Eagle, Groz-Beckert)'));
+});
 
 console.log('image-slot.js');
 test('ignores an unresolved "{{ }}" template placeholder as src instead of fetching it', () => {

@@ -237,7 +237,7 @@ manifest['/about'] = {
   description: 'Swami Enterprises — authorized JACK sewing machine dealer, Chanakya Place, New Delhi, trading since 2015.',
   markdown: `# About Swami Enterprises
 
-Swami Enterprises is a Delhi-based partner for industrial sewing machines and accessories — including JACK, MAQI, Pegasus, JUKI, SINGER, Golden Eagle, and Groz-Beckert — helping people choose, install and maintain the right equipment for how they actually produce. We supply single machines and bulk/wholesale orders to garment factories and buyers across India, not just Delhi-NCR.
+Swami Enterprises is a Delhi-based partner for industrial sewing machines and accessories — including JACK, MAQI, Pegasus, JUKI, SINGER, Golden Eagle, Groz-Beckert, and DAYANG — helping people choose, install and maintain the right equipment for how they actually produce. We supply single machines and bulk/wholesale orders to garment factories and buyers across India, not just Delhi-NCR.
 
 ## What we do
 
@@ -323,7 +323,7 @@ Every machine from Swami Enterprises comes with installation, training, maintena
 - **Installation** — delivered, threaded, tested and running on your floor, ready on day one.
 - **Training** — operators trained on the machine so it runs correctly from the first shift.
 - **Maintenance & AMC** — on-site AMC and scheduled upkeep in Delhi to keep downtime short.
-- **Genuine Spare Parts** — stocked direct for JACK machines, plus Golden Eagle and Groz-Beckert accessories.
+- **Genuine Spare Parts** — stocked direct for JACK machines, plus Golden Eagle and Groz-Beckert accessories and DAYANG cutting machines.
 - **Technical Support** — direct access to people who know the machines.
 - **After-Sales** — support continues after delivery.
 

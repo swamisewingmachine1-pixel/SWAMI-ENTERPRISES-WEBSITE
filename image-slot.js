@@ -438,7 +438,7 @@
 
   class ImageSlot extends HTMLElement {
     static get observedAttributes() {
-      return ['shape', 'radius', 'mask', 'fit', 'placeholder', 'src', 'id', 'credit', 'credit-href'];
+      return ['shape', 'radius', 'mask', 'fit', 'placeholder', 'src', 'id', 'credit', 'credit-href', 'alt'];
     }
 
     /** Duplicate-slide hook (called by deck-stage, see its
@@ -1135,6 +1135,16 @@
         };
       }
       this._cap.textContent = this.getAttribute('placeholder') || 'Drop an image';
+      // Real alt text for SEO/accessibility: an explicit `alt` attribute wins; otherwise
+      // derive one from `placeholder`, since across the host site that already holds a
+      // real description (e.g. "JACK F6 product photograph") for every filled slot — just
+      // strip the author-facing "Drop: "/"Drop a "-style prefix meant for the empty state,
+      // and skip it entirely if it's still an unresolved "{{ }}" binding (see srcAttr above).
+      const altAttr = this.getAttribute('alt');
+      let altText = altAttr != null ? altAttr : (this.getAttribute('placeholder') || '');
+      if (/^\{\{.*\}\}$/.test(altText.trim())) altText = '';
+      altText = altText.replace(/^Drop:?\s*(an?\s+)?/i, '').trim();
+      this._img.alt = altText;
       // Toggle via style.display — the [hidden] attribute alone loses to
       // the display:flex / display:block rules in the stylesheet above.
       // An Unsplash src with no credit attribute must NOT render — showing

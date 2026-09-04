@@ -4595,6 +4595,7 @@ class Component extends DCLogic {
       this.setMeta('name', 'twitter:card', 'summary_large_image');
       this.setCanonical(canonical);
       this.setProductJsonLd(view, id);
+      this.setBreadcrumbJsonLd(view, id);
       this._pageEnteredAt = Date.now();
       this._pageEnteredPath = path;
     };
@@ -4891,6 +4892,39 @@ class Component extends DCLogic {
     }
     if (el) el.remove();
   };
+  // BreadcrumbList schema — real site hierarchy only (Home > section > item), matching the
+  // actual "← BACK TO ..." links already on these pages. Google can show this as the search
+  // result's breadcrumb trail instead of the raw URL. Kept separate from setProductJsonLd's
+  // <script id="product-jsonld"> tag since a page can have both a Product/TechArticle entity
+  // and a breadcrumb trail at once.
+  setBreadcrumbJsonLd = (view, id) => {
+    let el = document.getElementById('breadcrumb-jsonld');
+    const site = 'https://swamienterprises.online';
+    let items = null;
+    if (view === 'product') {
+      const m = this.machines.find((x) => x.id === id);
+      if (m) items = [{ name: 'Home', url: site + '/' }, { name: 'Machines', url: site + '/machines' }, { name: m.model, url: site + this.urlPath('product', m.id) }];
+    } else if (view === 'geProduct') {
+      const p = this.accessoryPool.find((x) => x.id === id);
+      if (p) {
+        const brandName = p.brand || 'Golden Eagle';
+        const brandView = brandName === 'Groz-Beckert' ? 'accGrozBeckert' : brandName === 'DAYANG' ? 'accDayang' : 'accGoldenEagle';
+        items = [{ name: 'Home', url: site + '/' }, { name: 'Accessories & Spare Parts', url: site + '/accessories' }, { name: brandName, url: site + this.urlPath(brandView) }, { name: p.name, url: site + this.urlPath('geProduct', p.id) }];
+      }
+    } else {
+      const guideLabels = { guideStitch: 'Lockstitch vs Overlock vs Flatlock: Which Machine for Which Job', guideCompareF6: 'JACK F6 vs JACK 2002G: Which Lockstitch Machine Do You Need', guideShirtFactory: 'What Machines Does a Shirt Factory Actually Need', guideIndustrialVsDomestic: 'Industrial vs Domestic Sewing Machines: What Actually Changes', guideKnitwear: 'What Machines Does a Knitwear Line Actually Need', guideFactorySetup: 'Setting Up a New Production Line: The Real Machine Sequence' };
+      // No standalone "/guides" listing page exists to link a middle crumb to, so this is a
+      // straight two-level trail rather than inventing a URL for one.
+      if (guideLabels[view]) items = [{ name: 'Home', url: site + '/' }, { name: guideLabels[view], url: site + this.urlPath(view, id) }];
+    }
+    if (!items) { if (el) el.remove(); return; }
+    if (!el) { el = document.createElement('script'); el.type = 'application/ld+json'; el.id = 'breadcrumb-jsonld'; document.head.appendChild(el); }
+    el.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: items.map((it, i) => ({ '@type': 'ListItem', position: i + 1, name: it.name, item: it.url })),
+    });
+  };
   // Product intelligence: every meaningful business action fires a named event through Vercel
   // Web Analytics (the site's existing host, so no separate backend/database to run). This is
   // the actual data — searches run, machines viewed, Finder answers and where people drop off,
@@ -4940,6 +4974,7 @@ class Component extends DCLogic {
     this.setMeta('name', 'twitter:card', 'summary_large_image');
     this.setCanonical(canonical);
     this.setProductJsonLd(view, id);
+    this.setBreadcrumbJsonLd(view, id);
     if (typeof window.va === 'function') window.va('pageview', { path });
     // The initial page load's pageview is auto-captured by Vercel's own
     // insights script (no custom call needed there); this custom call only

@@ -268,6 +268,25 @@ test('ignores an unresolved "{{ }}" template placeholder as src instead of fetch
   const body = fs.readFileSync(path.join(root, 'image-slot.js'), 'utf8');
   assert.ok(/if \(\/\^\\\{\\\{\.\*\\\}\\\}\$\/\.test\(srcAttr\.trim\(\)\)\) srcAttr = '';/.test(body), 'missing the unresolved-placeholder guard in _render()');
 });
+test('sets real alt text on the rendered <img> derived from placeholder, stripping the "Drop:" editor prefix', () => {
+  const body = fs.readFileSync(path.join(root, 'image-slot.js'), 'utf8');
+  assert.ok(body.includes("'alt'"), 'alt is not in observedAttributes');
+  assert.ok(body.includes('this._img.alt = altText'), 'missing the alt-text assignment in _render()');
+  assert.ok(/altText\.replace\(\/\^Drop:\?/.test(body), 'missing the "Drop: " prefix strip');
+});
+
+console.log('SEO: BreadcrumbList schema');
+test('setBreadcrumbJsonLd exists and is called from both syncUrl and applyPathToState', () => {
+  const occurrences = (homeHtml.match(/this\.setBreadcrumbJsonLd\(view, id\);/g) || []).length;
+  assert.ok(/setBreadcrumbJsonLd = \(view, id\) => \{/.test(homeHtml));
+  assert.strictEqual(occurrences, 2, 'expected setBreadcrumbJsonLd to be called from both syncUrl and applyPathToState');
+});
+test('breadcrumb trail for a machine page is real (Home > Machines > model), not fabricated', () => {
+  const block = homeHtml.slice(homeHtml.indexOf('setBreadcrumbJsonLd = ('), homeHtml.indexOf('// Product intelligence:'));
+  assert.ok(block.includes("name: 'Machines', url: site + '/machines'"));
+  assert.ok(block.includes("name: 'Accessories & Spare Parts', url: site + '/accessories'"));
+  assert.ok(!block.includes("'/guides'"), 'should not link a fake "/guides" listing page that does not exist');
+});
 
 if (failures) { console.error('\n' + failures + ' test(s) failed'); process.exit(1); }
 console.log('\nAll tests passed');

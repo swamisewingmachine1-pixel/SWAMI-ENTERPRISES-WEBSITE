@@ -256,6 +256,12 @@ test('homepage brand-count copy matches the actual number of brands in the catal
   const numberWords = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
   const word = numberWords[brands.size].replace(/^./, c => c.toUpperCase());
   assert.ok(homeHtml.includes(word + ' brands.'), `expected the "OUR BRANDS" heading to say "${word} brands." to match ${brands.size} distinct brands: ${[...brands].join(', ')}`);
+  const statMatch = homeHtml.match(/>(\d+)<\/div>\s*<div style="font-size:13px;font-weight:600;letter-spacing:0.08em;color:#6E6E73;margin-top:8px">GLOBAL BRANDS/);
+  assert.ok(statMatch, 'could not find the "GLOBAL BRANDS PARTNERED" stat tile');
+  assert.strictEqual(Number(statMatch[1]), brands.size, `the "GLOBAL BRANDS PARTNERED" stat says ${statMatch[1]} but there are ${brands.size} distinct brands in the catalog`);
+});
+test('brand-logo frame backgrounds are overridden to solid white (no gray-tint mismatch against the white card)', () => {
+  assert.ok(/#dayang-brand-logo::part\(frame\).*\{ background:#fff !important; \}/.test(homeHtml.replace(/\n/g, ' ')));
 });
 test('footer tagline and site-wide brand mentions include DAYANG (no stale "Golden Eagle & Groz-Beckert only" copy)', () => {
   assert.ok(/AUTHORIZED JACK DEALER · GOLDEN EAGLE, GROZ-BECKERT &amp; DAYANG PARTNER/.test(homeHtml));

@@ -218,6 +218,28 @@ test('otherProducts section is hidden when a brand has only one product (no empt
   assert.ok(/hasOtherProducts/.test(homeHtml));
   assert.ok(/<sc-if value="\{\{ geProduct\.hasOtherProducts \}\}"/.test(homeHtml));
 });
+test('homepage brand-count copy matches the actual number of brands in the catalog (machines + accessory brands)', () => {
+  function grabArr(varName) {
+    const start = homeHtml.indexOf(varName + ' = [');
+    const arrStart = homeHtml.indexOf('[', start);
+    let depth = 0, i = arrStart;
+    for (; i < homeHtml.length; i++) { if (homeHtml[i] === '[') depth++; if (homeHtml[i] === ']') { depth--; if (depth === 0) { i++; break; } } }
+    return new Function('return ' + homeHtml.slice(arrStart, i))();
+  }
+  const machines = grabArr('machines');
+  const golden = grabArr('goldenEagleProducts');
+  const grozB = grabArr('grozBeckertProducts');
+  const dayang = grabArr('dayangProducts');
+  const brands = new Set([
+    ...machines.map(m => m.manufacturer),
+    ...golden.map(p => p.brand || 'Golden Eagle'),
+    ...grozB.map(p => p.brand || 'Golden Eagle'),
+    ...dayang.map(p => p.brand || 'Golden Eagle'),
+  ]);
+  const numberWords = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+  const word = numberWords[brands.size].replace(/^./, c => c.toUpperCase());
+  assert.ok(homeHtml.includes(word + ' brands.'), `expected the "OUR BRANDS" heading to say "${word} brands." to match ${brands.size} distinct brands: ${[...brands].join(', ')}`);
+});
 test('footer tagline and site-wide brand mentions include DAYANG (no stale "Golden Eagle & Groz-Beckert only" copy)', () => {
   assert.ok(/AUTHORIZED JACK DEALER · GOLDEN EAGLE, GROZ-BECKERT &amp; DAYANG PARTNER/.test(homeHtml));
   assert.ok(homeHtml.includes('JACK, MAQI, Pegasus, JUKI, SINGER, Golden Eagle, Groz-Beckert, and DAYANG'));

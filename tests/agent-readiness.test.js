@@ -281,6 +281,25 @@ test('sets real alt text on the rendered <img> derived from placeholder, strippi
   assert.ok(/altText\.replace\(\/\^Drop:\?/.test(body), 'missing the "Drop: " prefix strip');
 });
 
+console.log('Ask Swami chat widget');
+test('chat bubble and panel render outside every view sc-if (site-wide, not page-specific)', () => {
+  assert.ok(/onClick="\{\{ openChat \}\}"/.test(homeHtml));
+  assert.ok(/<sc-if value="\{\{ chatIsOpen \}\}"/.test(homeHtml));
+});
+test('chatMatch only replies from the real knowledge base, with an honest fallback + WhatsApp handoff otherwise', () => {
+  assert.ok(/chatMatch = \(text\) => \{/.test(homeHtml));
+  assert.ok(/chatFallback = "I don't have a confident answer/.test(homeHtml));
+  assert.ok(/wa\.me\/919971336656/.test(homeHtml));
+});
+test('chat answers do not claim authorized-distributor status for non-JACK brands', () => {
+  const kbBlock = homeHtml.slice(homeHtml.indexOf('chatKB = ['), homeHtml.indexOf('chatMatch = ('));
+  assert.ok(kbBlock.includes('stocking partner rather than'));
+});
+test('chat messages render via precomputed style fields, not inline ternaries the template engine cannot evaluate', () => {
+  assert.ok(/justify: isUser \? 'flex-end' : 'flex-start'/.test(homeHtml));
+  assert.ok(!/justify-content:\{\{ m\.isUser \?/.test(homeHtml), 'template must not contain an inline ternary inside {{ }} — this engine only resolves plain renderVals keys');
+});
+
 console.log('SEO: BreadcrumbList schema');
 test('setBreadcrumbJsonLd exists and is called from both syncUrl and applyPathToState', () => {
   const occurrences = (homeHtml.match(/this\.setBreadcrumbJsonLd\(view, id\);/g) || []).length;

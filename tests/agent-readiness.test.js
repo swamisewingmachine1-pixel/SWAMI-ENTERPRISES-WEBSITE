@@ -300,6 +300,32 @@ test('chat messages render via precomputed style fields, not inline ternaries th
   assert.ok(!/justify-content:\{\{ m\.isUser \?/.test(homeHtml), 'template must not contain an inline ternary inside {{ }} — this engine only resolves plain renderVals keys');
 });
 
+console.log('Ask Swami AI upgrade (Gemini)');
+test('sendChatMessage calls the real AI endpoint and falls back to the local KB on failure', () => {
+  assert.ok(/fetch\('\/api\/chat', \{/.test(homeHtml), 'widget must call the api/chat serverless function');
+  assert.ok(/\.catch\(\(\) => \{[\s\S]{0,120}chatMatch\(text\)/.test(homeHtml), 'must fall back to local keyword match if the AI call fails, so the widget never goes silent');
+});
+
+console.log('api/chat.js (Gemini-backed chat endpoint)');
+const apiChatSrc = fs.readFileSync(path.join(__dirname, '..', 'api', 'chat.js'), 'utf8');
+test('reads the API key from an env var, never hardcodes or echoes it', () => {
+  assert.ok(/process\.env\.GEMINI_API_KEY/.test(apiChatSrc));
+  assert.ok(!/AIza[0-9A-Za-z_-]{20,}/.test(apiChatSrc), 'must not contain a hardcoded Gemini key');
+});
+test('system prompt forbids inventing prices, distributor status, or delivery dates beyond the real facts', () => {
+  assert.ok(/Never invent prices, stock levels, delivery dates/.test(apiChatSrc));
+  assert.ok(/NOT the brand's authorized\/official distributor/.test(apiChatSrc));
+  assert.ok(/F6 has automatic thread trimming/.test(apiChatSrc), 'must keep the F6 manual-trim correction grounded in the AI facts too, not just the old keyword KB');
+});
+test('unresolved questions are escalated to WhatsApp instead of guessed', () => {
+  assert.ok(/ESCALATE/.test(apiChatSrc));
+  assert.ok(/escalate = true/.test(apiChatSrc));
+});
+test('rejects non-POST requests and requests with no message', () => {
+  assert.ok(/req\.method !== 'POST'/.test(apiChatSrc));
+  assert.ok(/if \(!message\)/.test(apiChatSrc));
+});
+
 console.log('SEO: BreadcrumbList schema');
 test('setBreadcrumbJsonLd exists and is called from both syncUrl and applyPathToState', () => {
   const occurrences = (homeHtml.match(/this\.setBreadcrumbJsonLd\(view, id\);/g) || []).length;

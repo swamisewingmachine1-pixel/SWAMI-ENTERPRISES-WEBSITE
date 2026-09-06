@@ -2656,13 +2656,28 @@ class Component extends DCLogic {
     if (!text) return;
     this.track('chat_message', { text });
     const userMsg = { role: 'user', text: text };
+    const historyForApi = this.state.chatMessages.concat([userMsg]);
     this.setState((s) => ({ chatMessages: s.chatMessages.concat([userMsg]), chatInput: '', chatTyping: true }));
-    setTimeout(() => {
-      const hit = this.chatMatch(text);
-      const reply = hit ? hit.a : this.chatFallback;
-      const waHref = hit ? '' : ('https://wa.me/919971336656?text=' + encodeURIComponent('Hi, I asked the website assistant: "' + text + '" — can you help?'));
-      this.setState((s) => ({ chatMessages: s.chatMessages.concat([{ role: 'bot', text: reply, escalate: !hit }]), chatTyping: false, chatEscalateHref: waHref }));
-    }, 550 + Math.random() * 350);
+
+    const finish = (reply, escalate) => {
+      const waHref = escalate ? ('https://wa.me/919971336656?text=' + encodeURIComponent('Hi, I asked the website assistant: "' + text + '" — can you help?')) : '';
+      this.setState((s) => ({ chatMessages: s.chatMessages.concat([{ role: 'bot', text: reply, escalate }]), chatTyping: false, chatEscalateHref: waHref }));
+    };
+
+    // Real AI (Gemini) grounded to our own catalog facts server-side (api/chat.js) — falls
+    // back to the local keyword-matched knowledge base if the AI is unreachable or unconfigured,
+    // so the widget still answers honestly even if the API has an outage.
+    fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: text, history: historyForApi }),
+    })
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error('bad status'))))
+      .then((data) => finish(data.reply, !!data.escalate))
+      .catch(() => {
+        const hit = this.chatMatch(text);
+        finish(hit ? hit.a : this.chatFallback, !hit);
+      });
   };
   onChatFormSubmit = (e) => { e.preventDefault(); this.sendChatMessage(); };
   chatChipClick = (c) => () => this.sendChatMessage(c);

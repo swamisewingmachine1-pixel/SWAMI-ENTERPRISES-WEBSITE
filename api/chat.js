@@ -95,7 +95,7 @@ module.exports = async (req, res) => {
 
   try {
     const upstream = await fetch(
-      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + apiKey,
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=' + apiKey,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -111,7 +111,7 @@ module.exports = async (req, res) => {
       const errText = await upstream.text().catch(() => '');
       console.error('Gemini error', upstream.status, errText);
       res.statusCode = 502;
-      return res.end(JSON.stringify({ error: 'AI upstream error', status: upstream.status, detail: errText.slice(0, 500) }));
+      return res.end(JSON.stringify({ error: 'AI upstream error' }));
     }
 
     const data = await upstream.json();

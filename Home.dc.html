@@ -205,6 +205,7 @@
 @supports (-webkit-background-clip:text) or (background-clip:text) { .sw-wordmark { color:transparent; } }
 .sw-wordmark--white { background:none; -webkit-background-clip:initial; background-clip:initial; color:#F5F5F7; }
 @keyframes swFadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes swTypingDot { 0%,60%,100%{ opacity:0.35; transform:translateY(0); } 30%{ opacity:1; transform:translateY(-3px); } }
 body { margin:0; zoom:0.85; }
 .nav-mega-wrap:hover .nav-mega-panel { opacity:1 !important; pointer-events:auto !important; transform:translateY(0) !important; }
 /* Mobile bar is 76px tall, desktop bar is 52px — the hero's margin-top must match
@@ -2458,49 +2459,55 @@ a:hover { color:#3D7BFF; }
   </div>
 
   <!-- ASK SWAMI CHAT WIDGET (renders on every page) -->
-  <div style="position:fixed;right:24px;bottom:24px;z-index:2100;width:60px;height:60px;border-radius:50%;background:#0A5CFF;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 28px rgba(10,92,255,0.4)" onClick="{{ openChat }}">
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-    <div style="position:absolute;top:2px;right:2px;width:12px;height:12px;border-radius:50%;background:#25D366;border:2px solid #050505"></div>
+  <div style="position:fixed;right:24px;bottom:24px;z-index:2100;width:60px;height:60px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#4d7fff,#0A3FCC 70%);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 10px 32px rgba(10,60,220,0.45),0 0 0 1px rgba(255,255,255,0.08) inset" onClick="{{ openChat }}">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2.5l1.9 4.9 4.9 1.9-4.9 1.9-1.9 4.9-1.9-4.9-4.9-1.9 4.9-1.9L12 2.5z" fill="#fff"></path><path d="M19 14.5l.9 2.3 2.3.9-2.3.9-.9 2.3-.9-2.3-2.3-.9 2.3-.9.9-2.3z" fill="#fff" opacity="0.85"></path></svg>
+    <div style="position:absolute;top:1px;right:1px;width:13px;height:13px;border-radius:50%;background:#25D366;border:2.5px solid #050505"></div>
   </div>
   <sc-if value="{{ chatIsOpen }}" hint-placeholder-val="{{ false }}">
-    <div style="position:fixed;right:24px;bottom:98px;width:min(380px,calc(100vw - 32px));height:min(560px,calc(100vh - 140px));background:#0A0A0A;border:1px solid rgba(247,247,245,0.12);border-radius:20px;display:flex;flex-direction:column;overflow:hidden;z-index:2100;box-shadow:0 24px 64px rgba(0,0,0,0.55);animation:swFadeIn 0.2s ease both">
-      <div style="padding:18px 20px;border-bottom:1px solid rgba(247,247,245,0.12);display:flex;align-items:center;gap:12px">
-        <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#0A5CFF,#5b8fd9);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:#fff;flex-shrink:0">S</div>
-        <div>
-          <div style="font-weight:700;font-size:15px;color:#F5F5F7">Ask Swami</div>
-          <div style="font-size:12px;color:#25D366;display:flex;align-items:center;gap:5px"><span style="width:6px;height:6px;border-radius:50%;background:#25D366;display:inline-block"></span> Real answers from our catalog</div>
+    <div style="position:fixed;right:24px;bottom:98px;width:min(392px,calc(100vw - 32px));height:min(600px,calc(100vh - 140px));background:linear-gradient(180deg,#161822,#101017);border:1px solid rgba(255,255,255,0.09);border-radius:24px;display:flex;flex-direction:column;overflow:hidden;z-index:2100;box-shadow:0 30px 80px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.04) inset;animation:swFadeIn 0.22s cubic-bezier(.2,.9,.3,1.1) both">
+      <div style="padding:20px 22px;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;gap:13px;background:linear-gradient(180deg,rgba(255,255,255,0.03),transparent)">
+        <div style="width:40px;height:40px;border-radius:14px;background:radial-gradient(circle at 30% 25%,#4d7fff,#0A3FCC 70%);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 14px rgba(10,60,220,0.4)">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M12 2.5l1.9 4.9 4.9 1.9-4.9 1.9-1.9 4.9-1.9-4.9-4.9-1.9 4.9-1.9L12 2.5z" fill="#fff"></path></svg>
         </div>
-        <span style="margin-left:auto;cursor:pointer;color:#86868B;font-size:22px;line-height:1;padding:4px" onClick="{{ closeChat }}">×</span>
+        <div>
+          <div style="font-family:'Playfair Display',Georgia,serif;font-weight:900;font-style:italic;font-size:17px;color:#F5F5F7;letter-spacing:-0.01em">Ask Swami</div>
+          <div style="font-size:11.5px;color:#7FE0A8;display:flex;align-items:center;gap:5px;margin-top:1px;font-family:'Manrope',sans-serif"><span style="width:5px;height:5px;border-radius:50%;background:#25D366;display:inline-block"></span> Answers from our real catalog</div>
+        </div>
+        <span style="margin-left:auto;cursor:pointer;color:#5A5F6B;font-size:18px;line-height:1;padding:6px;border-radius:8px" onClick="{{ closeChat }}">✕</span>
       </div>
-      <div style="flex:1;overflow-y:auto;padding:18px 16px;display:flex;flex-direction:column;gap:12px">
+      <div style="flex:1;overflow-y:auto;padding:20px 18px;display:flex;flex-direction:column;gap:14px">
         <sc-for list="{{ chatMessages }}" as="m" hint-placeholder-count="2">
           <div style="display:flex;justify-content:{{ m.justify }}">
-            <div style="max-width:82%;padding:11px 15px;border-radius:16px;font-size:14px;line-height:1.5;font-family:'Manrope',sans-serif;background:{{ m.bg }};color:{{ m.color }}">{{ m.text }}</div>
+            <div style="max-width:84%;padding:12px 16px;border-radius:{{ m.radius }};font-size:14.5px;line-height:1.55;font-family:'Manrope',sans-serif;background:{{ m.bg }};color:{{ m.color }};border:{{ m.border }};box-shadow:{{ m.shadow }}">{{ m.text }}</div>
           </div>
         </sc-for>
         <sc-if value="{{ chatTyping }}" hint-placeholder-val="{{ false }}">
           <div style="display:flex;justify-content:flex-start">
-            <div style="padding:13px 15px;border-radius:16px;background:#1D1D1F;font-size:13px;color:#86868B">···</div>
+            <div style="padding:14px 17px;border-radius:4px 18px 18px 18px;background:#1C1E28;border:1px solid rgba(255,255,255,0.06);display:flex;gap:4px;align-items:center">
+              <span style="width:6px;height:6px;border-radius:50%;background:#6b7280;animation:swTypingDot 1.2s ease infinite"></span>
+              <span style="width:6px;height:6px;border-radius:50%;background:#6b7280;animation:swTypingDot 1.2s ease 0.15s infinite"></span>
+              <span style="width:6px;height:6px;border-radius:50%;background:#6b7280;animation:swTypingDot 1.2s ease 0.3s infinite"></span>
+            </div>
           </div>
         </sc-if>
       </div>
       <sc-if value="{{ showChatChips }}" hint-placeholder-val="{{ true }}">
-        <div style="display:flex;flex-wrap:wrap;gap:8px;padding:2px 16px 4px">
+        <div style="display:flex;flex-wrap:wrap;gap:8px;padding:2px 18px 6px">
           <sc-for list="{{ chatChipsList }}" as="c" hint-placeholder-count="4">
-            <span style="font-size:12.5px;border:1px solid rgba(247,247,245,0.12);color:#86868B;background:transparent;padding:7px 12px;border-radius:999px;cursor:pointer" onClick="{{ c.click }}">{{ c.label }}</span>
+            <span style="font-size:12.5px;font-family:'Manrope',sans-serif;border:1px solid rgba(255,255,255,0.1);color:#AEB4C0;background:rgba(255,255,255,0.03);padding:8px 13px;border-radius:999px;cursor:pointer;transition:border-color 0.15s" onClick="{{ c.click }}">{{ c.label }}</span>
           </sc-for>
         </div>
       </sc-if>
       <sc-if value="{{ hasChatEscalateHref }}" hint-placeholder-val="{{ false }}">
-        <div style="margin:0 16px 14px;padding:10px 14px;border:1px solid rgba(37,211,102,0.4);background:rgba(37,211,102,0.08);border-radius:12px;font-size:13px;display:flex;align-items:center;justify-content:space-between;gap:10px;color:#F5F5F7">
+        <div style="margin:0 18px 14px;padding:12px 15px;border:1px solid rgba(37,211,102,0.3);background:rgba(37,211,102,0.07);border-radius:14px;font-size:13px;font-family:'Manrope',sans-serif;display:flex;align-items:center;justify-content:space-between;gap:10px;color:#E8EAED">
           <span>Need a person instead?</span>
-          <a href="{{ chatEscalateHref }}" target="_blank" rel="noopener noreferrer" style="color:#25D366;font-weight:600;text-decoration:none;white-space:nowrap">WhatsApp us →</a>
+          <a href="{{ chatEscalateHref }}" target="_blank" rel="noopener noreferrer" style="color:#25D366;font-weight:700;text-decoration:none;white-space:nowrap">WhatsApp us →</a>
         </div>
       </sc-if>
-      <form style="border-top:1px solid rgba(247,247,245,0.12);padding:12px;display:flex;gap:8px;align-items:flex-end" onSubmit="{{ onChatFormSubmit }}">
-        <input type="text" placeholder="Ask about a machine, brand, or an order…" value="{{ chatInput }}" onChange="{{ onChatInputChange }}" style="flex:1;background:#1D1D1F;border:1px solid rgba(247,247,245,0.12);border-radius:14px;color:#F5F5F7;font-family:'Manrope',sans-serif;font-size:14px;padding:12px 14px"></input>
-        <button type="submit" style="width:38px;height:38px;border-radius:50%;background:#0A5CFF;border:none;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M2 21l21-9L2 3v7l15 2-15 2z"></path></svg>
+      <form style="border-top:1px solid rgba(255,255,255,0.08);padding:14px;display:flex;gap:10px;align-items:center" onSubmit="{{ onChatFormSubmit }}">
+        <input type="text" placeholder="Ask about a machine, brand, or an order…" value="{{ chatInput }}" onChange="{{ onChatInputChange }}" style="flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:999px;color:#F5F5F7;font-family:'Manrope',sans-serif;font-size:14px;padding:13px 18px"></input>
+        <button type="submit" style="width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#4d7fff,#0A3FCC 70%);border:none;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;box-shadow:0 4px 14px rgba(10,60,220,0.4)">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="#fff"><path d="M2 21l21-9L2 3v7l15 2-15 2z"></path></svg>
         </button>
       </form>
     </div>
@@ -6090,7 +6097,17 @@ class Component extends DCLogic {
       hasChatEscalateHref: !!chatEscalateHref,
       chatMessages: (chatMessages || []).map((m) => {
         const isUser = m.role === 'user';
-        return { ...m, isBot: !isUser, isUser, justify: isUser ? 'flex-end' : 'flex-start', bg: isUser ? '#0A5CFF' : '#1D1D1F', color: isUser ? '#fff' : '#F5F5F7' };
+        return {
+          ...m,
+          isBot: !isUser,
+          isUser,
+          justify: isUser ? 'flex-end' : 'flex-start',
+          bg: isUser ? 'linear-gradient(135deg,#3B7CFF,#0A3FCC)' : '#1C1E28',
+          color: isUser ? '#fff' : '#E8EAED',
+          radius: isUser ? '18px 4px 18px 18px' : '4px 18px 18px 18px',
+          border: isUser ? 'none' : '1px solid rgba(255,255,255,0.06)',
+          shadow: isUser ? '0 4px 14px rgba(10,60,220,0.3)' : 'none',
+        };
       }),
       chatChipsList: this.chatChips.map((c) => ({ label: c, click: this.chatChipClick(c) })),
       showChatChips: (chatMessages || []).length <= 1,

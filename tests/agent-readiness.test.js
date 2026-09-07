@@ -293,7 +293,8 @@ test('chatMatch only replies from the real knowledge base, with an honest fallba
 });
 test('chat answers do not claim authorized-distributor status for non-JACK brands', () => {
   const kbBlock = homeHtml.slice(homeHtml.indexOf('chatKB = ['), homeHtml.indexOf('chatMatch = ('));
-  assert.ok(kbBlock.includes('stocking partner rather than'));
+  assert.ok(kbBlock.includes('stocking partner'));
+  assert.ok(!/authorized (distributor|dealer) for (MAQI|Pegasus|JUKI|SINGER|Golden Eagle|Groz-Beckert|DAYANG)/.test(kbBlock), 'must never claim authorized/official status for non-JACK brands');
 });
 test('chat messages render via precomputed style fields, not inline ternaries the template engine cannot evaluate', () => {
   assert.ok(/justify: isUser \? 'flex-end' : 'flex-start'/.test(homeHtml));

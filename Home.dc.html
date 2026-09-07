@@ -206,6 +206,11 @@
 .sw-wordmark--white { background:none; -webkit-background-clip:initial; background-clip:initial; color:#F5F5F7; }
 @keyframes swFadeIn { from { opacity:0; } to { opacity:1; } }
 @keyframes swTypingDot { 0%,60%,100%{ opacity:0.35; transform:translateY(0); } 30%{ opacity:1; transform:translateY(-3px); } }
+@keyframes swOrbBreathe { 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.07); } }
+@keyframes swOrbHue { 0%{ filter:hue-rotate(0deg); } 100%{ filter:hue-rotate(360deg); } }
+@keyframes swOrbWake { 0%{ transform:scale(0.2); opacity:0; } 60%{ transform:scale(1.12); opacity:1; } 100%{ transform:scale(1); opacity:1; } }
+@keyframes swOverlayIn { from{ opacity:0; backdrop-filter:blur(0px); } to{ opacity:1; backdrop-filter:blur(10px); } }
+@keyframes swModalIn { from{ opacity:0; transform:scale(0.94) translateY(14px); } to{ opacity:1; transform:scale(1) translateY(0); } }
 body { margin:0; zoom:0.85; }
 .nav-mega-wrap:hover .nav-mega-panel { opacity:1 !important; pointer-events:auto !important; transform:translateY(0) !important; }
 /* Mobile bar is 76px tall, desktop bar is 52px — the hero's margin-top must match
@@ -2459,57 +2464,58 @@ a:hover { color:#3D7BFF; }
   </div>
 
   <!-- ASK SWAMI CHAT WIDGET (renders on every page) -->
-  <div style="position:fixed;right:28px;bottom:28px;z-index:2100;width:62px;height:62px;border-radius:50%;background:#0A5CFF;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 12px 28px rgba(10,92,255,0.4),0 0 0 1px rgba(255,255,255,0.12) inset;transition:transform 0.18s ease" onClick="{{ openChat }}">
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4.4 3.3A.6.6 0 0 1 3.6 19V7Z" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"></path><circle cx="9" cy="10" r="1.1" fill="#fff"></circle><circle cx="13" cy="10" r="1.1" fill="#fff"></circle><circle cx="17" cy="10" r="1.1" fill="#fff"></circle></svg>
+  <div style="position:fixed;right:28px;bottom:28px;z-index:2100;width:64px;height:64px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center" onClick="{{ openChat }}">
+    <div style="position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 32% 28%,#5B8CFF,#0A5CFF 55%,#5227D6 100%);animation:swOrbBreathe 3.4s ease-in-out infinite;box-shadow:0 12px 30px rgba(10,92,255,0.45)"></div>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="position:relative"><path d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4.4 3.3A.6.6 0 0 1 3.6 19V7Z" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"></path><circle cx="9" cy="10" r="1.1" fill="#fff"></circle><circle cx="13" cy="10" r="1.1" fill="#fff"></circle><circle cx="17" cy="10" r="1.1" fill="#fff"></circle></svg>
     <div style="position:absolute;top:2px;right:2px;width:12px;height:12px;border-radius:50%;background:#25D366;border:2.5px solid #050505"></div>
   </div>
   <sc-if value="{{ chatIsOpen }}" hint-placeholder-val="{{ false }}">
-    <div style="position:fixed;right:28px;bottom:104px;width:min(400px,calc(100vw - 32px));height:min(600px,calc(100vh - 170px));background:#0A0A0A;border:1px solid rgba(255,255,255,0.08);border-radius:20px;display:flex;flex-direction:column;overflow:hidden;z-index:2100;box-shadow:0 24px 64px rgba(0,0,0,0.55),0 0 0 1px rgba(10,92,255,0.12);animation:swFadeIn 0.2s cubic-bezier(.2,.9,.3,1.1) both">
-      <div style="padding:22px 24px;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:14px">
-        <div style="width:42px;height:42px;border-radius:50%;background:#0A5CFF;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-          <span style="font-family:'Playfair Display',Georgia,serif;font-weight:900;font-style:italic;font-size:18px;color:#fff">S</span>
-        </div>
-        <div>
-          <div style="font-family:'Playfair Display',Georgia,serif;font-weight:900;font-style:italic;font-size:18px;color:#F5F5F7;letter-spacing:-0.01em">Ask Swami</div>
-          <div style="font-size:11.5px;color:#8A8F9C;display:flex;align-items:center;gap:5px;margin-top:2px;font-family:'Manrope',sans-serif"><span style="width:5px;height:5px;border-radius:50%;background:#25D366;display:inline-block"></span> Online — real catalog answers</div>
-        </div>
-        <span style="margin-left:auto;cursor:pointer;color:#6B7280;font-size:16px;line-height:1;padding:8px;border-radius:50%" onClick="{{ closeChat }}">✕</span>
-      </div>
-      <div style="flex:1;overflow-y:auto;padding:22px 20px;display:flex;flex-direction:column;gap:16px">
-        <sc-for list="{{ chatMessages }}" as="m" hint-placeholder-count="2">
-          <div style="display:flex;justify-content:{{ m.justify }}">
-            <div style="max-width:82%;padding:12px 16px;border-radius:{{ m.radius }};font-size:14.5px;line-height:1.55;font-family:'Manrope',sans-serif;background:{{ m.bg }};color:{{ m.color }};border:{{ m.border }};box-shadow:{{ m.shadow }}">{{ m.text }}</div>
+    <div style="position:fixed;inset:0;z-index:2100;background:rgba(4,4,7,0.74);display:flex;align-items:center;justify-content:center;padding:24px;animation:swOverlayIn 0.32s ease both" onClick="{{ closeChat }}">
+      <div style="width:min(520px,94vw);height:min(760px,90vh);background:linear-gradient(180deg,#0D0D11,#08080A);border:1px solid rgba(255,255,255,0.07);border-radius:28px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,0.6),0 0 0 1px rgba(91,140,255,0.1);animation:swModalIn 0.4s cubic-bezier(.2,.9,.3,1.1) both" onClick="{{ stopPropagation }}">
+        <div style="position:relative;padding:36px 24px 22px;display:flex;flex-direction:column;align-items:center;text-align:center;border-bottom:1px solid rgba(255,255,255,0.06);background:radial-gradient(ellipse at 50% -20%,rgba(91,140,255,0.16),transparent 70%)">
+          <span style="position:absolute;top:16px;right:16px;cursor:pointer;color:#6B7280;font-size:16px;line-height:1;padding:8px;border-radius:50%" onClick="{{ closeChat }}">✕</span>
+          <div style="width:76px;height:76px;border-radius:50%;position:relative;margin-bottom:14px">
+            <div style="position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 32% 28%,#5B8CFF,#0A5CFF 55%,#5227D6 100%);animation:swOrbWake 0.6s cubic-bezier(.2,.9,.3,1.1) both,swOrbBreathe {{ orbBreatheSpeed }} ease-in-out infinite 0.6s;box-shadow:0 0 46px rgba(91,140,255,0.5)"></div>
           </div>
-        </sc-for>
-        <sc-if value="{{ chatTyping }}" hint-placeholder-val="{{ false }}">
-          <div style="display:flex;justify-content:flex-start">
-            <div style="padding:14px 17px;border-radius:4px 18px 18px 18px;background:#17171A;border:1px solid rgba(255,255,255,0.06);display:flex;gap:4px;align-items:center">
-              <span style="width:6px;height:6px;border-radius:50%;background:#6b7280;animation:swTypingDot 1.2s ease infinite"></span>
-              <span style="width:6px;height:6px;border-radius:50%;background:#6b7280;animation:swTypingDot 1.2s ease 0.15s infinite"></span>
-              <span style="width:6px;height:6px;border-radius:50%;background:#6b7280;animation:swTypingDot 1.2s ease 0.3s infinite"></span>
+          <div style="font-family:'Playfair Display',Georgia,serif;font-weight:900;font-style:italic;font-size:23px;color:#F5F5F7;letter-spacing:-0.01em">Ask Swami</div>
+          <div style="font-size:12px;color:#8A8F9C;display:flex;align-items:center;gap:5px;margin-top:4px;font-family:'Manrope',sans-serif"><span style="width:5px;height:5px;border-radius:50%;background:#25D366;display:inline-block"></span> Online — real catalog, no scripts</div>
+        </div>
+        <div style="flex:1;overflow-y:auto;padding:24px 22px;display:flex;flex-direction:column;gap:16px">
+          <sc-for list="{{ chatMessages }}" as="m" hint-placeholder-count="2">
+            <div style="display:flex;justify-content:{{ m.justify }}">
+              <div style="max-width:82%;padding:13px 17px;border-radius:{{ m.radius }};font-size:14.5px;line-height:1.6;font-family:'Manrope',sans-serif;background:{{ m.bg }};color:{{ m.color }};border:{{ m.border }};box-shadow:{{ m.shadow }}">{{ m.text }}</div>
             </div>
+          </sc-for>
+          <sc-if value="{{ chatTyping }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;justify-content:flex-start">
+              <div style="padding:14px 17px;border-radius:4px 18px 18px 18px;background:#17171A;border:1px solid rgba(255,255,255,0.06);display:flex;gap:4px;align-items:center">
+                <span style="width:6px;height:6px;border-radius:50%;background:#6b7280;animation:swTypingDot 1.2s ease infinite"></span>
+                <span style="width:6px;height:6px;border-radius:50%;background:#6b7280;animation:swTypingDot 1.2s ease 0.15s infinite"></span>
+                <span style="width:6px;height:6px;border-radius:50%;background:#6b7280;animation:swTypingDot 1.2s ease 0.3s infinite"></span>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+        <sc-if value="{{ showChatChips }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-wrap:wrap;gap:8px;padding:2px 22px 8px">
+            <sc-for list="{{ chatChipsList }}" as="c" hint-placeholder-count="4">
+              <span style="font-size:12.5px;font-family:'Manrope',sans-serif;border:1px solid rgba(255,255,255,0.12);color:#B8BCC5;background:rgba(255,255,255,0.04);padding:8px 14px;border-radius:999px;cursor:pointer" onClick="{{ c.click }}">{{ c.label }}</span>
+            </sc-for>
           </div>
         </sc-if>
+        <sc-if value="{{ hasChatEscalateHref }}" hint-placeholder-val="{{ false }}">
+          <div style="margin:0 22px 16px;padding:13px 16px;border:1px solid rgba(37,211,102,0.28);background:rgba(37,211,102,0.08);border-radius:14px;font-size:13px;font-family:'Manrope',sans-serif;display:flex;align-items:center;justify-content:space-between;gap:10px;color:#E8EAED">
+            <span>Need a person instead?</span>
+            <a href="{{ chatEscalateHref }}" target="_blank" rel="noopener noreferrer" style="color:#25D366;font-weight:700;text-decoration:none;white-space:nowrap">WhatsApp us →</a>
+          </div>
+        </sc-if>
+        <form style="border-top:1px solid rgba(255,255,255,0.07);padding:16px;display:flex;gap:10px;align-items:center" onSubmit="{{ onChatFormSubmit }}">
+          <input type="text" placeholder="Ask about a machine, brand, or an order…" value="{{ chatInput }}" onChange="{{ onChatInputChange }}" style="flex:1;background:#151517;border:1px solid rgba(255,255,255,0.1);border-radius:999px;color:#F5F5F7;font-family:'Manrope',sans-serif;font-size:14px;padding:13px 18px"></input>
+          <button type="submit" style="width:42px;height:42px;border-radius:50%;background:#0A5CFF;border:none;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="#fff"><path d="M2 21l21-9L2 3v7l15 2-15 2z"></path></svg>
+          </button>
+        </form>
       </div>
-      <sc-if value="{{ showChatChips }}" hint-placeholder-val="{{ true }}">
-        <div style="display:flex;flex-wrap:wrap;gap:8px;padding:2px 20px 8px">
-          <sc-for list="{{ chatChipsList }}" as="c" hint-placeholder-count="4">
-            <span style="font-size:12.5px;font-family:'Manrope',sans-serif;border:1px solid rgba(255,255,255,0.12);color:#B8BCC5;background:rgba(255,255,255,0.04);padding:8px 14px;border-radius:999px;cursor:pointer" onClick="{{ c.click }}">{{ c.label }}</span>
-          </sc-for>
-        </div>
-      </sc-if>
-      <sc-if value="{{ hasChatEscalateHref }}" hint-placeholder-val="{{ false }}">
-        <div style="margin:0 20px 16px;padding:13px 16px;border:1px solid rgba(37,211,102,0.28);background:rgba(37,211,102,0.08);border-radius:14px;font-size:13px;font-family:'Manrope',sans-serif;display:flex;align-items:center;justify-content:space-between;gap:10px;color:#E8EAED">
-          <span>Need a person instead?</span>
-          <a href="{{ chatEscalateHref }}" target="_blank" rel="noopener noreferrer" style="color:#25D366;font-weight:700;text-decoration:none;white-space:nowrap">WhatsApp us →</a>
-        </div>
-      </sc-if>
-      <form style="border-top:1px solid rgba(255,255,255,0.07);padding:16px;display:flex;gap:10px;align-items:center" onSubmit="{{ onChatFormSubmit }}">
-        <input type="text" placeholder="Ask about a machine, brand, or an order…" value="{{ chatInput }}" onChange="{{ onChatInputChange }}" style="flex:1;background:#151517;border:1px solid rgba(255,255,255,0.1);border-radius:999px;color:#F5F5F7;font-family:'Manrope',sans-serif;font-size:14px;padding:13px 18px"></input>
-        <button type="submit" style="width:42px;height:42px;border-radius:50%;background:#0A5CFF;border:none;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="#fff"><path d="M2 21l21-9L2 3v7l15 2-15 2z"></path></svg>
-        </button>
-      </form>
     </div>
   </sc-if>
 
@@ -2639,7 +2645,7 @@ class Component extends DCLogic {
     }
     return bestScore >= 3 ? best : null;
   };
-  chatGreeting = "Hi! I'm the Swami Enterprises assistant. I can answer real questions about our machines, brands, bulk orders and service — ask away, or tap a suggestion below.";
+  chatGreeting = "I've spent years around the JACK machines on our Delhi showroom floor — the F6es, the A2Cs, the whole line. Ask me anything real: a machine, a brand, an order, a delivery. No scripts, just what we actually know.";
   chatFallback = "I don't have a confident answer for that from our catalog — a specialist can help directly. Want me to WhatsApp us?";
   chatChips = ['Are you an authorized JACK dealer?', 'Do you ship outside Delhi?', 'Tell me about the JACK F6', 'What are your showroom hours?'];
   openChat = () => {
@@ -2650,6 +2656,7 @@ class Component extends DCLogic {
     }
   };
   closeChat = () => this.setState({ chatOpen: false });
+  stopPropagation = (e) => e.stopPropagation();
   onChatInputChange = (e) => this.setState({ chatInput: e.target.value });
   sendChatMessage = (textArg) => {
     const text = (typeof textArg === 'string' ? textArg : this.state.chatInput).trim();
@@ -6104,10 +6111,12 @@ class Component extends DCLogic {
       chatIsOpen: !!chatOpen,
       openChat: this.openChat,
       closeChat: this.closeChat,
+      stopPropagation: this.stopPropagation,
       onChatInputChange: this.onChatInputChange,
       onChatFormSubmit: this.onChatFormSubmit,
       chatInput: chatInput || '',
       chatTyping: !!chatTyping,
+      orbBreatheSpeed: chatTyping ? '1s' : '3.4s',
       chatEscalateHref,
       hasChatEscalateHref: !!chatEscalateHref,
       chatMessages: (chatMessages || []).map((m) => {

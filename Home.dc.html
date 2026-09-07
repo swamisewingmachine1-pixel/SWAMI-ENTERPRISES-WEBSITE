@@ -207,10 +207,17 @@
 @keyframes swFadeIn { from { opacity:0; } to { opacity:1; } }
 @keyframes swTypingDot { 0%,60%,100%{ opacity:0.35; transform:translateY(0); } 30%{ opacity:1; transform:translateY(-3px); } }
 @keyframes swOrbBreathe { 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.07); } }
-@keyframes swOrbHue { 0%{ filter:hue-rotate(0deg); } 100%{ filter:hue-rotate(360deg); } }
 @keyframes swOrbWake { 0%{ transform:scale(0.2); opacity:0; } 60%{ transform:scale(1.12); opacity:1; } 100%{ transform:scale(1); opacity:1; } }
 @keyframes swOverlayIn { from{ opacity:0; backdrop-filter:blur(0px); } to{ opacity:1; backdrop-filter:blur(10px); } }
 @keyframes swModalIn { from{ opacity:0; transform:scale(0.94) translateY(14px); } to{ opacity:1; transform:scale(1) translateY(0); } }
+@keyframes swOrbSpin { to{ transform:rotate(360deg); } }
+@keyframes swOrbSpinRev { to{ transform:rotate(-360deg); } }
+.sw-orb { position:relative; border-radius:50%; overflow:hidden; background:#03060c; box-shadow:0 0 44px rgba(59,130,246,0.55),0 10px 26px rgba(0,0,0,0.45); animation:swOrbBreathe 3.4s ease-in-out infinite; }
+.sw-orb::before { content:''; position:absolute; inset:-65%; background:conic-gradient(from 0deg,transparent 0deg,#60a5fa 55deg,#c7ddff 90deg,transparent 130deg,transparent 210deg,#2563eb 260deg,#93c5fd 300deg,transparent 340deg,transparent 360deg); filter:blur(9px); animation:swOrbSpin 3.6s linear infinite; }
+.sw-orb::after { content:''; position:absolute; inset:8%; border-radius:50%; background:radial-gradient(circle at 32% 26%,rgba(255,255,255,0.4),transparent 45%),radial-gradient(circle at 70% 75%,rgba(59,130,246,0.25),transparent 55%); }
+.sw-orb.sw-orb-fast::before { animation-duration:1s; }
+.sw-orb-launcher { width:64px; height:64px; }
+.sw-orb-hero { width:76px; height:76px; }
 body { margin:0; zoom:0.85; }
 .nav-mega-wrap:hover .nav-mega-panel { opacity:1 !important; pointer-events:auto !important; transform:translateY(0) !important; }
 /* Mobile bar is 76px tall, desktop bar is 52px — the hero's margin-top must match
@@ -2464,9 +2471,8 @@ a:hover { color:#3D7BFF; }
   </div>
 
   <!-- ASK SWAMI CHAT WIDGET (renders on every page) -->
-  <div style="position:fixed;right:28px;bottom:28px;z-index:2100;width:64px;height:64px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center" onClick="{{ openChat }}">
-    <div style="position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 32% 28%,#5B8CFF,#0A5CFF 55%,#5227D6 100%);animation:swOrbBreathe 3.4s ease-in-out infinite;box-shadow:0 12px 30px rgba(10,92,255,0.45)"></div>
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="position:relative"><path d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4.4 3.3A.6.6 0 0 1 3.6 19V7Z" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"></path><circle cx="9" cy="10" r="1.1" fill="#fff"></circle><circle cx="13" cy="10" r="1.1" fill="#fff"></circle><circle cx="17" cy="10" r="1.1" fill="#fff"></circle></svg>
+  <div style="position:fixed;right:28px;bottom:28px;z-index:2100;cursor:pointer" onClick="{{ openChat }}">
+    <div class="sw-orb sw-orb-launcher"></div>
     <div style="position:absolute;top:2px;right:2px;width:12px;height:12px;border-radius:50%;background:#25D366;border:2.5px solid #050505"></div>
   </div>
   <sc-if value="{{ chatIsOpen }}" hint-placeholder-val="{{ false }}">
@@ -2474,9 +2480,7 @@ a:hover { color:#3D7BFF; }
       <div style="width:min(520px,94vw);height:min(760px,90vh);background:linear-gradient(180deg,#0D0D11,#08080A);border:1px solid rgba(255,255,255,0.07);border-radius:28px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,0.6),0 0 0 1px rgba(91,140,255,0.1);animation:swModalIn 0.4s cubic-bezier(.2,.9,.3,1.1) both" onClick="{{ stopPropagation }}">
         <div style="position:relative;padding:36px 24px 22px;display:flex;flex-direction:column;align-items:center;text-align:center;border-bottom:1px solid rgba(255,255,255,0.06);background:radial-gradient(ellipse at 50% -20%,rgba(91,140,255,0.16),transparent 70%)">
           <span style="position:absolute;top:16px;right:16px;cursor:pointer;color:#6B7280;font-size:16px;line-height:1;padding:8px;border-radius:50%" onClick="{{ closeChat }}">✕</span>
-          <div style="width:76px;height:76px;border-radius:50%;position:relative;margin-bottom:14px">
-            <div style="position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 32% 28%,#5B8CFF,#0A5CFF 55%,#5227D6 100%);animation:swOrbWake 0.6s cubic-bezier(.2,.9,.3,1.1) both,swOrbBreathe {{ orbBreatheSpeed }} ease-in-out infinite 0.6s;box-shadow:0 0 46px rgba(91,140,255,0.5)"></div>
-          </div>
+          <div class="{{ orbHeroClass }}" style="margin-bottom:14px;animation:swOrbWake 0.6s cubic-bezier(.2,.9,.3,1.1) both,swOrbBreathe 3.4s ease-in-out infinite 0.6s"></div>
           <div style="font-family:'Playfair Display',Georgia,serif;font-weight:900;font-style:italic;font-size:23px;color:#F5F5F7;letter-spacing:-0.01em">Ask Swami</div>
           <div style="font-size:12px;color:#8A8F9C;display:flex;align-items:center;gap:5px;margin-top:4px;font-family:'Manrope',sans-serif"><span style="width:5px;height:5px;border-radius:50%;background:#25D366;display:inline-block"></span> Online — real catalog, no scripts</div>
         </div>
@@ -6116,7 +6120,7 @@ class Component extends DCLogic {
       onChatFormSubmit: this.onChatFormSubmit,
       chatInput: chatInput || '',
       chatTyping: !!chatTyping,
-      orbBreatheSpeed: chatTyping ? '1s' : '3.4s',
+      orbHeroClass: chatTyping ? 'sw-orb sw-orb-hero sw-orb-fast' : 'sw-orb sw-orb-hero',
       chatEscalateHref,
       hasChatEscalateHref: !!chatEscalateHref,
       chatMessages: (chatMessages || []).map((m) => {

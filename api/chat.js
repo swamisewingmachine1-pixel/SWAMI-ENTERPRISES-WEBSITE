@@ -13,9 +13,16 @@ Address: E-2/73, 30 Feet Road, Block C, Chanakya Place I, New Delhi, 110059.
 Contact: +91 99713 36656 (call/WhatsApp), swamisewingmachine1@gmail.com.
 Showroom hours: Monday-Saturday 9:00 AM-8:00 PM, Sunday 9:00 AM-3:00 PM.
 
-Dealer status: Authorized JACK dealer. For MAQI, Pegasus, JUKI, SINGER, Golden Eagle, Groz-Beckert
-and DAYANG, Swami Enterprises is a stocking partner, NOT the brand's authorized/official distributor.
-Never claim "authorized" or "official" for any brand other than JACK.
+Dealer status: Swami Enterprises IS an authorized JACK dealer — always state this plainly and
+confidently whenever dealer/authorization status comes up, never phrase it as a denial or hedge.
+Separately, for the other 7 brands (MAQI, Pegasus, JUKI, SINGER, Golden Eagle, Groz-Beckert, DAYANG),
+Swami Enterprises is a trusted stocking partner carrying genuine stock — it is simply not each of
+those brands' own official/authorized distributor the way it is for JACK. Phrase this as a positive,
+separate fact ("for X we're a stocking partner carrying genuine stock"), never as "we are NOT
+authorized" or any wording that could sound like it questions the JACK authorization. If asked
+"are you an exclusive JACK showroom", answer that Swami Enterprises is an authorized JACK dealer
+(not necessarily the only or "exclusive" one in the city, but a genuine authorized dealer) —
+do not phrase this as "no" or as a negative answer.
 
 Brands carried (8 total): JACK (lockstitch, overlock, interlock, bartack machines), MAQI, Pegasus,
 JUKI, SINGER, Golden Eagle (spare parts), Groz-Beckert (needles), DAYANG (cutting machines).
@@ -111,14 +118,10 @@ module.exports = async (req, res) => {
       const errText = await upstream.text().catch(() => '');
       console.error('Gemini error', upstream.status, errText);
       res.statusCode = 502;
-      return res.end(JSON.stringify({ error: 'AI upstream error', status: upstream.status, detail: errText.slice(0, 500) }));
+      return res.end(JSON.stringify({ error: 'AI upstream error' }));
     }
 
     const data = await upstream.json();
-    if (body.debug) {
-      res.statusCode = 200;
-      return res.end(JSON.stringify(data));
-    }
     let text = data && data.candidates && data.candidates[0] && data.candidates[0].content &&
       data.candidates[0].content.parts && data.candidates[0].content.parts[0] &&
       data.candidates[0].content.parts[0].text;

@@ -314,7 +314,8 @@ test('reads the API key from an env var, never hardcodes or echoes it', () => {
 });
 test('system prompt forbids inventing prices, distributor status, or delivery dates beyond the real facts', () => {
   assert.ok(/Never invent prices, stock levels, delivery dates/.test(apiChatSrc));
-  assert.ok(/NOT the brand's authorized\/official distributor/.test(apiChatSrc));
+  assert.ok(/IS an authorized JACK dealer/.test(apiChatSrc));
+  assert.ok(/not each of\s*\n?\s*those brands' own official\/authorized distributor/.test(apiChatSrc));
   assert.ok(/F6 has automatic thread trimming/.test(apiChatSrc), 'must keep the F6 manual-trim correction grounded in the AI facts too, not just the old keyword KB');
 });
 test('unresolved questions are escalated to WhatsApp instead of guessed', () => {

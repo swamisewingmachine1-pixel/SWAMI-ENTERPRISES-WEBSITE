@@ -122,6 +122,7 @@ module.exports = async (req, res) => {
     }
 
     const data = await upstream.json();
+    if (body.debug) { res.statusCode = 200; return res.end(JSON.stringify(data)); }
     let text = data && data.candidates && data.candidates[0] && data.candidates[0].content &&
       data.candidates[0].content.parts && data.candidates[0].content.parts[0] &&
       data.candidates[0].content.parts[0].text;

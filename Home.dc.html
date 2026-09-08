@@ -4937,13 +4937,13 @@ class Component extends DCLogic {
     if (view === 'home') return 'Swami Enterprises — Industrial Sewing Machines & Bulk Spare Parts, Pan-India';
     if (view === 'product') {
       const m = this.machines.find((x) => x.id === id);
-      return (m ? m.model + ' — ' : '') + 'Swami Enterprises';
+      return (m ? m.model + ' — Specifications & Pan-India Delivery' : '') + ' | Swami Enterprises';
     }
     if (view === 'geProduct') {
       const p = this.accessoryPool.find((x) => x.id === id) || this.accessoryPool[0];
-      return p.name + ' — ' + (p.brand || 'Golden Eagle') + ' — Swami Enterprises';
+      return p.name + ' — ' + (p.brand || 'Golden Eagle') + ' | Pan-India Delivery | Swami Enterprises';
     }
-    const labels = { machines: 'Machines', industries: 'Industries', solutions: 'Solutions', finder: 'Find Your Machine', compare: 'Compare Machines', accessories: 'Accessories & Spare Parts', accGoldenEagle: 'Golden Eagle Accessories', accGrozBeckert: 'Groz-Beckert Needles', accDayang: 'DAYANG Cutting Machines', afterSales: 'After-Sales Service', about: 'About', contact: 'Contact Us', privacy: 'Privacy Policy', quote: 'Request a Quote', guideStitch: 'Lockstitch vs Overlock vs Flatlock: Which Machine for Which Job', guideCompareF6: 'JACK F6 vs JACK 2002G: Which Lockstitch Machine Do You Need', guideShirtFactory: 'What Machines Does a Shirt Factory Actually Need', guideIndustrialVsDomestic: 'Industrial vs Domestic Sewing Machines: What Actually Changes', guideKnitwear: 'What Machines Does a Knitwear Line Actually Need', guideFactorySetup: 'Setting Up a New Production Line: The Real Machine Sequence', landingAds: 'Industrial Sewing Machines Built for Serious Production' };
+    const labels = { machines: 'Machines — Pan-India Delivery', industries: 'Industries', solutions: 'Solutions', finder: 'Find Your Machine', compare: 'Compare Machines', accessories: 'Accessories & Spare Parts — Pan-India Delivery', accGoldenEagle: 'Golden Eagle Accessories', accGrozBeckert: 'Groz-Beckert Needles', accDayang: 'DAYANG Cutting Machines', afterSales: 'After-Sales Service', about: 'About', contact: 'Contact Us', privacy: 'Privacy Policy', quote: 'Request a Quote', guideStitch: 'Lockstitch vs Overlock vs Flatlock: Which Machine for Which Job', guideCompareF6: 'JACK F6 vs JACK 2002G: Which Lockstitch Machine Do You Need', guideShirtFactory: 'What Machines Does a Shirt Factory Actually Need', guideIndustrialVsDomestic: 'Industrial vs Domestic Sewing Machines: What Actually Changes', guideKnitwear: 'What Machines Does a Knitwear Line Actually Need', guideFactorySetup: 'Setting Up a New Production Line: The Real Machine Sequence', landingAds: 'Industrial Sewing Machines Built for Serious Production' };
     return (labels[view] || view) + ' — Swami Enterprises';
   };
   descriptionFor = (view, id) => {
@@ -4953,21 +4953,21 @@ class Component extends DCLogic {
       if (!m) return 'Swami Enterprises — authorized JACK sewing machine dealer, New Delhi.';
       const brand = m.manufacturer || 'JACK';
       const dealerPhrase = brand === 'JACK' ? 'authorized JACK dealer, New Delhi' : `${brand} partner, New Delhi`;
-      return `${m.model} — ${m.purpose} Real specifications, ${m.detailItems && m.detailItems.length ? 'official photography, ' : ''}${m.youtubeId ? 'product video, ' : ''}available from Swami Enterprises, ${dealerPhrase}.`;
+      return `${m.model} — ${m.purpose} Real specifications, ${m.detailItems && m.detailItems.length ? 'official photography, ' : ''}${m.youtubeId ? 'product video, ' : ''}available from Swami Enterprises, ${dealerPhrase} — dispatched pan-India.`;
     }
     if (view === 'geProduct') {
       const p = this.accessoryPool.find((x) => x.id === id) || this.accessoryPool[0];
-      return `${p.name} — ${p.desc} Genuine ${p.brand || 'Golden Eagle'} accessories, stocked by Swami Enterprises, New Delhi.`;
+      return `${p.name} — ${p.desc} Genuine ${p.brand || 'Golden Eagle'} accessories, stocked by Swami Enterprises, New Delhi, shipped pan-India.`;
     }
     const descs = {
-      machines: 'The full JACK industrial sewing machine range stocked by Swami Enterprises — lockstitch, overlock, interlock and bartack machines, real specifications.',
-      industries: 'What Swami Enterprises’ JACK machines are used for — shirts, uniforms, denim, knitwear, bags and technical sewing.',
-      solutions: 'We don’t just sell machines — installation, training, maintenance, spare parts and technical support from Swami Enterprises.',
-      accessories: 'Genuine accessories, spare parts and cutting machines from Golden Eagle, Groz-Beckert and DAYANG — needles, blades, presser feet, thread cutters and more, stocked by Swami Enterprises.',
-      accGoldenEagle: 'Genuine Golden Eagle spares and accessories — needles, cutting blades, abrasive belts, presser feet, and thread cutters, stocked by Swami Enterprises.',
-      accGrozBeckert: 'Genuine Groz-Beckert industrial sewing machine needles, from the world\'s leading needle manufacturer, stocked by Swami Enterprises.',
-      accDayang: 'DAYANG round-knife fabric cutting machines, stocked by Swami Enterprises, New Delhi.',
-      afterSales: 'Installation, training, maintenance, genuine spare parts, technical support and AMC — real after-sales service from Swami Enterprises, authorized JACK dealer, New Delhi.',
+      machines: 'The full JACK industrial sewing machine range stocked by Swami Enterprises — lockstitch, overlock, interlock and bartack machines, real specifications, dispatched pan-India from our Delhi showroom.',
+      industries: 'What Swami Enterprises’ JACK machines are used for — shirts, uniforms, denim, knitwear, bags and technical sewing, supplied to factories across India.',
+      solutions: 'We don’t just sell machines — installation, training, maintenance, spare parts and technical support from Swami Enterprises, serving customers pan-India.',
+      accessories: 'Genuine accessories, spare parts and cutting machines from Golden Eagle, Groz-Beckert and DAYANG — needles, blades, presser feet, thread cutters and more, stocked by Swami Enterprises and shipped pan-India.',
+      accGoldenEagle: 'Genuine Golden Eagle spares and accessories — needles, cutting blades, abrasive belts, presser feet, and thread cutters, stocked by Swami Enterprises, shipped pan-India.',
+      accGrozBeckert: 'Genuine Groz-Beckert industrial sewing machine needles, from the world\'s leading needle manufacturer, stocked by Swami Enterprises, shipped pan-India.',
+      accDayang: 'DAYANG round-knife fabric cutting machines, stocked by Swami Enterprises, New Delhi, dispatched pan-India.',
+      afterSales: 'Installation, training, maintenance, genuine spare parts, technical support and AMC — real after-sales service from Swami Enterprises, authorized JACK dealer, New Delhi, supporting customers across India.',
       finder: 'A short, honest questionnaire based on Swami Enterprises’ verified JACK machine data to find the right machine for your production.',
       compare: 'Compare JACK sewing machines side by side — real, verified specifications from Swami Enterprises.',
       about: 'Swami Enterprises — authorized JACK sewing machine dealer, Chanakya Place, New Delhi, trading since 2015. Bulk and wholesale orders shipped across India.',

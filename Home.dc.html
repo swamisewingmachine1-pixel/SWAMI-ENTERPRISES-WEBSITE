@@ -477,7 +477,7 @@ a:hover { color:#3D7BFF; }
            a link straight into that brand's page. margin-top clears the now-
            permanently-opaque fixed nav so the slide's top edge isn't hidden behind it. -->
       <div class="hero-video-wrap" style="min-height:calc(94vh - 76px);margin-top:76px;position:relative;background:#000;overflow:hidden;animation:swFadeUp 0.7s ease both">
-        <video id="hero-video-el" autoplay muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;z-index:0;display:{{ heroVideoDisplay }}" src="uploads/jack-hero-video.mp4"></video>
+        <video id="hero-video-el" autoplay muted playsinline preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;z-index:0;display:{{ heroVideoDisplay }}" src="uploads/jack-hero-video-v2.mp4"></video>
         <sc-if value="{{ heroIsImageSlide }}" hint-placeholder-val="{{ false }}">
           <img src="{{ currentHeroSlide.src }}" alt="{{ currentHeroSlide.brand }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0">
         </sc-if>
@@ -5158,8 +5158,8 @@ class Component extends DCLogic {
   // instead of inventing one. Groz-Beckert's slide reuses the real campaign banner
   // already sourced for their accessories page.
   getHeroSlides = () => [
-    { type: 'video', src: 'uploads/jack-hero-video.mp4', brand: 'JACK', tagline: 'Intelligent garment manufacturing, total solution provider.', ctaLabel: 'View JACK Machines', go: () => this.goToView('machines') },
-    { type: 'video', src: 'uploads/jack-intelligent-solution.mp4', brand: 'JACK', tagline: 'Shanghai stock listed — the machines behind India’s garment factories.', ctaLabel: 'View JACK Machines', go: () => this.goToView('machines') },
+    { type: 'video', src: 'uploads/jack-hero-video-v2.mp4', brand: 'JACK', tagline: 'Intelligent garment manufacturing, total solution provider.', ctaLabel: 'View JACK Machines', go: () => this.goToView('machines') },
+    { type: 'video', src: 'uploads/jack-intelligent-solution-v2.mp4', brand: 'JACK', tagline: 'Shanghai stock listed — the machines behind India’s garment factories.', ctaLabel: 'View JACK Machines', go: () => this.goToView('machines') },
     { type: 'image', src: 'uploads/maqi-homepage-hero.jpg', brand: 'MAQI', tagline: 'MAQI Technology Group — the real headquarters behind our smart lockstitch machines.', ctaLabel: 'View MAQI Machines', go: this.goMaqiMachines },
     { type: 'image', src: 'uploads/pegasus-homepage-hero.jpg', brand: 'PEGASUS', tagline: 'New trend with M900neo — Pegasus’s latest overlock series, built in Japan.', ctaLabel: 'View Pegasus Machines', go: this.goPegasusMachines },
     { type: 'image', src: 'uploads/juki-homepage-hero2.jpg', brand: 'JUKI', tagline: 'Globally trusted industrial sewing machines and solutions.', ctaLabel: 'View JUKI Machines', go: this.goJukiMachines },

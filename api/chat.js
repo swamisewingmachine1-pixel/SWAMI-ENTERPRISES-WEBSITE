@@ -9,6 +9,8 @@
 
 const FACTS = `
 Business: Swami Enterprises, industrial sewing machine and spare parts dealer, trading since 2015.
+Scale: sells an average of 10,000+ machines a year across all brands, from single machines to full
+production-line bulk orders, dispatched pan-India.
 Address: E-2/73, 30 Feet Road, Block C, Chanakya Place I, New Delhi, 110059.
 Contact: +91 99713 36656 (call/WhatsApp), swamisewingmachine1@gmail.com.
 Showroom hours: Monday-Saturday 9:00 AM-8:00 PM, Sunday 9:00 AM-3:00 PM.

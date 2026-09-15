@@ -175,7 +175,7 @@
   animation:sw-splash-out 0.6s ease 1.3s both;
 }
 #sw-splash img {
-  width:120px; height:120px;
+  width:160px; height:160px;
   animation:sw-splash-pulse 1.3s ease both;
 }
 @keyframes sw-splash-out { to { opacity:0; visibility:hidden; pointer-events:none; } }
@@ -256,7 +256,7 @@ a:hover { color:#3D7BFF; }
   <!-- NAV -->
   <div style="position:fixed;top:0;left:0;right:0;height:76px;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(24px,5vw,64px);display:{{ mobileBarDisplay }};background:{{ navBg }};backdropFilter:blur({{ navBlur }}px);WebkitBackdropFilter:blur({{ navBlur }}px);border-bottom:1px solid {{ navBorder }};transform:{{ navTransform }};transition:transform 0.32s cubic-bezier(0.4,0,0.2,1),background 0.4s ease">
     <div style="display:flex;align-items:center;gap:9px;cursor:pointer" onClick="{{ goHome }}">
-      <img src="/uploads/swami-wordmark-black-v1.png" alt="Swami Enterprises" style="height:26px;width:auto">
+      <img src="/uploads/swami-wordmark-black-v1.png" alt="Swami Enterprises" style="height:34px;width:auto">
     </div>
     <span style="color:{{ navText }};font-size:20px;cursor:pointer;display:{{ hamburgerVisibleDisplay }}" onClick="{{ toggleMobileNav }}">☰</span>
   </div>
@@ -264,7 +264,7 @@ a:hover { color:#3D7BFF; }
   <!-- DESKTOP FULL-WIDTH BAR (Apple-style) -->
   <div style="position:fixed;top:0;left:0;right:0;height:52px;z-index:1001;display:{{ desktopNavDisplay }};align-items:center;justify-content:space-between;padding:0 clamp(24px,3vw,40px);background:{{ navBg }};backdropFilter:blur({{ navBlur }}px);WebkitBackdropFilter:blur({{ navBlur }}px);border-bottom:1px solid {{ navBorder }};transform:{{ navTransform }};transition:transform 0.32s cubic-bezier(0.4,0,0.2,1),background 0.4s ease">
     <div style="display:flex;align-items:center;gap:8px;cursor:pointer" onClick="{{ goHome }}">
-      <img src="/uploads/swami-wordmark-black-v1.png" alt="Swami Enterprises" style="height:18px;width:auto">
+      <img src="/uploads/swami-wordmark-black-v1.png" alt="Swami Enterprises" style="height:24px;width:auto">
     </div>
     <div style="display:flex;align-items:center;gap:clamp(22px,2.2vw,34px)">
       <span style="font-size:12px;font-weight:400;cursor:pointer;color:{{ navText }};opacity:{{ navHomeOpacity }}" onClick="{{ goHome }}">Home</span>
@@ -442,7 +442,7 @@ a:hover { color:#3D7BFF; }
   <sc-if value="{{ mobileNavOpen }}" hint-placeholder-val="{{ false }}">
     <div style="position:fixed;inset:0;background:#050505;z-index:999;display:flex;flex-direction:column;justify-content:center;padding:80px clamp(28px,8vw,60px);gap:26px;animation:swFadeIn 0.3s ease both">
       <span style="position:absolute;top:26px;right:28px;color:#F5F5F7;font-size:24px;cursor:pointer" onClick="{{ toggleMobileNav }}">×</span>
-      <img src="/uploads/swami-wordmark-white-v1.png" alt="Swami Enterprises" style="height:20px;width:auto;position:absolute;top:26px;left:28px">
+      <img src="/uploads/swami-wordmark-white-v1.png" alt="Swami Enterprises" style="height:26px;width:auto;position:absolute;top:24px;left:28px">
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goToViewAndClose }}" data-target="home">Home</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goMachinesAndClose }}">Machines</span>
       <span style="font-size:28px;font-weight:600;color:#F5F5F7;cursor:pointer" onClick="{{ goMaqiMachinesAndClose }}">MAQI Machines</span>
@@ -1569,7 +1569,7 @@ a:hover { color:#3D7BFF; }
            would otherwise sit directly on top of these links on small
            screens — confirmed by testing, not a hypothetical. -->
       <div style="background:#050505;padding:clamp(40px,6vw,56px) clamp(24px,8vw,80px) calc(clamp(40px,6vw,56px) + 76px);display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center">
-        <img src="/uploads/swami-wordmark-white-v1.png" alt="Swami Enterprises" style="height:14px;width:auto">
+        <img src="/uploads/swami-wordmark-white-v1.png" alt="Swami Enterprises" style="height:19px;width:auto">
         <div style="display:flex;gap:24px;flex-wrap:wrap;font-size:13px;color:#A1A1A6">
           <a href="tel:+919971336656" onClick="{{ trackCallClick }}" style="color:#A1A1A6;text-decoration:none">+91 99713 36656</a>
           <a href="{{ laWhatsappHref }}" target="_blank" rel="noopener noreferrer" onClick="{{ trackWhatsappClick }}" style="color:#A1A1A6;text-decoration:none">WhatsApp</a>
@@ -2437,7 +2437,7 @@ a:hover { color:#3D7BFF; }
         <div style="font-size:14px;color:#A1A1A6;white-space:nowrap">Showroom &amp; service</div>
       </div>
       <div style="justify-self:end;text-align:right;margin-right:clamp(24px,6vw,80px)">
-        <img src="/uploads/swami-wordmark-white-v1.png" alt="Swami Enterprises — Garments Sewing Machine" style="height:44px;width:auto">
+        <img src="/uploads/swami-wordmark-white-v1.png" alt="Swami Enterprises — Garments Sewing Machine" style="height:58px;width:auto">
         <div style="display:flex;gap:18px;margin-top:32px;justify-content:flex-end">
           <span style="width:56px;height:56px;border-radius:50%;background:rgba(247,247,245,0.08);display:flex;align-items:center;justify-content:center;cursor:pointer" title="Facebook (link coming soon)">
             <svg width="25" height="25" viewBox="0 0 24 24" fill="#F5F5F7"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06C2 17.08 5.66 21.23 10.44 22v-7.03H7.9v-2.91h2.54V9.85c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22C18.34 21.23 22 17.08 22 12.06Z"/></svg>

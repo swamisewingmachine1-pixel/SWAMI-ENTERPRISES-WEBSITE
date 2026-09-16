@@ -2936,6 +2936,7 @@ class Component extends DCLogic {
       operations: ['interlock', 'coverstitch'],
       searchTerms: ['w4', 'jack w4', 'interlock', 'coverstitch', 'knitwear'],
       imgId: 'lib-w4', imgSrc: 'uploads/w4-cutout.webp', imgPh: 'Drop: JACK W4 photograph',
+      resources: [{ label: 'JACK W4 — Product Catalogue (PDF)', href: 'uploads/jack-w4-catalogue.pdf' }],
       specs: [
         ['Model shown', 'W4-D-01GB'], ['Needle', 'UY128GAS, 11-14#'], ['Needle no. / thread no.', '3 / 5'],
         ['Stitch length', '1.5–4.5mm'], ['Stitch width', '5.6 / 6.4mm'], ['Differential ratio', '0.65–1.3'],
@@ -2962,6 +2963,7 @@ class Component extends DCLogic {
       operations: ['interlock', 'coverstitch'],
       searchTerms: ['k7', 'jack k7', 'interlock', 'coverstitch', 'knitwear'],
       imgId: 'lib-k7', imgSrc: 'uploads/k7-cutout.jpg', imgPh: 'Drop: JACK K7 photograph',
+      resources: [{ label: 'JACK K7 — Product Catalogue (PDF)', href: 'uploads/jack-k7-catalogue.pdf' }],
       specs: [
         ['Model shown', 'K7-UT-01GB'], ['Needle size', '10#'], ['No. of needles / threads', '3 / 5'],
         ['Stitch length', '1.5–4.5mm'], ['Differential ratio', '0.6–1.8'], ['Preset / max speed', '4500 / 6000 s.p.m.'],
@@ -3040,6 +3042,7 @@ class Component extends DCLogic {
       operations: ["lockstitch","straight stitch"],
       searchTerms: ["a2c","jack a2c","lockstitch","straight stitch"],
       imgId: 'lib-a2c', imgSrc: 'uploads/jack-a2c-hero.jpg', imgPh: 'Drop: Jack A2C photograph',
+      resources: [{ label: 'JACK A2C-FST — Product Catalogue (PDF)', href: 'uploads/jack-a2c-catalogue.pdf' }],
       specs: [
         ['Series', 'Lockstitch (A-series)'],
         ['Needle', 'DBx1, 11-18#'],
@@ -3075,6 +3078,7 @@ class Component extends DCLogic {
       operations: ["lockstitch","straight stitch"],
       searchTerms: ["a3c","jack a3c","lockstitch","straight stitch"],
       imgId: 'lib-a3c', imgSrc: 'uploads/jack-a3c-hero.webp', imgPh: 'Drop: Jack A3C photograph',
+      resources: [{ label: 'JACK A3c — Product Catalogue (PDF)', href: 'uploads/jack-a3c-catalogue.pdf' }],
       specs: [
         ['Series', 'Lockstitch (A-series)'],
         ['Needle', 'DBx1, 11-18#'],
@@ -3460,6 +3464,7 @@ class Component extends DCLogic {
       operations: ["interlock","coverstitch"],
       searchTerms: ["8009","jack 8009","interlock","coverstitch"],
       imgId: 'lib-8009', imgSrc: 'uploads/jack-8009-hero.webp', imgPh: 'Drop: Jack JK-8009VCDII/UTL photograph',
+      resources: [{ label: 'JACK JK-8009VCDII/UTL — Product Catalogue (PDF)', href: 'uploads/jack-8009vcdii-catalogue.pdf' }],
       specs: [
         ['Series', 'Interlock, multi-needle'],
         ['Needle', 'UO113, 14-16#'],
@@ -3548,6 +3553,7 @@ class Component extends DCLogic {
       operations: ["lockstitch","straight stitch"],
       searchTerms: ["h2","jack h2","lockstitch","straight stitch"],
       imgId: 'lib-h2', imgSrc: 'uploads/jack-h2-hero.webp', imgPh: 'Drop: Jack H2 photograph',
+      resources: [{ label: 'JACK H2 — Product Catalogue (PDF)', href: 'uploads/jack-h2-catalogue.pdf' }],
       specs: [
         ['Series', 'Heavy-Duty, top feed'],
         ['Needle', 'DPx17, 20-23#'],
@@ -3681,7 +3687,10 @@ class Component extends DCLogic {
       operations: ["bartack","pattern stitching"],
       searchTerms: ["t1900","jack t1900","bartack","pattern stitching"],
       imgId: 'lib-t1900', imgSrc: 'uploads/jk-t1900g.jpg', imgPh: 'Drop: Jack JK-T1900/1903 photograph',
-      resources: [{ label: 'JACK JK-T1900G — Product Literature (PDF)', href: 'uploads/jack-t1900-literature.pdf' }],
+      resources: [
+        { label: 'JACK JK-T1900G — Product Literature (PDF)', href: 'uploads/jack-t1900-literature.pdf' },
+        { label: 'JACK JK-T1900G/1903G/1906G — Product Catalogue (PDF)', href: 'uploads/jack-t1900-catalogue.pdf' },
+      ],
       specs: [
         ['Type', 'Bartack / button sewer'],
         ['Stitch field', '60 × 50mm'],
@@ -3741,6 +3750,7 @@ class Component extends DCLogic {
       operations: ["bartack","pattern stitching"],
       searchTerms: ["1790","jack 1790","bartack","pattern stitching"],
       imgId: 'lib-1790', imgSrc: 'uploads/jack-1790-hero.webp', imgPh: 'Drop: Jack JK-T1790G photograph',
+      resources: [{ label: 'JACK JK-T1790G — Product Catalogue (PDF)', href: 'uploads/jack-t1790g-catalogue.pdf' }],
       specs: [
         ['Type', 'Buttonhole'],
         ['Needle', 'DPx5, 12#'],
@@ -3910,6 +3920,103 @@ class Component extends DCLogic {
         { n: '02', title: 'Multi-material cutting', desc: 'Rated for fabric, patterns, interfacing and lightweight leather — one pair covers most cutting tasks on a tailoring bench.' },
       ],
       highlightTags: ['High-carbon precision-ground blade', 'Multi-material cutting'],
+    },
+
+    // Real JACK models added from Swami Enterprises' own 2026 product catalogues
+    // (PDF literature, real spec tables photographed from the JACK source brochure —
+    // not fabricated). Each catalogue is also linked below as a downloadable resource.
+    {
+      id: 'jack-jkt781g',
+      model: 'JACK JK-T781G',
+      manufacturer: 'JACK',
+      category: 'Buttonholing',
+      purpose: 'Integrated electronic lockstitch buttonholing machine on a servo-driven platform, with automatic presser-foot lifting and thread trimming, running up to 3600 s.p.m.',
+      applications: ['shirts', 'wovens', 'garments'],
+      operations: ['buttonholing', 'lockstitch'],
+      searchTerms: ['jk-t781g', 't781g', 'jack t781g', 'buttonhole', 'buttonholing'],
+      imgId: 'lib-jack-t781g', imgSrc: 'uploads/jk-t781g-hero.webp', imgPh: 'Drop: JACK JK-T781G product photograph',
+      resources: [{ label: 'JACK JK-T781G — Product Catalogue (PDF)', href: 'uploads/jack-t781g-catalogue.pdf' }],
+      specs: [
+        ['Series', 'JK-T781G-Z (woven, 22x4 hole)'], ['Needle', 'DPx5 12# (DPx5KN 11# on knitting variant)'],
+        ['Presser foot lift', '12mm'], ['Max sewing speed', '3600 s.p.m.'], ['Remaining thread', '≤3mm'],
+        ['Parallel interspace', '0.2-2.5mm'], ['Thread trimming', 'Automatic'], ['Presser-foot lifting', 'Automatic'],
+        ['Dimensions', '730 x 365 x 695mm'], ['Weight', '46/66kg'], ['Variants', 'JK-T781G/T782G/T783G-Z, JK-T781GK-Z (knitting), JK-T781G-Z-F13'],
+      ],
+      capabilityItems: [
+        { n: '01', title: 'Servo-driven integration', desc: 'Low vibration and noise with high-efficiency positioning from the integrated servo platform.' },
+        { n: '02', title: 'Auto lifting & trimming', desc: 'Automatic presser-foot lift and thread trimming reduce manual steps between pieces.' },
+        { n: '03', title: 'Short thread remaining', desc: 'Remaining thread kept within roughly 3mm, cutting down manual thread-cutting work.' },
+      ],
+      highlightTags: ['3600 s.p.m.', '12mm presser foot lift', 'Automatic thread trimming', 'Servo-driven'],
+    },
+    {
+      id: 'jack-jkt1377e',
+      model: 'JACK JK-T1377E',
+      manufacturer: 'JACK',
+      category: 'Button Sewing',
+      purpose: 'Integrated computerized button-attaching machine with direct-drive architecture, an LCD operation panel and automatic thread trimming, for simple, fast button-sewing setup.',
+      applications: ['shirts', 'garments'],
+      operations: ['button attaching', 'button sewing'],
+      searchTerms: ['jk-t1377e', 't1377e', 'jack t1377e', 'button attaching', 'button sewing'],
+      imgId: 'lib-jack-t1377e', imgSrc: 'uploads/jk-t1377e-hero.webp', imgPh: 'Drop: JACK JK-T1377E product photograph',
+      resources: [{ label: 'JACK JK-T1377E — Product Catalogue (PDF)', href: 'uploads/jack-t1377e-catalogue.pdf' }],
+      specs: [
+        ['Needle', 'TQx1 16#'], ['Stitch', '1'], ['Thread', '1'], ['Button diameter', '10-28mm'],
+        ['Foot lift', '9mm'], ['Max sewing speed', '1500 s.p.m.'], ['Thread trimming', 'Automatic'],
+        ['Presser-foot lifting', 'Automatic'], ['Dimensions', '625 x 465 x 440mm'], ['Weight', '28.6/34.5kg'],
+      ],
+      capabilityItems: [
+        { n: '01', title: 'Three patterns', desc: 'Three button-sewing pattern options built in.' },
+        { n: '02', title: 'Integrated direct drive', desc: 'Power-saving, direct-drive positioning.' },
+        { n: '03', title: 'LCD operation panel', desc: 'Simple visual setup and operation from the built-in display.' },
+      ],
+      highlightTags: ['1500 s.p.m.', 'LCD operation panel', 'Direct drive', 'Automatic thread trimming'],
+    },
+    {
+      id: 'jack-c3c',
+      model: 'JACK C3c',
+      manufacturer: 'JACK',
+      category: 'Overlock',
+      purpose: 'High-speed overlock machine with a servo-assisted presser-foot shear, running up to 5500 s.p.m., available in 3-, 4-, 5- and 6-thread configurations for different seam needs.',
+      applications: ['garments', 'wovens', 'knitwear'],
+      operations: ['overlock'],
+      searchTerms: ['c3c', 'jack c3c', 'overlock'],
+      imgId: 'lib-jack-c3c', imgSrc: 'uploads/jack-c3c-hero.webp', imgPh: 'Drop: JACK C3c product photograph',
+      resources: [{ label: 'JACK C3c — Product Catalogue (PDF)', href: 'uploads/jack-c3c-catalogue.pdf' }],
+      specs: [
+        ['Configurations', 'C3c-3-02/233 (3-thread) up to C3c-6-03/333 (6-thread)'], ['Needle', '#11 or #14 depending on configuration'],
+        ['Max sewing speed', '5500 s.p.m.'], ['Differential ratio', '0.7-2'], ['Presser foot lift', '6.5mm'],
+        ['Dimensions', '520 x 360 x 510mm'], ['Weight', '27.32/34.65kg'],
+      ],
+      capabilityItems: [
+        { n: '01', title: 'Servo-assisted shear', desc: 'Soft shear/cutting sound with fast response from the servo-assisted presser-foot shear.' },
+        { n: '02', title: 'Smooth stitches', desc: 'Reduced lint output for a cleaner seam finish.' },
+        { n: '03', title: 'Multiple thread options', desc: '3-, 4-, 5- and 6-thread configurations to match different seam requirements.' },
+      ],
+      highlightTags: ['5500 s.p.m.', 'Servo-assisted shear', '3/4/5/6-thread configurations'],
+    },
+    {
+      id: 'jack-e5',
+      model: 'JACK E5',
+      manufacturer: 'JACK',
+      category: 'Overlock',
+      purpose: 'Thickness-adjustable, direct-drive overlock machine built for stable seam output across light and heavy material, running up to 5500 s.p.m. with a wide 90-295V operating voltage.',
+      applications: ['garments', 'denim', 'workwear'],
+      operations: ['overlock'],
+      searchTerms: ['e5', 'jack e5', 'overlock'],
+      imgId: 'lib-jack-e5', imgSrc: 'uploads/jack-e5-hero.webp', imgPh: 'Drop: JACK E5 product photograph',
+      resources: [{ label: 'JACK E5 — Product Catalogue (PDF)', href: 'uploads/jack-e5-catalogue.pdf' }],
+      specs: [
+        ['Configurations', 'E5-3-02/233 (3-thread) up to E5-6-M04/435 (6-thread)'], ['Needle', '#11 to #19 depending on configuration'],
+        ['Max sewing speed', '5500 s.p.m.'], ['Operating voltage', '90-295V'], ['Presser foot lift', '5.5-7mm'],
+        ['Dimensions', '515 x 360 x 510mm'],
+      ],
+      capabilityItems: [
+        { n: '01', title: 'Light/heavy adjustable', desc: 'Free material-thickness adjustment for light or heavy fabric.' },
+        { n: '02', title: 'Seam thickness upgrade', desc: 'Long stroke for stable power output on thicker seams.' },
+        { n: '03', title: 'Wide voltage', desc: 'Operates across a 90-295V range.' },
+      ],
+      highlightTags: ['5500 s.p.m.', 'Thickness-adjustable', 'Wide voltage 90-295V', 'Direct drive'],
     },
 
     // Real MAQI Lockstitch-series industrial sewing machines, sourced from MAQI's

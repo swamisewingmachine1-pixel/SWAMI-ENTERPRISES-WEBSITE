@@ -24,7 +24,7 @@ Not a fit / do not claim: this catalog does not include non-JACK-family sewing m
 
 ## Machines
 
-Full catalog: https://swamienterprises.online/machines (74 models)
+Full catalog: https://swamienterprises.online/machines (78 models)
 
 ### JACK
 - [JACK F6](https://swamienterprises.online/machines/jack-f6) — Lockstitch. Direct-drive computerized lockstitch machine running up to 5000 s.p.m. on a built-in silent servo motor, with oil-free semi-dry lubrication and a built-in thread-cutting knife for shirts, wovens and uniform work. Needle system: DBx1, 11-18#.
@@ -69,6 +69,10 @@ Full catalog: https://swamienterprises.online/machines (74 models)
 - [JACK JK-T3](https://swamienterprises.online/machines/jack-t3-cutter) — Cutting Equipment. Straight-blade fabric cutting machine for clean, precise cuts through multiple layers of material — genuine Swedish high-speed steel blade with an integrated sharpening stone.
 - [JACK L5](https://swamienterprises.online/machines/jack-l5-press) — Finishing Equipment. Industrial ironing table with steam generator boiler for garment finishing and pressing — cyclonic vacuum motor with electromagnetic heat exchange for consistent, wrinkle-free results.
 - [JACK Tailor Scissors](https://swamienterprises.online/machines/jack-tailor-scissors) — Hand Tools. Professional-grade tailoring scissors in high-carbon steel, for fabric, patterns, interfacing and lightweight leather across multiple layers.
+- [JACK JK-T781G](https://swamienterprises.online/machines/jack-jkt781g) — Buttonholing. Integrated electronic lockstitch buttonholing machine on a servo-driven platform, with automatic presser-foot lifting and thread trimming, running up to 3600 s.p.m. Needle system: DPx5 12# (DPx5KN 11# on knitting variant).
+- [JACK JK-T1377E](https://swamienterprises.online/machines/jack-jkt1377e) — Button Sewing. Integrated computerized button-attaching machine with direct-drive architecture, an LCD operation panel and automatic thread trimming, for simple, fast button-sewing setup. Needle system: TQx1 16#.
+- [JACK C3c](https://swamienterprises.online/machines/jack-c3c) — Overlock. High-speed overlock machine with a servo-assisted presser-foot shear, running up to 5500 s.p.m., available in 3-, 4-, 5- and 6-thread configurations for different seam needs. Needle system: #11 or #14 depending on configuration.
+- [JACK E5](https://swamienterprises.online/machines/jack-e5) — Overlock. Thickness-adjustable, direct-drive overlock machine built for stable seam output across light and heavy material, running up to 5500 s.p.m. with a wide 90-295V operating voltage. Needle system: #11 to #19 depending on configuration.
 
 ### MAQI
 - [MAQI Q7T](https://swamienterprises.online/machines/maqi-q7t) — Lockstitch. MAQI's Q7T is an electronically controlled lockstitch machine built around quiet operation — silent electronic backtack, double-knife thread trimming that leaves a short thread end, and a closed automatic oil-pan lubrication system that keeps the machine and fabric free of oil stains.

@@ -20,6 +20,7 @@
     { "source": "/privacy", "destination": "/Home.dc.html" },
     { "source": "/after-sales-service", "destination": "/Home.dc.html" },
     { "source": "/request-quote", "destination": "/Home.dc.html" },
+    { "source": "/start-a-project", "destination": "/Home.dc.html" },
     { "source": "/guides/:slug", "destination": "/Home.dc.html" },
     { "source": "/locations", "destination": "/Home.dc.html" },
     { "source": "/locations/:slug", "destination": "/Home.dc.html" },

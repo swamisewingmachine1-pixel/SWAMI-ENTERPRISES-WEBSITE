@@ -10,7 +10,7 @@
 // the honest state of it. Documented in docs/ADMIN_SETUP.md. Good enough
 // for one owner checking a dashboard; not what you'd want with a sales team
 // of more than a couple of trusted people sharing one password.
-const { kvSet, kvGet, kvRpush, kvLrange } = require('./_kv');
+const { kvSet, kvGet, kvRpush, kvLrange, kvIncrWithExpiry } = require('./_kv');
 
 const STATUSES = ['NEW', 'CONTACTED', 'QUALIFIED', 'QUOTATION', 'NEGOTIATION', 'WON', 'LOST'];
 const LOST_REASONS = ['Price', 'Competitor', 'Timing', 'No response', 'Requirement changed', 'Other'];
@@ -27,6 +27,7 @@ function isAuthorized(req) {
 // Each signal is a fixed, visible reason so a salesperson can see *why* a
 // lead is HIGH, not just trust a black-box number.
 function computePriority(lead) {
+  if (lead.leadType === 'enterprise_project') return computeEnterpriseScore(lead);
   const reasons = [];
   const qty = parseInt(lead.quantity, 10);
   if (qty && qty >= 10) reasons.push('quantity >= 10');
@@ -35,6 +36,29 @@ function computePriority(lead) {
   if (reasons.length >= 2) return { level: 'HIGH', reasons };
   if (reasons.length === 1) return { level: 'MEDIUM', reasons };
   return { level: 'LOW', reasons: [] };
+}
+
+// Internal-only lead-quality score for enterprise project enquiries — never
+// shown to the customer, only used to sort the admin dashboard. Every point
+// has a visible reason for the same "no black box" reason as computePriority.
+const HIGH_MACHINE_RANGES = ['51-100', '101-250', '250+'];
+const URGENT_TIMELINES = ['Immediately', 'Within 30 days', '1-3 months'];
+const DECISION_ROLES = ['Owner / Founder', 'Managing Director', 'Plant Head', 'Purchase / Procurement'];
+function computeEnterpriseScore(lead) {
+  let score = 0;
+  const reasons = [];
+  if (lead.machineRequirementRange === '250+') { score += 3; reasons.push('250+ machines'); }
+  else if (lead.machineRequirementRange === '101-250' || lead.machineRequirementRange === '51-100') { score += 3; reasons.push('51+ machines'); }
+  if (URGENT_TIMELINES.includes(lead.timeline)) { score += 2; reasons.push('timeline within 3 months'); }
+  if (lead.projectType === 'New factory' || lead.projectType === 'New production line') { score += 2; reasons.push('new factory/line'); }
+  if (DECISION_ROLES.includes(lead.role)) { score += 2; reasons.push('procurement/plant/owner role'); }
+  if (lead.website) { score += 1; reasons.push('website provided'); }
+  if (lead.installationRequired === 'Yes') { score += 1; reasons.push('installation required'); }
+  if (lead.serviceRequired === 'Yes') { score += 1; reasons.push('service required'); }
+  let level = 'enterprise_standard';
+  if (score >= 7) level = 'enterprise_high';
+  else if (score >= 4) level = 'enterprise_medium';
+  return { level, score, reasons };
 }
 
 function clean(str, max) {
@@ -63,8 +87,17 @@ async function handle(req, res) {
     if (typeof body === 'string') { try { body = JSON.parse(body); } catch (e) { body = {}; } }
     body = body || {};
 
+    // Honeypot: a real visitor never fills a field hidden with CSS/off-screen
+    // positioning. A bot filling every input in the DOM will. Silently accept
+    // (never tell the bot it was caught) but skip persistence.
+    if (clean(body.website2, 200)) {
+      res.statusCode = 201;
+      return res.end(JSON.stringify({ id: 'ok' }));
+    }
+    const leadType = body.leadType === 'enterprise_project' ? 'enterprise_project' : 'machine_quote';
     const fullName = clean(body.fullName, 120);
     const phone = clean(body.phone, 30);
+    const email = clean(body.email, 120);
     if (!fullName || !phone) {
       res.statusCode = 400;
       return res.end(JSON.stringify({ error: 'fullName and phone are required' }));
@@ -73,15 +106,29 @@ async function handle(req, res) {
       res.statusCode = 400;
       return res.end(JSON.stringify({ error: 'phone looks invalid' }));
     }
+    if (email && !/^\S+@\S+\.\S+$/.test(email)) {
+      res.statusCode = 400;
+      return res.end(JSON.stringify({ error: 'email looks invalid' }));
+    }
+    // Rate limit: at most 5 submissions per phone number per hour. A genuine
+    // buyer never needs more than that; a script retrying does.
+    try {
+      const hits = await kvIncrWithExpiry('ratelimit:leads:' + phone.replace(/\D/g, ''), 3600);
+      if (hits > 5) {
+        res.statusCode = 429;
+        return res.end(JSON.stringify({ error: 'Too many submissions from this number. Please try again later or WhatsApp us directly.' }));
+      }
+    } catch (e) { /* Redis hiccup should never block a real lead from saving */ }
 
     const id = (globalThis.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(36).slice(2);
     const lead = {
       id,
+      leadType,
       createdAt: new Date().toISOString(),
       fullName,
       companyName: clean(body.companyName, 120),
       phone,
-      email: clean(body.email, 120),
+      email,
       city: clean(body.city, 80),
       industry: clean(body.industry, 60),
       machine: clean(body.machine, 60),
@@ -101,13 +148,40 @@ async function handle(req, res) {
       quotation: null,
       wonLost: null,
     };
+
+    if (leadType === 'enterprise_project') {
+      if (!lead.companyName || !lead.city) {
+        res.statusCode = 400;
+        return res.end(JSON.stringify({ error: 'companyName and city are required for a project brief' }));
+      }
+      lead.role = clean(body.role, 60);
+      lead.state = clean(body.state, 60);
+      lead.factoryLocation = clean(body.factoryLocation, 160);
+      lead.website = clean(body.website, 200);
+      lead.projectType = clean(body.projectType, 60);
+      lead.industries = Array.isArray(body.industries) ? body.industries.map((x) => clean(String(x), 60)).filter(Boolean).slice(0, 12) : [];
+      lead.machineRequirementRange = clean(body.machineRequirementRange, 20);
+      lead.dailyProductionTarget = clean(body.dailyProductionTarget, 80);
+      lead.existingMachineCount = clean(body.existingMachineCount, 40);
+      lead.currentBrands = clean(body.currentBrands, 160);
+      lead.supportNeeds = Array.isArray(body.supportNeeds) ? body.supportNeeds.map((x) => clean(String(x), 60)).filter(Boolean).slice(0, 12) : [];
+      lead.requirementDescription = clean(body.requirementDescription, 1500);
+      lead.installationRequired = clean(body.installationRequired, 20);
+      lead.serviceRequired = clean(body.serviceRequired, 20);
+      lead.preferredContactMethod = clean(body.preferredContactMethod, 20);
+      lead.preferredContactTime = clean(body.preferredContactTime, 20);
+      lead.budgetRange = clean(body.budgetRange, 40);
+      lead.sourcePage = clean(body.sourcePage, 60) || 'start-a-project';
+      lead.status = 'NEW';
+    }
+
     lead.priority = computePriority(lead);
 
     await kvSet('lead:' + id, lead);
     await kvRpush('leads:index', id);
 
     res.statusCode = 201;
-    return res.end(JSON.stringify({ id }));
+    return res.end(JSON.stringify({ id, reference: 'SWM-PRJ-' + id.slice(0, 8).toUpperCase() }));
   }
 
   // Everything below is the admin surface — auth required.

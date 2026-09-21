@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Swami Enterprises — Industrial Sewing Machines & Bulk Spare Parts, Pan-India</title>
 <meta name="description" content="Authorized JACK dealer and importer in Delhi — industrial sewing machines and genuine spare parts, dispatched pan-India. Trading since 2015.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <link rel="canonical" href="https://swamienterprises.online/">
 <link rel="llms.txt" href="https://swamienterprises.online/llms.txt">
 <link rel="agent-instructions" href="https://swamienterprises.online/agent-instructions.txt">
@@ -1240,6 +1241,7 @@ a:hover { color:#3D7BFF; }
             <button type="submit" style="padding:16px;background:#0A5CFF;color:#fff;border:none;font-size:15px;font-weight:600;cursor:pointer;border-radius:980px">Request a Quote</button>
             <div style="text-align:center;font-size:13px;color:#6E6E73">Or call <a href="tel:+919971336656" onClick="{{ trackCallClick }}" style="color:#6E6E73">+91 99713 36656</a> / <a href="tel:+919990101097" style="color:#6E6E73">+91 99901 01097</a> directly.</div>
           </form>
+          <div style="text-align:center;font-size:13px;color:#6E6E73;margin-top:24px;padding-top:24px;border-top:1px solid rgba(0,0,0,0.08)">Planning a factory, expansion or bulk purchase instead of one machine? <span style="color:#1D1D1F;font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px" onClick="{{ goStartProject }}">Start a Project →</span></div>
         </sc-if>
 
         <sc-if value="{{ quoteSubmitted }}" hint-placeholder-val="{{ false }}">
@@ -1249,6 +1251,269 @@ a:hover { color:#3D7BFF; }
             <div style="display:flex;gap:16px;margin-top:32px;flex-wrap:wrap;justify-content:center">
               <span style="padding:15px 28px;background:#0A5CFF;color:#fff;font-size:15px;font-weight:600;cursor:pointer;border-radius:980px" onClick="{{ quoteWhatsappAgain }}">WhatsApp us now</span>
               <span style="padding:15px 28px;border:1px solid #1D1D1F;color:#1D1D1F;font-size:15px;font-weight:600;cursor:pointer;border-radius:980px" onClick="{{ goMachines }}">Back to Machines</span>
+            </div>
+          </div>
+        </sc-if>
+
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ START A PROJECT (enterprise/bulk enquiry) ============ -->
+  <sc-if value="{{ isStartProject }}" hint-placeholder-val="{{ false }}">
+    <div style="width:100%;background:#F7F7F4;min-height:100vh;animation:swFadeIn 0.4s ease both;padding:calc(64px + clamp(50px,8vw,90px)) clamp(20px,6vw,64px) clamp(60px,8vw,100px)">
+      <div style="max-width:640px;margin:0 auto">
+
+        <sc-if value="{{ spNotSubmitted }}" hint-placeholder-val="{{ true }}">
+          <div style="font-size:12px;font-weight:600;letter-spacing:0.1em;color:#5B5B57">SWAMI ENTERPRISE</div>
+          <h1 style="font-weight:700;font-size:clamp(28px,4.4vw,44px);color:#111111;letter-spacing:-0.02em;margin-top:14px;line-height:1.15">Start a Production Project</h1>
+          <div style="font-size:15px;color:#5B5B57;margin-top:16px;line-height:1.65;max-width:520px">Tell us what you manufacture, what you are planning, and where you need support. Our team will review the requirement and help structure the right machine, supply, and service approach.</div>
+          <div style="font-size:12px;color:#5B5B57;margin-top:18px;letter-spacing:0.02em">Bulk procurement &middot; Factory expansion &middot; New production lines &middot; Service &amp; parts planning</div>
+
+          <div style="margin-top:40px">
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:#5B5B57;margin-bottom:8px">
+              <span>Step {{ spStepNum }} of 5</span>
+              <span>{{ spProgressPct }}</span>
+            </div>
+            <div style="height:2px;background:rgba(0,0,0,0.1);border-radius:2px;overflow:hidden">
+              <div style="height:100%;background:#111111;width:{{ spProgressPct }};transition:width 0.2s ease"></div>
+            </div>
+          </div>
+
+          <!-- STEP 1: ABOUT YOUR BUSINESS -->
+          <sc-if value="{{ spIsStep0 }}" hint-placeholder-val="{{ true }}">
+            <div style="margin-top:40px;display:flex;flex-direction:column;gap:16px;animation:swFadeIn 0.25s ease both">
+              <div style="font-size:13px;font-weight:600;color:#111111">About your business</div>
+              <div>
+                <label style="display:block;font-size:12px;color:#5B5B57;margin-bottom:6px">Company name *</label>
+                <input type="text" required="" value="{{ spCompanyName }}" onChange="{{ onSpCompanyNameChange }}" style="width:100%;padding:13px 14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:4px;color:#111111"></input>
+              </div>
+              <div>
+                <label style="display:block;font-size:12px;color:#5B5B57;margin-bottom:6px">Contact name *</label>
+                <input type="text" required="" value="{{ spContactName }}" onChange="{{ onSpContactNameChange }}" style="width:100%;padding:13px 14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:4px;color:#111111"></input>
+              </div>
+              <div>
+                <label style="display:block;font-size:12px;color:#5B5B57;margin-bottom:6px">Role / designation *</label>
+                <select value="{{ spRole }}" onChange="{{ onSpRoleChange }}" style="width:100%;padding:13px 14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:4px;color:#111111">
+                  <option value="">Select role</option>
+                  <sc-for list="{{ spRoleOptions }}" as="ro" hint-placeholder-count="9">
+                    <option value="{{ ro.value }}">{{ ro.label }}</option>
+                  </sc-for>
+                </select>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+                <div>
+                  <label style="display:block;font-size:12px;color:#5B5B57;margin-bottom:6px">Work email *</label>
+                  <input type="email" inputmode="email" required="" value="{{ spEmail }}" onChange="{{ onSpEmailChange }}" style="width:100%;padding:13px 14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:4px;color:#111111"></input>
+                </div>
+                <div>
+                  <label style="display:block;font-size:12px;color:#5B5B57;margin-bottom:6px">Phone / WhatsApp *</label>
+                  <input type="tel" inputmode="tel" required="" value="{{ spPhone }}" onChange="{{ onSpPhoneChange }}" style="width:100%;padding:13px 14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:4px;color:#111111"></input>
+                </div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+                <div>
+                  <label style="display:block;font-size:12px;color:#5B5B57;margin-bottom:6px">City *</label>
+                  <input type="text" required="" value="{{ spCity }}" onChange="{{ onSpCityChange }}" style="width:100%;padding:13px 14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:4px;color:#111111"></input>
+                </div>
+                <div>
+                  <label style="display:block;font-size:12px;color:#5B5B57;margin-bottom:6px">State *</label>
+                  <input type="text" required="" value="{{ spState }}" onChange="{{ onSpStateChange }}" style="width:100%;padding:13px 14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:4px;color:#111111"></input>
+                </div>
+              </div>
+              <div>
+                <label style="display:block;font-size:12px;color:#5B5B57;margin-bottom:6px">Factory / plant location (optional)</label>
+                <input type="text" value="{{ spFactoryLocation }}" onChange="{{ onSpFactoryLocationChange }}" style="width:100%;padding:13px 14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:4px;color:#111111"></input>
+              </div>
+              <div>
+                <label style="display:block;font-size:12px;color:#5B5B57;margin-bottom:6px">Company website (optional)</label>
+                <input type="text" value="{{ spWebsite }}" onChange="{{ onSpWebsiteChange }}" style="width:100%;padding:13px 14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:4px;color:#111111"></input>
+              </div>
+              <input type="text" value="{{ spWebsite2 }}" onChange="{{ onSpWebsite2Change }}" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0"></input>
+            </div>
+          </sc-if>
+
+          <!-- STEP 2: WHAT ARE YOU PLANNING -->
+          <sc-if value="{{ spIsStep1 }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:40px;display:flex;flex-direction:column;gap:16px;animation:swFadeIn 0.25s ease both">
+              <div style="font-size:13px;font-weight:600;color:#111111">What are you planning?</div>
+              <div style="font-size:12px;color:#5B5B57">We use this to understand the type of equipment and support required.</div>
+              <select value="{{ spProjectType }}" onChange="{{ onSpProjectTypeChange }}" style="width:100%;padding:13px 14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:4px;color:#111111">
+                <option value="">Select one</option>
+                <sc-for list="{{ spProjectTypeOptions }}" as="pt" hint-placeholder-count="9">
+                  <option value="{{ pt.value }}">{{ pt.label }}</option>
+                </sc-for>
+              </select>
+              <div style="margin-top:8px">
+                <label style="display:block;font-size:12px;color:#5B5B57;margin-bottom:10px">What do you manufacture? (select all that apply)</label>
+                <div style="display:flex;flex-wrap:wrap;gap:8px">
+                  <sc-for list="{{ spIndustryChips }}" as="chip" hint-placeholder-count="9">
+                    <span onClick="{{ chip.toggle }}" style="font-size:13px;padding:9px 15px;border-radius:980px;cursor:pointer;border:1px solid {{ chip.chipBorder }};background:{{ chip.chipBg }};color:{{ chip.chipColor }}">{{ chip.name }}</span>
+                  </sc-for>
+                </div>
+              </div>
+              <sc-if value="{{ spHasIndustryOther }}" hint-placeholder-val="{{ false }}">
+                <input type="text" placeholder="Tell us what you manufacture" value="{{ spIndustryOther }}" onChange="{{ onSpIndustryOtherChange }}" style="width:100%;padding:13px 14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:4px;color:#111111"></input>
+              </sc-if>
+            </div>
+          </sc-if>
+
+          <!-- STEP 3: PRODUCTION REQUIREMENT -->
+          <sc-if value="{{ spIsStep2 }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:40px;display:flex;flex-direction:column;gap:16px;animation:swFadeIn 0.25s ease both">
+              <div style="font-size:13px;font-weight:600;color:#111111">Production requirement</div>
+              <div style="font-size:12px;color:#5B5B57">An approximate requirement is enough. Exact machine quantities can be finalized later.</div>
+              <div>
+                <label style="display:block;font-size:12px;color:#5B5B57;margin-bottom:6px">Approximate machine requirement *</label>
+                <select value="{{ spMachineRange }}" onChange="{{ onSpMachineRangeChange }}" style="width:100%;padding:13px 14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:4px;color:#111111">
+                  <option value="">Select a range</option>
+                  <sc-for list="{{ spMachineRangeOptions }}" as="mr" hint-placeholder-count="6">
+                    <option value="{{ mr.value }}">{{ mr.label }}</option>
+                  </sc-for>
+                </select>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+                <div>
+                  <label style="display:block;font-size:12px;color:#5B5B57;margin-bottom:6px">Daily production target</label>
+                  <input type="text" placeholder="e.g. 3,000 shirts/day" value="{{ spDailyTarget }}" onChange="{{ onSpDailyTargetChange }}" style="width:100%;padding:13px 14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:4px;color:#111111"></input>
+                </div>
+                <div>
+                  <label style="display:block;font-size:12px;color:#5B5B57;margin-bottom:6px">Existing machine count</label>
+                  <input type="text" value="{{ spExistingMachines }}" onChange="{{ onSpExistingMachinesChange }}" style="width:100%;padding:13px 14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:4px;color:#111111"></input>
+                </div>
+              </div>
+              <div>
+                <label style="display:block;font-size:12px;color:#5B5B57;margin-bottom:6px">Current brands used</label>
+                <input type="text" placeholder="JACK, JUKI, Brother, Pegasus, Siruba, MAQI, mixed" value="{{ spCurrentBrands }}" onChange="{{ onSpCurrentBrandsChange }}" style="width:100%;padding:13px 14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:4px;color:#111111"></input>
+              </div>
+              <div>
+                <label style="display:block;font-size:12px;color:#5B5B57;margin-bottom:10px">What do you need help with?</label>
+                <div style="display:flex;flex-wrap:wrap;gap:8px">
+                  <sc-for list="{{ spSupportChips }}" as="chip" hint-placeholder-count="10">
+                    <span onClick="{{ chip.toggle }}" style="font-size:13px;padding:9px 15px;border-radius:980px;cursor:pointer;border:1px solid {{ chip.chipBorder }};background:{{ chip.chipBg }};color:{{ chip.chipColor }}">{{ chip.name }}</span>
+                  </sc-for>
+                </div>
+              </div>
+              <div>
+                <label style="display:block;font-size:12px;color:#5B5B57;margin-bottom:6px">Describe your requirement</label>
+                <textarea rows="4" placeholder="e.g. We are setting up a 60-machine shirt production line in Jaipur and need help selecting lockstitch, overlock, buttonhole and button-sewing machines. Target production is 2,500 shirts per day." value="{{ spDescription }}" onChange="{{ onSpDescriptionChange }}" style="width:100%;padding:13px 14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:4px;resize:vertical;color:#111111"></textarea>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- STEP 4: TIMELINE & SUPPORT -->
+          <sc-if value="{{ spIsStep3 }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:40px;display:flex;flex-direction:column;gap:16px;animation:swFadeIn 0.25s ease both">
+              <div style="font-size:13px;font-weight:600;color:#111111">Timeline &amp; support</div>
+              <div style="font-size:12px;color:#5B5B57">Timelines help us understand sourcing and delivery urgency.</div>
+              <div>
+                <label style="display:block;font-size:12px;color:#5B5B57;margin-bottom:6px">Project timeline *</label>
+                <select value="{{ spTimeline }}" onChange="{{ onSpTimelineChange }}" style="width:100%;padding:13px 14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:4px;color:#111111">
+                  <option value="">Select timeline</option>
+                  <sc-for list="{{ spTimelineOptions }}" as="tl" hint-placeholder-count="6">
+                    <option value="{{ tl.value }}">{{ tl.label }}</option>
+                  </sc-for>
+                </select>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+                <div>
+                  <label style="display:block;font-size:12px;color:#5B5B57;margin-bottom:6px">Installation required?</label>
+                  <select value="{{ spInstallation }}" onChange="{{ onSpInstallationChange }}" style="width:100%;padding:13px 14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:4px;color:#111111">
+                    <option value="">Select</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Need advice">Need advice</option>
+                  </select>
+                </div>
+                <div>
+                  <label style="display:block;font-size:12px;color:#5B5B57;margin-bottom:6px">Service support required?</label>
+                  <select value="{{ spService }}" onChange="{{ onSpServiceChange }}" style="width:100%;padding:13px 14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:4px;color:#111111">
+                    <option value="">Select</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Need advice">Need advice</option>
+                  </select>
+                </div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+                <div>
+                  <label style="display:block;font-size:12px;color:#5B5B57;margin-bottom:6px">Preferred contact method</label>
+                  <select value="{{ spContactMethod }}" onChange="{{ onSpContactMethodChange }}" style="width:100%;padding:13px 14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:4px;color:#111111">
+                    <option value="">Select</option>
+                    <option value="Phone">Phone</option>
+                    <option value="WhatsApp">WhatsApp</option>
+                    <option value="Email">Email</option>
+                  </select>
+                </div>
+                <div>
+                  <label style="display:block;font-size:12px;color:#5B5B57;margin-bottom:6px">Best time to contact</label>
+                  <select value="{{ spContactTime }}" onChange="{{ onSpContactTimeChange }}" style="width:100%;padding:13px 14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:4px;color:#111111">
+                    <option value="">Select</option>
+                    <option value="Morning">Morning</option>
+                    <option value="Afternoon">Afternoon</option>
+                    <option value="Evening">Evening</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label style="display:block;font-size:12px;color:#5B5B57;margin-bottom:6px">Budget range (optional)</label>
+                <select value="{{ spBudget }}" onChange="{{ onSpBudgetChange }}" style="width:100%;padding:13px 14px;border:1px solid rgba(0,0,0,0.18);background:#fff;font-size:15px;font-family:'Manrope',sans-serif;border-radius:4px;color:#111111">
+                  <option value="">Prefer not to say</option>
+                  <sc-for list="{{ spBudgetOptions }}" as="b" hint-placeholder-count="6">
+                    <option value="{{ b.value }}">{{ b.label }}</option>
+                  </sc-for>
+                </select>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- STEP 5: REVIEW -->
+          <sc-if value="{{ spIsStep4 }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:40px;animation:swFadeIn 0.25s ease both">
+              <div style="font-size:13px;font-weight:600;color:#111111;margin-bottom:20px">Review your project brief</div>
+              <div style="border-top:1px solid rgba(0,0,0,0.1)">
+                <sc-for list="{{ spReviewRows }}" as="row" hint-placeholder-count="9">
+                  <div style="display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px solid rgba(0,0,0,0.1)">
+                    <span style="font-size:13px;color:#5B5B57;flex:none">{{ row.label }}</span>
+                    <span style="font-size:14px;color:#111111;text-align:right">{{ row.value }}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="display:flex;gap:16px;margin-top:16px;flex-wrap:wrap">
+                <span style="font-size:13px;color:#5B5B57;cursor:pointer;text-decoration:underline;text-underline-offset:3px" onClick="{{ spEditStep0 }}">Edit business details</span>
+                <span style="font-size:13px;color:#5B5B57;cursor:pointer;text-decoration:underline;text-underline-offset:3px" onClick="{{ spEditStep1 }}">Edit project</span>
+                <span style="font-size:13px;color:#5B5B57;cursor:pointer;text-decoration:underline;text-underline-offset:3px" onClick="{{ spEditStep2 }}">Edit requirement</span>
+                <span style="font-size:13px;color:#5B5B57;cursor:pointer;text-decoration:underline;text-underline-offset:3px" onClick="{{ spEditStep3 }}">Edit timeline</span>
+              </div>
+              <div style="margin-top:28px">
+                <span class="sw-btn" style="display:inline-block;padding:16px 32px;background:#111111;color:#fff;font-size:15px;font-weight:600;cursor:pointer;border-radius:4px" onClick="{{ submitStartProject }}">Submit Project Brief</span>
+              </div>
+              <div style="font-size:12px;color:#5B5B57;margin-top:16px;max-width:440px;line-height:1.6">By submitting, you agree that SWAMI may contact you regarding this business requirement. <span style="text-decoration:underline;cursor:pointer" onClick="{{ goPrivacy }}">Privacy Policy</span>.</div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ spHasError }}" hint-placeholder-val="{{ false }}">
+            <div role="alert" style="color:#B3261E;font-size:14px;margin-top:20px">{{ spError }}</div>
+          </sc-if>
+
+          <div style="display:flex;justify-content:space-between;margin-top:32px">
+            <span style="font-size:14px;color:#5B5B57;cursor:pointer;padding:14px 4px;visibility:{{ spBackVisibility }}" onClick="{{ spBack }}">&larr; Back</span>
+            <sc-if value="{{ spNotStep4 }}" hint-placeholder-val="{{ true }}">
+              <span style="font-size:15px;font-weight:600;padding:14px 32px;background:#111111;color:#fff;cursor:pointer;border-radius:4px" onClick="{{ spNext }}">Continue</span>
+            </sc-if>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ spIsSubmitted }}" hint-placeholder-val="{{ false }}">
+          <div style="min-height:50vh;display:flex;flex-direction:column;justify-content:center">
+            <div style="font-weight:700;font-size:clamp(24px,3.6vw,34px);color:#111111;letter-spacing:-0.01em">Project brief received.</div>
+            <div style="font-size:15px;color:#5B5B57;margin-top:16px;max-width:440px;line-height:1.65">Our team will review the requirement and contact you using your preferred method. For urgent requirements, you can also speak directly with SWAMI.</div>
+            <sc-if value="{{ spHasReference }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:12px;color:#5B5B57;margin-top:18px">Reference: <span style="font-family:'IBM Plex Mono',monospace;color:#111111">{{ spReference }}</span></div>
+            </sc-if>
+            <div style="display:flex;gap:16px;margin-top:32px;flex-wrap:wrap">
+              <span style="padding:15px 28px;background:#111111;color:#fff;font-size:15px;font-weight:600;cursor:pointer;border-radius:4px" onClick="{{ enterpriseWhatsappClick }}">Talk on WhatsApp</span>
+              <span style="padding:15px 28px;border:1px solid #111111;color:#111111;font-size:15px;font-weight:600;cursor:pointer;border-radius:4px" onClick="{{ goHome }}">Return to Home</span>
             </div>
           </div>
         </sc-if>
@@ -2902,7 +3167,7 @@ class Component extends DCLogic {
   // hub (optional) names a real, well-known garment/textile cluster in that state — omitted
   // wherever we're not confident of a specific one, rather than inventing a claim.
   locations = [
-    { id: 'delhi', name: 'Delhi', slug: 'delhi', cities: ['New Delhi', 'Chanakya Place', 'Karol Bagh', 'Gandhi Nagar', 'Okhla'], hub: 'Gandhi Nagar and Karol Bagh’s garment wholesale markets', isBase: true },
+    { id: 'delhi', name: 'Delhi', slug: 'delhi', cities: ['New Delhi', 'Chanakya Place', 'West Delhi', 'Janakpuri', 'Karol Bagh', 'Gandhi Nagar', 'Okhla', 'Naraina', 'Uttam Nagar'], hub: 'Gandhi Nagar and Karol Bagh’s garment wholesale markets', isBase: true },
     { id: 'haryana', name: 'Haryana', slug: 'haryana', cities: ['Gurugram', 'Faridabad', 'Panipat', 'Karnal', 'Ambala'], hub: 'Panipat’s textile and home-furnishing industry, and Gurugram/Faridabad’s garment exporters' },
     { id: 'punjab', name: 'Punjab', slug: 'punjab', cities: ['Ludhiana', 'Amritsar', 'Jalandhar', 'Chandigarh'], hub: 'Ludhiana’s hosiery and knitwear industry' },
     { id: 'uttar-pradesh', name: 'Uttar Pradesh', slug: 'uttar-pradesh', cities: ['Noida', 'Ghaziabad', 'Kanpur', 'Lucknow', 'Agra'], hub: 'Noida’s garment exporters and Kanpur’s garment and leather units' },
@@ -5003,7 +5268,7 @@ class Component extends DCLogic {
       const gbMatch = path.match(/^\/accessories\/groz-beckert\/([a-z0-9-]+)/i);
       const dyMatch = path.match(/^\/accessories\/dayang\/([a-z0-9-]+)/i);
       const locMatch = path.match(/^\/locations\/([a-z-]+)/i);
-      const viewFromPath = { '/machines': 'machines', '/industries': 'industries', '/solutions': 'solutions', '/finder': 'finder', '/compare': 'compare', '/accessories': 'accessories', '/accessories/golden-eagle': 'accGoldenEagle', '/accessories/groz-beckert': 'accGrozBeckert', '/accessories/dayang': 'accDayang', '/after-sales-service': 'afterSales', '/about': 'about', '/contact': 'contact', '/privacy': 'privacy', '/request-quote': 'quote', '/guides/lockstitch-vs-overlock-vs-flatlock': 'guideStitch', '/guides/jack-f6-vs-jack-2002g': 'guideCompareF6', '/guides/machines-for-a-shirt-factory': 'guideShirtFactory', '/guides/industrial-vs-domestic-sewing-machines': 'guideIndustrialVsDomestic', '/guides/machines-for-a-knitwear-line': 'guideKnitwear', '/guides/setting-up-a-new-production-line': 'guideFactorySetup', '/industrial-sewing-machines': 'landingAds', '/locations': 'locations' };
+      const viewFromPath = { '/machines': 'machines', '/industries': 'industries', '/solutions': 'solutions', '/finder': 'finder', '/compare': 'compare', '/accessories': 'accessories', '/accessories/golden-eagle': 'accGoldenEagle', '/accessories/groz-beckert': 'accGrozBeckert', '/accessories/dayang': 'accDayang', '/after-sales-service': 'afterSales', '/about': 'about', '/contact': 'contact', '/privacy': 'privacy', '/request-quote': 'quote', '/guides/lockstitch-vs-overlock-vs-flatlock': 'guideStitch', '/guides/jack-f6-vs-jack-2002g': 'guideCompareF6', '/guides/machines-for-a-shirt-factory': 'guideShirtFactory', '/guides/industrial-vs-domestic-sewing-machines': 'guideIndustrialVsDomestic', '/guides/machines-for-a-knitwear-line': 'guideKnitwear', '/guides/setting-up-a-new-production-line': 'guideFactorySetup', '/industrial-sewing-machines': 'landingAds', '/locations': 'locations', '/start-a-project': 'startProject' };
       let next = null;
       if (machineMatch && this.machines.find((m) => m.id === machineMatch[1])) {
         next = { view: 'product', selectedMachineId: machineMatch[1] };
@@ -5230,6 +5495,7 @@ class Component extends DCLogic {
       return '/accessories/' + brandSlug + '/' + p.slug;
     }
     if (view === 'quote') return '/request-quote';
+    if (view === 'startProject') return '/start-a-project';
     if (view === 'accGoldenEagle') return '/accessories/golden-eagle';
     if (view === 'accGrozBeckert') return '/accessories/groz-beckert';
     if (view === 'accDayang') return '/accessories/dayang';
@@ -5263,6 +5529,7 @@ class Component extends DCLogic {
       if (!loc) return 'JACK Sewing Machine Dealer, Pan-India Delivery — Swami Enterprises';
       return `JACK Sewing Machine Dealer in ${loc.name} | Swami Enterprises`;
     }
+    if (view === 'startProject') return 'Start a Production Project | Swami Enterprises';
     const labels = { machines: 'Machines — Pan-India Delivery', industries: 'Industries', solutions: 'Solutions', finder: 'Find Your Machine', compare: 'Compare Machines', accessories: 'Accessories & Spare Parts — Pan-India Delivery', accGoldenEagle: 'Golden Eagle Accessories', accGrozBeckert: 'Groz-Beckert Needles', accDayang: 'DAYANG Cutting Machines', afterSales: 'After-Sales Service', about: 'About', contact: 'Contact Us', privacy: 'Privacy Policy', quote: 'Request a Quote', guideStitch: 'Lockstitch vs Overlock vs Flatlock: Which Machine for Which Job', guideCompareF6: 'JACK F6 vs JACK 2002G: Which Lockstitch Machine Do You Need', guideShirtFactory: 'What Machines Does a Shirt Factory Actually Need', guideIndustrialVsDomestic: 'Industrial vs Domestic Sewing Machines: What Actually Changes', guideKnitwear: 'What Machines Does a Knitwear Line Actually Need', guideFactorySetup: 'Setting Up a New Production Line: The Real Machine Sequence', landingAds: 'Industrial Sewing Machines Built for Serious Production', locations: 'Where We Deliver — Pan-India' };
     return (labels[view] || view) + ' — Swami Enterprises';
   };
@@ -5294,6 +5561,7 @@ class Component extends DCLogic {
       contact: 'Showroom address, phone, WhatsApp and email for our Chanakya Place, New Delhi showroom — reach a specialist for bulk or wholesale enquiries.',
       privacy: 'Swami Enterprises’ privacy policy — what information we collect through swamienterprises.online, how it is used, and how to request it be deleted.',
       quote: 'Request a quote from Swami Enterprises — authorized JACK dealer & importer, New Delhi. Tell us what you need, a specialist follows up on WhatsApp or by phone.',
+      startProject: 'Plan a new industrial sewing line, factory expansion, bulk machine purchase, service requirement or production project with Swami Enterprises.',
       guideStitch: 'Lockstitch, overlock and flatlock machines do different jobs — a plain-English guide to which one you actually need, from Swami Enterprises, authorized JACK dealer & importer, New Delhi.',
       guideCompareF6: 'JACK F6 vs JACK 2002G compared on real specs — speed, stitch length, needle, and which fabrics each one actually handles, from Swami Enterprises, New Delhi.',
       guideShirtFactory: 'The real machine sequence for a shirt production line — lockstitch, buttonholing, and what to add as you scale, from Swami Enterprises, authorized JACK dealer & importer, New Delhi.',
@@ -5306,8 +5574,8 @@ class Component extends DCLogic {
     if (view === 'location') {
       const loc = this.locations.find((x) => x.id === id);
       if (!loc) return descs.home;
-      const cityList = loc.cities.slice(0, 2).join(', ');
-      return `JACK dealer & importer, New Delhi. We deliver, install and support JACK sewing machines in ${loc.name} — ${cityList} and more.`;
+      const cityList = loc.cities.join(', ');
+      return `JACK dealer & importer, New Delhi. We deliver, install and support JACK sewing machines in ${loc.name} — including ${cityList}.`;
     }
     return descs[view] || descs.home;
   };
@@ -5462,6 +5730,8 @@ class Component extends DCLogic {
       if (loc) items = [{ name: 'Home', url: site + '/' }, { name: 'Locations', url: site + '/locations' }, { name: loc.name, url: site + this.urlPath('location', loc.id) }];
     } else if (view === 'locations') {
       items = [{ name: 'Home', url: site + '/' }, { name: 'Locations', url: site + '/locations' }];
+    } else if (view === 'startProject') {
+      items = [{ name: 'Home', url: site + '/' }, { name: 'Start a Project', url: site + '/start-a-project' }];
     } else {
       const guideLabels = { guideStitch: 'Lockstitch vs Overlock vs Flatlock: Which Machine for Which Job', guideCompareF6: 'JACK F6 vs JACK 2002G: Which Lockstitch Machine Do You Need', guideShirtFactory: 'What Machines Does a Shirt Factory Actually Need', guideIndustrialVsDomestic: 'Industrial vs Domestic Sewing Machines: What Actually Changes', guideKnitwear: 'What Machines Does a Knitwear Line Actually Need', guideFactorySetup: 'Setting Up a New Production Line: The Real Machine Sequence' };
       // No standalone "/guides" listing page exists to link a middle crumb to, so this is a
@@ -5861,6 +6131,125 @@ class Component extends DCLogic {
     } catch (e) {}
   };
   quoteWhatsappAgain = () => { if (this._lastQuoteWhatsapp) window.open(this._lastQuoteWhatsapp, '_blank'); };
+
+  // --- Start a Project (enterprise/bulk enquiry) --------------------------
+  // Separate flow from Request a Quote: that one is "I want a price on a
+  // machine I've already picked", this one is "I'm planning a factory/line
+  // and don't necessarily know which machines yet." Same lead API, own
+  // fields, own WhatsApp template, own analytics events, own honeypot.
+  spProjectTypes = ['New factory', 'New production line', 'Factory expansion', 'Machine replacement', 'Automation upgrade', 'Bulk machine purchase', 'Service / maintenance requirement', 'Spare parts planning', 'Not sure yet'];
+  spIndustryChoices = ['Shirts / light wovens', 'Uniforms', 'Knitwear / activewear', 'Denim / workwear', 'Bags / technical sewing', 'Trousers', 'T-shirts', 'Polo shirts', 'Other'];
+  spSupportChoices = ['Machine selection', 'Production line planning', 'Bulk procurement', 'Automation', 'Installation', 'Operator setup', 'Service support', 'Preventive maintenance', 'Spare parts', 'Factory expansion planning'];
+  spRoles = ['Owner / Founder', 'Managing Director', 'Plant Head', 'Production Head', 'Operations', 'Purchase / Procurement', 'Factory Manager', 'Engineer / Technical', 'Other'];
+  spMachineRanges = ['1-5', '6-20', '21-50', '51-100', '101-250', '250+'];
+  spTimelines = ['Immediately', 'Within 30 days', '1-3 months', '3-6 months', '6-12 months', 'Planning stage'];
+  spBudgetRanges = ['Under ₹5 lakh', '₹5–15 lakh', '₹15–50 lakh', '₹50 lakh–₹1 crore', '₹1 crore+', 'Not decided'];
+  goStartProject = () => {
+    this.setState({
+      view: 'startProject', contactOpen: false, spStep: 0, spSubmitted: false, spError: '', spReference: '',
+      spCompanyName: '', spContactName: '', spRole: '', spEmail: '', spPhone: '', spCity: '', spState: '', spFactoryLocation: '', spWebsite: '',
+      spProjectType: '', spIndustries: [], spIndustryOther: '',
+      spMachineRange: '', spDailyTarget: '', spExistingMachines: '', spCurrentBrands: '', spSupportNeeds: [], spDescription: '',
+      spTimeline: '', spInstallation: '', spService: '', spContactMethod: '', spContactTime: '', spBudget: '', spWebsite2: '',
+    });
+    if (typeof window !== 'undefined' && window.history) window.history.pushState({}, '', '/start-a-project');
+    document.title = this.titleFor('startProject');
+    this.setMeta('name', 'description', this.descriptionFor('startProject'));
+    this.setCanonical('https://swamienterprises.online/start-a-project');
+    this.setBreadcrumbJsonLd('startProject');
+    this.track('start_project_view', {});
+  };
+  onSpField = (field) => (e) => this.setState({ [field]: e && e.target ? e.target.value : e });
+  spToggleIndustry = (name) => this.setState((s) => {
+    const cur = s.spIndustries || [];
+    return { spIndustries: cur.includes(name) ? cur.filter((x) => x !== name) : [...cur, name] };
+  });
+  spToggleSupport = (name) => this.setState((s) => {
+    const cur = s.spSupportNeeds || [];
+    return { spSupportNeeds: cur.includes(name) ? cur.filter((x) => x !== name) : [...cur, name] };
+  });
+  spValidateStep = (step, s) => {
+    if (step === 0) {
+      if (!(s.spCompanyName || '').trim()) return 'Company name is required.';
+      if (!(s.spContactName || '').trim()) return 'Contact name is required.';
+      if (!(s.spRole || '').trim()) return 'Please select your role.';
+      if (!/^\S+@\S+\.\S+$/.test((s.spEmail || '').trim())) return 'A valid work email is required.';
+      if (!/^[\d\s+()-]{6,20}$/.test((s.spPhone || '').trim())) return 'A valid phone/WhatsApp number is required.';
+      if (!(s.spCity || '').trim()) return 'City is required.';
+      if (!(s.spState || '').trim()) return 'State is required.';
+      return '';
+    }
+    if (step === 1) {
+      if (!s.spProjectType) return 'Please tell us what you’re planning.';
+      if (!(s.spIndustries || []).length) return 'Please select at least one product type.';
+      return '';
+    }
+    if (step === 2) {
+      if (!s.spMachineRange) return 'Please give an approximate machine requirement.';
+      return '';
+    }
+    if (step === 3) {
+      if (!s.spTimeline) return 'Please select a project timeline.';
+      return '';
+    }
+    return '';
+  };
+  spNext = () => {
+    const s = this.state;
+    const err = this.spValidateStep(s.spStep, s);
+    if (err) { this.setState({ spError: err }); return; }
+    const next = s.spStep + 1;
+    this.setState({ spStep: next, spError: '' });
+    const stepEvents = ['start_project_begin', 'start_project_step_2', 'start_project_step_3', 'start_project_step_4', 'start_project_review'];
+    if (stepEvents[next]) this.track(stepEvents[next], { projectType: s.spProjectType || undefined });
+  };
+  spBack = () => this.setState((s) => ({ spStep: Math.max(0, s.spStep - 1), spError: '' }));
+  spGoStep = (step) => this.setState((s) => (step <= s.spStep ? { spStep: step, spError: '' } : {}));
+  buildEnterpriseWhatsappMessage = (s) => {
+    const lines = ['Hi Swami Enterprises,', '', 'We are planning an industrial sewing project.', '', `Company: ${s.spCompanyName || ''}`, `Industry: ${(s.spIndustries || []).join(', ')}`, `Location: ${s.spCity || ''}${s.spState ? ', ' + s.spState : ''}`, `Project type: ${s.spProjectType || ''}`, `Approx. machine requirement: ${s.spMachineRange || ''}`, `Timeline: ${s.spTimeline || ''}`, '', 'I would like to discuss this requirement.'];
+    return lines.join('\n');
+  };
+  enterpriseWhatsappClick = () => {
+    this.track('enterprise_whatsapp_click', { projectType: this.state.spProjectType || undefined, machineRange: this.state.spMachineRange || undefined, timeline: this.state.spTimeline || undefined });
+    window.open('https://wa.me/919971336656?text=' + encodeURIComponent(this.buildEnterpriseWhatsappMessage(this.state)), '_blank');
+  };
+  submitStartProject = (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    const s = this.state;
+    const err = this.spValidateStep(0, s) || this.spValidateStep(1, s) || this.spValidateStep(2, s) || this.spValidateStep(3, s);
+    if (err) { this.setState({ spError: err }); return; }
+    if ((s.spWebsite2 || '').trim()) { this.setState({ spSubmitted: true }); return; } // honeypot: pretend success, submit nothing
+    this.setState({ spError: '' });
+    const utm = this.getUtm();
+    this.track('start_project_submit', {
+      projectType: s.spProjectType || undefined, machineRange: s.spMachineRange || undefined, timeline: s.spTimeline || undefined,
+      industry: (s.spIndustries || [])[0] || undefined, source: utm.source || undefined,
+    });
+    fetch('/api/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        leadType: 'enterprise_project',
+        fullName: s.spContactName, companyName: s.spCompanyName, role: s.spRole, email: s.spEmail, phone: s.spPhone,
+        city: s.spCity, state: s.spState, factoryLocation: s.spFactoryLocation, website: s.spWebsite,
+        projectType: s.spProjectType, industries: (s.spIndustries || []).concat(s.spIndustryOther ? [s.spIndustryOther] : []),
+        machineRequirementRange: s.spMachineRange, dailyProductionTarget: s.spDailyTarget, existingMachineCount: s.spExistingMachines,
+        currentBrands: s.spCurrentBrands, supportNeeds: s.spSupportNeeds, requirementDescription: s.spDescription,
+        timeline: s.spTimeline, installationRequired: s.spInstallation, serviceRequired: s.spService,
+        preferredContactMethod: s.spContactMethod, preferredContactTime: s.spContactTime, budgetRange: s.spBudget,
+        website2: s.spWebsite2, sourcePage: 'start-a-project',
+        source: utm.source, medium: utm.medium, campaign: utm.campaign, landingPage: utm.landingPage,
+        lastTouchSource: this.getLastTouchUtm().source, lastTouchMedium: this.getLastTouchUtm().medium,
+      }),
+    }).then((r) => r.json().catch(() => ({}))).then((data) => {
+      this.setState({ spSubmitted: true, spReference: data && data.reference ? data.reference : '' });
+      this.track('start_project_success', {});
+    }).catch(() => {
+      // A network/server failure must never lose what was typed — stay on
+      // the review step with a retry option, not a generic error page.
+      this.setState({ spError: 'We couldn’t submit your project brief. Please try again, or contact us directly on WhatsApp.' });
+    });
+  };
 
   selectFinderOption = (key, value) => {
     this.track('finder_answer', { step: key, value });
@@ -6265,6 +6654,82 @@ class Component extends DCLogic {
         const msg = `Hi Swami Enterprises, I'd like a wholesale/bulk quote for the ${m.model}. Could you share pricing and availability?`;
         window.open('https://wa.me/919971336656?text=' + encodeURIComponent(msg), '_blank');
       },
+      // --- Start a Project render fields ---
+      isStartProject: view === 'startProject',
+      goStartProject: () => this.goStartProject(),
+      spStepSafe: this.state.spStep || 0,
+      spStepNum: (this.state.spStep || 0) + 1,
+      spProgressPct: Math.round(((this.state.spStep || 0) + 1) / 5 * 100) + '%',
+      spIsStep0: (this.state.spStep || 0) === 0,
+      spIsStep1: (this.state.spStep || 0) === 1,
+      spIsStep2: (this.state.spStep || 0) === 2,
+      spIsStep3: (this.state.spStep || 0) === 3,
+      spIsStep4: (this.state.spStep || 0) === 4,
+      spNotStep4: (this.state.spStep || 0) !== 4,
+      spBackVisibility: (this.state.spStep || 0) === 0 ? 'hidden' : 'visible',
+      spHasError: !!this.state.spError,
+      spNotSubmitted: !this.state.spSubmitted,
+      spIsSubmitted: !!this.state.spSubmitted,
+      spHasReference: !!this.state.spReference,
+      spRoleOptions: this.spRoles.map((r) => ({ value: r, label: r })),
+      spProjectTypeOptions: this.spProjectTypes.map((t) => ({ value: t, label: t })),
+      spMachineRangeOptions: this.spMachineRanges.map((r) => ({ value: r, label: r })),
+      spTimelineOptions: this.spTimelines.map((t) => ({ value: t, label: t })),
+      spBudgetOptions: this.spBudgetRanges.map((b) => ({ value: b, label: b })),
+      spIndustryChips: this.spIndustryChoices.map((name) => {
+        const selected = (this.state.spIndustries || []).includes(name);
+        return { name, selected, toggle: () => this.spToggleIndustry(name), chipBg: selected ? '#111111' : '#fff', chipColor: selected ? '#fff' : '#111111', chipBorder: selected ? '#111111' : 'rgba(0,0,0,0.18)' };
+      }),
+      spHasIndustryOther: (this.state.spIndustries || []).includes('Other'),
+      spSupportChips: this.spSupportChoices.map((name) => {
+        const selected = (this.state.spSupportNeeds || []).includes(name);
+        return { name, selected, toggle: () => this.spToggleSupport(name), chipBg: selected ? '#111111' : '#fff', chipColor: selected ? '#fff' : '#111111', chipBorder: selected ? '#111111' : 'rgba(0,0,0,0.18)' };
+      }),
+      onSpCompanyNameChange: this.onSpField('spCompanyName'),
+      onSpContactNameChange: this.onSpField('spContactName'),
+      onSpRoleChange: this.onSpField('spRole'),
+      onSpEmailChange: this.onSpField('spEmail'),
+      onSpPhoneChange: this.onSpField('spPhone'),
+      onSpCityChange: this.onSpField('spCity'),
+      onSpStateChange: this.onSpField('spState'),
+      onSpFactoryLocationChange: this.onSpField('spFactoryLocation'),
+      onSpWebsiteChange: this.onSpField('spWebsite'),
+      onSpWebsite2Change: this.onSpField('spWebsite2'),
+      onSpProjectTypeChange: this.onSpField('spProjectType'),
+      onSpIndustryOtherChange: this.onSpField('spIndustryOther'),
+      onSpMachineRangeChange: this.onSpField('spMachineRange'),
+      onSpDailyTargetChange: this.onSpField('spDailyTarget'),
+      onSpExistingMachinesChange: this.onSpField('spExistingMachines'),
+      onSpCurrentBrandsChange: this.onSpField('spCurrentBrands'),
+      onSpDescriptionChange: this.onSpField('spDescription'),
+      onSpTimelineChange: this.onSpField('spTimeline'),
+      onSpInstallationChange: this.onSpField('spInstallation'),
+      onSpServiceChange: this.onSpField('spService'),
+      onSpContactMethodChange: this.onSpField('spContactMethod'),
+      onSpContactTimeChange: this.onSpField('spContactTime'),
+      onSpBudgetChange: this.onSpField('spBudget'),
+      spNext: this.spNext,
+      spBack: this.spBack,
+      spEditStep0: () => this.spGoStep(0),
+      spEditStep1: () => this.spGoStep(1),
+      spEditStep2: () => this.spGoStep(2),
+      spEditStep3: () => this.spGoStep(3),
+      submitStartProject: this.submitStartProject,
+      enterpriseWhatsappClick: this.enterpriseWhatsappClick,
+      spReviewRows: (() => {
+        const s = this.state;
+        return [
+          { label: 'Company', value: s.spCompanyName || '—' },
+          { label: 'Contact', value: `${s.spContactName || ''}${s.spRole ? ' — ' + s.spRole : ''}` },
+          { label: 'Location', value: `${s.spCity || ''}${s.spState ? ', ' + s.spState : ''}` },
+          { label: 'Project type', value: s.spProjectType || '—' },
+          { label: 'Industry', value: (s.spIndustries || []).join(', ') || '—' },
+          { label: 'Machine requirement', value: s.spMachineRange || '—' },
+          { label: 'Timeline', value: s.spTimeline || '—' },
+          { label: 'Support requested', value: (s.spSupportNeeds || []).join(', ') || '—' },
+          { label: 'Description', value: s.spDescription || '—' },
+        ];
+      })(),
       activeMachine: (() => {
         const m = this.machines.find((x) => x.id === this.state.selectedMachineId) || this.machines[0];
         return {

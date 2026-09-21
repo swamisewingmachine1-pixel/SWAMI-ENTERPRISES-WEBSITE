@@ -55,6 +55,7 @@ add('/locations');
 for (const loc of locations) add('/locations/' + loc.slug);
 add('/privacy');
 add('/request-quote');
+add('/start-a-project');
 add('/after-sales-service');
 add('/accessories');
 add('/accessories/golden-eagle');

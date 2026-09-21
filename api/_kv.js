@@ -48,4 +48,13 @@ module.exports = {
     const client = await getClient();
     return client.lLen(key);
   },
+  // Increments a counter and sets its expiry only on the first increment in
+  // the window (INCR then EXPIRE NX) — a real fixed-window rate limit with
+  // no extra service, used to cap public form submissions per identifier.
+  kvIncrWithExpiry: async (key, ttlSeconds) => {
+    const client = await getClient();
+    const count = await client.incr(key);
+    if (count === 1) await client.expire(key, ttlSeconds);
+    return count;
+  },
 };

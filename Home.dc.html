@@ -9,6 +9,14 @@
 <link rel="canonical" href="https://swamienterprises.online/">
 <link rel="llms.txt" href="https://swamienterprises.online/llms.txt">
 <link rel="agent-instructions" href="https://swamienterprises.online/agent-instructions.txt">
+<!-- Google Analytics 4: SWAMI website measurement (G-B839XXGT0J) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B839XXGT0J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-B839XXGT0J', { send_page_view: true });
+</script>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Swami Enterprises">
 <meta property="og:title" content="Swami Enterprises — Industrial Sewing Machines & Bulk Spare Parts, Pan-India">
@@ -5758,6 +5766,9 @@ class Component extends DCLogic {
   track = (name, props) => {
     if (typeof window === 'undefined') return;
     if (typeof window.va === 'function') window.va('event', { name, ...(props || {}) });
+    if (typeof window.gtag === 'function') window.gtag('event', name,
+      Object.fromEntries(Object.entries(props || {}).filter(([, value]) => value !== undefined && value !== null && value !== ''))
+    );
     // One data layer, GTM-compatible, never re-initialized after first
     // push — a future GTM container can read this without any other code
     // change. No GTM script is loaded (no real container ID exists yet);

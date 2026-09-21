@@ -439,7 +439,7 @@ for (const loc of locations) {
   const hubLine = loc.hub ? ` This includes ${loc.hub}.` : '';
   manifest['/locations/' + loc.slug] = {
     title: `JACK Sewing Machine Dealer in ${loc.name} — Swami Enterprises`,
-    description: `Swami Enterprises, authorized JACK dealer & importer based in New Delhi, delivers, installs and supports JACK industrial sewing machines across ${loc.name}.`,
+    description: `JACK dealer & importer, New Delhi. We deliver, install and support JACK sewing machines in ${loc.name} — ${loc.cities.slice(0, 2).join(', ')} and more.`,
     markdown: `# JACK Sewing Machines in ${loc.name}
 
 Swami Enterprises is an authorized JACK dealer and importer based in New Delhi. We deliver, install and support JACK industrial sewing machines — lockstitch, overlock, interlock and bartack — for garment units, tailoring businesses and factories across ${loc.name}, serving ${cityList} and more.${hubLine}

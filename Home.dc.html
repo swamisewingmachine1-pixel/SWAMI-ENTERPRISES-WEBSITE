@@ -300,7 +300,7 @@ a:hover { color:#3D7BFF; }
                 <span style="font-size:15px;color:#1D1D1F;cursor:pointer" onClick="{{ goMachines }}">Lockstitch</span>
                 <span style="font-size:15px;color:#1D1D1F;cursor:pointer" onClick="{{ goMachines }}">Overlock</span>
                 <span style="font-size:15px;color:#1D1D1F;cursor:pointer" onClick="{{ goMachines }}">Interlock / Coverstitch</span>
-                <span style="font-size:15px;color:#1D1D1F;cursor:pointer" onClick="{{ goMachines }}">Pattern / Bartack</span>
+                <span style="font-size:15px;color:#1D1D1F;cursor:pointer" onClick="{{ goMachines }}">Bartack, Pattern &amp; Buttonhole</span>
               </div>
             </div>
             <div>
@@ -3139,7 +3139,7 @@ class Component extends DCLogic {
       id: 'jack-9820g',
       model: 'JACK 9820G',
       manufacturer: 'JACK',
-      category: 'Pattern / Bartack',
+      category: 'Pattern Sewing',
       purpose: 'Computerized eyelet and pattern-sewing machine (9820G-1 for jackets, 9820G-2 for jeans) with a 5–42mm eyelet length range and 1.5–5.0mm zig-zag width, operated from a single multifunction pedal at up to 2500rpm.',
       applications: ['garments', 'bags', 'technical sewing'],
       operations: ['bartack', 'pattern stitching'],
@@ -3836,7 +3836,7 @@ class Component extends DCLogic {
       id: 'jack-t1900',
       model: 'JACK JK-T1900/1903',
       manufacturer: 'JACK',
-      category: 'Pattern / Bartack',
+      category: 'Bartack',
       purpose: 'Electronic bartack and button-sewing machine with a touch-screen panel and voice guidance — one machine, transformable between bartack and button-sewing setups.',
       applications: ["garments","bags","technical sewing"],
       operations: ["bartack","pattern stitching"],
@@ -3871,7 +3871,7 @@ class Component extends DCLogic {
       id: 'jack-m9',
       model: 'JACK M9',
       manufacturer: 'JACK',
-      category: 'Pattern / Bartack',
+      category: 'Pattern Sewing',
       purpose: 'Jack’s current flagship template machine — a 360°-rotating aircraft-aluminium head sews in any direction, folds down to a fraction of its footprint in under a minute.',
       applications: ["garments","bags","technical sewing"],
       operations: ["bartack","pattern stitching"],
@@ -3899,7 +3899,7 @@ class Component extends DCLogic {
       id: 'jack-1790',
       model: 'JACK JK-T1790G',
       manufacturer: 'JACK',
-      category: 'Pattern / Bartack',
+      category: 'Buttonhole',
       purpose: 'Super-fast computerized buttonhole machine with good knitting adaptation and an intelligent high-speed, high-efficiency system.',
       applications: ["garments","bags","technical sewing"],
       operations: ["bartack","pattern stitching"],
@@ -3928,7 +3928,7 @@ class Component extends DCLogic {
       id: 'jack-9270',
       model: 'JACK JK-T9270D/9280D',
       manufacturer: 'JACK',
-      category: 'Pattern / Bartack',
+      category: 'Feed-off-Arm',
       purpose: 'Mechatronic, direct-drive feed-off-the-arm machine with automatic needle stopping and a lubricated rear puller — widely used across garment types.',
       applications: ["garments","bags","technical sewing"],
       operations: ["bartack","pattern stitching"],
@@ -3955,7 +3955,7 @@ class Component extends DCLogic {
       id: 'jack-8740',
       model: 'JACK JK-8740',
       manufacturer: 'JACK',
-      category: 'Pattern / Bartack',
+      category: 'Feed-off-Arm',
       purpose: 'Feed-off-arm interlock with a large operating-space seat design for easier sewing of large fabric pieces — 4 needles, 6 threads.',
       applications: ["garments","bags","technical sewing"],
       operations: ["bartack","pattern stitching"],
@@ -3984,7 +3984,7 @@ class Component extends DCLogic {
       id: 'jack-m7',
       model: 'JACK M7',
       manufacturer: 'JACK',
-      category: 'Pattern / Bartack',
+      category: 'Pattern Sewing',
       purpose: 'Extra-large 140×95cm template machine that folds down for easy transport and storage — Jack’s largest foldable template machine.',
       applications: ["garments","bags","technical sewing"],
       operations: ["bartack","pattern stitching"],
@@ -4084,7 +4084,7 @@ class Component extends DCLogic {
       id: 'jack-jkt781g',
       model: 'JACK JK-T781G',
       manufacturer: 'JACK',
-      category: 'Buttonholing',
+      category: 'Buttonhole',
       purpose: 'Integrated electronic lockstitch buttonholing machine on a servo-driven platform, with automatic presser-foot lifting and thread trimming, running up to 3600 s.p.m.',
       applications: ['shirts', 'wovens', 'garments'],
       operations: ['buttonholing', 'lockstitch'],
@@ -4710,7 +4710,7 @@ class Component extends DCLogic {
       id: 'juki-lbh-1790an',
       model: 'JUKI LBH-1790AN',
       manufacturer: 'JUKI',
-      category: 'Buttonholing',
+      category: 'Buttonhole',
       purpose: "JUKI's computer-controlled buttonholing sewing system, with built-in NFC for two-way data communication on sewing performance.",
       applications: ['garments', 'shirts'],
       operations: ['buttonholing'],
@@ -4723,7 +4723,7 @@ class Component extends DCLogic {
       id: 'juki-lk-1900c',
       model: 'JUKI LK-1900C Series',
       manufacturer: 'JUKI',
-      category: 'Bartacking',
+      category: 'Bartack',
       purpose: "JUKI's computer-controlled bartacking machine, sewing at up to 3,300 stitches per minute.",
       applications: ['garments'],
       operations: ['bartacking'],
@@ -4737,7 +4737,7 @@ class Component extends DCLogic {
       id: 'juki-ams-221en',
       model: 'JUKI AMS-221EN Series',
       manufacturer: 'JUKI',
-      category: 'Pattern Stitching',
+      category: 'Pattern Sewing',
       purpose: "JUKI's AMS-221EN series computer-controlled pattern-stitching (cycle) machine, built for productivity, energy conservation and stitch quality.",
       applications: ['garments'],
       operations: ['pattern stitching'],
@@ -6462,7 +6462,7 @@ class Component extends DCLogic {
         // appended automatically instead of silently vanishing from this
         // page — a hardcoded-only list orphaned 3 real accessory products
         // added in the previous phase until this fix.
-        const knownOrder = ['Lockstitch', 'Overlock', 'Interlock / Coverstitch', 'Pattern / Bartack'];
+        const knownOrder = ['Lockstitch', 'Overlock', 'Interlock / Coverstitch', 'Chainstitch', 'Bartack', 'Pattern Sewing', 'Buttonhole', 'Button Sewing', 'Feed-off-Arm', 'Cutting Equipment', 'Finishing Equipment', 'Hand Tools'];
         const otherCats = [...new Set(machineResults.map((m) => m.category))].filter((c) => !knownOrder.includes(c)).sort();
         const order = [...knownOrder, ...otherCats];
         return order.map((cat) => ({

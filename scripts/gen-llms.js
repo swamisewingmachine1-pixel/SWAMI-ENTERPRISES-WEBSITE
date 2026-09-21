@@ -19,6 +19,7 @@ const machines = grab('machines');
 const golden = grab('goldenEagleProducts');
 const grozB = grab('grozBeckertProducts');
 const dayang = grab('dayangProducts');
+const locations = grab('locations');
 
 const out = [];
 out.push('# Swami Enterprises');
@@ -63,6 +64,14 @@ out.push('## DAYANG cutting machines');
 out.push('');
 for (const p of dayang) {
   out.push('- [' + p.name + '](https://swamienterprises.online/accessories/dayang/' + p.slug + ') — ' + p.sub + '. ' + p.desc);
+}
+out.push('');
+out.push('## Locations we deliver to');
+out.push('');
+out.push('Swami Enterprises has one physical showroom, in Chanakya Place, New Delhi. We deliver, install and support JACK industrial sewing machines pan-India, including every state and union territory below (see each page for real cities served and honest install/support details for that location).');
+out.push('');
+for (const loc of locations) {
+  out.push('- [' + loc.name + '](https://swamienterprises.online/locations/' + loc.slug + ') — ' + loc.cities.join(', ') + '.');
 }
 out.push('');
 out.push('## Pan-India orders — common questions');

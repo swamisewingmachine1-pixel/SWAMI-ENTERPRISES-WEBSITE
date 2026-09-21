@@ -24,7 +24,7 @@ const locations = grab('locations');
 const out = [];
 out.push('# Swami Enterprises');
 out.push('');
-out.push("> Industrial sewing machine dealer and spare parts supplier based in New Delhi, India, serving garment factories and bulk/wholesale buyers pan-India (Delhi NCR, Tirupur, Ludhiana, Surat, Kolkata and other garment hubs). Authorized JACK dealer, trading since 2015. Also carries MAQI, Pegasus, JUKI, and SINGER industrial machines, Golden Eagle / Groz-Beckert spare parts and needles, and DAYANG fabric cutting machines, as a stocking partner (not an authorized distributor for those brands).");
+out.push("> Industrial sewing machine dealer and spare parts supplier based in New Delhi, India, serving garment factories and bulk/wholesale buyers pan-India (Delhi NCR, Tirupur, Ludhiana, Surat, Kolkata and other garment hubs). Authorized JACK dealer and importer, trading since 2015. Also carries MAQI, Pegasus, JUKI, and SINGER industrial machines, Golden Eagle / Groz-Beckert spare parts and needles, and DAYANG fabric cutting machines, as a stocking partner (not an authorized distributor for those brands).");
 out.push('');
 out.push('Website: https://swamienterprises.online');
 out.push('Contact: https://swamienterprises.online/contact');

@@ -31,7 +31,7 @@ function specsTable(specs) {
 // ---- Machines ----
 for (const m of machines) {
   const brand = m.manufacturer || 'JACK';
-  const dealerPhrase = brand === 'JACK' ? 'authorized JACK dealer, New Delhi' : (brand + ' partner, New Delhi');
+  const dealerPhrase = brand === 'JACK' ? 'authorized JACK dealer & importer, New Delhi' : (brand + ' partner, New Delhi');
   let md = '# ' + m.model + '\n\n';
   md += '**Brand:** ' + brand + '  \n**Category:** ' + m.category + '\n\n';
   md += (m.purpose || '') + '\n\n';
@@ -230,12 +230,12 @@ for (const [p, g] of Object.entries(guides)) {
 // ---- Static pages (hand-written, real content only) ----
 manifest['/'] = {
   title: 'Swami Enterprises — Industrial Sewing Machines & Bulk Spare Parts, Pan-India',
-  description: 'Authorized JACK dealer based in Delhi, supplying industrial sewing machines and genuine spare parts to garment factories and bulk buyers across India.',
+  description: 'Authorized JACK dealer & importer based in Delhi, supplying industrial sewing machines and genuine spare parts to garment factories and bulk buyers across India.',
   markdown: fs.readFileSync(path.join(root, 'llms.txt'), 'utf8'),
 };
 manifest['/about'] = {
   title: 'About — Swami Enterprises',
-  description: 'Swami Enterprises — authorized JACK sewing machine dealer, Chanakya Place, New Delhi, trading since 2015.',
+  description: 'Swami Enterprises — authorized JACK sewing machine dealer and importer, Chanakya Place, New Delhi, trading since 2015.',
   markdown: `# About Swami Enterprises
 
 Swami Enterprises is a Delhi-based partner for industrial sewing machines and accessories — including JACK, MAQI, Pegasus, JUKI, SINGER, Golden Eagle, Groz-Beckert, and DAYANG — helping people choose, install and maintain the right equipment for how they actually produce. We supply single machines and bulk/wholesale orders to garment factories and buyers across India, not just Delhi-NCR.
@@ -333,7 +333,7 @@ Every machine from Swami Enterprises comes with installation, training, maintena
 };
 manifest['/request-quote'] = {
   title: 'Request a Quote — Swami Enterprises',
-  description: 'Request a quote from Swami Enterprises — authorized JACK dealer, New Delhi.',
+  description: 'Request a quote from Swami Enterprises — authorized JACK dealer & importer, New Delhi.',
   markdown: `# Request a Quote
 
 Tell Swami Enterprises what you need and a specialist reviews every request personally — no automated quotes. Expect a reply on WhatsApp or by phone, usually the same day.
@@ -420,7 +420,7 @@ manifest['/industrial-sewing-machines'] = {
   description: 'Genuine JACK industrial sewing machines for garment manufacturers, tailoring businesses, factories and workshops.',
   markdown: `# Industrial Sewing Machines Built for Serious Production
 
-Genuine JACK industrial sewing machines for garment manufacturers, tailoring businesses, factories and workshops. Get expert guidance choosing the right machine — authorized JACK dealer, New Delhi. [Browse machines](${BASE}/machines) or [request a quote](${BASE}/request-quote).
+Genuine JACK industrial sewing machines for garment manufacturers, tailoring businesses, factories and workshops. Get expert guidance choosing the right machine — authorized JACK dealer & importer, New Delhi. [Browse machines](${BASE}/machines) or [request a quote](${BASE}/request-quote).
 `,
 };
 
@@ -439,14 +439,14 @@ for (const loc of locations) {
   const hubLine = loc.hub ? ` This includes ${loc.hub}.` : '';
   manifest['/locations/' + loc.slug] = {
     title: `JACK Sewing Machine Dealer in ${loc.name} — Swami Enterprises`,
-    description: `Swami Enterprises, authorized JACK dealer based in New Delhi, delivers, installs and supports JACK industrial sewing machines across ${loc.name}.`,
+    description: `Swami Enterprises, authorized JACK dealer & importer based in New Delhi, delivers, installs and supports JACK industrial sewing machines across ${loc.name}.`,
     markdown: `# JACK Sewing Machines in ${loc.name}
 
-Swami Enterprises is an authorized JACK dealer based in New Delhi. We deliver, install and support JACK industrial sewing machines — lockstitch, overlock, interlock and bartack — for garment units, tailoring businesses and factories across ${loc.name}, serving ${cityList} and more.${hubLine}
+Swami Enterprises is an authorized JACK dealer and importer based in New Delhi. We deliver, install and support JACK industrial sewing machines — lockstitch, overlock, interlock and bartack — for garment units, tailoring businesses and factories across ${loc.name}, serving ${cityList} and more.${hubLine}
 
 ## Does Swami Enterprises deliver JACK sewing machines to ${loc.name}?
 
-Yes. We're an authorized JACK dealer based in New Delhi, and we regularly dispatch single-machine and bulk/wholesale orders — JACK, MAQI, Pegasus, JUKI and SINGER machines, and Golden Eagle, Groz-Beckert and DAYANG accessories — to ${loc.name}.
+Yes. We're an authorized JACK dealer and importer based in New Delhi, and we regularly dispatch single-machine and bulk/wholesale orders — JACK, MAQI, Pegasus, JUKI and SINGER machines, and Golden Eagle, Groz-Beckert and DAYANG accessories — to ${loc.name}.
 
 ## Do you provide installation and after-sales support in ${loc.name}?
 

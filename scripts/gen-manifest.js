@@ -134,7 +134,7 @@ Shirts are wovens, not knits — that changes which machines actually matter, co
 
 ## The core machine: high-speed lockstitch
 
-Shirt seams — collars, cuffs, body panels, side seams — are lockstitched, not overlocked. A woven fabric doesn't fray the way a knit does, and doesn't need the stretch an overlock/flatlock seam gives. A computerized lockstitch machine built for speed (the JACK F6's 5000 s.p.m., for example) is the actual core of a shirt line.
+Shirt seams — collars, cuffs, body panels, side seams — are lockstitched, not overlocked. Lockstitch handles the structural assembly; a woven seam doesn't need the built-in stretch an overlock/flatlock stitch gives a knit. Raw-edge finishing (overlocking exposed edges to control fraying) is a separate, garment-specific decision, not something every shirt seam requires by default. A computerized lockstitch machine built for speed (the JACK F6's 5000 s.p.m., for example) is the actual core of a shirt line.
 
 ## What most shirt lines add next
 

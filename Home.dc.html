@@ -5207,7 +5207,7 @@ class Component extends DCLogic {
     if (view === 'location') {
       const loc = this.locations.find((x) => x.id === id);
       if (!loc) return 'JACK Sewing Machine Dealer, Pan-India Delivery — Swami Enterprises';
-      return `JACK Sewing Machine Dealer in ${loc.name} — Sales, Installation & Service | Swami Enterprises`;
+      return `JACK Sewing Machine Dealer in ${loc.name} | Swami Enterprises`;
     }
     const labels = { machines: 'Machines — Pan-India Delivery', industries: 'Industries', solutions: 'Solutions', finder: 'Find Your Machine', compare: 'Compare Machines', accessories: 'Accessories & Spare Parts — Pan-India Delivery', accGoldenEagle: 'Golden Eagle Accessories', accGrozBeckert: 'Groz-Beckert Needles', accDayang: 'DAYANG Cutting Machines', afterSales: 'After-Sales Service', about: 'About', contact: 'Contact Us', privacy: 'Privacy Policy', quote: 'Request a Quote', guideStitch: 'Lockstitch vs Overlock vs Flatlock: Which Machine for Which Job', guideCompareF6: 'JACK F6 vs JACK 2002G: Which Lockstitch Machine Do You Need', guideShirtFactory: 'What Machines Does a Shirt Factory Actually Need', guideIndustrialVsDomestic: 'Industrial vs Domestic Sewing Machines: What Actually Changes', guideKnitwear: 'What Machines Does a Knitwear Line Actually Need', guideFactorySetup: 'Setting Up a New Production Line: The Real Machine Sequence', landingAds: 'Industrial Sewing Machines Built for Serious Production', locations: 'Where We Deliver — Pan-India' };
     return (labels[view] || view) + ' — Swami Enterprises';

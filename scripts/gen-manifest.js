@@ -438,7 +438,7 @@ for (const loc of locations) {
   const cityList = loc.cities.slice(0, 4).join(', ');
   const hubLine = loc.hub ? ` This includes ${loc.hub}.` : '';
   manifest['/locations/' + loc.slug] = {
-    title: `JACK Sewing Machine Dealer in ${loc.name} — Swami Enterprises`,
+    title: `JACK Sewing Machine Dealer in ${loc.name} | Swami Enterprises`,
     description: `JACK dealer & importer, New Delhi. We deliver, install and support JACK sewing machines in ${loc.name} — ${loc.cities.slice(0, 2).join(', ')} and more.`,
     markdown: `# JACK Sewing Machines in ${loc.name}
 

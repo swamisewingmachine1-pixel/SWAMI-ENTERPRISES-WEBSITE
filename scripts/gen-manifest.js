@@ -279,6 +279,10 @@ swamisewingmachine1@gmail.com
 Monday – Saturday: 9:00 AM – 8:00 PM
 Sunday: 9:00 AM – 3:00 PM
 
+## GSTIN
+
+07ATMPJ1206C1Z7
+
 [Request a Quote](${BASE}/request-quote)
 `,
 };

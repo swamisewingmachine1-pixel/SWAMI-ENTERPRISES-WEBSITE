@@ -5324,11 +5324,18 @@ class Component extends DCLogic {
       if (!p) { if (el) el.remove(); return; }
       if (!el) { el = document.createElement('script'); el.type = 'application/ld+json'; el.id = 'product-jsonld'; document.head.appendChild(el); }
       const brandName = p.brand || 'Golden Eagle';
+      // A single, unambiguous Model spec (not a range like "TC-801, TC-805...") is a real
+      // manufacturer part number — safe to expose as mpn. Ranges are left out rather than
+      // guessing which one the page is actually about.
+      const modelSpec = (p.specs || []).find((s) => s[0] === 'Model');
+      const mpn = modelSpec && !/[,/]| and /.test(modelSpec[1]) ? modelSpec[1] : undefined;
       el.textContent = JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'Product',
         name: p.name,
         brand: { '@type': 'Brand', name: brandName },
+        category: p.sub || undefined,
+        ...(mpn ? { mpn } : {}),
         description: p.desc,
         image: 'https://swamienterprises.online/' + p.src,
         url: 'https://swamienterprises.online' + this.urlPath('geProduct', p.id),

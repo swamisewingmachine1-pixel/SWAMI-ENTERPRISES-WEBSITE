@@ -1287,9 +1287,10 @@ a:hover { color:#3D7BFF; }
               <div style="height:100%;background:#111111;width:{{ spProgressPct }};transition:width 0.2s ease"></div>
             </div>
           </div>
+        </sc-if>
 
           <!-- STEP 1: ABOUT YOUR BUSINESS -->
-          <sc-if value="{{ spIsStep0 }}" hint-placeholder-val="{{ true }}">
+          <sc-if value="{{ spShowStep0 }}" hint-placeholder-val="{{ true }}">
             <div style="margin-top:40px;display:flex;flex-direction:column;gap:16px;animation:swFadeIn 0.25s ease both">
               <div style="font-size:13px;font-weight:600;color:#111111">About your business</div>
               <div>
@@ -1342,7 +1343,7 @@ a:hover { color:#3D7BFF; }
           </sc-if>
 
           <!-- STEP 2: WHAT ARE YOU PLANNING -->
-          <sc-if value="{{ spIsStep1 }}" hint-placeholder-val="{{ false }}">
+          <sc-if value="{{ spShowStep1 }}" hint-placeholder-val="{{ false }}">
             <div style="margin-top:40px;display:flex;flex-direction:column;gap:16px;animation:swFadeIn 0.25s ease both">
               <div style="font-size:13px;font-weight:600;color:#111111">What are you planning?</div>
               <div style="font-size:12px;color:#5B5B57">We use this to understand the type of equipment and support required.</div>
@@ -1367,7 +1368,7 @@ a:hover { color:#3D7BFF; }
           </sc-if>
 
           <!-- STEP 3: PRODUCTION REQUIREMENT -->
-          <sc-if value="{{ spIsStep2 }}" hint-placeholder-val="{{ false }}">
+          <sc-if value="{{ spShowStep2 }}" hint-placeholder-val="{{ false }}">
             <div style="margin-top:40px;display:flex;flex-direction:column;gap:16px;animation:swFadeIn 0.25s ease both">
               <div style="font-size:13px;font-weight:600;color:#111111">Production requirement</div>
               <div style="font-size:12px;color:#5B5B57">An approximate requirement is enough. Exact machine quantities can be finalized later.</div>
@@ -1410,7 +1411,7 @@ a:hover { color:#3D7BFF; }
           </sc-if>
 
           <!-- STEP 4: TIMELINE & SUPPORT -->
-          <sc-if value="{{ spIsStep3 }}" hint-placeholder-val="{{ false }}">
+          <sc-if value="{{ spShowStep3 }}" hint-placeholder-val="{{ false }}">
             <div style="margin-top:40px;display:flex;flex-direction:column;gap:16px;animation:swFadeIn 0.25s ease both">
               <div style="font-size:13px;font-weight:600;color:#111111">Timeline &amp; support</div>
               <div style="font-size:12px;color:#5B5B57">Timelines help us understand sourcing and delivery urgency.</div>
@@ -1476,7 +1477,7 @@ a:hover { color:#3D7BFF; }
           </sc-if>
 
           <!-- STEP 5: REVIEW -->
-          <sc-if value="{{ spIsStep4 }}" hint-placeholder-val="{{ false }}">
+          <sc-if value="{{ spShowStep4 }}" hint-placeholder-val="{{ false }}">
             <div style="margin-top:40px;animation:swFadeIn 0.25s ease both">
               <div style="font-size:13px;font-weight:600;color:#111111;margin-bottom:20px">Review your project brief</div>
               <div style="border-top:1px solid rgba(0,0,0,0.1)">
@@ -1500,6 +1501,7 @@ a:hover { color:#3D7BFF; }
             </div>
           </sc-if>
 
+        <sc-if value="{{ spNotSubmitted }}" hint-placeholder-val="{{ true }}">
           <sc-if value="{{ spHasError }}" hint-placeholder-val="{{ false }}">
             <div role="alert" style="color:#B3261E;font-size:14px;margin-top:20px">{{ spError }}</div>
           </sc-if>
@@ -6682,6 +6684,21 @@ class Component extends DCLogic {
       spHasError: !!this.state.spError,
       spNotSubmitted: !this.state.spSubmitted,
       spIsSubmitted: !!this.state.spSubmitted,
+      // Flattened step visibility (submitted-check folded in here directly)
+      // so the actual form inputs sit only 2 sc-if levels deep from the
+      // view root — matching every other working onChange-bound form in
+      // this codebase (isQuote > quoteNotSubmitted > input). A 3rd nested
+      // level (isStartProject > spNotSubmitted > spIsStepN > input) was
+      // tested live and silently broke controlled-input reactivity: typing
+      // never updated the DOM value and no error was thrown, even though
+      // identical onClick-driven interactions at the same depth worked
+      // fine — an apparent limit of this hand-rolled template engine's
+      // reconciliation for value-bound form elements specifically.
+      spShowStep0: !this.state.spSubmitted && (this.state.spStep || 0) === 0,
+      spShowStep1: !this.state.spSubmitted && (this.state.spStep || 0) === 1,
+      spShowStep2: !this.state.spSubmitted && (this.state.spStep || 0) === 2,
+      spShowStep3: !this.state.spSubmitted && (this.state.spStep || 0) === 3,
+      spShowStep4: !this.state.spSubmitted && (this.state.spStep || 0) === 4,
       spHasReference: !!this.state.spReference,
       spRoleOptions: this.spRoles.map((r) => ({ value: r, label: r })),
       spProjectTypeOptions: this.spProjectTypes.map((t) => ({ value: t, label: t })),

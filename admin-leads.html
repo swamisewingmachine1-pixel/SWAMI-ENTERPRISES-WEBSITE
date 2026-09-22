@@ -45,6 +45,10 @@
   .pri-HIGH{color:#C4361D;font-weight:700}
   .pri-MEDIUM{color:#946200;font-weight:600}
   .pri-LOW{color:var(--sub)}
+  .pri-enterprise_high{color:#C4361D;font-weight:700}
+  .pri-enterprise_medium{color:#946200;font-weight:600}
+  .pri-enterprise_standard{color:var(--sub)}
+  .type-badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:0.03em;background:#1D1D1F;color:#F5F5F7;margin-left:6px;vertical-align:middle}
   .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);display:none;align-items:flex-end;justify-content:flex-end;z-index:100}
   .overlay.open{display:flex}
   .panel{width:min(460px,100vw);height:100%;background:var(--white);overflow-y:auto;padding:24px}
@@ -89,6 +93,9 @@
       <select id="fIndustry" onchange="render()"><option value="">All industries</option></select>
       <select id="fMachine" onchange="render()"><option value="">All machines</option></select>
       <select id="fSource" onchange="render()"><option value="">All sources</option></select>
+      <select id="fType" onchange="render()"><option value="">All types</option><option value="enterprise_project">Enterprise Project</option><option value="machine_quote">Machine Quote</option></select>
+      <select id="fMachineRange" onchange="render()"><option value="">All machine ranges</option></select>
+      <select id="fTimeline" onchange="render()"><option value="">All timelines</option></select>
       <label style="display:flex;align-items:center;gap:6px;font-size:13px"><input type="checkbox" id="fFollowToday" onchange="render()"> Follow-up today</label>
     </div>
     <table>
@@ -148,6 +155,8 @@ function populateFilters() {
   fill('fIndustry', uniq((l) => l.industry));
   fill('fMachine', uniq((l) => l.machine));
   fill('fSource', uniq((l) => l.source));
+  fill('fMachineRange', uniq((l) => l.machineRequirementRange));
+  fill('fTimeline', uniq((l) => l.timeline));
 }
 
 function todayStr() { return new Date().toISOString().slice(0, 10); }
@@ -158,6 +167,9 @@ function filtered() {
   const industry = document.getElementById('fIndustry').value;
   const machine = document.getElementById('fMachine').value;
   const source = document.getElementById('fSource').value;
+  const type = document.getElementById('fType').value;
+  const machineRange = document.getElementById('fMachineRange').value;
+  const timeline = document.getElementById('fTimeline').value;
   const followToday = document.getElementById('fFollowToday').checked;
   return LEADS.filter((l) => {
     if (STAGE_FILTER && l.status !== STAGE_FILTER) return false;
@@ -165,6 +177,9 @@ function filtered() {
     if (industry && l.industry !== industry) return false;
     if (machine && l.machine !== machine) return false;
     if (source && l.source !== source) return false;
+    if (type && (l.leadType || 'machine_quote') !== type) return false;
+    if (machineRange && l.machineRequirementRange !== machineRange) return false;
+    if (timeline && l.timeline !== timeline) return false;
     if (followToday && l.followUpDate !== todayStr()) return false;
     if (q) {
       const hay = [l.fullName, l.companyName, l.phone, l.email, l.machine].join(' ').toLowerCase();
@@ -217,20 +232,22 @@ function render() {
   ].join('');
 
   // Rows
-  document.getElementById('rows').innerHTML = list.map((l) => `
+  document.getElementById('rows').innerHTML = list.map((l) => {
+    const isEnt = l.leadType === 'enterprise_project';
+    return `
     <tr onclick="openDetail('${l.id}')">
-      <td><b>${esc(l.fullName)}</b><div style="color:#6E6E73;font-size:11px">${esc(l.phone)}</div></td>
+      <td><b>${esc(l.fullName)}</b>${isEnt ? '<span class="type-badge">ENTERPRISE</span>' : ''}<div style="color:#6E6E73;font-size:11px">${esc(l.phone)}</div></td>
       <td>${esc(l.companyName) || '—'}</td>
       <td>${esc(l.city) || '—'}</td>
-      <td>${esc(l.industry) || '—'}</td>
-      <td>${esc(l.machine) || '—'}</td>
-      <td>${esc(l.quantity) || '—'}</td>
+      <td>${esc(isEnt ? (l.industries || []).join(', ') : l.industry) || '—'}</td>
+      <td>${esc(isEnt ? l.projectType : l.machine) || '—'}</td>
+      <td>${esc(isEnt ? l.machineRequirementRange : l.quantity) || '—'}</td>
       <td>${esc(l.source) || '—'}</td>
       <td>${(l.createdAt || '').slice(0, 10)}</td>
       <td class="pri-${l.priority ? l.priority.level : 'LOW'}">${l.priority ? l.priority.level : 'LOW'}</td>
       <td><span class="badge b-${l.status}">${l.status}</span></td>
     </tr>
-  `).join('') || '<tr><td colspan="10" style="text-align:center;color:#6E6E73;padding:30px">No leads match.</td></tr>';
+  `; }).join('') || '<tr><td colspan="10" style="text-align:center;color:#6E6E73;padding:30px">No leads match.</td></tr>';
 }
 
 function setStage(s) { STAGE_FILTER = s; render(); }
@@ -239,7 +256,9 @@ function esc(s) { return (s || '').toString().replace(/[&<>"']/g, (c) => ({ '&':
 function openDetail(id) {
   const l = LEADS.find((x) => x.id === id);
   if (!l) return;
-  const waMsg = encodeURIComponent(`Hi ${l.fullName}, this is Swami Enterprises. You'd enquired${l.machine ? ' about the ' + l.machine : ''}${l.industry ? ' for your ' + l.industry.toLowerCase() + ' work' : ''}. Following up on pricing and availability.`);
+  const waMsg = l.leadType === 'enterprise_project'
+    ? encodeURIComponent(`Hi ${l.fullName}, this is Swami Enterprises. Thanks for the project brief for ${l.companyName || 'your company'}${l.projectType ? ' (' + l.projectType + ')' : ''}. Following up to discuss your requirement.`)
+    : encodeURIComponent(`Hi ${l.fullName}, this is Swami Enterprises. You'd enquired${l.machine ? ' about the ' + l.machine : ''}${l.industry ? ' for your ' + l.industry.toLowerCase() + ' work' : ''}. Following up on pricing and availability.`);
   const wa = 'https://wa.me/' + l.phone.replace(/\D/g, '') + '?text=' + waMsg;
   document.getElementById('panel').innerHTML = `
     <div style="display:flex;justify-content:space-between;align-items:center">
@@ -272,6 +291,27 @@ function openDetail(id) {
       <div class="row"><span>Timeline</span><span>${esc(l.timeline) || '—'}</span></div>
       <div class="row" style="display:block"><span>Notes from customer</span><div style="margin-top:4px">${esc(l.requirements) || '—'}</div></div>
     </div>
+
+    ${l.leadType === 'enterprise_project' ? `
+    <div class="sec"><div class="sec-title">ENTERPRISE PROJECT</div>
+      <div class="row"><span>Role</span><span>${esc(l.role) || '—'}</span></div>
+      <div class="row"><span>State</span><span>${esc(l.state) || '—'}</span></div>
+      <div class="row"><span>Factory location</span><span>${esc(l.factoryLocation) || '—'}</span></div>
+      <div class="row"><span>Website</span><span>${esc(l.website) || '—'}</span></div>
+      <div class="row"><span>Project type</span><span>${esc(l.projectType) || '—'}</span></div>
+      <div class="row"><span>Industries</span><span>${esc((l.industries || []).join(', ')) || '—'}</span></div>
+      <div class="row"><span>Machine requirement</span><span>${esc(l.machineRequirementRange) || '—'}</span></div>
+      <div class="row"><span>Daily production target</span><span>${esc(l.dailyProductionTarget) || '—'}</span></div>
+      <div class="row"><span>Existing machines</span><span>${esc(l.existingMachineCount) || '—'}</span></div>
+      <div class="row"><span>Current brands</span><span>${esc(l.currentBrands) || '—'}</span></div>
+      <div class="row"><span>Support needed</span><span>${esc((l.supportNeeds || []).join(', ')) || '—'}</span></div>
+      <div class="row"><span>Installation required</span><span>${esc(l.installationRequired) || '—'}</span></div>
+      <div class="row"><span>Service required</span><span>${esc(l.serviceRequired) || '—'}</span></div>
+      <div class="row"><span>Preferred contact</span><span>${esc(l.preferredContactMethod) || '—'}${l.preferredContactTime ? ' / ' + esc(l.preferredContactTime) : ''}</span></div>
+      <div class="row"><span>Budget range</span><span>${esc(l.budgetRange) || '—'}</span></div>
+      <div class="row"><span>Lead quality score</span><span>${l.priority ? esc(String(l.priority.score)) + ' — ' + esc(l.priority.reasons.join(', ')) : '—'}</span></div>
+      <div class="row" style="display:block"><span>Requirement description</span><div style="margin-top:4px">${esc(l.requirementDescription) || '—'}</div></div>
+    </div>` : ''}
 
     <div class="sec"><div class="sec-title">ATTRIBUTION</div>
       <div class="row"><span>Source</span><span>${esc(l.source) || '—'}</span></div>
